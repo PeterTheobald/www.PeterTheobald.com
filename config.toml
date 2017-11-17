@@ -1,0 +1,52 @@
+baseurl = "/"
+languageCode = "en-us"
+publishDir = "docs"
+title = "Peter Theobald"
+theme = "hugo-xmag"
+googleAnalytics = "UA-18164620-1"
+disqusShortname = "petertheobald"
+ignoreFiles = ["\\.Rmd$", "_files$", "_cache$"]
+preserveTaxonomyNames = true
+footnotereturnlinkcontents = "↩"
+hasCJKLanguage = true
+enableEmoji = true
+paginate = 9
+
+[permalinks]
+    post = "/post/:slug/"
+    personal = "/personal/:slug"
+    tech = "/tech/:slug"
+
+[[menu.main]]
+    name = "Home"
+    url = "/"
+    weight = 1
+[[menu.main]]
+    name = "About"
+    url = "/about/"
+    weight = 2
+[[menu.main]]
+    name = "Tech"
+    url = "/categories/tech/"
+    weight = 3
+[[menu.main]]
+    name = "Personal"
+    url = "/categories/personal/"
+    weight = 4
+[[menu.main]]
+    name = "Tags"
+    url = "/tags/"
+    weight = 5
+
+[params]
+    description = "Software Engineer. Computer Forensics. Tech Entrepreneur. Geeky Dad. Rock Climber."
+    summary_length = 300
+
+[params.text]
+    back = "&larr; Back to Home"
+    edit = "Edit this page &rarr;"
+    truncated = "&hellip;"
+    
+[params.banner]
+    src = "/images/profile-100c.png"
+    alt = "Peter Theobald"

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Windows on Peter Theobald</title>
+    <link>/tags/windows/</link>
+    <description>Recent content in Windows on Peter Theobald</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 01 Jun 2011 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/windows/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Upgrade your Inspiron 8600 to Windows 7 with this NVidia FX Go5200 video driver</title>
+      <link>/tech/upgrade-your-inspiron-8600-to-windows-7-with-this-nvidia-fx-go5200-video-driver/</link>
+      <pubDate>Wed, 01 Jun 2011 00:00:00 +0000</pubDate>
+      
+      <guid>/tech/upgrade-your-inspiron-8600-to-windows-7-with-this-nvidia-fx-go5200-video-driver/</guid>
+      <description>I have an old Dell Inspiron 8600 I wanted to upgrade to Windows 7. The problem was that there is no current video driver for the Inspiron&amp;rsquo;s Nvidia Geforce FX Go5200 video chip. Even the driver Dell is offering for download for Windows XP is the wrong one and causes all sorts of problems. There simply is no driver for Windows 7.
+So I searched on NVIDIA to see what drivers might be close.</description>
+    </item>
+    
+  </channel>
+</rss>

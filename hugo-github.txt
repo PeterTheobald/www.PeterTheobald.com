@@ -1,0 +1,80 @@
+INSTALLING COMMAND LINE:
+
+- You can work with git in Linux shell, Bash for Windows 10 (WSL), Git Bash for Windows 7/8, or a Git GUI tool
+    -- use Linux shell git
+    -- or install Bash for Windows 10 (Windows Subsystem for Linux), install ConEmu, run ConEmu/Bash, sudo apt-get install git
+    -- or Git Bash for Windows 7/8
+    -- or do all Git work w GUI
+- You can connect git to github remote using either HTTPS or SSH.
+  Use SSH. HTTPS will either ask username,password *every* time you pull or push or store your password in plain text
+- set up ssh:
+  use existing ~/.ssh/id_rsa.pub, or generate a new ssh key pair: ssh-keygen -t rsa -b 4096 -C "your_email@example.com";
+  ssh-add ~/.ssh/id_rsa
+  might need to start ssh agent: eval $(ssh-agent -s)
+  edit ~/.ssh/config:
+    #Default github
+    Host github.com
+      Hostname github.com
+      User git
+      IdentityFile ~/.ssh/id_rsa
+  Later you will use: remote add origin git@github.com:<username>/<repo>.git
+  Github.com: add ssh key (copy/paste), test: ssh -T git@github.com
+- optional second GitHub account:
+  generate a new ssh key pair: ssh-keygen -t rsa -b 4096 -C "your_email@example.com"; save to ~/.ssh/id_rsa_<account2>
+  ssh-add ~/.ssh/id_rsa_<account2>
+  edit ~/.ssh/config:
+    Host github-<account2>
+      Hostname github.com
+      User git
+      IdentityFile ~/.ssh/id_rsa_<account2>
+  Later you will use: remote add origin git@github-<account2>:<account2>/<repo>.git
+  Github.com: add ssh key (copy/paste), test: ssh -T git@github.com
+- git config --global user.name "my name"
+  git config --global user.email "my@email"
+- download hugo.tar.gz, unpack, sudo cp hugo /usr/local/bin
+  (note: we will use git simply to push changes to github pages, and will be exhibiting bad git ettiquette for team environments)
+
+CREATING WEBSITE:
+
+- github.com: create <repo> for website (check initialize with README)
+	note: website will be at <username>.github.io/<repo> until the domain is set up
+	note2: alternate could create special repo <username>.github.io which will be at <username>.github.io
+- domain registrar:
+	1. (best) <domain> ALIAS or ANAME -> <username>.github.io/<repo>
+	1. (next best) <domain> A -> 192.30.252.153; A-> 192.30.252.154
+	2. www.domain.com CNAME -> <username>.github.io/<repo>
+- local hd: mkdir <website>
+- cd <website>
+- hugo new site .                       # set up basic hugo website files and folders
+- git init                              # set up empty local git repo
+- ONLY IF YOU HAVE MULTIPLE GITHUB ACCOUNTS, customize git for this repo:
+    git config user.name <my name>
+    git config user.email <my@email>
+- cd themes
+- git clone http://github.com/<theme-username>/<theme> # download copy of your favorite hugo theme
+- (Note you now have nested git repositories. if this bothers you: rm -r <theme>/.git)
+- cd ..
+- Find config.yaml or config.toml in theme and copy it to <website> directory. (1) Edit add: publishDir="docs" or publishDir:docs (2) Edit add: theme=<themename>
+- git add -v --all                      # tell git to track all the files (in the staging index)
+- git commit --all -m "initial commit"  # tell git to commit all the files to the local repo (branch "master")
+
+- git remote add origin https://<username>@github.com/<username>/<repo>.git    # connect to github remote and label it locally as "origin"
+- git pull -v origin master             # tell git to download everything from the github repo to local branch 'origin/master' then merge to local branch 'master'
+- git push -uv origin master             # tell git to push local repo (branch "master") to github pages
+
+- github.com: settings custom domain <domain>, serve pages from master/docs
+
+
+WORKFLOW:
+
+- git pull -u origin master             # tell git to download everything from the github repo to local branch 'origin/master' then merge to local branch 'master'
+- Edit files
+- hugo server
+- Review results at http://localhost:1313
+- ^C
+- hugo
+- git add -v --all                     # tell git to track all the files (in the staging index)
+- git commit --all -m "desc"           # tell git to commit all the files to the local repo (branch "master")
+- git push -u origin master            # tell git to push local repo (branch "master") to github pages
+- Review results at <domain>
+ 

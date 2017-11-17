@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    
+    <title>Peter Theobald</title>
+	<link href='https://fonts.googleapis.com/css?family=Oswald' rel='stylesheet'>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link href="//cdn.bootcss.com/highlight.js/9.12.0/styles/github.min.css" rel="stylesheet">
+
+  </head>
+
+  <body class="page">
+    <nav class="header">
+      <div class="banner">
+<a href="/">
+
+<img src="/images/profile-100c.png" alt="Peter Theobald" />
+</a>
+<div class="banner-title">Peter Theobald</div><div class="banner-description">Software Engineer. Computer Forensics. Tech Entrepreneur. Geeky Dad. Rock Climber.</div>
+</div>
+
+      
+      <ul class="menu">
+        
+        
+        <li><a href="/"><span data-hover="Home">Home</span></a></li>
+        
+        <li><a href="/about/"><span data-hover="About">About</span></a></li>
+        
+        <li><a href="/categories/tech/"><span data-hover="Tech">Tech</span></a></li>
+        
+        <li><a href="/categories/personal/"><span data-hover="Personal">Personal</span></a></li>
+        
+        <li><a href="/tags/"><span data-hover="Tags">Tags</span></a></li>
+        
+      </ul>
+    </nav>
+
+<div class="container">
+<article>
+<div class="article-meta">
+
+  
+  
+  <h1><span class="title">Upgrade your Inspiron 8600 to Windows 7 with this NVidia FX Go5200 video driver</span></h1>
+  <span class="date">2011-06-01</span>
+
+  
+
+  
+  
+  <div class="categories">
+    
+    
+      <a href="/categories/tech">tech: </a>
+    
+    
+    
+    <a href="/tags/windows">windows</a>
+    
+  </div>
+  
+  
+
+</div>
+
+
+
+<main>
+<p>I have an old Dell Inspiron 8600 I wanted to upgrade to Windows 7. The problem was that there is no current video driver for the Inspiron&rsquo;s Nvidia Geforce FX Go5200 video chip. Even the driver Dell is offering for download for Windows XP is the wrong one and causes all sorts of problems. There simply is no driver for Windows 7.</p>
+
+<p>So I searched on NVIDIA to see what drivers might be close. I found these two possible candidates:</p>
+
+<ul>
+<li>ForceWare 179.48 Win 7 driver for the Go7200</li>
+<li>ForceWare 96.85 Vista driver for the FX5200 (NOT the FX Go5200)</li>
+</ul>
+
+<p>I tried both, and I was able to get the ForceWare 96.85 driver working. Here&rsquo;s how&hellip;</p>
+
+<p>I downloaded the ForceWare 96.85 driver from NVIDIA.
+<a href="http://www.nvidia.com/object/winvista_x86_96.85_2.html">Link to driver</a></p>
+
+<p>The device manager showed me that my Go5200 codes are: VEN_10DE&amp;DEV_0324&amp;SUBSYS_019C1028.
+When I tried to install the ForceWare 96.85 driver (by running setup.exe) I was told it couldn&rsquo;t find a matching driver. I looked in the nv_disp.inf file and I saw lists of various NVIDIA video devices, but my Go5200 was not in the list. I simply added it to the list matching the format of the other lines.
+(Note: if the install deletes the files after failing you may have to run the install and leave it waiting for you to click &lsquo;OK&rsquo; while you copy the folder to another working folder)</p>
+
+<p>I added lines in two places:</p>
+
+<p>Where it had:</p>
+
+<pre><code>%NVIDIA_NV34.DEV_0322.1% = nv_NV3x, PCI\VEN_10DE&amp;DEV_0322
+%NVIDIA_NV34.DEV_0323.1% = nv_NV3x, PCI\VEN_10DE&amp;DEV_0323
+%NVIDIA_NV34.DEV_0326.1% = nv_NV3x, PCI\VEN_10DE&amp;DEV_0326
+%NVIDIA_NV34.DEV_0327.1% = nv_NV3x, PCI\VEN_10DE&amp;DEV_0327
+</code></pre>
+
+<p>I added a line for my Go5200:</p>
+
+<pre><code>%NVIDIA_NV34.DEV_0322.1% = nv_NV3x, PCI\VEN_10DE&amp;DEV_0322
+%NVIDIA_NV34.DEV_0323.1% = nv_NV3x, PCI\VEN_10DE&amp;DEV_0323
+%NVIDIA_NV34.DEV_0324.1% = nv_NV3x, PCI\VEN_10DE&amp;DEV_0324&amp;SUBSYS_019c1028
+%NVIDIA_NV34.DEV_0326.1% = nv_NV3x, PCI\VEN_10DE&amp;DEV_0326
+%NVIDIA_NV34.DEV_0327.1% = nv_NV3x, PCI\VEN_10DE&amp;DEV_0327
+</code></pre>
+
+<p>Actually I added two lines, because when I Googled for DEV_0324 I saw some references to a different SUBSYS. Just in case I added both:</p>
+
+<pre><code>%NVIDIA_NV34.DEV_0322.1% = nv_NV3x, PCI\VEN_10DE&amp;DEV_0322
+%NVIDIA_NV34.DEV_0323.1% = nv_NV3x, PCI\VEN_10DE&amp;DEV_0323
+%NVIDIA_NV34.DEV_0324.1% = nv_NV3x, PCI\VEN_10DE&amp;DEV_0324&amp;SUBSYS_019c1028
+%NVIDIA_NV34.DEV_0324.1% = nv_NV3x, PCI\VEN_10DE&amp;DEV_0324&amp;SUBSYS_01961028
+%NVIDIA_NV34.DEV_0326.1% = nv_NV3x, PCI\VEN_10DE&amp;DEV_0326
+%NVIDIA_NV34.DEV_0327.1% = nv_NV3x, PCI\VEN_10DE&amp;DEV_0327
+</code></pre>
+
+<p>And in one other place I changed this:</p>
+
+<pre><code>NVIDIA_NV34.DEV_0323.1 = &quot;NVIDIA GeForce FX 5200LE&quot;
+NVIDIA_NV34.DEV_0326.1 = &quot;NVIDIA GeForce FX 5500&quot;
+</code></pre>
+
+<p>To this:</p>
+
+<pre><code>NVIDIA_NV34.DEV_0323.1 = &quot;NVIDIA GeForce FX 5200LE&quot;
+NVIDIA_NV34.DEV_0324.1 = &quot;NVIDIA GeForce FX Go5200&quot;
+NVIDIA_NV34.DEV_0324.3 = &quot;NVIDIA GeForce FX Go5200 &quot;
+NVIDIA_NV34.DEV_0326.1 = &quot;NVIDIA GeForce FX 5500&quot;
+</code></pre>
+
+<p>Then I installed my new driver (setup.exe). I found my video chip was recognized! I was able to set it&rsquo;s proper native resolution in Control Panel/Display, and my &ldquo;Performance&rdquo; measurement went from 1.0 to 2.0. Not high enough for all of the Aero visual effects, but now I can watch video without any choppiness.</p>
+
+<hr />
+
+<p>Comments migrated from the old blog:</p>
+
+<blockquote>
+<p>Jerry June 10, 2011 at 8:16 PM<br />
+I am about to try this myself, thank you.</p>
+
+<p>Jerry June 10, 2011 at 8:56 PM<br />
+Wow. Thank you so much.</p>
+
+<p>BillyKool July 24, 2011 at 3:40 PM<br />
+Awesome Peter,<br />
+I&rsquo;ll point out a note. If you do not install this update you will not likely be allocating any system memory to video.
+With this update Win 7 allocated 255MB of my 1GB of memory and it made Aero Exp Index go from 1.0 to 2.4. Great!
+But, point being if you have only 512MB, you may not want to do this without increasing your RAM.
+But that said, I&rsquo;ve been looking for this code patch for a while.<br />
+Thanks again Peter.</p>
+
+<p>addiRockART October 5, 2012 at 1:09 PM<br />
+so, I am having the same problem, BUT, even after editing said document, the installer says &ldquo;windows vista not found.&rdquo; any ideas? can I get some help? :)</p>
+
+<p>Karel Kolbaba November 5, 2013 at 5:27 AM<br />
+super, thank you so much!!!</p>
+
+<p>Farhad Azhadi April 17, 2014 at 6:49 PM<br />
+Thank You SOOOO Much!!!!!!</p>
+
+<p>dieter collischon April 30, 2014 at 12:59 AM<br />
+This works fine for my old Inspiron. Thanks!</p>
+
+<p>Catherine Durstewitz March 20, 2016 at 11:04 AM<br />
+Thank you so much for taking the time to share this information Peter. We are trying to breathe life back into my Inspiron 8600 with Windows 7&hellip; Many thanks again!</p>
+
+<p>Unknown July 24, 2016 at 2:49 PM<br />
+Peter,<br />
+Thanks a ton! I too was able to breathe life back into my Inspiron running Win 7. Much thanks!
+</small></p>
+</blockquote>
+
+</main>
+
+
+
+
+
+<nav class="post-nav">
+  <span class="nav-prev"><a href="/tech/tricky-forensic-hard-drive-acquisition-of-an-imac/">&larr; Tricky forensic hard drive acquisition of an iMac</a></span>
+  <span class="nav-next"><a href="/tech/unison-2.40.61-binary-for-nexenta-core-platform-3/">Unison 2.40.61 binary for Nexenta Core Platform 3 &rarr;</a></span>
+</nav>
+
+
+<div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "petertheobald" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</article>
+</div>
+
+
+
+<footer>
+
+<div class="footer">
+  
+  
+  <div class="copyright">
+  &copy; 2017 <a href="#" onClick="document.location.href = 'mailto:'+'peter'+'@petertheobald.com';return false;">Peter<span style="display:none">foo</span>@PeterTheobald.com</a> |
+  <a href="https://twitter.com/peterjtheobald"><i class="fa fa-twitter" aria-hidden="true"></i> @PeterJTheobald</a> |
+  <a href="https://www.linkedin.com/profile/view?id=peterjtheobald"><i class="fa fa-linkedin" aria-hidden="true"></i> |
+  <a href="https://github.com/petertheobald/"><i class="fa fa-github" aria-hidden="true"></i> Github</a> |
+  <a href="http://www.petertheobald.com/index.xml"><i class="fa fa-rss" aria-hidden="true"></i> RSS</a>
+  </div>
+</div>
+</footer>
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/languages/r.min.js"></script>
+<script>
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+</script>
+
+
+
+
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-18164620-1', 'auto');
+ga('send', 'pageview');
+</script>
+
+
+</body>
+</html>
+

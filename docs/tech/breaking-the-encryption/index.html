@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    
+    <title>Peter Theobald</title>
+	<link href='https://fonts.googleapis.com/css?family=Oswald' rel='stylesheet'>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link href="//cdn.bootcss.com/highlight.js/9.12.0/styles/github.min.css" rel="stylesheet">
+
+  </head>
+
+  <body class="page">
+    <nav class="header">
+      <div class="banner">
+<a href="/">
+
+<img src="/images/profile-100c.png" alt="Peter Theobald" />
+</a>
+<div class="banner-title">Peter Theobald</div><div class="banner-description">Software Engineer. Computer Forensics. Tech Entrepreneur. Geeky Dad. Rock Climber.</div>
+</div>
+
+      
+      <ul class="menu">
+        
+        
+        <li><a href="/"><span data-hover="Home">Home</span></a></li>
+        
+        <li><a href="/about/"><span data-hover="About">About</span></a></li>
+        
+        <li><a href="/categories/tech/"><span data-hover="Tech">Tech</span></a></li>
+        
+        <li><a href="/categories/personal/"><span data-hover="Personal">Personal</span></a></li>
+        
+        <li><a href="/tags/"><span data-hover="Tags">Tags</span></a></li>
+        
+      </ul>
+    </nav>
+
+<div class="container">
+<article>
+<div class="article-meta">
+
+  
+  
+  <h1><span class="title">Breaking The Encryption</span></h1>
+  <span class="date">2016-07-07</span>
+
+  
+
+  
+  
+  <div class="categories">
+    
+    
+      <a href="/categories/tech">tech: </a>
+    
+    
+    
+    <a href="/tags/encryption">encryption</a>, <a href="/tags/forensics">forensics</a>, <a href="/tags/truecrypt">truecrypt</a>
+    
+  </div>
+  
+  
+
+</div>
+
+
+
+<main>
+<p>I was presented with a hard drive encrypted with TrueCrypt. TrueCrypt is unbreakable. Was there anything I could do? <em>(tl;dr: yes)</em>
+</p>
+
+<p>In this case I was presented with a hard drive encrypted with TrueCrypt. One litigant claims the other guessed his password and changed it so he can’t decrypt it. The other litigant claims this is a lie and the first guy doesn’t want to reveal the financial records on that hard drive. The attorney on the case told me he had spoken with “an ex-FBI guy” who said to forget it – TrueCrypt is unbreakable. Was there anything I could do?</p>
+
+<p>I told him that it is true that I knew of no known flaws in TrueCrypt’s implementation. There were a few things I could try and let run for several weeks but there were no guarantees – it could take millions of years to crack TrueCrypt with a plain brute-force search for the password. I was given the go-ahead and two weeks to see what I could do.</p>
+
+<p>I didn’t have access to a memory dump from the computer when TrueCrypt was running, or I may have been able to grab the encryption key from RAM. I tried finding an encryption key in the hiberfil.sys file and pagefile but had no luck.</p>
+
+<p>I set up three cracking stations. The first would run a brute-force search across every character combination. This method would eventually find any password, but could take millions of years to finish searching. I used the open source software oclHashCat to use a graphics card to speed up the attempts. I had to make a lot of compromises with my settings in order to finish in any reasonable time. Some quick back of the napkin math showed me there are 1,209,600 seconds in two weeks and I could run about 3 billion password attempts in those two weeks, so I chose to brute-force only letters and digits, no punctuation, up to 6 characters using TrueCrypt’s default encryption methods. That would finish just before the two weeks was up.</p>
+
+<p>For the second cracking station I scanned the entire hard drive and built a dictionary of every single word that occurred in any file, or in any slack space or any deleted fragment. This should give me a good sample of words that the user used in his documents. The second station ran a dictionary based crack using this wordlist.</p>
+
+<p>For the third cracking station I downloaded the biggest password lists I could find. These included huge dictionaries, word lists from every piece of literature at Project Gutenburg and millions of passwords taken from Internet hacks and breaches over the years.</p>
+
+<p>Every day I would work with those three monitors behind me endlessly scrolling password guesses down the screen like scenes from The Matrix. At the end of two weeks I had to call the attorney and tell him, ‘Sorry – the TrueCrypt cracking has been running all this time with no luck.’ He said an important court date had been rescheduled and to let it run for another week. One day I came in and one of the stations had stopped scrolling. My heart sank, assuming the software had crashed and all that time was lost. I stared dumbly at the screen for a moment until I realized that in the most anticlimactic success output ever there was a single word displayed on the screen followed by a Linux prompt: ‘#’ waiting for my instructions on what to do next.</p>
+
+<p>The password had been one of the ones cracked and released online. It was a long meaningless string of letters and numbers. The brute-force would never have found it within my lifetime. The user must have used the same password for some online account that had been breached. I picked up the phone to deliver the good news!</p>
+
+<hr />
+
+<p>Comments from old blog:</p>
+
+<blockquote>
+<p>From: @shuutech <a href="https://shuutech.wordpress.com/">https://shuutech.wordpress.com/</a> March 20, 2015 at 4:05 PM<br />
+From what I understand, the randomness is obtained by your mouse movement. That being the case, the default config is insecure because it isn’t random enough – you need to configure it to scroll for longer to increase the entropy. Is this true?</p>
+
+<p>From: Peter Theobald March 20, 2015 at 4:06 PM<br />
+The default configuration I talked about in my post refers to the default choice of encryption algorithms used by Truecrypt: AES and RIPEMD-160. The Truecrypt user can choose from a variety of other encryption algorithms with different (minor) benefits and drawbacks.
+The randomness you are asking about is the source of entropy that Truecrypt uses to initialize it’s random number generator. When creating a new encrypted volume Truecrypt asks you to wiggle your mouse around inside a window and uses the microscopic movements of your mouse as extra entropy to improve it’s random number generator. If a random number generator used only deterministic mathematical operations for randomness then theoretically it could make it possible to calculate the sequence of random numbers. By incorporating real-world uncertainty into the operation the random numbers are improved.
+In the situation described in my post, better randomness would not have stopped me from breaking the encryption as I matched the password with a password reused on another online account. For better security the user should not have reused the same password on multiple websites.</p>
+</blockquote>
+</main>
+
+
+
+
+
+<nav class="post-nav">
+  <span class="nav-prev"><a href="/tech/ghost-solver---in-which-we-ruin-a-great-game/">&larr; Ghost Solver - In Which We Ruin a Great Game</a></span>
+  <span class="nav-next"><a href="/tech/tricky-forensic-hard-drive-acquisition-of-an-imac/">Tricky forensic hard drive acquisition of an iMac &rarr;</a></span>
+</nav>
+
+
+<div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "petertheobald" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</article>
+</div>
+
+
+
+<footer>
+
+<div class="footer">
+  
+  
+  <div class="copyright">
+  &copy; 2017 <a href="#" onClick="document.location.href = 'mailto:'+'peter'+'@petertheobald.com';return false;">Peter<span style="display:none">foo</span>@PeterTheobald.com</a> |
+  <a href="https://twitter.com/peterjtheobald"><i class="fa fa-twitter" aria-hidden="true"></i> @PeterJTheobald</a> |
+  <a href="https://www.linkedin.com/profile/view?id=peterjtheobald"><i class="fa fa-linkedin" aria-hidden="true"></i> |
+  <a href="https://github.com/petertheobald/"><i class="fa fa-github" aria-hidden="true"></i> Github</a> |
+  <a href="http://www.petertheobald.com/index.xml"><i class="fa fa-rss" aria-hidden="true"></i> RSS</a>
+  </div>
+</div>
+</footer>
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+
+
+
+
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-18164620-1', 'auto');
+ga('send', 'pageview');
+</script>
+
+
+</body>
+</html>
+
