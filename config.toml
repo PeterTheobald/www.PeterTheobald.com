@@ -14,7 +14,7 @@ paginate = 9
 
 [permalinks]
     post = "/post/:slug/"
-    personal = "/personal/:slug"
+    play = "/play/:slug"
     tech = "/tech/:slug"
 
 [[menu.main]]
@@ -30,8 +30,8 @@ paginate = 9
     url = "/categories/tech/"
     weight = 3
 [[menu.main]]
-    name = "Personal"
-    url = "/categories/personal/"
+    name = "Play"
+    url = "/categories/play/"
     weight = 4
 [[menu.main]]
     name = "Tags"

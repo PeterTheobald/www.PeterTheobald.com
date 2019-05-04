@@ -3,7 +3,7 @@ date: "2017-03-14"
 draft: false
 title: "Troy and Abed in a Montage"
 thumbnail: "Troy-and-Abed-in-a-montage.png"
-categories: [personal]
+categories: [play]
 tags: [community, videos]
 scripts: [ "/js/custom-scripts.js" ]
 ---

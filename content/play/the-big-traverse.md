@@ -4,7 +4,7 @@ draft: false
 title: "The Big Traverse"
 thumbnail: "the-big-traverse-sm.png"
 description: I've issued a challenge to all the great people at Island Rock Climbing Gym... Can you do The Big Traverse?!
-categories: [personal]
+categories: [play]
 tags: [ "rock climbing"]
 scripts: [ ]
 ---

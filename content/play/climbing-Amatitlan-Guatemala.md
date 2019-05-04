@@ -3,7 +3,7 @@ date: "2016-07-07"
 draft: false
 title: "Climbing Amatitlan Guatemala"
 thumbnail: "climbing-guatemala-cover.png"
-categories: [ personal ]
+categories: [ play ]
 tags: [ "rock climbing", "travel", "videos"]
 scripts: [ "/js/custom-scripts.js" ]
 ---

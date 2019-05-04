@@ -3,7 +3,7 @@ date: "2017-06-21"
 draft: true
 title: "Everyone explorer"
 thumbnail: "everyone.jpg"
-categories: [personal]
+categories: [play]
 tags: [ "javascript", "paperjs"]
 scripts: [ "/js/everyone.js" ]
 ---
