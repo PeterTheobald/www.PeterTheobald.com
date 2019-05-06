@@ -7,7 +7,7 @@ googleAnalytics = "UA-18164620-1"
 disqusShortname = "petertheobald"
 ignoreFiles = ["\\.Rmd$", "_files$", "_cache$"]
 preserveTaxonomyNames = true
-pluralizelisttitles: "false"
+pluralizelisttitles: false
 footnotereturnlinkcontents = "↩"
 hasCJKLanguage = true
 enableEmoji = true
