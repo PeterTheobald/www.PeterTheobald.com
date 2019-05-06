@@ -1,5 +1,8 @@
 backend:
-  name: git-gateway
+  name: github
+  repo: PeterTheobald/www.PeterTheobald.com
+  branch: master
+  site_domain: petertheobald.netlify.com
   publish_mode: editorial_workflow
   
 media_folder: "static/images" # Media files will be stored in the repo under static/images/uploads
