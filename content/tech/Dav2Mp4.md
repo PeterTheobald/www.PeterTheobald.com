@@ -7,7 +7,6 @@ tags:
   - forensics
   - programming
   - video-editing
-  - testing
 draft: false
 ---
 Many security cameras export video in a proprietary format called DAV which is difficult to work with. I wrote this program to convert DAV videos into standard MP4 video.
