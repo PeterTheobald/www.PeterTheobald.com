@@ -44,7 +44,7 @@
       </div>
       -->
       <ul class="menu">
-        {{if and .Title (not .IsPage)}}<li>{{.Title }}:</li>{{end}}
+        {{if and .Title (not .IsPage)}}<li>{{.Title }} articles:</li>{{end}}
         {{ range .Site.Menus.main }}
         <li><a href="{{ .URL | relURL }}"><span data-hover="{{ .Name }}">{{ .Name }}</span></a></li>
         {{ end }}
