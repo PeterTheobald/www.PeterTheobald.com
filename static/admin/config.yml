@@ -15,10 +15,10 @@ collections:
       - {label: "Layout", name: "layout", widget: "hidden", default: "blog"}
       - {label: "Title", name: "title", widget: "string"}
       - {label: "Publish Date", name: "date", widget: "datetime"}
-      - {label: "Thumbnail", name: "thumbnail", widget: "image", required: "false"}
-      - {label: "Scripts", name: "scripts", widget: "string", required: "false"}
-      - {label: "Tags", name: "tags", widget: "string", required: "false"}
-      - {label: "Draft", name: "draft", widget: "boolean", default: "false"}
+      - {label: "Thumbnail", name: "thumbnail", widget: "image", required: false}
+      - {label: "Scripts", name: "scripts", widget: "string", required: false}
+      - {label: "Tags", name: "tags", widget: "string", required: false}
+      - {label: "Draft", name: "draft", widget: "boolean", default: false}
       - {label: "Body", name: "body", widget: "markdown"}
   - name: "tech" # Used in routes, e.g., /admin/collections/blog
     label: "Tech Section" # Used in the UI
@@ -29,8 +29,8 @@ collections:
       - {label: "Layout", name: "layout", widget: "hidden", default: "tech"}
       - {label: "Title", name: "title", widget: "string"}
       - {label: "Publish Date", name: "date", widget: "datetime"}
-      - {label: "Thumbnail", name: "thumbnail", widget: "image", required: "false"}
-      - {label: "Scripts", name: "scripts", widget: "string", required: "false"}
-      - {label: "Tags", name: "tags", widget: "string", required: "false"}
-      - {label: "Draft", name: "draft", widget: "boolean", default: "false"}
+      - {label: "Thumbnail", name: "thumbnail", widget: "image", required: false}
+      - {label: "Scripts", name: "scripts", widget: "string", required: false}
+      - {label: "Tags", name: "tags", widget: "string", required: false}
+      - {label: "Draft", name: "draft", widget: "boolean", default: false}
       - {label: "Body", name: "body", widget: "markdown"}
