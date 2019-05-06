@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Jquery on Peter Theobald</title>
+    <title>jquery on Peter Theobald</title>
     <link>/tags/jquery/</link>
-    <description>Recent content in Jquery on Peter Theobald</description>
+    <description>Recent content in jquery on Peter Theobald</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Wed, 24 May 2017 00:00:00 +0000</lastBuildDate>
@@ -17,9 +17,7 @@
       <pubDate>Wed, 24 May 2017 00:00:00 +0000</pubDate>
       
       <guid>/tech/dave-says-thats-not-funny/</guid>
-      <description>&lt;p&gt;Dave doesn&amp;rsquo;t think any of my jokes are funny. I keep trying but he always says the same thing, &amp;ldquo;That&amp;rsquo;s not funny&amp;rdquo;. So like all repetitive processes, I automated it. This page scrapes jokes from &lt;a href=&#34;http://www.reddit.com/r/Jokes&#34;&gt;Reddit/r/Jokes&lt;/a&gt; and presents them here as texts to Dave.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;Dave doesn&amp;rsquo;t think any of my jokes are funny. I keep trying but he always says the same thing, &amp;ldquo;That&amp;rsquo;s not funny&amp;rdquo;. So like all repetitive processes, I automated it. This page scrapes jokes from &lt;a href=&#34;http://www.reddit.com/r/Jokes&#34;&gt;Reddit/r/Jokes&lt;/a&gt; and presents them here as texts to Dave.&lt;/p&gt;</description>
     </item>
     
   </channel>

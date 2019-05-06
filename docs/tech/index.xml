@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Teches on Peter Theobald</title>
+    <title>Tech on Peter Theobald</title>
     <link>/tech/</link>
-    <description>Recent content in Teches on Peter Theobald</description>
+    <description>Recent content in Tech on Peter Theobald</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Tue, 15 Aug 2017 00:00:00 +0000</lastBuildDate>
@@ -26,31 +26,25 @@
       <pubDate>Wed, 24 May 2017 00:00:00 +0000</pubDate>
       
       <guid>/tech/dave-says-thats-not-funny/</guid>
-      <description>&lt;p&gt;Dave doesn&amp;rsquo;t think any of my jokes are funny. I keep trying but he always says the same thing, &amp;ldquo;That&amp;rsquo;s not funny&amp;rdquo;. So like all repetitive processes, I automated it. This page scrapes jokes from &lt;a href=&#34;http://www.reddit.com/r/Jokes&#34;&gt;Reddit/r/Jokes&lt;/a&gt; and presents them here as texts to Dave.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;Dave doesn&amp;rsquo;t think any of my jokes are funny. I keep trying but he always says the same thing, &amp;ldquo;That&amp;rsquo;s not funny&amp;rdquo;. So like all repetitive processes, I automated it. This page scrapes jokes from &lt;a href=&#34;http://www.reddit.com/r/Jokes&#34;&gt;Reddit/r/Jokes&lt;/a&gt; and presents them here as texts to Dave.&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Ghost Solver - Now in Clojure</title>
-      <link>/tech/ghost-solver---now-in-clojure/</link>
+      <link>/tech/ghost-solver-now-in-clojure/</link>
       <pubDate>Tue, 20 Dec 2016 00:00:00 +0000</pubDate>
       
-      <guid>/tech/ghost-solver---now-in-clojure/</guid>
-      <description>&lt;p&gt;&lt;a href=&#34;/tech/ghost-game-solver/&#34;&gt;My previous post&lt;/a&gt; was about a Python program to calculate the moves to guarantee a win in the puzzle word game &amp;lsquo;Ghost&amp;rsquo;. The algorithm was naturally recursive and felt &amp;lsquo;LISPy&amp;rsquo;. &lt;a href=&#34;http://www.twitter.com/pdlug&#34;&gt;@pdlug&lt;/a&gt; has been telling me how writing in Clojure will expand my mind, make me more productive and hem my pants so this week I learned just enough Clojure (I already knew LISP) to re-write the Ghost game solver in Clojure.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <guid>/tech/ghost-solver-now-in-clojure/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;/tech/ghost-game-solver/&#34;&gt;My previous post&lt;/a&gt; was about a Python program to calculate the moves to guarantee a win in the puzzle word game &amp;lsquo;Ghost&amp;rsquo;. The algorithm was naturally recursive and felt &amp;lsquo;LISPy&amp;rsquo;. &lt;a href=&#34;http://www.twitter.com/pdlug&#34;&gt;@pdlug&lt;/a&gt; has been telling me how writing in Clojure will expand my mind, make me more productive and hem my pants so this week I learned just enough Clojure (I already knew LISP) to re-write the Ghost game solver in Clojure.&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Ghost Solver - In Which We Ruin a Great Game</title>
-      <link>/tech/ghost-solver---in-which-we-ruin-a-great-game/</link>
+      <link>/tech/ghost-solver-in-which-we-ruin-a-great-game/</link>
       <pubDate>Sat, 26 Nov 2016 00:00:00 +0000</pubDate>
       
-      <guid>/tech/ghost-solver---in-which-we-ruin-a-great-game/</guid>
-      <description>&lt;p&gt;My son showed me a new word game, &amp;lsquo;Ghost&amp;rsquo;, and I wrote a Python program to &amp;ldquo;solve&amp;rdquo; the game and find all winning sequences.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <guid>/tech/ghost-solver-in-which-we-ruin-a-great-game/</guid>
+      <description>&lt;p&gt;My son showed me a new word game, &amp;lsquo;Ghost&amp;rsquo;, and I wrote a Python program to &amp;ldquo;solve&amp;rdquo; the game and find all winning sequences.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -59,8 +53,7 @@
       <pubDate>Thu, 07 Jul 2016 16:11:58 +0530</pubDate>
       
       <guid>/tech/breaking-the-encryption/</guid>
-      <description>&lt;p&gt;I was presented with a hard drive encrypted with TrueCrypt. TrueCrypt is unbreakable. Was there anything I could do? &lt;em&gt;(tl;dr: yes)&lt;/em&gt;
-&lt;/p&gt;</description>
+      <description>&lt;p&gt;I was presented with a hard drive encrypted with TrueCrypt. TrueCrypt is unbreakable. Was there anything I could do? &lt;em&gt;(tl;dr: yes)&lt;/em&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -69,9 +62,7 @@
       <pubDate>Thu, 30 Apr 2015 00:00:00 +0000</pubDate>
       
       <guid>/tech/tricky-forensic-hard-drive-acquisition-of-an-imac/</guid>
-      <description>&lt;p&gt;Recently I had to do a forensic acquisition of an iMac hard drive, and it presented many obstacles.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;Recently I had to do a forensic acquisition of an iMac hard drive, and it presented many obstacles.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -90,8 +81,7 @@ So I searched on NVIDIA to see what drivers might be close.</description>
       <pubDate>Fri, 01 Apr 2011 00:00:00 +0000</pubDate>
       
       <guid>/tech/unison-2.40.61-binary-for-nexenta-core-platform-3/</guid>
-      <description>&lt;p&gt;I have compiled a Unison 2.40.61 binary (file-syncronization tool) for Nexenta (Solaris/Linux hybrid OS with ZFS) and made it available for download here.
-&lt;/p&gt;</description>
+      <description>&lt;p&gt;I have compiled a Unison 2.40.61 binary (file-syncronization tool) for Nexenta (Solaris/Linux hybrid OS with ZFS) and made it available for download here.&lt;/p&gt;</description>
     </item>
     
     <item>

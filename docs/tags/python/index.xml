@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Python on Peter Theobald</title>
+    <title>python on Peter Theobald</title>
     <link>/tags/python/</link>
-    <description>Recent content in Python on Peter Theobald</description>
+    <description>Recent content in python on Peter Theobald</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Tue, 15 Aug 2017 00:00:00 +0000</lastBuildDate>
@@ -22,13 +22,11 @@
     
     <item>
       <title>Ghost Solver - In Which We Ruin a Great Game</title>
-      <link>/tech/ghost-solver---in-which-we-ruin-a-great-game/</link>
+      <link>/tech/ghost-solver-in-which-we-ruin-a-great-game/</link>
       <pubDate>Sat, 26 Nov 2016 00:00:00 +0000</pubDate>
       
-      <guid>/tech/ghost-solver---in-which-we-ruin-a-great-game/</guid>
-      <description>&lt;p&gt;My son showed me a new word game, &amp;lsquo;Ghost&amp;rsquo;, and I wrote a Python program to &amp;ldquo;solve&amp;rdquo; the game and find all winning sequences.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <guid>/tech/ghost-solver-in-which-we-ruin-a-great-game/</guid>
+      <description>&lt;p&gt;My son showed me a new word game, &amp;lsquo;Ghost&amp;rsquo;, and I wrote a Python program to &amp;ldquo;solve&amp;rdquo; the game and find all winning sequences.&lt;/p&gt;</description>
     </item>
     
   </channel>
