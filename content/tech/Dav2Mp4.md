@@ -9,9 +9,10 @@ tags:
   - video-editing
 draft: false
 ---
-Many security cameras export video in a proprietary format called DAV which is difficult to work with. I wrote this program to convert DAV videos into standard MP4 video.
+Many security cameras export video in a proprietary format called DAV which is difficult to work with. I wrote this program to convert DAV videos into standard MP4 video. 
 
 <!--more-->
+
 <img style="display:block;max-width:100%;margin:auto" src="/images/dav2mp4-960.png">
 
 I've worked on several projects involving video from security cameras, and in most cases the video was stored in the proprietary DAV (Dahua Video) format. The vendor software that works with DAV video is awful to the point of being unusable - crashing constantly, inconsistent seeking and labelling of times, finicky interface that sometimes works and sometimes doesn't. After installing DAV software from several different security camera manufacturers I got fed up and wrote this program to convert a large collection of DAV video files into standard MP4 video. It also creates subtitles with the running timestamps to make it clear as you seek and view through the video where you are. The DAV video files are sometimes broken up into hundreds of small segments showing just a few minutes in each file. This program will also merge contiguous video files into single larger MP4 video files.
