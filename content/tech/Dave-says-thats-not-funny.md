@@ -7,7 +7,7 @@ categories: [tech]
 tags: [ "javascript", "programming", "jquery"]
 scripts: [ "dave-says-thats-not-funny.js"]
 ---
-Dave doesn't think any of my jokes are funny. I keep trying but he always says the same thing, "That's not funny". So like all repetitive processes, I automated it. This page scrapes jokes from [Reddit/r/Jokes](http://www.reddit.com/r/Jokes) and presents them here as texts to Dave.
+Dave doesn't think any of my jokes are funny. I keep trying but he always says the same thing, "That's not funny". So like all repetitive processes, I automated it. This page scrapes jokes from [Reddit/r/Jokes](http://www.reddit.com/r/Jokes) and presents them here as texts to Dave. 
 
 <!--more-->
 
