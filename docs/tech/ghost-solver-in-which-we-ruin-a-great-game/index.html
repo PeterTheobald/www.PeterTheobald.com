@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    
+    <title>Peter Theobald</title>
+	<link href='https://fonts.googleapis.com/css?family=Oswald' rel='stylesheet'>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link href="//cdn.bootcss.com/highlight.js/9.12.0/styles/github.min.css" rel="stylesheet">
+
+	  
+    
+    <script type="text/javascript" src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+  </head>
+
+  <body class="page">
+    <nav class="header">
+      <div class="banner">
+<a href="/">
+
+<img src="/images/profile-100c.png" alt="Peter Theobald" />
+</a>
+<div class="banner-title">Peter Theobald</div><div class="banner-description">Software Engineer. Computer Forensics. Tech Entrepreneur. Geeky Dad. Rock Climber.</div>
+</div>
+
+      
+      <ul class="menu">
+        
+        
+        <li><a href="/"><span data-hover="Home">Home</span></a></li>
+        
+        <li><a href="/about/"><span data-hover="About">About</span></a></li>
+        
+        <li><a href="/tech/"><span data-hover="Tech">Tech</span></a></li>
+        
+        <li><a href="/play/"><span data-hover="Play">Play</span></a></li>
+        
+        <li><a href="/tags/"><span data-hover="Tags">Tags</span></a></li>
+        
+      </ul>
+    </nav>
+
+<div class="container">
+<article>
+<div class="article-meta">
+
+  
+  
+  <h1><span class="title">Ghost Solver - In Which We Ruin a Great Game</span></h1>
+  <span class="date">2016-11-26</span>
+
+  
+
+  
+  
+  <div class="categories">
+    
+    
+      <a href="/categories/tech">tech: </a>
+    
+    
+    
+    <a href="/tags/python">python</a>, <a href="/tags/games">games</a>, <a href="/tags/puzzles">puzzles</a>, <a href="/tags/programming">programming</a>
+    
+  </div>
+  
+  
+
+</div>
+
+
+
+<main>
+<p>My son showed me a new word game, &lsquo;Ghost&rsquo;, and I wrote a Python program to &ldquo;solve&rdquo; the game and find all winning sequences.</p>
+
+<p>The game played like this: We took turns adding a letter to a growing word fragment, trying not to be the one to complete a valid word. Each fragment must be the beginning of an actual word and there is a minimum of 4 letters to count as a complete word. The player who completes a word loses the round.</p>
+
+<p>For example one of our rounds went like this:</p>
+
+<pre><code>- He started with 'T',
+- I responded with 'R', 
+- No matter what he responds with I will respond with 'C': TRAC, TREC, TRIC, TROC, TRUC,
+- He will have to respond with K, completing a word and losing.
+</code></pre>
+
+<p>We played for a while and I really enjoyed it. So naturally I felt compelled to write a program to &ldquo;solve&rdquo; the game and find which words would guarantee a win for the player whether he plays first or second. Why would I do this when I know it will ruin the game? Didn&rsquo;t I remember how hollow the victory was when I figured out the winning sequences to Tic-Tac-Toe as a kid? Because writing this program is more fun than playing the game, that&rsquo;s why.</p>
+
+<h1 id="the-program">The Program</h1>
+
+<p>The algorithm is relatively simple:</p>
+
+<ol>
+<li>Read a dictionary into a tree so from any letter I can traverse what letters could follow.</li>
+<li>Traverse that tree, finding words that WIN for the player and LOSE for the opponent.</li>
+<li>List the words guaranteed to win for each starting letter, or choose the best of several branches when there is more than one choice.
+<br /></li>
+</ol>
+
+<p>The data structure is a <a href="https://en.wikipedia.org/wiki/Trie">TRIE</a> : It is a hash/dictionary with the first letters for keys and another hash/dictionary for the values. Each sub-hash/dictionary likewise has the subsequent letter as a key and another hash/dictionary as the value, until the end of a word is reached and the value will be an empty list or Null/Nil/None.</p>
+
+<p>The search does two things:</p>
+
+<ol>
+<li>For end-of-words with no &lsquo;next letter&rsquo; return WIN if the opponent had to complete a word or LOSE if the player had to complete a word, depending on which player went first and whether it&rsquo;s an even or odd turn.</li>
+<li>For all other letters (nodes) recursively check each branch. If it&rsquo;s the players turn and any branches guarantee a win choose the &lsquo;best&rsquo; branch and return it. If it&rsquo;s the opponents turn and every branch forces a win return them all. If any branches lose assume the opponent would choose that and return LOSE.</li>
+</ol>
+
+<p>Here is the code in Python. I&rsquo;ve put it up on GitHub at <a href="https://github.com/PeterTheobald/GhostSolver">ghostSolver</a></p>
+
+<pre><code class="language-python"># ghostSolver.py
+# Peter@PeterTheobald.com 2016
+#
+# Ghost is a word game in which players take turns adding letters to a growing
+# word fragment, trying not to be the one to complete a valid word. Each
+# fragment must be the beginning of an actual word, there is a minimum of four
+# letters of a word that counts. The player who completes a word loses the round.
+#
+# This program reads a dictionary and figures out words that will guarantee
+# a win both for the player who plays first and the player who plays second.
+#
+# Input: ghostSolver.py &lt; wordlist.txt
+# Output: Player goes first: list of winning words.
+#         Player goes second: list of winning words.
+
+import pprint
+import fileinput
+import re
+
+# Our trie is a tree of letters forming words.
+# Implemented as a hash-map with letters as keys; values are sub-tries or nil
+# In the ghost game no words are allowed with complete words as prefixes
+#   eg: if we have &quot;cart&quot; we can never reach &quot;cartridge&quot;
+
+def trieLetters( trie):
+  return trie.keys()
+  
+def subTrie( trie, letter):
+  return trie[letter]
+
+# read through a list of words, split each word into letters,
+# traverse the letters in the tree and add any new letters found
+# throw away any words less than 4 letters long
+# throw away any words that are supersets of existing words
+# this is made easier because we assume the input is always sorted
+# dont need any end-of-word markers because there are no supersets.
+# leaf nodes are always end-of-word. non-leaf nodes are never end-of-word.
+
+def buildTrie():
+  trie={}
+  for line in fileinput.input():
+    word=line.rstrip()
+    if len(word)&lt;4:
+      continue
+    # clean out some cruft from online dictionaries, anything with Capitals or punctuation
+    if re.search( '[^a-z]', word):
+      continue
+    p=trie
+    newnode=True
+    for letter in word:
+      if letter in p:
+        # this letter has already been created (for a different word), follow it
+        p=subTrie( p, letter)
+        newnode=False
+      else:
+        # This letter isn't here. Is it because we are adding new letters onto the tree
+        # or because we've reached the end of a complete existing word?
+        if p or newnode:
+          # create new node for this letter
+          p[letter]={}
+          newnode=True
+          p=subTrie( p, letter)
+        else:
+          # this is a superset of an existing word
+          continue # skip it-Ghost can't use it and saves lots of memory
+  return trie
+
+def isOdd(x):
+  return x%2
+def isEven(x):
+  return not x%2
+def isPlayersMove( partialWord, playerGoesFirst):
+  return ((playerGoesFirst and isEven( len( partialWord)))
+          or ( not( playerGoesFirst) and isOdd( len( partialWord))))
+
+# returns list of all words branching from this trie
+# can also be used for all words branching from a sub-trie and a partial word
+def allWords( trie, partialWord):
+  if not trie:
+    return [partialWord]
+  resultList=[]
+  for l in trieLetters( trie):
+    resultList.extend( allWords( subTrie(trie, l), partialWord+l))
+  return resultList
+           
+def bestWords( trie, partialWord): # I have words. I have the best words.
+  # in: a partial word, and a tree of completions of that word
+  # out: a tree with the best branch in it
+  # best is defined as:
+  #   1. the branch with the fewest sub-branches (words)
+  #   2. the branch with the shortest word
+  #   3. the branch with alphabetically first word
+  # Note: this is somewhat subjective:
+  #       1 long word is 'better' than 2 short words
+  #       3 short words and 3 long words are 'better' than 6 medium words
+  wordList=[]
+  countWords={}
+  shortestWord={}
+  alphaFirstWord={}
+  for l in trieLetters( trie):
+    # pre-calculate sort keys for each letter and list of words
+    wordList=allWords( subTrie( trie, l), partialWord+l)
+    countWords[l]=len( wordList)
+    shortestWord[l]=min(map(len,wordList))
+    alphaFirstWord[l]=sorted(wordList)[0]
+  bestBranchLetter=sorted( trie, 
+                  key=lambda x: ( countWords[x], shortestWord[x], alphaFirstWord[x])
+                  )[0]
+  return { bestBranchLetter: subTrie( trie, bestBranchLetter)}
+
+def winningMoves( trie, partialWord, playerGoesFirst):
+  # traverse the tree, find words that lose and prune them. Only pass back up the winning words
+  if ( isPlayersMove( partialWord, playerGoesFirst)):
+    # Player's move
+    # played 'word' so far, next letter is one of tree.keys
+    # if ANY children are winning words, choose the best one
+    # prune the rest
+    resultNode={}
+    for l in trieLetters( trie): # search all children branches
+      if subTrie( trie, l): # skip losing end-of-words
+        subResult=winningMoves( subTrie( trie, l), partialWord+l, playerGoesFirst)
+        if subResult:
+          resultNode[l]=subResult
+    if (resultNode):
+      return bestWords( resultNode, partialWord)
+    else:
+      return None
+  else:
+    # Opponent's move
+    # played 'word' so far, next letter is one of tree.keys
+    # if ALL children are winning words, prune losers return ALL win word branches
+    # if ANY children lose, this is a dangerous branch return None
+    # if opponent must complete a word, this is a win word
+    resultNode={}
+    for l in trieLetters( trie): # search all children branches
+      if not subTrie( trie, l): # end of word keep a win
+        resultNode[l]={}
+      else:
+        subResult=winningMoves( subTrie( trie, l), partialWord+l, playerGoesFirst)
+        if not subResult: # found a losing branch, prune this
+          return None
+        else:
+          resultNode[l]=subResult # keep winning branches
+    return resultNode   
+
+def printWinners( trie, playerGoesFirst):
+    for l in sorted( trieLetters( trie)):
+        winningTrie=winningMoves( subTrie( trie, l), l, playerGoesFirst)
+        if (winningTrie):
+            print(l+&quot;: %s&quot; % sorted(allWords( winningTrie, l)))
+        else:
+            print(l+&quot;: No winning words&quot;)
+
+def main():
+    trie=buildTrie( )
+    print( &quot;Player goes first: winning words:\n&quot;)
+    printWinners( trie, True)
+    print( &quot;\nAdversary goes first: winning words:\n&quot;)
+    printWinners( trie, False)
+
+if __name__ == &quot;__main__&quot;:
+    main()
+
+</code></pre>
+
+<h1 id="the-results">The Results</h1>
+
+<pre><code>Player goes first: winning words:
+
+  a: No winning words  
+  b: No winning words  
+  c: No winning words  
+  d: No winning words  
+  e: No winning words  
+  f: No winning words  
+  g: No winning words  
+  h: ['hack', 'hegemony', 'hick', 'hoar', 'hues', 'hybrid']  
+  i: No winning words  
+  j: ['jack', 'jest', 'jigs', 'jobs', 'just']  
+  k: No winning words  
+  l: No winning words  
+  m: ['maze', 'meek', 'meet', 'mien', 'mnemonic', 'moan', 'moat', 'muff', 'myth']  
+  n: No winning words  
+  o: No winning words  
+  p: No winning words  
+  q: No winning words  
+  r: ['raft', 'relate', 'relating', 'relent', 'relish', 'reload', 'reluctance', 'rely', 'rhapsody', 'rill', 'rock', 'ruin']  
+  s: No winning words  
+  t: No winning words  
+  u: No winning words  
+  v: No winning words  
+  w: No winning words  
+  y: No winning words  
+  z: ['zeal', 'zinc', 'zodiac']  
+
+Adversary goes first: winning words:
+
+  a: ['ahead']  
+  b: ['black', 'bleed', 'blimp', 'bloat', 'bluff']  
+  c: ['clarity', 'cleft', 'cliff', 'cloak', 'cluck']  
+  d: ['draft', 'dregs', 'drift', 'droll', 'drunk', 'dryly']  
+  e: ['equal', 'equator'] 
+  f: ['frail', 'freak', 'friar', 'frock', 'fruit']  
+  g: ['graft', 'grenade', 'grill', 'groan', 'gruff']  
+  h: No winning words  
+  i: ['illegal']  
+  j: No winning words  
+  k: ['knack', 'knead', 'knife', 'knifing', 'knock', 'knuckle']  
+  l: ['lying', 'lymph', 'lynch', 'lyric']  
+  m: No winning words  
+  n: ['nylon', 'nymph']  
+  o: ['ozone']  
+  p: ['pneumatic']  
+  q: ['quack', 'quell', 'quick', 'quonset']  
+  r: No winning words  
+  s: ['squeamish', 'squeeze', 'squeezing', 'squelch']  
+  t: ['twain', 'tweed', 'twice', 'twofold']  
+  u: ['ulcer', 'ultra']  
+  v: ['vulture']  
+  w: ['whack', 'wheat', 'which', 'whoop']  
+  y: ['yield']  
+  z: No winning words  
+</code></pre>
+
+<p>I also tried it with a 176,000 word scrabble dictionary (TWL06) a monster 267,000 word meta-dictionary compilation from several dictionaries (SOWPODS) and a smaller 32,000 word dictionary (6of12). The results from each obviously varied due to the different words available. You should use the one that most closely matches your vocabulary and the dictionary you will use to check challenges when you play. You can download a copy of these wordlists from the <a href="https://github.com/PeterTheobald/GhostSolver">GhostSolver github repo</a>.</p>
+
+<h1 id="randall-munroe-did-it-first">Randall Munroe Did It First</h1>
+
+<p>After going through all of this someone pointed out to me that Randall Munroe of XKCD has a <a href="https://blog.xkcd.com/2007/12/31/ghost/">blog post</a> about solving this game. He discussed it but didn&rsquo;t post any code. His results differed slightly from mine. This is due to two factors: We most likely used different dictionaries and we coded different subjective definitions of the &ldquo;best&rdquo; choice among winning branches.</p>
+
+<p>In the code when the player has the choice of different letters that lead down different branches that each lead to winning words, I choose the &ldquo;best&rdquo; branch to present. I have subjectively coded the definition of best as:</p>
+
+<ol>
+<li>Choose the branch with fewer words in it. Remembering one winning word is better than remembering two or three winning words.</li>
+<li>Otherwise choose the branch with the shortest word in it.</li>
+<li>Otherwise choose the branch with a word that comes first alphabetically.
+<br /></li>
+</ol>
+
+<p>This implies that a branch with one long word is considered better than a branch with two short words, and a six-word branch with 3 short words and 3 long words is considered better than a six-word branch with 6 medium length words.</p>
+
+<p>So now I&rsquo;m satisfied. I&rsquo;ve written my program. I&rsquo;ve solved the game. I&rsquo;ve ruined Ghost.</p>
+
+<ul>
+<li>I think the algorithm is very recursive and LISPy, and would be expressed very naturally in Clojure. I&rsquo;d like to re-write it in Clojure.  UPDATE: I&rsquo;ve rewritten it in Clojure, <a href="/tech/ghost-in-clojure">read about it</a>.</li>
+<li>I&rsquo;d also like to ruin my favorite game WordBase by writing an AI player. I already have the general algorithm in mind using minimax searching with alpha-beta pruning and a good static board evaluator.</li>
+</ul>
+</main>
+
+
+
+
+
+<nav class="post-nav">
+  <span class="nav-prev"><a href="/tech/ghost-solver-now-in-clojure/">&larr; Ghost Solver - Now in Clojure</a></span>
+  <span class="nav-next"><a href="/tech/breaking-the-encryption/">Breaking The Encryption &rarr;</a></span>
+</nav>
+
+
+<div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "petertheobald" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</article>
+</div>
+
+
+
+<footer>
+
+<div class="footer">
+  
+  
+  <div class="copyright">
+  &copy; 2017 <a href="#" onClick="document.location.href = 'mailto:'+'peter'+'@petertheobald.com';return false;">Peter<span style="display:none">foo</span>@PeterTheobald.com</a> |
+  <a href="https://twitter.com/peterjtheobald"><i class="fa fa-twitter" aria-hidden="true"></i> @PeterJTheobald</a> |
+  <a href="https://www.linkedin.com/profile/view?id=peterjtheobald"><i class="fa fa-linkedin" aria-hidden="true"></i> |
+  <a href="https://github.com/petertheobald/"><i class="fa fa-github" aria-hidden="true"></i> Github</a> |
+  <a href="http://www.petertheobald.com/index.xml"><i class="fa fa-rss" aria-hidden="true"></i> RSS</a>
+  </div>
+</div>
+</footer>
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/languages/r.min.js"></script>
+<script>
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+</script>
+
+
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-18164620-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+
+</body>
+</html>
+

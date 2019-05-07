@@ -6,19 +6,10 @@
     <description>Recent content in Categories on Peter Theobald</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 26 Aug 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 24 May 2017 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/categories/index.xml" rel="self" type="application/rss+xml" />
     
-    
-    <item>
-      <title>play</title>
-      <link>/categories/play/</link>
-      <pubDate>Sat, 26 Aug 2017 00:00:00 +0000</pubDate>
-      
-      <guid>/categories/play/</guid>
-      <description></description>
-    </item>
     
     <item>
       <title>tech</title>
@@ -26,6 +17,15 @@
       <pubDate>Wed, 24 May 2017 00:00:00 +0000</pubDate>
       
       <guid>/categories/tech/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>play</title>
+      <link>/categories/play/</link>
+      <pubDate>Tue, 14 Mar 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/categories/play/</guid>
       <description></description>
     </item>
     

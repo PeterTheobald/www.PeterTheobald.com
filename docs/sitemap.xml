@@ -8,12 +8,6 @@
   </url>
   
   <url>
-    <loc>/categories/</loc>
-    <lastmod>2017-08-26T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>/play/</loc>
     <lastmod>2017-08-26T00:00:00+00:00</lastmod>
     <priority>0</priority>
@@ -26,14 +20,8 @@
   </url>
   
   <url>
-    <loc>/play/the-big-traverse/</loc>
+    <loc>/play/traversing-for-endurance/</loc>
     <lastmod>2017-08-26T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/categories/play/</loc>
-    <lastmod>2017-08-26T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -78,6 +66,12 @@
   </url>
   
   <url>
+    <loc>/categories/</loc>
+    <lastmod>2017-05-24T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>/tech/dave-says-thats-not-funny/</loc>
     <lastmod>2017-05-24T00:00:00+00:00</lastmod>
   </url>
@@ -107,6 +101,12 @@
   
   <url>
     <loc>/tags/community/</loc>
+    <lastmod>2017-03-14T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/categories/play/</loc>
     <lastmod>2017-03-14T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
