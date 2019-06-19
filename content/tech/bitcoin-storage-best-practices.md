@@ -38,11 +38,11 @@ Hard drives crash, human memory falters, dementia, fires and floods... there see
 
 ![/images/steel plate-lg.jpg](/images/steel plate.jpg#floatright "Recovery Seed eched onto steel plate") Here is an important point: The Recovery Seed can be used to rebuild the entire wallet so it can never be typed in to a computer, phone or any digital device that could be hacked. Not ever. Don't even say it in front of your Alexa or iPhone. When the wallet is first created the Recovery Seed will be shown to you once and you will write it down on paper, not in your password manager, not in a file, not even on a thumbdrive. For long term storage there are many options to keep the Recovery Seed in a form that will endure over time. The most popular ones are letters punched or etched onto steel plates. Personally since I don't have much Bitcoin to protect I am using archival pencil on archival acid-free paper sealed with archival tape and stored in three different locations. I also included this warning with the Recovery Seed:
 ```
-IMPORTANT! SECRET! DO NOT THROW OUT!<br>
-These 24 words are the RECOVERY SEED to recover a wallet with valuable BITCOINS<br>
-Be careful access to this RECOVERY SEED could lead to someone STEALING all the BITCOINS<br>
-Follow the instructions in my will to recover the Bitcoins<br>
-If the sealed tape has been tampered with transfer the Bitcoins to a new wallet immediately<br>
+IMPORTANT! SECRET! DO NOT THROW OUT!
+These 24 words are the RECOVERY SEED to recover a wallet with valuable BITCOINS
+Be careful access to this RECOVERY SEED could lead to someone STEALING all the BITCOINS
+Follow the instructions in my will to recover the Bitcoins
+If the sealed tape has been tampered with transfer the Bitcoins to a new wallet immediately
 ```
 I think it would be acceptable to store your hardware wallet PIN and your Recovery Seed *passphrase* (not the Seed itself) in your password manager. That way you only have one master password to remember and you never have everything needed to access your Bitcoin in one place. Personally I don't keep my my Recovery Seed passphrase in a password manager, I told it to several trusted loved ones who do not have access to my backed up Recovery Seeds but can be counted on to remember the passphrase in case I am hurt or have memory problems in the future.
 
@@ -58,11 +58,12 @@ Now after you've set this up, TEST IT. Follow the instructions as if you are inc
 
 
 Instructions to go with your will or important papers; modify this to fit your circumstances:
+```
+** IMPORTANT. I HAVE VALUABLE BITCOINS. THESE ARE THE INSTRUCTIONS TO RECOVER THOSE BITCOINS **
+As of 2019 I have 0.25 Bitcoins.
+To recover these Bitcoins follow these instructions. If someone technical helps you never show them the PIN or RECOVERY SEED or passphrase.
 
-> ** IMPORTANT. I HAVE VALUABLE BITCOINS. THESE ARE THE INSTRUCTIONS TO RECOVER THOSE BITCOINS **<br>
-> As of 2019 I have 0.25 Bitcoins.<br>
-> To recover these Bitcoins follow these instructions. If someone technical helps you never show them the PIN or RECOVERY SEED or passphrase.<br>
-> 
-> 1. If you have my Ledger Nano S hardware wallet and you know my PIN code, plug the Ledger Nano S into your computer and run the wallet software. Enter the PIN code and the SEED passphrase when asked. You should see the balance of Bitcoins. Unless you really know what you're doing here I recommend you open an account on Coinbase.com, transfer all of the Bitcoin to Coinbase and sell it for dollars.
-> 
-> 2. If you don't have my Ledger Nano S hardware wallet or you don't know my PIN code, purchase a Ledger Nano S or compatible hardware wallet such as another model Ledger or a Trezor. Find the RECOVERY SEED in the safe or bank safety deposit box that we have previously discussed. Carefully cut away the tape sealing the RECOVERY SEED at the edges so you can open and view the RECOVERY SEED. On your new hardware wallet, enter the RECOVERY SEED and the passphrase that we have previously discussed. It is important that you remember this passphrase, without it there is no way to recovery the Bitcoin. That is why I have told the RECOVERY SEED only to only very few very trusted people in the family and never written it down. You should see the balance of Bitcoins. Unless you really know what you're doing here I recommend you open an account on Coinbase.com, transfer all of the Bitcoin to Coinbase and sell it for dollars.
+1. If you have my Ledger Nano S hardware wallet and you know my PIN code, plug the Ledger Nano S into your computer and run the wallet software. Enter the PIN code and the SEED passphrase when asked. You should see the balance of Bitcoins. Unless you really know what you're doing here I recommend you open an account on Coinbase.com, transfer all of the Bitcoin to Coinbase and sell it for dollars.
+
+2. If you don't have my Ledger Nano S hardware wallet or you don't know my PIN code, purchase a Ledger Nano S or compatible hardware wallet such as another model Ledger or a Trezor. Find the RECOVERY SEED in the safe or bank safety deposit box that we have previously discussed. Carefully cut away the tape sealing the RECOVERY SEED at the edges so you can open and view the RECOVERY SEED. On your new hardware wallet, enter the RECOVERY SEED and the passphrase that we have previously discussed. It is important that you remember this passphrase, without it there is no way to recovery the Bitcoin. That is why I have told the RECOVERY SEED only to only very few very trusted people in the family and never written it down. You should see the balance of Bitcoins. Unless you really know what you're doing here I recommend you open an account on Coinbase.com, transfer all of the Bitcoin to Coinbase and sell it for dollars.
+```
