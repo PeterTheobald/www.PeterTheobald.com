@@ -38,11 +38,11 @@ Hard drives crash, human memory falters, dementia, fires and floods... there see
 
 ![steel plate](/images/steel plate.jpg#floatright) Here is an important point: The Recovery Seed can be used to rebuild the entire wallet so it can never be typed in to a computer, phone or any digital device that could be hacked. Not ever. Don't even say it in front of your Alexa or iPhone. When the wallet is first created the Recovery Seed will be shown to you once and you will write it down on paper, not in your password manager, not in a file, not even on a thumbdrive. For long term storage there are many options to keep the Recovery Seed in a form that will endure over time. The most popular ones are letters punched or etched onto steel plates. Personally since I don't have much Bitcoin to protect I am using archival pencil on archival acid-free paper sealed with archival tape and stored in three different locations. I also included this warning with the Recovery Seed:
 
->	IMPORTANT! SECRET! DO NOT THROW OUT!
->	These 24 words are the RECOVERY SEED to recover a wallet with valuable BITCOINS
->	Be careful access to this RECOVERY SEED could lead to someone STEALING all the BITCOINS
->	Follow the instructions in my will to recover the Bitcoins
->	If the sealed tape has been tampered with transfer the Bitcoins to a new wallet immediately
+>	IMPORTANT! SECRET! DO NOT THROW OUT!<br>
+>	These 24 words are the RECOVERY SEED to recover a wallet with valuable BITCOINS<br>
+>	Be careful access to this RECOVERY SEED could lead to someone STEALING all the BITCOINS<br>
+>	Follow the instructions in my will to recover the Bitcoins<br>
+>	If the sealed tape has been tampered with transfer the Bitcoins to a new wallet immediately<br>
 
 I think it would be acceptable to store your hardware wallet PIN and your Recovery Seed *passphrase* (not the Seed itself) in your password manager. That way you only have one master password to remember and you never have everything needed to access your Bitcoin in one place. Personally I don't keep my my Recovery Seed passphrase in a password manager, I told it to several trusted loved ones who do not have access to my backed up Recovery Seeds but can be counted on to remember the passphrase in case I am hurt or have memory problems in the future.
 
