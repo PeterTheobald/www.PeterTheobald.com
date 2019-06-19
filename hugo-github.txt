@@ -59,15 +59,24 @@ CREATING WEBSITE:
 - git commit --all -m "initial commit"  # tell git to commit all the files to the local repo (branch "master")
 
 - git remote add origin https://<username>@github.com/<username>/<repo>.git    # connect to github remote and label it locally as "origin"
+   ?? git remote add origin git@github.com/<username>/<repo>.git    # connect to github remote and label it locally as "origin"
+	(git remote add origin https://github.com/PeterTheobald/www.PeterTheobald.com.git)
 - git pull -v origin master             # tell git to download everything from the github repo to local branch 'origin/master' then merge to local branch 'master'
 - git push -uv origin master             # tell git to push local repo (branch "master") to github pages
 
 - github.com: settings custom domain <domain>, serve pages from master/docs
 
+SETTING UP WEBSITE ON NEW PC:
+
+- git clone git@github.com:<username>/<repo>.git
+  (git clone git@github.com:PeterTheobald/www.PeterTheobald.com.git)
+
+  // git clone http://<username>@github.com/<username>/<repo>.git
+  // git remote set-url origin git@github.com:<username>/<repo>.git)
 
 WORKFLOW:
 
-- git pull -u origin master             # tell git to download everything from the github repo to local branch 'origin/master' then merge to local branch 'master'
+- git pull origin master             # tell git to download everything from the github repo to local branch 'origin/master' then merge to local branch 'master'
 - Edit files
 - hugo server
 - Review results at http://localhost:1313
