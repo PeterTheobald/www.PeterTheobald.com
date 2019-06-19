@@ -1,7 +1,7 @@
 ---
 title: Bitcoin Storage Best Practices
 date: '2019-06-19'
-thumbnail: dav2mp4.png
+thumbnail: hacker.jpg
 tags:
   - bitcoin
   - crypto
