@@ -57,6 +57,7 @@ Now after you've set this up, TEST IT. Follow the instructions as if you are inc
 (Everywhere I talked about Bitcoin applies equally to other cryptocurrencies such as Ethereum, Litecoin and others)
 
 Instructions to go with your will or important papers; modify this to fit your circumstances:
+
 >** IMPORTANT. I HAVE VALUABLE BITCOINS. THESE ARE THE INSTRUCTIONS TO RECOVER THOSE BITCOINS **
 >As of 2019 I have 0.25 Bitcoins.
 >To recover these Bitcoins follow these instructions. If someone technical helps you never show them the PIN or RECOVERY SEED or passphrase.
