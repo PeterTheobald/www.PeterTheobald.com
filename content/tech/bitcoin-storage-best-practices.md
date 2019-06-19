@@ -60,7 +60,7 @@ Now after you've set this up, TEST IT. Follow the instructions as if you are inc
 Instructions to go with your will or important papers; modify this to fit your circumstances:
 
 > ** IMPORTANT. I HAVE VALUABLE BITCOINS. THESE ARE THE INSTRUCTIONS TO RECOVER THOSE BITCOINS **
-> As of <todays date> I have 0.25 Bitcoins.
+> As of 2019 I have 0.25 Bitcoins.
 > To recover these Bitcoins follow these instructions. If someone technical helps you never show them the PIN or RECOVERY SEED or passphrase.
 > 
 > 1. If you have my Ledger Nano S hardware wallet and you know my PIN code, plug the Ledger Nano S into your computer and run the wallet software. Enter the PIN code and the SEED passphrase when asked. You should see the balance of Bitcoins. Unless you really know what you're doing here I recommend you open an account on Coinbase.com, transfer all of the Bitcoin to Coinbase and sell it for dollars.
