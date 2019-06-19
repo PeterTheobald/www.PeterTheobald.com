@@ -56,13 +56,9 @@ Now after you've set this up, TEST IT. Follow the instructions as if you are inc
 
 (Everywhere I talked about Bitcoin applies equally to other cryptocurrencies such as Ethereum, Litecoin and others)
 
-
 Instructions to go with your will or important papers; modify this to fit your circumstances:
-
 >** IMPORTANT. I HAVE VALUABLE BITCOINS. THESE ARE THE INSTRUCTIONS TO RECOVER THOSE BITCOINS **
 >As of 2019 I have 0.25 Bitcoins.
 >To recover these Bitcoins follow these instructions. If someone technical helps you never show them the PIN or RECOVERY SEED or passphrase.
->
 >1. If you have my Ledger Nano S hardware wallet and you know my PIN code, plug the Ledger Nano S into your computer and run the wallet software. Enter the PIN code and the SEED passphrase when asked. You should see the balance of Bitcoins. Unless you really know what you're doing here I recommend you open an account on Coinbase.com, transfer all of the Bitcoin to Coinbase and sell it for dollars.
->
 >2. If you don't have my Ledger Nano S hardware wallet or you don't know my PIN code, purchase a Ledger Nano S or compatible hardware wallet such as another model Ledger or a Trezor. Find the RECOVERY SEED in the safe or bank safety deposit box that we have previously discussed. Carefully cut away the tape sealing the RECOVERY SEED at the edges so you can open and view the RECOVERY SEED. On your new hardware wallet, enter the RECOVERY SEED and the passphrase that we have previously discussed. It is important that you remember this passphrase, without it there is no way to recovery the Bitcoin. That is why I have told the RECOVERY SEED only to only very few very trusted people in the family and never written it down. You should see the balance of Bitcoins. Unless you really know what you're doing here I recommend you open an account on Coinbase.com, transfer all of the Bitcoin to Coinbase and sell it for dollars.
