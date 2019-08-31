@@ -6,7 +6,7 @@ tags:
   - bitcoin
   - crypto
   - security
-draft: false
+draft: true
 ---
 
 ![hacker](/images/hacker.jpg#floatright "I'm in your junk drawer stealing your Bitcoins...") Imagine keeping your life savings in cash in your kitchen junk drawer. This is effectively how some people are storing their Bitcoins and cryptocurrency from a security perspective. Bitcoin is a 'bearer instrument' like cash, meaning if you hold it you own it. Anyone who gets a peek at your private keys or recovery seed could take everything with practically no recourse.
