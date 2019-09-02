@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>encryption on Peter Theobald</title>
+    <title>Encryption on Peter Theobald</title>
     <link>/tags/encryption/</link>
-    <description>Recent content in encryption on Peter Theobald</description>
+    <description>Recent content in Encryption on Peter Theobald</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Thu, 07 Jul 2016 16:11:58 +0530</lastBuildDate>
@@ -17,7 +17,8 @@
       <pubDate>Thu, 07 Jul 2016 16:11:58 +0530</pubDate>
       
       <guid>/tech/breaking-the-encryption/</guid>
-      <description>&lt;p&gt;I was presented with a hard drive encrypted with TrueCrypt. TrueCrypt is unbreakable. Was there anything I could do? &lt;em&gt;(tl;dr: yes)&lt;/em&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;I was presented with a hard drive encrypted with TrueCrypt. TrueCrypt is unbreakable. Was there anything I could do? &lt;em&gt;(tl;dr: yes)&lt;/em&gt;
+&lt;/p&gt;</description>
     </item>
     
   </channel>

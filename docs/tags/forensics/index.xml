@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>forensics on Peter Theobald</title>
+    <title>Forensics on Peter Theobald</title>
     <link>/tags/forensics/</link>
-    <description>Recent content in forensics on Peter Theobald</description>
+    <description>Recent content in Forensics on Peter Theobald</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Tue, 15 Aug 2017 00:00:00 +0000</lastBuildDate>
@@ -17,7 +17,9 @@
       <pubDate>Tue, 15 Aug 2017 00:00:00 +0000</pubDate>
       
       <guid>/tech/dav2mp4-convert-security-cam-dav-to-mp4/</guid>
-      <description>&lt;p&gt;Many security cameras export video in a proprietary format called DAV which is difficult to work with. I wrote this program to convert DAV videos into standard MP4 video.&lt;/p&gt;</description>
+      <description>&lt;p&gt;Many security cameras export video in a proprietary format called DAV which is difficult to work with. I wrote this program to convert DAV videos into standard MP4 video.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -26,7 +28,8 @@
       <pubDate>Thu, 07 Jul 2016 16:11:58 +0530</pubDate>
       
       <guid>/tech/breaking-the-encryption/</guid>
-      <description>&lt;p&gt;I was presented with a hard drive encrypted with TrueCrypt. TrueCrypt is unbreakable. Was there anything I could do? &lt;em&gt;(tl;dr: yes)&lt;/em&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;I was presented with a hard drive encrypted with TrueCrypt. TrueCrypt is unbreakable. Was there anything I could do? &lt;em&gt;(tl;dr: yes)&lt;/em&gt;
+&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -35,7 +38,9 @@
       <pubDate>Thu, 30 Apr 2015 00:00:00 +0000</pubDate>
       
       <guid>/tech/tricky-forensic-hard-drive-acquisition-of-an-imac/</guid>
-      <description>&lt;p&gt;Recently I had to do a forensic acquisition of an iMac hard drive, and it presented many obstacles.&lt;/p&gt;</description>
+      <description>&lt;p&gt;Recently I had to do a forensic acquisition of an iMac hard drive, and it presented many obstacles.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
   </channel>
