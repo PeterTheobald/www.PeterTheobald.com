@@ -1,4 +1,5 @@
 INSTALLING COMMAND LINE:
+* This is all obsolete now. I am using gitless in WSL and everything just works *
 
 - You can work with git in Linux shell, Bash for Windows 10 (WSL), Git Bash for Windows 7/8, or a Git GUI tool
     -- use Linux shell git
