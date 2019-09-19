@@ -1,4 +1,9 @@
 INSTALLING COMMAND LINE:
+Setting up:
+- create ssh key and add to github, or copy .ssh files to this machine
+- mkdir petertheobald.com; cd petertheobald.com; gl init (ssh remote URL)
+
+*OLD WAY:*
 * This is all obsolete now. I am using gitless in WSL and everything just works *
 
 - You can work with git in Linux shell, Bash for Windows 10 (WSL), Git Bash for Windows 7/8, or a Git GUI tool
