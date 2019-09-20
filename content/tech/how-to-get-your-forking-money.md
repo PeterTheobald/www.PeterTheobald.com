@@ -5,7 +5,7 @@ thumbnail: forking00-bitcoin-fork-200.png
 tags:
   - bitcoin
   - crypto
-draft: true
+draft: false
 ---
 Several times Bitcoin has 'forked' or split off into different related coins. When this happens anyone who holds Bitcoin automatically gets coins in the new forked coin, for free. I will explain what a fork is and how to get your free money.
 
