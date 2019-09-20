@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Video-editing on Peter Theobald</title>
+    <title>video-editing on Peter Theobald</title>
     <link>/tags/video-editing/</link>
-    <description>Recent content in Video-editing on Peter Theobald</description>
+    <description>Recent content in video-editing on Peter Theobald</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Tue, 15 Aug 2017 00:00:00 +0000</lastBuildDate>
@@ -17,9 +17,7 @@
       <pubDate>Tue, 15 Aug 2017 00:00:00 +0000</pubDate>
       
       <guid>/tech/dav2mp4-convert-security-cam-dav-to-mp4/</guid>
-      <description>&lt;p&gt;Many security cameras export video in a proprietary format called DAV which is difficult to work with. I wrote this program to convert DAV videos into standard MP4 video.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;Many security cameras export video in a proprietary format called DAV which is difficult to work with. I wrote this program to convert DAV videos into standard MP4 video.&lt;/p&gt;</description>
     </item>
     
   </channel>

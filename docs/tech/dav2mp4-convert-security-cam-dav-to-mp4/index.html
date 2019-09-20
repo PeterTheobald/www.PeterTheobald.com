@@ -73,8 +73,6 @@
 <main>
 <p>Many security cameras export video in a proprietary format called DAV which is difficult to work with. I wrote this program to convert DAV videos into standard MP4 video.</p>
 
-<p></p>
-
 <p><img style="display:block;max-width:100%;margin:auto" src="/images/dav2mp4-960.png"></p>
 
 <p>I&rsquo;ve worked on several projects involving video from security cameras, and in most cases the video was stored in the proprietary DAV (Dahua Video) format. The vendor software that works with DAV video is awful to the point of being unusable - crashing constantly, inconsistent seeking and labelling of times, finicky interface that sometimes works and sometimes doesn&rsquo;t. After installing DAV software from several different security camera manufacturers I got fed up and wrote this program to convert a large collection of DAV video files into standard MP4 video. It also creates subtitles with the running timestamps to make it clear as you seek and view through the video where you are. The DAV video files are sometimes broken up into hundreds of small segments showing just a few minutes in each file. This program will also merge contiguous video files into single larger MP4 video files.</p>
@@ -622,7 +620,7 @@ ui.mainloop()
 
 
 <div id="disqus_thread"></div>
-<script>
+<script type="application/javascript">
     var disqus_config = function () {
     
     
@@ -674,14 +672,17 @@ ui.mainloop()
 
 
 
-<script>
-(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-ga('create', 'UA-18164620-1', 'auto');
-ga('send', 'pageview');
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-18164620-1', 'auto');
+	
+	ga('send', 'pageview');
+}
 </script>
 
 

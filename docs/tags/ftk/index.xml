@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Ftk on Peter Theobald</title>
+    <title>ftk on Peter Theobald</title>
     <link>/tags/ftk/</link>
-    <description>Recent content in Ftk on Peter Theobald</description>
+    <description>Recent content in ftk on Peter Theobald</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Thu, 30 Apr 2015 00:00:00 +0000</lastBuildDate>
@@ -17,9 +17,7 @@
       <pubDate>Thu, 30 Apr 2015 00:00:00 +0000</pubDate>
       
       <guid>/tech/tricky-forensic-hard-drive-acquisition-of-an-imac/</guid>
-      <description>&lt;p&gt;Recently I had to do a forensic acquisition of an iMac hard drive, and it presented many obstacles.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;Recently I had to do a forensic acquisition of an iMac hard drive, and it presented many obstacles.&lt;/p&gt;</description>
     </item>
     
   </channel>
