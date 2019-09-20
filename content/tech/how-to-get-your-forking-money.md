@@ -1,7 +1,7 @@
 ---
 title: How To Get Your Forking Money
 date: '2019-09-20'
-thumbnail: hacker.jpg
+thumbnail: forking00-bitcoin-fork-200.png
 tags:
   - bitcoin
   - crypto
@@ -96,7 +96,7 @@ First I open my Electrum Bitcoin wallet and look at my Bitcoins. ![photo of Elec
 
 In Electrum I create a new wallet 'NEW SAFE BTC WALLET' and create a new seed. Back up this seed on paper in a secure place. This is going to be the recovery seed for your Bitcoins from now on. Get a 'RECEIVE ADDRESS' for this new wallet. ![photo of receive address]("/images/forking02 new wallet recv adr 655.png") Go back to your original Bitcoin wallet and transfer all of your Bitcoins from the original wallet into the new safe wallet: Go to the SEND tab and paste in the receive address from the new wallet. Click MAX to send everything. ![photo of transfer entire wallet]("/images/forking03 sending btc from orig wallet 655.png") My Bitcoins are now safe. 
 
-Download and install ElectrumG from https://bitcoingold.org/electrumg/ . Create a new wallet and choose 'standard wallet', and 'I already have a seed'. Go back to the *original Bitcoin wallet* in Electrum and go to 'wallet menu', and 'seed'. ![photo original wallet seed]("/images/forking04 original btc wallet seed 406.png") Copy the recovery seed from the original Bitcoin wallet and paste the seed into ElectrumG. ![photo seed pasted in ElectrumG]("/images/forking05 electrumg seed pasted 607.png") That's it! ElectrumG finds the Bitcoin Gold and shows the balance. ![photo electrumG BTG]("/images/forking06 electrumg recvd balance 594.png") I now have control of my Bitcoin Gold and can keep them in this wallet, transfer them to an exchange to sell them, transfer them to another person privately, or transfer them to ShapeShift or Changelly to convert them to Bitcoin.
+Download and install ElectrumG from [https://bitcoingold.org/electrumg/](https://bitcoingold.org/electrumg/) . Create a new wallet and choose 'standard wallet', and 'I already have a seed'. Go back to the *original Bitcoin wallet* in Electrum and go to 'wallet menu', and 'seed'. ![photo original wallet seed]("/images/forking04 original btc wallet seed 406.png") Copy the recovery seed from the original Bitcoin wallet and paste the seed into ElectrumG. ![photo seed pasted in ElectrumG]("/images/forking05 electrumg seed pasted 607.png") That's it! ElectrumG finds the Bitcoin Gold and shows the balance. ![photo electrumG BTG]("/images/forking06 electrumg recvd balance 594.png") I now have control of my Bitcoin Gold and can keep them in this wallet, transfer them to an exchange to sell them, transfer them to another person privately, or transfer them to ShapeShift or Changelly to convert them to Bitcoin.
 
 Thanks, and please give me feedback or questions or just a shout out if you enjoyed this.
 Enter your email address here ________ if you want me to notify you when I make a tool to automate checking if you own forked coins.
