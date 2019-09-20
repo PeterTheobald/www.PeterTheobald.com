@@ -126,3 +126,5 @@ I now have control of my Bitcoin Gold and can keep them in this wallet, transfer
 Thanks, and please give me feedback or questions or just a shout out if you enjoyed this.
 Enter your email address here if you want me to notify you when I make a tool to automate checking if you own forked coins:
 <form  action="https://formspree.io/peter@petertheobald.com" method="POST" name="sentMessage" id="forking-coins"> <input type=text name="email" value="email@example.com"> <input type=submit value="Send"> </form> 
+
+
