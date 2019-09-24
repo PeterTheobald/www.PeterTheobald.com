@@ -6,10 +6,19 @@
     <description>Recent content on Peter Theobald</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 26 Aug 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 20 Sep 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>How To Get Your Forking Money</title>
+      <link>/tech/how-to-get-your-forking-money/</link>
+      <pubDate>Fri, 20 Sep 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/tech/how-to-get-your-forking-money/</guid>
+      <description>&lt;p&gt;Several times Bitcoin has &amp;lsquo;forked&amp;rsquo; or split off into different related coins. When this happens anyone who holds Bitcoin automatically gets coins in the new forked coin, for free. I will explain what a fork is and how to get your free money.&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Traversing for Endurance</title>
@@ -19,9 +28,7 @@
       <guid>/play/traversing-for-endurance/</guid>
       <description>&lt;p&gt;I do most of my climbing in an indoor gym, &lt;a href=&#34;http://www.islandrock.net&#34;&gt;Island Rock&lt;/a&gt;. I find that climbing in the gym trains me for short powerful climbs, but outside I was getting pumped after the 30-40 vertical feet I was used to. A great training routine for endurance is to do long traverses, so I laid out a traverse route that hits every wall in the gym. The difficulty varies over time as the gym resets each wall; Some sections felt around V.2, some around V.5. At first I found it difficult to finish the entire traverse. When I finally was able to complete one full traverse it took me 40 minutes to complete it. I was forced to learn techniques to rest on the wall, hanging on straight arms, finding ways to place my feet with opposing force to rest. Eventually, with practice in resting and in finding the best sequence of holds I got it down to 16 minutes.&lt;/p&gt;
 
-&lt;p&gt;I made up a poster explaining The Big Traverse and hung it up. Within days I was seeing people working their way across the traverse. I&amp;rsquo;ve included a link to the full poster below as an example so you can make something similar for your local gym.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+&lt;p&gt;I made up a poster explaining The Big Traverse and hung it up. Within days I was seeing people working their way across the traverse. I&amp;rsquo;ve included a link to the full poster below as an example so you can make something similar for your local gym.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -30,9 +37,7 @@
       <pubDate>Tue, 15 Aug 2017 00:00:00 +0000</pubDate>
       
       <guid>/tech/dav2mp4-convert-security-cam-dav-to-mp4/</guid>
-      <description>&lt;p&gt;Many security cameras export video in a proprietary format called DAV which is difficult to work with. I wrote this program to convert DAV videos into standard MP4 video.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;Many security cameras export video in a proprietary format called DAV which is difficult to work with. I wrote this program to convert DAV videos into standard MP4 video.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -41,9 +46,7 @@
       <pubDate>Wed, 24 May 2017 00:00:00 +0000</pubDate>
       
       <guid>/tech/dave-says-thats-not-funny/</guid>
-      <description>&lt;p&gt;Dave doesn&amp;rsquo;t think any of my jokes are funny. I keep trying but he always says the same thing, &amp;ldquo;That&amp;rsquo;s not funny&amp;rdquo;. So like all repetitive processes, I automated it. This page scrapes jokes from &lt;a href=&#34;http://www.reddit.com/r/Jokes&#34;&gt;Reddit/r/Jokes&lt;/a&gt; and presents them here as texts to Dave.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;Dave doesn&amp;rsquo;t think any of my jokes are funny. I keep trying but he always says the same thing, &amp;ldquo;That&amp;rsquo;s not funny&amp;rdquo;. So like all repetitive processes, I automated it. This page scrapes jokes from &lt;a href=&#34;http://www.reddit.com/r/Jokes&#34;&gt;Reddit/r/Jokes&lt;/a&gt; and presents them here as texts to Dave.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -52,31 +55,25 @@
       <pubDate>Tue, 14 Mar 2017 00:00:00 +0000</pubDate>
       
       <guid>/play/troy-and-abed-in-a-montage/</guid>
-      <description>&lt;p&gt;To try out the free video editor &amp;lsquo;HitFilm&amp;rsquo; I made this montage of the fake show &amp;lsquo;Troy and Abed in the Morning&amp;rsquo; from the show Community.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;To try out the free video editor &amp;lsquo;HitFilm&amp;rsquo; I made this montage of the fake show &amp;lsquo;Troy and Abed in the Morning&amp;rsquo; from the show Community.&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Ghost Solver - Now in Clojure</title>
-      <link>/tech/ghost-solver---now-in-clojure/</link>
+      <link>/tech/ghost-solver-now-in-clojure/</link>
       <pubDate>Tue, 20 Dec 2016 00:00:00 +0000</pubDate>
       
-      <guid>/tech/ghost-solver---now-in-clojure/</guid>
-      <description>&lt;p&gt;&lt;a href=&#34;/tech/ghost-game-solver/&#34;&gt;My previous post&lt;/a&gt; was about a Python program to calculate the moves to guarantee a win in the puzzle word game &amp;lsquo;Ghost&amp;rsquo;. The algorithm was naturally recursive and felt &amp;lsquo;LISPy&amp;rsquo;. &lt;a href=&#34;http://www.twitter.com/pdlug&#34;&gt;@pdlug&lt;/a&gt; has been telling me how writing in Clojure will expand my mind, make me more productive and hem my pants so this week I learned just enough Clojure (I already knew LISP) to re-write the Ghost game solver in Clojure.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <guid>/tech/ghost-solver-now-in-clojure/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;/tech/ghost-game-solver/&#34;&gt;My previous post&lt;/a&gt; was about a Python program to calculate the moves to guarantee a win in the puzzle word game &amp;lsquo;Ghost&amp;rsquo;. The algorithm was naturally recursive and felt &amp;lsquo;LISPy&amp;rsquo;. &lt;a href=&#34;http://www.twitter.com/pdlug&#34;&gt;@pdlug&lt;/a&gt; has been telling me how writing in Clojure will expand my mind, make me more productive and hem my pants so this week I learned just enough Clojure (I already knew LISP) to re-write the Ghost game solver in Clojure.&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Ghost Solver - In Which We Ruin a Great Game</title>
-      <link>/tech/ghost-solver---in-which-we-ruin-a-great-game/</link>
+      <link>/tech/ghost-solver-in-which-we-ruin-a-great-game/</link>
       <pubDate>Sat, 26 Nov 2016 00:00:00 +0000</pubDate>
       
-      <guid>/tech/ghost-solver---in-which-we-ruin-a-great-game/</guid>
-      <description>&lt;p&gt;My son showed me a new word game, &amp;lsquo;Ghost&amp;rsquo;, and I wrote a Python program to &amp;ldquo;solve&amp;rdquo; the game and find all winning sequences.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <guid>/tech/ghost-solver-in-which-we-ruin-a-great-game/</guid>
+      <description>&lt;p&gt;My son showed me a new word game, &amp;lsquo;Ghost&amp;rsquo;, and I wrote a Python program to &amp;ldquo;solve&amp;rdquo; the game and find all winning sequences.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -85,8 +82,7 @@
       <pubDate>Thu, 07 Jul 2016 16:11:58 +0530</pubDate>
       
       <guid>/tech/breaking-the-encryption/</guid>
-      <description>&lt;p&gt;I was presented with a hard drive encrypted with TrueCrypt. TrueCrypt is unbreakable. Was there anything I could do? &lt;em&gt;(tl;dr: yes)&lt;/em&gt;
-&lt;/p&gt;</description>
+      <description>&lt;p&gt;I was presented with a hard drive encrypted with TrueCrypt. TrueCrypt is unbreakable. Was there anything I could do? &lt;em&gt;(tl;dr: yes)&lt;/em&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -95,9 +91,7 @@
       <pubDate>Thu, 07 Jul 2016 00:00:00 +0000</pubDate>
       
       <guid>/play/climbing-amatitlan-guatemala/</guid>
-      <description>&lt;p&gt;Video from a rock climbing trip to Amatitl&amp;aacute;n, Guatemala&amp;hellip;&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;Video from a rock climbing trip to Amatitl&amp;aacute;n, Guatemala&amp;hellip;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -106,9 +100,7 @@
       <pubDate>Thu, 30 Apr 2015 00:00:00 +0000</pubDate>
       
       <guid>/tech/tricky-forensic-hard-drive-acquisition-of-an-imac/</guid>
-      <description>&lt;p&gt;Recently I had to do a forensic acquisition of an iMac hard drive, and it presented many obstacles.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;Recently I had to do a forensic acquisition of an iMac hard drive, and it presented many obstacles.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -127,8 +119,7 @@ So I searched on NVIDIA to see what drivers might be close.</description>
       <pubDate>Fri, 01 Apr 2011 00:00:00 +0000</pubDate>
       
       <guid>/tech/unison-2.40.61-binary-for-nexenta-core-platform-3/</guid>
-      <description>&lt;p&gt;I have compiled a Unison 2.40.61 binary (file-syncronization tool) for Nexenta (Solaris/Linux hybrid OS with ZFS) and made it available for download here.
-&lt;/p&gt;</description>
+      <description>&lt;p&gt;I have compiled a Unison 2.40.61 binary (file-syncronization tool) for Nexenta (Solaris/Linux hybrid OS with ZFS) and made it available for download here.&lt;/p&gt;</description>
     </item>
     
     <item>

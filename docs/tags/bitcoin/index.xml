@@ -6,19 +6,18 @@
     <description>Recent content in bitcoin on Peter Theobald</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 19 Jun 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 20 Sep 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/bitcoin/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>Bitcoin Storage Best Practices</title>
-      <link>/tech/bitcoin-storage-best-practices/</link>
-      <pubDate>Wed, 19 Jun 2019 00:00:00 +0000</pubDate>
+      <title>How To Get Your Forking Money</title>
+      <link>/tech/how-to-get-your-forking-money/</link>
+      <pubDate>Fri, 20 Sep 2019 00:00:00 +0000</pubDate>
       
-      <guid>/tech/bitcoin-storage-best-practices/</guid>
-      <description>Imagine keeping your life savings in cash in your kitchen junk drawer. This is effectively how some people are storing their Bitcoins and cryptocurrency from a security perspective. Bitcoin is a &amp;lsquo;bearer instrument&amp;rsquo; like cash, meaning if you hold it you own it. Anyone who gets a peek at your private keys or recovery seed could take everything with practically no recourse.
-I find most of the security advice out there is too vague, full of unhelpful comments that list all the things you should never do without explaining a practical guideline for what you should do.</description>
+      <guid>/tech/how-to-get-your-forking-money/</guid>
+      <description>&lt;p&gt;Several times Bitcoin has &amp;lsquo;forked&amp;rsquo; or split off into different related coins. When this happens anyone who holds Bitcoin automatically gets coins in the new forked coin, for free. I will explain what a fork is and how to get your free money.&lt;/p&gt;</description>
     </item>
     
   </channel>

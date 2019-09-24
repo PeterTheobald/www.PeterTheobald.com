@@ -6,130 +6,31 @@
     <description>Recent content in Tags on Peter Theobald</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 20 Dec 2016 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 20 Sep 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>Clojure</title>
-      <link>/tags/clojure/</link>
-      <pubDate>Tue, 20 Dec 2016 00:00:00 +0000</pubDate>
+      <title>bitcoin</title>
+      <link>/tags/bitcoin/</link>
+      <pubDate>Fri, 20 Sep 2019 00:00:00 +0000</pubDate>
       
-      <guid>/tags/clojure/</guid>
+      <guid>/tags/bitcoin/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Community</title>
-      <link>/tags/community/</link>
-      <pubDate>Tue, 14 Mar 2017 00:00:00 +0000</pubDate>
+      <title>crypto</title>
+      <link>/tags/crypto/</link>
+      <pubDate>Fri, 20 Sep 2019 00:00:00 +0000</pubDate>
       
-      <guid>/tags/community/</guid>
+      <guid>/tags/crypto/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Encryption</title>
-      <link>/tags/encryption/</link>
-      <pubDate>Thu, 07 Jul 2016 16:11:58 +0530</pubDate>
-      
-      <guid>/tags/encryption/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Forensics</title>
-      <link>/tags/forensics/</link>
-      <pubDate>Tue, 15 Aug 2017 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/forensics/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Ftk</title>
-      <link>/tags/ftk/</link>
-      <pubDate>Thu, 30 Apr 2015 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/ftk/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Games</title>
-      <link>/tags/games/</link>
-      <pubDate>Tue, 20 Dec 2016 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/games/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Javascript</title>
-      <link>/tags/javascript/</link>
-      <pubDate>Wed, 24 May 2017 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/javascript/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Jquery</title>
-      <link>/tags/jquery/</link>
-      <pubDate>Wed, 24 May 2017 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/jquery/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Mac</title>
-      <link>/tags/mac/</link>
-      <pubDate>Thu, 30 Apr 2015 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/mac/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Ocaml</title>
-      <link>/tags/ocaml/</link>
-      <pubDate>Fri, 01 Apr 2011 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/ocaml/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Programming</title>
-      <link>/tags/programming/</link>
-      <pubDate>Tue, 15 Aug 2017 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/programming/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Puzzles</title>
-      <link>/tags/puzzles/</link>
-      <pubDate>Tue, 20 Dec 2016 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/puzzles/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Python</title>
-      <link>/tags/python/</link>
-      <pubDate>Tue, 15 Aug 2017 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/python/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Rock climbing</title>
+      <title>rock climbing</title>
       <link>/tags/rock-climbing/</link>
       <pubDate>Sat, 26 Aug 2017 00:00:00 +0000</pubDate>
       
@@ -138,43 +39,34 @@
     </item>
     
     <item>
-      <title>Solaris</title>
-      <link>/tags/solaris/</link>
-      <pubDate>Fri, 01 Apr 2011 00:00:00 +0000</pubDate>
+      <title>forensics</title>
+      <link>/tags/forensics/</link>
+      <pubDate>Tue, 15 Aug 2017 00:00:00 +0000</pubDate>
       
-      <guid>/tags/solaris/</guid>
+      <guid>/tags/forensics/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Travel</title>
-      <link>/tags/travel/</link>
-      <pubDate>Thu, 07 Jul 2016 00:00:00 +0000</pubDate>
+      <title>programming</title>
+      <link>/tags/programming/</link>
+      <pubDate>Tue, 15 Aug 2017 00:00:00 +0000</pubDate>
       
-      <guid>/tags/travel/</guid>
+      <guid>/tags/programming/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Truecrypt</title>
-      <link>/tags/truecrypt/</link>
-      <pubDate>Thu, 07 Jul 2016 16:11:58 +0530</pubDate>
+      <title>python</title>
+      <link>/tags/python/</link>
+      <pubDate>Tue, 15 Aug 2017 00:00:00 +0000</pubDate>
       
-      <guid>/tags/truecrypt/</guid>
+      <guid>/tags/python/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Unison</title>
-      <link>/tags/unison/</link>
-      <pubDate>Fri, 01 Apr 2011 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/unison/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Video-editing</title>
+      <title>video-editing</title>
       <link>/tags/video-editing/</link>
       <pubDate>Tue, 15 Aug 2017 00:00:00 +0000</pubDate>
       
@@ -183,7 +75,34 @@
     </item>
     
     <item>
-      <title>Videos</title>
+      <title>javascript</title>
+      <link>/tags/javascript/</link>
+      <pubDate>Wed, 24 May 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/javascript/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>jquery</title>
+      <link>/tags/jquery/</link>
+      <pubDate>Wed, 24 May 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/jquery/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>community</title>
+      <link>/tags/community/</link>
+      <pubDate>Tue, 14 Mar 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/community/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>videos</title>
       <link>/tags/videos/</link>
       <pubDate>Tue, 14 Mar 2017 00:00:00 +0000</pubDate>
       
@@ -192,7 +111,79 @@
     </item>
     
     <item>
-      <title>Windows</title>
+      <title>clojure</title>
+      <link>/tags/clojure/</link>
+      <pubDate>Tue, 20 Dec 2016 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/clojure/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>games</title>
+      <link>/tags/games/</link>
+      <pubDate>Tue, 20 Dec 2016 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/games/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>puzzles</title>
+      <link>/tags/puzzles/</link>
+      <pubDate>Tue, 20 Dec 2016 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/puzzles/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>encryption</title>
+      <link>/tags/encryption/</link>
+      <pubDate>Thu, 07 Jul 2016 16:11:58 +0530</pubDate>
+      
+      <guid>/tags/encryption/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>truecrypt</title>
+      <link>/tags/truecrypt/</link>
+      <pubDate>Thu, 07 Jul 2016 16:11:58 +0530</pubDate>
+      
+      <guid>/tags/truecrypt/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>travel</title>
+      <link>/tags/travel/</link>
+      <pubDate>Thu, 07 Jul 2016 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/travel/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>ftk</title>
+      <link>/tags/ftk/</link>
+      <pubDate>Thu, 30 Apr 2015 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/ftk/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>mac</title>
+      <link>/tags/mac/</link>
+      <pubDate>Thu, 30 Apr 2015 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/mac/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>windows</title>
       <link>/tags/windows/</link>
       <pubDate>Wed, 01 Jun 2011 00:00:00 +0000</pubDate>
       
@@ -201,7 +192,34 @@
     </item>
     
     <item>
-      <title>Zfs</title>
+      <title>ocaml</title>
+      <link>/tags/ocaml/</link>
+      <pubDate>Fri, 01 Apr 2011 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/ocaml/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>solaris</title>
+      <link>/tags/solaris/</link>
+      <pubDate>Fri, 01 Apr 2011 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/solaris/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>unison</title>
+      <link>/tags/unison/</link>
+      <pubDate>Fri, 01 Apr 2011 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/unison/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>zfs</title>
       <link>/tags/zfs/</link>
       <pubDate>Fri, 01 Apr 2011 00:00:00 +0000</pubDate>
       

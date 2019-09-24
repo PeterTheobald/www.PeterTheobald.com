@@ -1,11 +1,11 @@
 ---
 title: How To Get Your Forking Money
 date: '2019-09-20'
-thumbnail: hacker.jpg
+thumbnail: forking00-bitcoin-fork-200.png
 tags:
   - bitcoin
   - crypto
-draft: true
+draft: false
 ---
 Several times Bitcoin has 'forked' or split off into different related coins. When this happens anyone who holds Bitcoin automatically gets coins in the new forked coin, for free. I will explain what a fork is and how to get your free money.
 
@@ -26,25 +26,25 @@ It's easy to figure out if you own any forked coins. Refer to the chart below wh
 
 **BITCOIN FORKS**
 
-|Original Coin | Forked Coin | Date | Block | Current Value 9/2019 |
-|---|||||
-|BTC| BCH Bitcoin Cash| Aug. 1, 2017|Block 478558|
-|BTC| BTG Bitcoin Gold| Oct. 24, 2017 |Block 491407|
-|BTC| BCD Bitcoin Diamond *| Nov. 24, 2017 |block 495866|
-|BTC| SBTC SuperBitcoin| Dec. 12, 2017 |Block 498888|
-|BTC| BTA Bitcoin Atom|Jan. 24, 2018 |Block 505,888|
-|BTC| BTX Bitcoin Core*|Nov. 2, 2018|Block 492820|
-|BCH| BSV BitcoinSV (Satoshi's Vision)*| Nov. 15 2018 |Block 556766|
-|---|||||
-|LTC| LCC Litcoin Cash| Feb. 18, 2018 |Block 1371111|
-|---|||||
-|ETH| ETC Ethereum Classic| Jul. 20, 2016|Block 1920000|
-|ETH| CLO Callisto | Mar. 5, 2018|Block 5500000|
-|---|||||
+Original Coin | Forked Coin | Date | Block | 
+---|---|---|---|---
+BTC| BCH Bitcoin Cash| Aug. 1, 2017|Block 478558
+BTC| BTG Bitcoin Gold| Oct. 24, 2017 |Block 491407
+BTC| BCD Bitcoin Diamond <sup>1</sup>| Nov. 24, 2017 |block 495866
+BTC| SBTC SuperBitcoin| Dec. 12, 2017 |Block 498888
+BTC| BTA Bitcoin Atom|Jan. 24, 2018 |Block 505,888
+BTC| BTX Bitcoin Core <sup>2</sup>|Nov. 2, 2018|Block 492820
+BCH| BSV BitcoinSV (Satoshi's Vision) <sup>3</sup>| Nov. 15 2018 |Block 556766
+---||||
+LTC| LCC Litcoin Cash| Feb. 18, 2018 |Block 1371111
+---||||
+ETH| ETC Ethereum Classic| Jul. 20, 2016|Block 1920000
+ETH| CLO Callisto | Mar. 5, 2018|Block 5500000
+---||||
 
-   *BCD Bitcoin Diamond says you own 10 BCD for every Bitcoin BTC you had at the time of the fork, but this is just marketing fluff. The actual number in the wallet is the same, the smallest denomination of *Satoshis* is the same. They have just redefined the term *one BCD coin* to have ten less Satoshis, ie: they just moved the decimal point when they show you how many coins you own.
-   *BSV Special care has to be taken with BSV, as the BCH/BSV fork was very contentious and both sides refused to admit they weren't the one and only true BCH. Neither side added "Replay Protection" to their coin, meaning BCH and BSV transactions can be automatically sent to BOTH chains with very confusing results. Read more on 'BSV Replay Protection' and 'BSV splitting' before getting your BSV coins. I can address this issue specifically if readers are interested.
-   *BTX Bitcoin Core is strictly speaking not actually a fork. They took the Bitcoin blockchain, removed all the empty spent addresses to make the blockchain smaller, cut all the unspent amounts in half and used this as their initial blockchain. So if you held Bitcoins you have half as many BTX.
+<sup>1</sup> BCD Bitcoin Diamond says you own 10 BCD for every Bitcoin BTC you had at the time of the fork, but this is just marketing fluff. The actual number in the wallet is the same, the smallest denomination of *Satoshis* is the same. They have just redefined the term *one BCD coin* to have ten less Satoshis, ie: they just moved the decimal point when they show you how many coins you own.   
+<sup>2</sup> BSV Special care has to be taken with BSV, as the BCH/BSV fork was very contentious and both sides refused to admit they weren't the one and only true BCH. Neither side added "Replay Protection" to their coin, meaning BCH and BSV transactions can be automatically sent to BOTH chains with very confusing results. Read more on 'BSV Replay Protection' and 'BSV splitting' before getting your BSV coins. I can address this issue specifically if people are interested.   
+<sup>3</sup> BTX Bitcoin Core is strictly speaking not actually a fork. They took the Bitcoin blockchain, removed all the empty spent addresses to make the blockchain smaller, cut all the unspent amounts in half and used this as their initial blockchain. So if you held Bitcoins you have half as many BTX.   
 
 *HELP I MOVED MY COINS AROUND A LOT AND I'M NOT SURE WHAT I OWNED AT THOSE SPECIFIC DATES*
 
@@ -66,7 +66,14 @@ Ok, if you aren't sure exactly what you owned on those specific dates there is a
 - [ETC Ethereum Classic Explorer]( https://gastracker.io/ )
 - [CLO Callisto Explorer]( https://blockscout.com/callisto/mainnet )
 
-If enough people are interested, I can make an automated tool that would figure out what forked coins you own. You would enter the dates you owned coins or you would enter your public addresses and the automated tool would figure out for you what forks you own. Enter your email address here if you want me to let you know when I make this tool available: _______  (I promise not to spam you - I'm not selling anything)
+If enough people are interested, I can make an automated tool that would figure out what forked coins you own. You would enter the dates you owned coins or you would enter your public addresses and the automated tool would figure out for you what forks you own. Enter your email address here if you want me to let you know when I make this tool available: (I promise not to spam you - I'm not selling anything)
+
+<div style="text-align: center;">
+<form  action="https://formspree.io/peter@petertheobald.com" method="POST" name="sentMessage" id="forking-coins">
+<label for="email"><strong>Tell me when there's an automated tool: </strong> </label>
+<input type=text name="email" value="myemail@example.com" id="email"/>
+<input type=submit value="Send"/> </form> 
+</div>
 
 # How to get your forked coins 
 
@@ -92,11 +99,44 @@ If you are downloading and trusting a new software wallet it is a good idea to f
 
 As an example I'm going to show you the process of gaining control of my Bitcoin Gold forked coins starting with Bitcoins in an Electrum wallet and ending with full control of my Bitcoin Gold so I could hold it, sell it or transfer it. For the example I will use the ElectrumG wallet, a special version of the Electrum Bitcoin wallet made specifically for managing Bitcoin Gold. I chose ElectrumG because it is very simple and trusted (unfortunately no Linux version). Note that the official Bitcoin Gold software on the Bitcoin Gold website is not just a wallet, it is a full Bitcoin Gold node and would take several days to build a local copy of the entire Bitcoin Gold blockchain on my computer. That's overkill for what I need to do so I will use a simple Bitcoin Gold wallet like ElectrumG instead.
 
-First I open my Electrum Bitcoin wallet and look at my Bitcoins. ![photo of Electrum wallet]("/images/forking01 original btc wallet 895.png") I am going to put these same private keys and addresses into my ElectrumG Bitcoin Gold wallet. I can either transfer just the private key(s) or use the recovery seed to transfer the entire wallet. Before I transfer sensitive information into the new software I will make my original Bitcoins safe. If I am transferring just the private keys I can keep my original Bitcoins safe by transferring them to a new receive address in the same wallet. If I am transferring the entire wallet using the recovery seed I can keep my original Bitcoins safe by transferring them to a new wallet (Electrum calls this a 'sweep'). To keep this example simple I am going to transfer my entire wallet; This way we don't have to figure out which addresses had Bitcoin on the date of the fork. 
+First I open my Electrum Bitcoin wallet and look at my Bitcoins.
 
-In Electrum I create a new wallet 'NEW SAFE BTC WALLET' and create a new seed. Back up this seed on paper in a secure place. This is going to be the recovery seed for your Bitcoins from now on. Get a 'RECEIVE ADDRESS' for this new wallet. ![photo of receive address]("/images/forking02 new wallet recv adr 655.png") Go back to your original Bitcoin wallet and transfer all of your Bitcoins from the original wallet into the new safe wallet: Go to the SEND tab and paste in the receive address from the new wallet. Click MAX to send everything. ![photo of transfer entire wallet]("/images/forking03 sending btc from orig wallet 655.png") My Bitcoins are now safe. 
+![photo of Electrum wallet](/images/forking01 original btc wallet 895.png)
 
-Download and install ElectrumG from https://bitcoingold.org/electrumg/ . Create a new wallet and choose 'standard wallet', and 'I already have a seed'. Go back to the *original Bitcoin wallet* in Electrum and go to 'wallet menu', and 'seed'. ![photo original wallet seed]("/images/forking04 original btc wallet seed 406.png") Copy the recovery seed from the original Bitcoin wallet and paste the seed into ElectrumG. ![photo seed pasted in ElectrumG]("/images/forking05 electrumg seed pasted 607.png") That's it! ElectrumG finds the Bitcoin Gold and shows the balance. ![photo electrumG BTG]("/images/forking06 electrumg recvd balance 594.png") I now have control of my Bitcoin Gold and can keep them in this wallet, transfer them to an exchange to sell them, transfer them to another person privately, or transfer them to ShapeShift or Changelly to convert them to Bitcoin.
+I am going to put these same private keys and addresses into my ElectrumG Bitcoin Gold wallet. I can either transfer just the private key(s) or use the recovery seed to transfer the entire wallet. Before I transfer sensitive information into the new software I will make my original Bitcoins safe. If I am transferring just the private keys I can keep my original Bitcoins safe by transferring them to a new receive address in the same wallet. If I am transferring the entire wallet using the recovery seed I can keep my original Bitcoins safe by transferring them to a new wallet (Electrum calls this a 'sweep'). To keep this example simple I am going to transfer my entire wallet; This way we don't have to figure out which addresses had Bitcoin on the date of the fork. 
+
+In Electrum I create a new wallet 'NEW SAFE BTC WALLET' and create a new seed. Back up this seed on paper in a secure place. This is going to be the recovery seed for your Bitcoins from now on. Get a 'RECEIVE ADDRESS' for this new wallet.
+
+![photo of receive address](/images/forking02 new wallet recv adr 655.png)
+
+Go back to your original Bitcoin wallet and transfer all of your Bitcoins from the original wallet into the new safe wallet: Go to the SEND tab and paste in the receive address from the new wallet. Click MAX to send everything.
+
+![photo of transfer entire wallet](/images/forking03 sending btc from orig wallet 655.png)
+
+My Bitcoins are now safe. 
+
+Download and install ElectrumG from [https://bitcoingold.org/electrumg/](https://bitcoingold.org/electrumg/) . Create a new wallet and choose 'standard wallet', and 'I already have a seed'. Go back to the *original Bitcoin wallet* in Electrum and go to 'wallet menu', and 'seed'.
+
+![photo original wallet seed](/images/forking04 original btc wallet seed 406.png)
+
+Copy the recovery seed from the original Bitcoin wallet and paste the seed into ElectrumG.
+
+![photo seed pasted in ElectrumG](/images/forking05 electrumg seed pasted 607.png)
+
+That's it! ElectrumG finds the Bitcoin Gold and shows the balance.
+
+![photo electrumG BTG](/images/forking06 electrumg recvd balance 594.png)
+
+I now have control of my Bitcoin Gold and can keep them in this wallet, transfer them to an exchange to sell them, transfer them to another person privately, or transfer them to ShapeShift or Changelly to convert them to Bitcoin.
 
 Thanks, and please give me feedback or questions or just a shout out if you enjoyed this.
-Enter your email address here ________ if you want me to notify you when I make a tool to automate checking if you own forked coins.
+
+Enter your email address here if you want me to notify you when I make a tool to automate checking if you own forked coins:
+
+<div style="text-align: center;">
+<form  action="https://formspree.io/peter@petertheobald.com" method="POST" name="sentMessage" id="forking-coins">
+<label for="email"><strong>Tell me when there's an automated tool: </strong> </label>
+<input type=text name="email" value="myemail@example.com" id="email"/>
+<input type=submit value="Send"/> </form> 
+</div>
+
