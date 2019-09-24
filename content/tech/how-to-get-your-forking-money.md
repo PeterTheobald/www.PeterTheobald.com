@@ -67,7 +67,13 @@ Ok, if you aren't sure exactly what you owned on those specific dates there is a
 - [CLO Callisto Explorer]( https://blockscout.com/callisto/mainnet )
 
 If enough people are interested, I can make an automated tool that would figure out what forked coins you own. You would enter the dates you owned coins or you would enter your public addresses and the automated tool would figure out for you what forks you own. Enter your email address here if you want me to let you know when I make this tool available: (I promise not to spam you - I'm not selling anything)
-<form  action="https://formspree.io/peter@petertheobald.com" method="POST" name="sentMessage" id="forking-coins"> <input type=text name="email" value="email@example.com"> <input type=submit value="Send"> </form> 
+
+<div style="text-align: center;">
+<form  action="https://formspree.io/peter@petertheobald.com" method="POST" name="sentMessage" id="forking-coins">
+<label for="email"><strong>Tell me when there's an automated tool: </strong> </label>
+<input type=text name="email" value="myemail@example.com" id="email"/>
+<input type=submit value="Send"/> </form> 
+</div>
 
 # How to get your forked coins 
 
@@ -124,7 +130,13 @@ That's it! ElectrumG finds the Bitcoin Gold and shows the balance.
 I now have control of my Bitcoin Gold and can keep them in this wallet, transfer them to an exchange to sell them, transfer them to another person privately, or transfer them to ShapeShift or Changelly to convert them to Bitcoin.
 
 Thanks, and please give me feedback or questions or just a shout out if you enjoyed this.
-Enter your email address here if you want me to notify you when I make a tool to automate checking if you own forked coins:
-<form  action="https://formspree.io/peter@petertheobald.com" method="POST" name="sentMessage" id="forking-coins"> <input type=text name="email" value="email@example.com"> <input type=submit value="Send"> </form> 
 
+Enter your email address here if you want me to notify you when I make a tool to automate checking if you own forked coins:
+
+<div style="text-align: center;">
+<form  action="https://formspree.io/peter@petertheobald.com" method="POST" name="sentMessage" id="forking-coins">
+<label for="email"><strong>Tell me when there's an automated tool: </strong> </label>
+<input type=text name="email" value="myemail@example.com" id="email"/>
+<input type=submit value="Send"/> </form> 
+</div>
 
