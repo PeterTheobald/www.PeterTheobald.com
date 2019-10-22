@@ -3,11 +3,6 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>/</loc>
-    <lastmod>2019-09-20T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>/tags/bitcoin/</loc>
     <lastmod>2019-09-20T00:00:00+00:00</lastmod>
   </url>
@@ -19,6 +14,11 @@
   
   <url>
     <loc>/tech/how-to-get-your-forking-money/</loc>
+    <lastmod>2019-09-20T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/</loc>
     <lastmod>2019-09-20T00:00:00+00:00</lastmod>
   </url>
   
