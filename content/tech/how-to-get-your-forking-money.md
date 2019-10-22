@@ -6,12 +6,11 @@ tags:
   - bitcoin
   - crypto
 draft: false
+description: Several times Bitcoin has 'forked' or split off into different related coins. When this happens anyone who holds Bitcoin automatically gets coins in the new forked coin, for free. I will explain what a fork is and how to get your free money.
 ---
-Several times Bitcoin has 'forked' or split off into different related coins. When this happens anyone who holds Bitcoin automatically gets coins in the new forked coin, for free. I will explain what a fork is and how to get your free money.
+I got a call from a potential client who had tried to collect his Bitcoin Diamond forked coins, but instead got scammed out of $300,000 worth of Bitcoins. He had gone to electrumdiamond.org ( **DON'T GO THERE** ) and downloaded fake wallet software from GitHub. He entered his wallet recovery seed into the software ( **NEVER DO THIS** ) and the software used his recovery seed to steal all his Bitcoins. I am writing this article so you know how to safely collect your forked coins without this happening to you.
 
-<!--more-->
-
-I got a call from a potential client who had tried to collect his Bitcoin Diamond forked coins, but instead got scammed out of $300,000 worth of Bitcoins. He had gone to electrumdiamond.org ( **DON'T GO THERE** ) and downloaded fake wallet software from GitHub. He entered his wallet recovery seed into the software ( **NEVER DO THIS** ) and the software used his reovery seed to steal all his Bitcoins. I am writing this article so you know how to safely collect your forked coins without this happening to you.
+Several times Bitcoin has 'forked' or split off into different related coins. When this happens anyone who holds Bitcoin automatically gets coins in the new forked coin, for free. I will explain what a fork is and how to get your free money, safely.
 
 # What is a fork? 
 
