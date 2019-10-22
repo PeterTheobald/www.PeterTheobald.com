@@ -11,6 +11,8 @@ Several times Bitcoin has 'forked' or split off into different related coins. Wh
 
 <!--more-->
 
+I got a call from a potential client who had tried to collect his Bitcoin Diamond forked coins, but instead got scammed out of $300,000 worth of Bitcoins. He had gone to electrumdiamond.org ( **DON'T GO THERE** ) and downloaded fake wallet software from GitHub. He entered his wallet recovery seed into the software ( **NEVER DO THIS** ) and the software used his reovery seed to steal all his Bitcoins. I am writing this article so you know how to safely collect your forked coins without this happening to you.
+
 # What is a fork? 
 
 When someone comes up with a new feature that they feel would be an improvement to Bitcoin or any other cryptocurrency, if the idea gains support one of three things happens:
@@ -89,11 +91,11 @@ On the date of the fork, if you had your coins in a private hardware wallet like
 
 ## From a wallet
 
-On the date of the fork, if you had your coins in a private software wallet running on your computer or mobile device then you can and must get your forked coins yourself. The forked coins are being held on the new forked blockchain in *the same address* as your original coins on the original blockchain. You need to download wallet software that supports the new forked coins in order to check your balance and transfer the coins to a new wallet or an exchange. Your private keys and addresses will be the same as the ones for your original Bitcoins. You can use wallet software that supports many different forked coins, such as Coinomi or you can use a wallet that is specific to each forked coin such as ElectrumG for BTG, etc. The exact procedure you will follow to gain control of your forked coins will differ somewhat depending on which wallet software you are using. It is hard to find wallet software for some of the less popular forked coins. I've read that *Coinomi*, *Bither* and *BitPie* support many lesser known coins, but I cannot vouch for their safety myself.
+On the date of the fork, if you had your coins in a private software wallet running on your computer or mobile device then you can and must get your forked coins yourself. The forked coins are being held on the new forked blockchain in *the same address* as your original Bitcoins on the original Bitcoin blockchain. You need to download wallet software that supports the new forked coins in order to check your balance and transfer the coins to a new wallet or an exchange. Your private keys and addresses will be the same as the ones for your original Bitcoins. You can use wallet software that supports many different forked coins, such as Coinomi or you can use a wallet that is specific to each forked coin such as ElectrumG for BTG, etc. The exact procedure you will follow to gain control of your forked coins will differ somewhat depending on which wallet software you are using. It is hard to find wallet software for some of the less popular forked coins. I've read that *Coinomi*, *Bither* and *BitPie* support many lesser known coins, but I cannot vouch for their safety myself.
 
 **IMPORTANT SECURITY NOTE**
 
-If you are downloading and trusting a new software wallet it is a good idea to first move your original Bitcoins out of the shared address, just in case there is a trojan in the software. Once you enter your private key or recovery seed for the new forked coins the software will also know your private key for your original Bitcoins because they are the same keys. The way to do that is simple, just use your wallet software to transfer your Bitcoins out of the shared address right back to yourself at a new receive address or into a new wallet.
+If you are downloading and trusting a new software wallet it is essential that you first move your original Bitcoins out of the shared address, in case there is a trojan in the software. It's the wild west out there and you don't know which software to trust. Once you enter your private key or recovery seed for the new forked coins the software will also know your private key for your original Bitcoins because they are the same keys. The way to move your Bitcoin to safety is simple, just use your Bitcoin wallet software to transfer your Bitcoins out of the shared address right back to yourself at a new receive address or into a new wallet.
 
 ## Example getting Bitcoin Gold BTG coins using ElectrumG wallet software
 
@@ -129,7 +131,7 @@ That's it! ElectrumG finds the Bitcoin Gold and shows the balance.
 
 I now have control of my Bitcoin Gold and can keep them in this wallet, transfer them to an exchange to sell them, transfer them to another person privately, or transfer them to ShapeShift or Changelly to convert them to Bitcoin.
 
-Thanks, and please give me feedback or questions or just a shout out if you enjoyed this.
+Thanks, and please give me feedback or questions or just a shout out if this was helpful.
 
 Enter your email address here if you want me to notify you when I make a tool to automate checking if you own forked coins:
 
