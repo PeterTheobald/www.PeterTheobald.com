@@ -50,8 +50,8 @@
 
   
   
-  <h1><span class="title">About me...</span></h1>
-  
+  <h1><span class="title">Unison 2.40.61 binary for Nexenta Core Platform 3</span></h1>
+  <span class="date">2011-04-01</span>
 
   
 
@@ -59,6 +59,12 @@
   
   <div class="categories">
     
+    
+      <a href="/categories/tech">tech: </a>
+    
+    
+    
+    <a href="/tags/unison">unison</a>, <a href="/tags/zfs">zfs</a>, <a href="/tags/solaris">solaris</a>, <a href="/tags/ocaml">ocaml</a>
     
   </div>
   
@@ -69,26 +75,33 @@
 
 
 <main>
-<p>I am a <strong>software engineer</strong> and <strong>computer forensics analyst</strong> (and also a husband, geeky dad and rock climber). This is my personal site with posts about <a href="/categories/tech/">programming</a>, <a href="/categories/personal/">geeky fun stuff, making things and rock climbing</a>. I also have <a href="http://www.tcforensics.com">posts on my company website</a> that talks about forensics cases for a less technical audience.</p>
+<p>I have compiled a Unison 2.40.61 binary (file-syncronization tool) for Nexenta (Solaris/Linux hybrid OS with ZFS) and made it available for download here.</p>
 
-<p>I am the owner of <a href="http://www.tcforensics.com">TC Forensics</a> where I provide computer forensics services such as finding hidden or destroyed data, investigating cryptocurrency transactions, investigating medical provider data breaches, and providing litigation support and expert testimony related to computer evidence.</p>
+<p>Nexenta Core Platform 3 is a Solaris-like operating system that has an OpenSolaris (RIP) kernel and GNU/Linux user-land commands layered on top. This gives the user the best of both worlds: A kernel that runs the amazing ZFS filesystem, with the familiar Linux toolset.</p>
 
-<p>Less frequently I develop web sites and internet-connected desktop applications.</p>
+<p>Unison is a file synchronization tool that is unmatched in it&rsquo;s safety and efficiency. It is optimized to run well over slow network links, using the rsync protocol to detect and send only the changed parts of files. It handles changes to files on both ends, including deletes making it a true two-way sync tool. In this way it has more in common with Dropbox than a backup tool. It is multi-platform, running on Linux, Windows, Macs, and Solaris.</p>
 
-<p>For more details view my full <a href="/downloads/Peter Theobald resume.pdf">resume</a>. Some highlights are:</p>
+<p>Using Unison to sync multiple computers to a central ZFS server makes a great combination. Add ZFS snapshots and RAIDZ or mirroring of the sync&rsquo;ed files makes it a great backup server as well.</p>
 
-<ul>
-<li>I Founded <a href="https://angel.co/company/li-net">LI Net</a>, an early Internet Service Provider, with three partners and little capital; In four years we built LI Net into the largest ISP on Long Island and one of the largest in New York. Just as we were looking at an angel round of funding to expand we accepted an acquisition offer from <a href="https://www.crunchbase.com/organization/verio#/entity">Verio</a>, a national roll-up of the leading regional ISPs, for over $7M cash plus Verio stock.</li>
-<li>At <a href="https://www.crunchbase.com/organization/lehman-brothers#/entity">Lehman Brothers</a>, I provided support and customizations in C++ and Bash for the Fixed-Income Derivatives department, mostly for the overnight portfolio risk management processes. A highlight was adding support for path-dependent Bermuda style options to our SUMMIT based Black-Scholes option pricing models.</li>
-<li>I developed the full stack for several web sites, including SponsorClick.com, AgencyAccess.com, DMLT (Investment Cafe) Reporting, Wine Alert (eRobertParker.com) web scraping system, ICS Network Systems (MailSentry) where my anti-spam work (in Python) was granted a U.S. patent, AllBooks4Less.com (Half.com) and more. My weapons of choice depending on the project were: C++, Python, Perl, SQL, Javascript, Cold Fusion (Java framework similar to JSP), PHP.</li>
-<li>At ERI, I developed a document imaging system in C++/XWindows/Informix DB; Did installation and training for the document imaging system for Banco Bradesco in São Paolo, Brasil and for Brooklyn Union Gas in Brooklyn, New York; Also at ERI I assisted the sales department in designing specs for custom solutions as a pre-sales engineer.</li>
-</ul>
+<p>UNISON 2.40.61 ON NCP 3</p>
 
+<p>I am using Nexenta Core Platform 3, and I found that the apt repository has a very obsolete version of Unison (2.27.57). I have compiled Unison 2.40.61 for Nexenta Core 3.</p>
+
+<p>Nexenta has an OCaml interpreter, but does not have the OCaml native compiler. I had to compile it to interpreted byte-code. To install it, first install OCaml: &ldquo;apt-get install ocaml&rdquo;, then download the Unison binary from the link below and copy it to &ldquo;/usr/bin&rdquo;.</p>
+
+<p><a href="/downloads/unison-2.40.61-byte-code">Download the Unison 2.40.61 binary for Nexenta Core Platform 3 here</a></p>
+
+<p>This binary was compiled to interpreted byte-code, not native-code so although I have only tested it on Nexenta Core Platform 3, it may run on any platform that has an OCaml interpreter. If you try it on another platform please let me know and I will list it here.</p>
 </main>
 
 
 
 
+
+<nav class="post-nav">
+  <span class="nav-prev"><a href="/tech/upgrade-inspiron-8600-to-windows7-with-nvidia-driver/">&larr; Upgrade your Inspiron 8600 to Windows 7 with this NVidia FX Go5200 video driver</a></span>
+  <span class="nav-next"><a href="/tech/zfs-capable-operating-systems/">ZFS capable operating systems &rarr;</a></span>
+</nav>
 
 
 <div id="disqus_thread"></div>

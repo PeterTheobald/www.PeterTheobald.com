@@ -33,10 +33,10 @@
     
     <item>
       <title>Dav2Mp4 Convert security cam DAV to MP4</title>
-      <link>/tech/dav2mp4-convert-security-cam-dav-to-mp4/</link>
+      <link>/tech/dav2mp4/</link>
       <pubDate>Tue, 15 Aug 2017 00:00:00 +0000</pubDate>
       
-      <guid>/tech/dav2mp4-convert-security-cam-dav-to-mp4/</guid>
+      <guid>/tech/dav2mp4/</guid>
       <description>&lt;p&gt;Many security cameras export video in a proprietary format called DAV which is difficult to work with. I wrote this program to convert DAV videos into standard MP4 video.&lt;/p&gt;</description>
     </item>
     
@@ -60,19 +60,19 @@
     
     <item>
       <title>Ghost Solver - Now in Clojure</title>
-      <link>/tech/ghost-solver-now-in-clojure/</link>
+      <link>/tech/ghost-solver-in-clojure/</link>
       <pubDate>Tue, 20 Dec 2016 00:00:00 +0000</pubDate>
       
-      <guid>/tech/ghost-solver-now-in-clojure/</guid>
+      <guid>/tech/ghost-solver-in-clojure/</guid>
       <description>&lt;p&gt;&lt;a href=&#34;/tech/ghost-game-solver/&#34;&gt;My previous post&lt;/a&gt; was about a Python program to calculate the moves to guarantee a win in the puzzle word game &amp;lsquo;Ghost&amp;rsquo;. The algorithm was naturally recursive and felt &amp;lsquo;LISPy&amp;rsquo;. &lt;a href=&#34;http://www.twitter.com/pdlug&#34;&gt;@pdlug&lt;/a&gt; has been telling me how writing in Clojure will expand my mind, make me more productive and hem my pants so this week I learned just enough Clojure (I already knew LISP) to re-write the Ghost game solver in Clojure.&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Ghost Solver - In Which We Ruin a Great Game</title>
-      <link>/tech/ghost-solver-in-which-we-ruin-a-great-game/</link>
+      <link>/tech/ghost-game-solver/</link>
       <pubDate>Sat, 26 Nov 2016 00:00:00 +0000</pubDate>
       
-      <guid>/tech/ghost-solver-in-which-we-ruin-a-great-game/</guid>
+      <guid>/tech/ghost-game-solver/</guid>
       <description>&lt;p&gt;My son showed me a new word game, &amp;lsquo;Ghost&amp;rsquo;, and I wrote a Python program to &amp;ldquo;solve&amp;rdquo; the game and find all winning sequences.&lt;/p&gt;</description>
     </item>
     
@@ -96,29 +96,29 @@
     
     <item>
       <title>Tricky forensic hard drive acquisition of an iMac</title>
-      <link>/tech/tricky-forensic-hard-drive-acquisition-of-an-imac/</link>
+      <link>/tech/tricky-forensic-hard-drive-acquisition/</link>
       <pubDate>Thu, 30 Apr 2015 00:00:00 +0000</pubDate>
       
-      <guid>/tech/tricky-forensic-hard-drive-acquisition-of-an-imac/</guid>
+      <guid>/tech/tricky-forensic-hard-drive-acquisition/</guid>
       <description>&lt;p&gt;Recently I had to do a forensic acquisition of an iMac hard drive, and it presented many obstacles.&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Upgrade your Inspiron 8600 to Windows 7 with this NVidia FX Go5200 video driver</title>
-      <link>/tech/upgrade-your-inspiron-8600-to-windows-7-with-this-nvidia-fx-go5200-video-driver/</link>
+      <link>/tech/upgrade-inspiron-8600-to-windows7-with-nvidia-driver/</link>
       <pubDate>Wed, 01 Jun 2011 00:00:00 +0000</pubDate>
       
-      <guid>/tech/upgrade-your-inspiron-8600-to-windows-7-with-this-nvidia-fx-go5200-video-driver/</guid>
+      <guid>/tech/upgrade-inspiron-8600-to-windows7-with-nvidia-driver/</guid>
       <description>I have an old Dell Inspiron 8600 I wanted to upgrade to Windows 7. The problem was that there is no current video driver for the Inspiron&amp;rsquo;s Nvidia Geforce FX Go5200 video chip. Even the driver Dell is offering for download for Windows XP is the wrong one and causes all sorts of problems. There simply is no driver for Windows 7.
 So I searched on NVIDIA to see what drivers might be close.</description>
     </item>
     
     <item>
       <title>Unison 2.40.61 binary for Nexenta Core Platform 3</title>
-      <link>/tech/unison-2.40.61-binary-for-nexenta-core-platform-3/</link>
+      <link>/tech/unison-for-nexenta/</link>
       <pubDate>Fri, 01 Apr 2011 00:00:00 +0000</pubDate>
       
-      <guid>/tech/unison-2.40.61-binary-for-nexenta-core-platform-3/</guid>
+      <guid>/tech/unison-for-nexenta/</guid>
       <description>&lt;p&gt;I have compiled a Unison 2.40.61 binary (file-syncronization tool) for Nexenta (Solaris/Linux hybrid OS with ZFS) and made it available for download here.&lt;/p&gt;</description>
     </item>
     
@@ -137,8 +137,8 @@ So I searched on NVIDIA to see what drivers might be close.</description>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/about/</guid>
-      <description>I am a software engineer and computer forensics analyst; I am also a husband and geeky dad. This is my personal site with posts about programming, geeky fun stuff, making things and rock climbing. I also have a blog on my company website that talks about forensics cases for an audience of attorneys and judges.
-I am the owner of TC Forensics – I provide computer forensics services to attorneys, law firms and the courts.</description>
+      <description>I am a software engineer and computer forensics analyst (and also a husband, geeky dad and rock climber). This is my personal site with posts about programming, geeky fun stuff, making things and rock climbing. I also have posts on my company website that talks about forensics cases for a less technical audience.
+I am the owner of TC Forensics where I provide computer forensics services such as finding hidden or destroyed data, investigating cryptocurrency transactions, investigating medical provider data breaches, and providing litigation support and expert testimony related to computer evidence.</description>
     </item>
     
   </channel>

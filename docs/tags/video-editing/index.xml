@@ -13,10 +13,10 @@
     
     <item>
       <title>Dav2Mp4 Convert security cam DAV to MP4</title>
-      <link>/tech/dav2mp4-convert-security-cam-dav-to-mp4/</link>
+      <link>/tech/dav2mp4/</link>
       <pubDate>Tue, 15 Aug 2017 00:00:00 +0000</pubDate>
       
-      <guid>/tech/dav2mp4-convert-security-cam-dav-to-mp4/</guid>
+      <guid>/tech/dav2mp4/</guid>
       <description>&lt;p&gt;Many security cameras export video in a proprietary format called DAV which is difficult to work with. I wrote this program to convert DAV videos into standard MP4 video.&lt;/p&gt;</description>
     </item>
     
