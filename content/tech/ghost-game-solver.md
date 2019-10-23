@@ -281,6 +281,6 @@ This implies that a branch with one long word is considered better than a branch
 
 So now I'm satisfied. I've written my program. I've solved the game. I've ruined Ghost.
 
-- I think the algorithm is very recursive and LISPy, and would be expressed very naturally in Clojure. I'd like to re-write it in Clojure.  UPDATE: I've rewritten it in Clojure, [read about it](/tech/ghost-in-clojure).
+- I think the algorithm is very recursive and LISPy, and would be expressed very naturally in Clojure. I'd like to re-write it in Clojure.  UPDATE: I've rewritten it in Clojure, [read about it](/tech/ghost-solver-in-clojure).
 - I'd also like to ruin my favorite game WordBase by writing an AI player. I already have the general algorithm in mind using minimax searching with alpha-beta pruning and a good static board evaluator.
 

@@ -14,9 +14,9 @@ enableEmoji = true
 paginate = 9
 
 [permalinks]
-    post = "/post/:slug/"
-    play = "/play/:slug/"
-    tech = "/tech/:slug/"
+    post = "/post/:filename/"
+    play = "/play/:filename/"
+    tech = "/tech/:filename/"
 
 [[menu.main]]
     name = "Home"

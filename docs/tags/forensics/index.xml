@@ -13,10 +13,10 @@
     
     <item>
       <title>Dav2Mp4 Convert security cam DAV to MP4</title>
-      <link>/tech/dav2mp4-convert-security-cam-dav-to-mp4/</link>
+      <link>/tech/dav2mp4/</link>
       <pubDate>Tue, 15 Aug 2017 00:00:00 +0000</pubDate>
       
-      <guid>/tech/dav2mp4-convert-security-cam-dav-to-mp4/</guid>
+      <guid>/tech/dav2mp4/</guid>
       <description>&lt;p&gt;Many security cameras export video in a proprietary format called DAV which is difficult to work with. I wrote this program to convert DAV videos into standard MP4 video.&lt;/p&gt;</description>
     </item>
     
@@ -31,10 +31,10 @@
     
     <item>
       <title>Tricky forensic hard drive acquisition of an iMac</title>
-      <link>/tech/tricky-forensic-hard-drive-acquisition-of-an-imac/</link>
+      <link>/tech/tricky-forensic-hard-drive-acquisition/</link>
       <pubDate>Thu, 30 Apr 2015 00:00:00 +0000</pubDate>
       
-      <guid>/tech/tricky-forensic-hard-drive-acquisition-of-an-imac/</guid>
+      <guid>/tech/tricky-forensic-hard-drive-acquisition/</guid>
       <description>&lt;p&gt;Recently I had to do a forensic acquisition of an iMac hard drive, and it presented many obstacles.&lt;/p&gt;</description>
     </item>
     
