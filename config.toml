@@ -40,7 +40,7 @@ paginate = 9
     weight = 5
 
 [params]
-    description = "Software Engineer. Computer Forensics. Tech Entrepreneur. Geeky Dad. Rock Climber."
+    description = "Software Engineer. Computer Forensics. Rock Climbing Geeky Dad."
     summary_length = 300
 
 [params.text]

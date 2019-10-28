@@ -2,7 +2,7 @@
 permalink: /about/ 
 title: "About me..."
 ---
-I am a **software engineer** and **computer forensics analyst** (and also a husband, geeky dad and rock climber). This is my personal site with posts about [programming](/categories/tech/), [geeky fun stuff, making things and rock climbing](/categories/personal/). I also have [posts on my company website](http://www.tcforensics.com) that talks about forensics cases for a less technical audience.
+I am a **software engineer** and **computer forensics analyst** (and also a rock climber and geeky dad). This is my personal site with posts about [programming](/tech/), and [making geeky things and rock climbing](/play/). I also have [posts on my company website](http://www.tcforensics.com) that talks about forensics cases for a less technical audience.
 
 I am the owner of [TC Forensics](http://www.tcforensics.com) where I provide computer forensics services such as finding hidden or destroyed data, investigating cryptocurrency transactions, investigating medical provider data breaches, and providing litigation support and expert testimony related to computer evidence.
 
