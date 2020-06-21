@@ -1,50 +1,52 @@
 ---
 title: How To Get Your Forking Money
-date: '2019-09-20'
+date: 2019-09-20
 thumbnail: forking00-bitcoin-fork-200.png
 tags:
   - bitcoin
   - crypto
 draft: false
-description: Several times Bitcoin has 'forked' or split off into different related coins. When this happens anyone who holds Bitcoin automatically gets coins in the new forked coin, for free. I will explain what a fork is and how to get your free money.
+description: Several times Bitcoin has 'forked' or split off into different
+  related coins. When this happens anyone who holds Bitcoin automatically gets
+  coins in the new forked coin, for free. I will explain what a fork is and how
+  to get your free money.
 ---
 I got a call from a potential client who had tried to collect his Bitcoin Diamond forked coins, but instead got scammed out of $300,000 worth of Bitcoins. He had gone to electrumdiamond.org ( **DON'T GO THERE** ) and downloaded fake wallet software from GitHub. He entered his wallet recovery seed into the software ( **NEVER DO THIS** ) and the software used his recovery seed to steal all his Bitcoins. I am writing this article so you know how to safely collect your forked coins without this happening to you.
 
 Several times Bitcoin has 'forked' or split off into different related coins. When this happens anyone who holds Bitcoin automatically gets coins in the new forked coin, for free. I will explain what a fork is and how to get your free money, safely.
 
-# What is a fork? 
+# What is a fork?
 
 When someone comes up with a new feature that they feel would be an improvement to Bitcoin or any other cryptocurrency, if the idea gains support one of three things happens:
 
 1. The community overwhelmingly agrees that the feature is an improvement, has little risk, and the rules (and code) for Bitcoin should be changed to have that new feature. The developers write code to implement this new feature and the miners and validating nodes all agree on a specific date and time (or more accurately a specific new block number) that the new code will be in effect.
-2. The community disagrees on the new feature, but both sides are large enough and adamant enough that they would rather fork the community and create a new coin than give up on their opinion. The same process happens. Deveopers write new code, miners and validating nodes agree on a new block number to switch over to the new code. But in this case after the split everyone doesn't switch to the new code. Some miners and validating nodes only accept blocks of transactions that fit the original rules and some only accept blocks of transactions that fit the new rules. The blockchain forks (splits) into two different chains with a common history of transactions but a diverging future. Since all of the transactions going forward will be different they essentially have created a new coin with it's own activity separate from the original coin. The two sides may disagree over who gets to use the original name ("our code is the original code therefore we are BITCOIN", "no, our code is truer to the spirit and intent of Bitcoin therefore we are BITCOIN"). Typically one side will be more popular than the other and over time more of the mining power will migrate to the more popular (and safer and more valuable) coin. *A key point is anyone who owned coins before the fork will now own coins on BOTH chains and so automatically keeps his or her original coins __and__ gets the new coins as well*. This is the forked money I will explain how to get.
+2. The community disagrees on the new feature, but both sides are large enough and adamant enough that they would rather fork the community and create a new coin than give up on their opinion. The same process happens. Developers write new code, miners and validating nodes agree on a new block number to switch over to the new code. But in this case after the split everyone doesn't switch to the new code. Some miners and validating nodes only accept blocks of transactions that fit the original rules and some only accept blocks of transactions that fit the new rules. The blockchain forks (splits) into two different chains with a common history of transactions but a diverging future. Since all of the transactions going forward will be different they essentially have created a new coin with it's own activity separate from the original coin. The two sides may disagree over who gets to use the original name ("our code is the original code therefore we are BITCOIN", "no, our code is truer to the spirit and intent of Bitcoin therefore we are BITCOIN"). Typically one side will be more popular than the other and over time more of the mining power will migrate to the more popular (and safer and more valuable) coin. *A key point is anyone who owned coins before the fork will now own coins on BOTH chains and so automatically keeps his or her original coins **and** gets the new coins as well*. This is the forked money I will explain how to get.
 3. There is a third choice. Instead of forking, the community around the new feature decides to write new code and start over with an empty blockchain. The blockchain isn't forked, the software is forked. Nobody owns any of the new coin until they mine it or buy it. This is how altcoins like LITECOIN, DOGECOIN, and ETHEREUM are started.
 
-
-# Do I have any forked coins? 
+# Do I have any forked coins?
 
 It's easy to figure out if you own any forked coins. Refer to the chart below which lists all of the major forks of Bitcoin, Litecoin and Ethereum. The important information is the *date* when you purchased your coins. If any of the forks occured while you owned the coin then you also own the forked coin. For example, if you bought 2 Bitcoins on September 15, 2017 then you do not have any Bitcoin Cash (BCH) but you do have 2 Bitcoin Gold (BTG) and 2 Bitcoin Diamond (BCD). But if you sold your 2 Bitcoins on November 30, 2017 then you would not have any SuperBitcoin (SBTC). There are more forks than those listed here but their value is so small it wouldn't be worth collecting them. 
 
 **BITCOIN FORKS**
 
-Original Coin | Forked Coin | Date | Block | 
----|---|---|---|---
-BTC| BCH Bitcoin Cash| Aug. 1, 2017|Block 478558
-BTC| BTG Bitcoin Gold| Oct. 24, 2017 |Block 491407
-BTC| BCD Bitcoin Diamond <sup>1</sup>| Nov. 24, 2017 |block 495866
-BTC| SBTC SuperBitcoin| Dec. 12, 2017 |Block 498888
-BTC| BTA Bitcoin Atom|Jan. 24, 2018 |Block 505,888
-BTC| BTX Bitcoin Core <sup>2</sup>|Nov. 2, 2018|Block 492820
-BCH| BSV BitcoinSV (Satoshi's Vision) <sup>3</sup>| Nov. 15 2018 |Block 556766
----||||
-LTC| LCC Litcoin Cash| Feb. 18, 2018 |Block 1371111
----||||
-ETH| ETC Ethereum Classic| Jul. 20, 2016|Block 1920000
-ETH| CLO Callisto | Mar. 5, 2018|Block 5500000
----||||
+| Original Coin | Forked Coin                                   | Date          | Block         |
+| ------------- | --------------------------------------------- | ------------- | ------------- |
+| BTC           | BCH Bitcoin Cash                              | Aug. 1, 2017  | Block 478558  |
+| BTC           | BTG Bitcoin Gold                              | Oct. 24, 2017 | Block 491407  |
+| BTC           | BCD Bitcoin Diamond <sup>1</sup>              | Nov. 24, 2017 | block 495866  |
+| BTC           | SBTC SuperBitcoin                             | Dec. 12, 2017 | Block 498888  |
+| BTC           | BTA Bitcoin Atom                              | Jan. 24, 2018 | Block 505,888 |
+| BTC           | BTX Bitcoin Core <sup>2</sup>                 | Nov. 2, 2018  | Block 492820  |
+| BCH           | BSV BitcoinSV (Satoshi's Vision) <sup>3</sup> | Nov. 15 2018  | Block 556766  |
+| \---          |                                               |               |               |
+| LTC           | LCC Litcoin Cash                              | Feb. 18, 2018 | Block 1371111 |
+| \---          |                                               |               |               |
+| ETH           | ETC Ethereum Classic                          | Jul. 20, 2016 | Block 1920000 |
+| ETH           | CLO Callisto                                  | Mar. 5, 2018  | Block 5500000 |
+| \---          |                                               |               |               |
 
-<sup>1</sup> BCD Bitcoin Diamond says you own 10 BCD for every Bitcoin BTC you had at the time of the fork, but this is just marketing fluff. The actual number in the wallet is the same, the smallest denomination of *Satoshis* is the same. They have just redefined the term *one BCD coin* to have ten less Satoshis, ie: they just moved the decimal point when they show you how many coins you own.   
-<sup>2</sup> BSV Special care has to be taken with BSV, as the BCH/BSV fork was very contentious and both sides refused to admit they weren't the one and only true BCH. Neither side added "Replay Protection" to their coin, meaning BCH and BSV transactions can be automatically sent to BOTH chains with very confusing results. Read more on 'BSV Replay Protection' and 'BSV splitting' before getting your BSV coins. I can address this issue specifically if people are interested.   
+<sup>1</sup> BCD Bitcoin Diamond says you own 10 BCD for every Bitcoin BTC you had at the time of the fork, but this is just marketing fluff. The actual number in the wallet is the same, the smallest denomination of *Satoshis* is the same. They have just redefined the term *one BCD coin* to have ten less Satoshis, ie: they just moved the decimal point when they show you how many coins you own.\
+<sup>2</sup> BSV Special care has to be taken with BSV, as the BCH/BSV fork was very contentious and both sides refused to admit they weren't the one and only true BCH. Neither side added "Replay Protection" to their coin, meaning BCH and BSV transactions can be automatically sent to BOTH chains with very confusing results. Read more on 'BSV Replay Protection' and 'BSV splitting' before getting your BSV coins. I can address this issue specifically if people are interested.\
 <sup>3</sup> BTX Bitcoin Core is strictly speaking not actually a fork. They took the Bitcoin blockchain, removed all the empty spent addresses to make the blockchain smaller, cut all the unspent amounts in half and used this as their initial blockchain. So if you held Bitcoins you have half as many BTX.   
 
 *HELP I MOVED MY COINS AROUND A LOT AND I'M NOT SURE WHAT I OWNED AT THOSE SPECIFIC DATES*
@@ -53,19 +55,19 @@ Ok, if you aren't sure exactly what you owned on those specific dates there is a
 
 **List of forked coin block explorers:**
 
-- [BTC Original Bitcoin Explorer]( https://www.blockchain.com/explorer?currency=BTC )
-- [BCH Bitcoin Cash Explorer]( https://www.blockchain.com/explorer?currency=BCH&stat=blocks )
-- [BTG Bitcoin Gold Explorer]( https://btgexplorer.com/ )
-- [BCD Bitcoin Diamond Explorer]( http://explorer.btcd.io/#/ )
-- [SBTC SuperBitcoin Explorer]( http://block.superbtc.org/ )
-- [BTA Bitcoin Atom Explorer]( https://explorer.bitcoinatom.io/ )
-- [BTX Bitcoin Core Explorer]( https://chainz.cryptoid.info/btx/ )
-- [BSV BitcoinSV Explorer]( https://blockchair.com/bitcoin-sv )
-- [LTC Original Litecoin Explorer]( https://live.blockcypher.com/ltc/ )
-- [LCC Litcoin Cash Explorer]( https://chainz.cryptoid.info/lcc/ )
-- [ETH Original Ethereum Explorer]( https://etherscan.io/ )
-- [ETC Ethereum Classic Explorer]( https://gastracker.io/ )
-- [CLO Callisto Explorer]( https://blockscout.com/callisto/mainnet )
+* [BTC Original Bitcoin Explorer](https://www.blockchain.com/explorer?currency=BTC)
+* [BCH Bitcoin Cash Explorer](https://www.blockchain.com/explorer?currency=BCH&stat=blocks)
+* [BTG Bitcoin Gold Explorer](https://btgexplorer.com/)
+* [BCD Bitcoin Diamond Explorer](http://explorer.btcd.io/#/)
+* [SBTC SuperBitcoin Explorer](http://block.superbtc.org/)
+* [BTA Bitcoin Atom Explorer](https://explorer.bitcoinatom.io/)
+* [BTX Bitcoin Core Explorer](https://chainz.cryptoid.info/btx/)
+* [BSV BitcoinSV Explorer](https://blockchair.com/bitcoin-sv)
+* [LTC Original Litecoin Explorer](https://live.blockcypher.com/ltc/)
+* [LCC Litcoin Cash Explorer](https://chainz.cryptoid.info/lcc/)
+* [ETH Original Ethereum Explorer](https://etherscan.io/)
+* [ETC Ethereum Classic Explorer](https://gastracker.io/)
+* [CLO Callisto Explorer](https://blockscout.com/callisto/mainnet)
 
 If enough people are interested, I can make an automated tool that would figure out what forked coins you own. You would enter the dates you owned coins or you would enter your public addresses and the automated tool would figure out for you what forks you own. Enter your email address here if you want me to let you know when I make this tool available: (I promise not to spam you - I'm not selling anything)
 
@@ -76,11 +78,11 @@ If enough people are interested, I can make an automated tool that would figure 
 <input type=submit value="Send"/> </form> 
 </div>
 
-# How to get your forked coins 
+# How to get your forked coins
 
 If you own forked coins first you have to decide what to do with them. Do you want to hold them in case they rise in the future? Do you want to transfer them to Bitcoin for stability? Do you want to sell them for dollars? Transfer them to another wallet or an exchange for safe keeping?
 
-## From an exchange 
+## From an exchange
 
 On the date of the fork, if your coins were being held by an exchange such as Coinbase or Kraken then you are completely reliant on that exchange to give you your forked coins. If the exchange supports the new coin then your new forked coins should appear in your account. If the exchange doesn't support the new coin then there is nothing you can do. You don't know what addresses your coins were being held in so you couldn't even check to see if the exchange took the forked coins or is ignoring them. All I can recommend is to contact support at the exchange.
 
@@ -116,7 +118,7 @@ Go back to your original Bitcoin wallet and transfer all of your Bitcoins from t
 
 My Bitcoins are now safe. 
 
-Download and install ElectrumG from [https://bitcoingold.org/electrumg/](https://bitcoingold.org/electrumg/) . Create a new wallet and choose 'standard wallet', and 'I already have a seed'. Go back to the *original Bitcoin wallet* in Electrum and go to 'wallet menu', and 'seed'.
+Download and install ElectrumG from <https://bitcoingold.org/electrumg/> . Create a new wallet and choose 'standard wallet', and 'I already have a seed'. Go back to the *original Bitcoin wallet* in Electrum and go to 'wallet menu', and 'seed'.
 
 ![photo original wallet seed](/images/forking04 original btc wallet seed 406.png)
 
@@ -140,4 +142,3 @@ Enter your email address here if you want me to notify you when I make a tool to
 <input type=text name="email" value="myemail@example.com" id="email"/>
 <input type=submit value="Send"/> </form> 
 </div>
-
