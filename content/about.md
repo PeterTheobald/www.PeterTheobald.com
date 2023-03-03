@@ -12,7 +12,7 @@ Previously I was the founder of [TC Forensics](http://www.tcforensics.com) where
 
 Prior to that I developed web sites and internet-connected desktop applications.
 
-For more details view my full [resume](/downloads/Peter_Theobald_resume_R_2023-01-13.pdf). Some highlights are:
+For more details view my full [resume](/downloads/Peter_Theobald_resume_R_2023-01-13.pdf). Some highlights are: 
 
 * I Founded [LI Net](https://angel.co/company/li-net), an early Internet Service Provider, with three partners and little capital; In four years we built LI Net into the largest ISP on Long Island and one of the largest in New York. Just as we were looking at a round of funding to expand we accepted an acquisition offer from [Verio](https://www.crunchbase.com/organization/verio#/entity), a national roll-up of the leading regional ISPs, for over $7M cash plus Verio stock.
 * At [Lehman Brothers](https://www.crunchbase.com/organization/lehman-brothers#/entity), I provided support and customizations in C++ and Bash for the Fixed-Income Derivatives department, mostly for the overnight portfolio risk management processes. A highlight was adding support for path-dependent Bermuda style options to our SUMMIT based Black-Scholes option pricing models.
