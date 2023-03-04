@@ -12,6 +12,8 @@ footnotereturnlinkcontents = "↩"
 hasCJKLanguage = true
 enableEmoji = true
 paginate = 9
+[markup.goldmark.renderer]
+    unsafe= true
 
 [permalinks]
     post = "/post/:filename/"
