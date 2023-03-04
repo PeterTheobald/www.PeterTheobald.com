@@ -16,6 +16,6 @@ On a trip to Antigua Guatemala, I went with the great guides at Old Town Outfitt
 {{< youtube id="MUq8ZIBGcUc" >}}
 
 ---
-Edited down from lots of boring footage to 3 minutes with [LightWorks](https://www.lwks.com/) fantastic free professional level video editor. Music is ['Platoon'](https://www.youtube.com/watch?v=9JkDzNOgO3U) by Jungle.
+Edited down from lots of boring footage to 3 minutes with [LightWorks](https://www.lwks.com/) fantastic free professional level video editor. <s>Music is ['Platoon'](https://www.youtube.com/watch?v=9JkDzNOgO3U) by Jungle.</s> Music is boring generic music because of YouTube's DCMA takedowns.
 
 
