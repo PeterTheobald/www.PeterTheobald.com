@@ -104,7 +104,7 @@ As an example I'm going to show you the process of gaining control of my Bitcoin
 
 First I open my Electrum Bitcoin wallet and look at my Bitcoins.
 
-![photo of Electrum wallet](/images/forking01 original btc wallet 895.png)
+![photo of Electrum wallet](/images/forking01 original btc wallet 895.png) 
 
 I am going to put these same private keys and addresses into my ElectrumG Bitcoin Gold wallet. I can either transfer just the private key(s) or use the recovery seed to transfer the entire wallet. Before I transfer sensitive information into the new software I will make my original Bitcoins safe. If I am transferring just the private keys I can keep my original Bitcoins safe by transferring them to a new receive address in the same wallet. If I am transferring the entire wallet using the recovery seed I can keep my original Bitcoins safe by transferring them to a new wallet (Electrum calls this a 'sweep'). To keep this example simple I am going to transfer my entire wallet; This way we don't have to figure out which addresses had Bitcoin on the date of the fork. 
 
