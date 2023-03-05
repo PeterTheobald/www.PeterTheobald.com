@@ -159,13 +159,13 @@ function buildJoke( joke) {
 
 function placeJokeLine( canvas, jokeLine) {
   var ctx=canvas.getContext("2d");
-  jokeWrappedLines=wordWrap( jokeLine, 25);
+  jokeWrappedLines=wordWrap( jokeLine, 30);
   if (jokeWrappedLines.length==1) {
     // One liner jokes fit inside the ONELINER bubble image
     appendImageToCanvas( canvas, jokeImageObjects[ONELINER]);
     ctx.font="12pt Helvetica";
     ctx.textBaseline="top";
-    ctx.fillText( jokeWrappedLines[0], 60, canvas.height-22);
+    ctx.fillText( jokeWrappedLines[0], 60, canvas.height-18);
   } else {
     // multiline jokes go inside a TOP, MID, BOT bubble image
     appendImageToCanvas( canvas, jokeImageObjects[TOP]);
@@ -173,7 +173,7 @@ function placeJokeLine( canvas, jokeLine) {
       appendImageToCanvas( canvas, jokeImageObjects[MID]);
       ctx.font="12pt Helvetica";
       ctx.textBaseline="top";
-      ctx.fillText( jokeWrappedLines[i], 60, canvas.height-22);
+      ctx.fillText( jokeWrappedLines[i], 60, canvas.height-18);
     }
     appendImageToCanvas( canvas, jokeImageObjects[BOT]);
   }
