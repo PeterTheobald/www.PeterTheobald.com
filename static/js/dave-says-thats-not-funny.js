@@ -85,7 +85,7 @@ function requestFirst10RedditJokes() {
   // tried using decent law-abiding CORS request but iOS Safari wouldnt have it.
   // resorted to ugly-security-hack JSONP request.
   // "Here's some code from another site, just eval() it, what could go wrong?"
-  $.getJSON( "http://www.reddit.com/r/Jokes/top.json?sort=top&t=day&limit=10&jsonp=?", redditLoader);
+  $.getJSON( "https://www.reddit.com/r/Jokes/top.json?sort=top&t=day&limit=10&jsonp=?", redditLoader);
 }
 
 var lastRedditJokeId='';
@@ -99,7 +99,7 @@ function requestNext10RedditJokes() {
       // tried using decent law-abiding CORS request but iOS Safari wouldnt have it.
       // resorted to ugly-security-hack JSONP request
       // "Here's some code from another site, just eval() it, what could go wrong?"
-      $.getJSON( "http://www.reddit.com/r/Jokes/top.json?sort=top&t=day&limit=10&after="+lastRedditJokeId+"&jsonp=?", redditLoader);
+      $.getJSON( "https://www.reddit.com/r/Jokes/top.json?sort=top&t=day&limit=10&after="+lastRedditJokeId+"&jsonp=?", redditLoader);
   }
 }
 
