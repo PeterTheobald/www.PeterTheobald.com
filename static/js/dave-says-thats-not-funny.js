@@ -159,7 +159,7 @@ function buildJoke( joke) {
 
 function placeJokeLine( canvas, jokeLine) {
   var ctx=canvas.getContext("2d");
-  jokeWrappedLines=wordWrap( jokeLine, 30);
+  jokeWrappedLines=wordWrap( jokeLine, 28);
   if (jokeWrappedLines.length==1) {
     // One liner jokes fit inside the ONELINER bubble image
     appendImageToCanvas( canvas, jokeImageObjects[ONELINER]);
