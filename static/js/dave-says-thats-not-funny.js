@@ -163,7 +163,7 @@ function placeJokeLine( canvas, jokeLine) {
   if (jokeWrappedLines.length==1) {
     // One liner jokes fit inside the ONELINER bubble image
     appendImageToCanvas( canvas, jokeImageObjects[ONELINER]);
-    ctx.font="14pt Helvetica";
+    ctx.font="12pt Helvetica";
     ctx.textBaseline="top";
     ctx.fillText( jokeWrappedLines[0], 60, canvas.height-22);
   } else {
@@ -171,7 +171,7 @@ function placeJokeLine( canvas, jokeLine) {
     appendImageToCanvas( canvas, jokeImageObjects[TOP]);
     for(var i=0; i<jokeWrappedLines.length; i++) {
       appendImageToCanvas( canvas, jokeImageObjects[MID]);
-      ctx.font="14pt Helvetica";
+      ctx.font="12pt Helvetica";
       ctx.textBaseline="top";
       ctx.fillText( jokeWrappedLines[i], 60, canvas.height-22);
     }
