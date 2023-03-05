@@ -148,7 +148,7 @@ function buildJoke( joke) {
   }
   appendImageToCanvas( canvas, jokeImageObjects[SPACER]);
   appendImageToCanvas( canvas, jokeImageObjects[REPLY]);
-  ctx.font="14pt Helvetica";
+  ctx.font="12pt Helvetica";
   ctx.textBaseline="top";
   ctx.fillText( "That's not funny", 25, canvas.height-25);
   appendImageToCanvas( canvas, jokeImageObjects[FOOTER]);
