@@ -4,9 +4,9 @@ title: "About me..."
 ---
 I am a **site reliability engineer (SRE)** and **software engineer (SWE)** (and also a rock climber and geeky dad). This is my personal site with posts about [programming](/tech/), and [making geeky things and rock climbing](/play/).
 
-I am a Site Reliability Engineer for the Compute Technology Group at Akamai where I am improving reliability, metrics, observability and tooling for Linode cloud services to enable our projected 50x scaling of our cloud services network.
+I am a Site Reliability Engineer for the Compute Technology Group at [Akamai](https://www.akamai.com) where I am improving reliability, metrics, observability and tooling for Linode cloud services to enable our projected 50x scaling of our cloud services network.
 
-Previously I was a Production Engineer at Meta (Facebook) solving systems problems in reliability, scalability, performance, and security for one of the world’s largest distributed computer networks serving billions of people across Facebook, Instagram, WhatsApp, Oculus and other products.
+Previously I was a Production Engineer at [Meta (Facebook)](https://www.facebook.com) solving systems problems in reliability, scalability, performance, and security for one of the world’s largest distributed computer networks serving billions of people across Facebook, Instagram, WhatsApp, Oculus and other products.
 
 Prior to that I was the founder of [TC Forensics](http://www.tcforensics.com) where I provided computer forensics services such as finding hidden or destroyed data, investigating cryptocurrency transactions, investigating medical provider data breaches, and providing litigation support and expert testimony related to computer evidence.
 
