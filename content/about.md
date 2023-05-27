@@ -2,7 +2,7 @@
 permalink: /about/ 
 title: "About me..."
 ---
-I am a **site reliability engineer (SRE)** and **software engineer (SWE)** (and also a rock climber and geeky dad). This is my personal site with posts about [programming](/tech/), and [making geeky things and rock climbing](/play/).
+I am a **site reliability engineer (SRE)** and **software engineer (SWE)** living in the San Francisco Bay Area (and also a rock climber and geeky dad). This is my personal site with posts about [programming](/tech/), and [making geeky things and rock climbing](/play/).
 
 I am a Senior Site Reliability Engineer for the Compute Technology Group at [Akamai](https://www.akamai.com) where I am improving reliability, metrics, observability and tooling for Linode cloud services to enable our projected 50x scaling of our cloud services network.
 
