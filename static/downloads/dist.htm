@@ -1,0 +1,53 @@
+<html>
+<head>
+<script>
+target_lat='37.4081636024583';
+target_long='-122.11692754350655';
+const options = {
+  enableHighAccuracy: true,
+  timeout: 10000,
+};
+// unit='M'iles (default) 'K'ilometers 'N'autical miles 'f'eet 'm'eters
+function distance(lat1, lon1, lat2, lon2, unit) {
+	if ((lat1 == lat2) && (lon1 == lon2)) {
+		return 0;
+	}
+	else {
+		var radlat1 = Math.PI * lat1/180;
+		var radlat2 = Math.PI * lat2/180;
+		var theta = lon1-lon2;
+		var radtheta = Math.PI * theta/180;
+		var dist = Math.sin(radlat1) * Math.sin(radlat2) + Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
+		if (dist > 1) {
+			dist = 1;
+		}
+		dist = Math.acos(dist);
+		dist = dist * 180/Math.PI;
+		dist = dist * 60 * 1.1515;
+		if (unit=="K" || unit=="m") { dist = dist * 1.609344 }
+		if (unit=="N") { dist = dist * 0.8684 }
+		if (unit=='m') { dist = dist * 1000.0 }
+		if (unit=='f') { dist = dist * 5280 }
+		return dist;
+	}
+}
+function update_distance(position) {
+  dist=distance(target_lat, target_long, position.coords.latitude, position.coords.longitude, 'f');
+  console.log(target_lat, target_long, position.coords.latitude, position.coords.longitude, 'f', dist.toFixed(0))
+  document.getElementById("distance-feedback").innerHTML = '[' + dist.toFixed(0) + ']';
+}
+function update_error(error) {
+  document.getElementById("error-feedback").innerHTML = 'location error';
+}
+navigator.geolocation.getCurrentPosition(update_distance, update_error, options);
+const id = navigator.geolocation.watchPosition(update_distance, update_error, options);
+</script>
+</head>
+<body>
+<p id="distance-feedback">
+[ ]
+</p>
+<p id="error-feedback">
+</p>
+</body>
+</html>
