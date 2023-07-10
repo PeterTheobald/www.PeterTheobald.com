@@ -39,6 +39,8 @@ function update_distance(position) {
 function update_error(error) {
   document.getElementById("error-feedback").innerHTML = 'location error';
 }
+document.getElementById("distance-feedback").style.width = "100%";
+document.getElementById("distance-feedback").style.height = "100%";
 navigator.geolocation.getCurrentPosition(update_distance, update_error, options);
 const id = navigator.geolocation.watchPosition(update_distance, update_error, options);
 </script>
