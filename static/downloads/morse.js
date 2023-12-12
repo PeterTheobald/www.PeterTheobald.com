@@ -12,19 +12,32 @@ let currentWord = "";
 let buttonPressTime;
 let endOfLetterTimeout;
 
-document.getElementById("redButton").addEventListener("mousedown", function() {
-    buttonPressTime = new Date(); // Record the time when the button is pressed
-    clearTimeout(endOfLetterTimeout); // Clear the end-of-letter timeout
-});
+// Function to disable text selection
+function disableTextSelection(element) {
+    element.style.userSelect = 'none'; // Standard syntax
+    element.style.webkitUserSelect = 'none'; // WebKit/Blink browsers
+    element.style.msUserSelect = 'none'; // Internet Explorer/Edge
+}
 
-document.getElementById("redButton").addEventListener("mouseup", function() {
+// Disable text selection on buttons
+window.onload = function() {
+    disableTextSelection(document.getElementById("redButton"));
+    disableTextSelection(document.getElementById("greenButton"));
+};
+
+function handleStart() {
+    buttonPressTime = new Date();
+    clearTimeout(endOfLetterTimeout);
+}
+
+function handleEnd() {
     const pressDuration = new Date() - buttonPressTime;
     if (pressDuration < 500) {
         currentInput += ".";
-        document.getElementById("morse-dot").play(); // Play dot sound
+        document.getElementById("dotSound").play();
     } else {
         currentInput += "-";
-        document.getElementById("morse-dash").play(); // Play dash sound
+        document.getElementById("dashSound").play();
     }
 
     // Set a timeout for end of a letter
@@ -33,8 +46,16 @@ document.getElementById("redButton").addEventListener("mouseup", function() {
         currentWord += letter;
         document.getElementById("inputDisplay").innerText = currentWord;
         currentInput = "";
-    }, 750); // 0.75 seconds for end of a letter
-});
+    }, 750);
+}
+
+// Handle both mouse and touch events for desktop and mobile compatibility
+const redButton = document.getElementById("redButton");
+redButton.addEventListener("mousedown", handleStart);
+redButton.addEventListener("touchstart", handleStart, { passive: false });
+redButton.addEventListener("mouseup", handleEnd);
+redButton.addEventListener("touchend", handleEnd, { passive: false });
+
 
 document.getElementById("greenButton").addEventListener("click", function() {
     if (currentWord === "ORION") {
