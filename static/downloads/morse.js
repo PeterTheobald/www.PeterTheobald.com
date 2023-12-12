@@ -34,10 +34,10 @@ function handleEnd() {
     const pressDuration = new Date() - buttonPressTime;
     if (pressDuration < 500) {
         currentInput += ".";
-        document.getElementById("dotSound").play();
+        document.getElementById("morse-dot").play();
     } else {
         currentInput += "-";
-        document.getElementById("dashSound").play();
+        document.getElementById("morse-dash").play();
     }
 
     // Set a timeout for end of a letter
