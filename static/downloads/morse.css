@@ -1,0 +1,19 @@
+button {
+    width: 100px;
+    height: 50px;
+    font-size: 20px;
+    margin: 10px;
+}
+
+#redButton {
+    background-color: red;
+}
+
+#greenButton {
+    background-color: green;
+}
+
+#inputDisplay, #resultDisplay {
+    margin-top: 20px;
+    font-size: 20px;
+}
