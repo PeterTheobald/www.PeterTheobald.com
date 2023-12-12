@@ -32,7 +32,7 @@ function handleStart() {
 
 function handleEnd() {
     const pressDuration = new Date() - buttonPressTime;
-    if (pressDuration < 500) {
+    if (pressDuration < 300) {
         currentInput += ".";
         document.getElementById("morse-dot").play();
     } else {
