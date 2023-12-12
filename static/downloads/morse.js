@@ -49,12 +49,17 @@ function handleEnd() {
     }, 750);
 }
 
-// Handle both mouse and touch events for desktop and mobile compatibility
+// Check if touch is supported and use appropriate events
 const redButton = document.getElementById("redButton");
-redButton.addEventListener("mousedown", handleStart);
-redButton.addEventListener("touchstart", handleStart, { passive: false });
-redButton.addEventListener("mouseup", handleEnd);
-redButton.addEventListener("touchend", handleEnd, { passive: false });
+if ('ontouchstart' in window) {
+    // Touch events for touch-capable devices
+    redButton.addEventListener("touchstart", handleStart, { passive: false });
+    redButton.addEventListener("touchend", handleEnd, { passive: false });
+} else {
+    // Mouse events for non-touch devices
+    redButton.addEventListener("mousedown", handleStart);
+    redButton.addEventListener("mouseup", handleEnd);
+}
 
 
 document.getElementById("greenButton").addEventListener("click", function() {
