@@ -65,8 +65,10 @@ if ('ontouchstart' in window) {
 document.getElementById("greenButton").addEventListener("click", function() {
     if (currentWord === "ORION") {
         document.getElementById("resultDisplay").innerText = "SUCCESS";
+		document.getElementById("victory-image").src="victory-image.png";
+		document.getElementById("victory-speech").play();
     } else {
-        document.getElementById("resultDisplay").innerText = "CODE NOT RECOGNIZED";
+        document.getElementById("resultDisplay").innerText = "NAME NOT RECOGNIZED";
     }
     currentWord = ""; // Clear the current word
     document.getElementById("inputDisplay").innerText = currentWord; // Update the display
