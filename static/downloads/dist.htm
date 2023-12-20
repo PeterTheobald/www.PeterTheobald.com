@@ -40,7 +40,13 @@ body {
   grid-column: 1;
   grid-row: 2;
 }
-
+img {
+	max-width: 100%;
+	max-height: 100vh; /* Viewport Height */
+	object-fit: contain;
+	display: block; /* Removes bottom margin/whitespace */
+	margin: auto; /* Center the image */
+}
 /*
 html, body { margin: 0px; height: 100%; }
 div {
@@ -57,6 +63,7 @@ div {
     font-size: 150px;
     text-align:center;
 }
+
 */
 </style>
 <script>
@@ -93,7 +100,13 @@ function distance(lat1, lon1, lat2, lon2, unit) {
 function update_distance(position) {
   dist=distance(target_lat, target_long, position.coords.latitude, position.coords.longitude, 'f');
   console.log(target_lat, target_long, position.coords.latitude, position.coords.longitude, 'f', dist.toLocaleString(undefined, {maximumFractionDigits: 0}))
-  document.getElementById("distance-feedback").innerHTML = ' ' + dist.toLocaleString(undefined, {maximumFractionDigits: 0}) + ' ';
+  //dist=3; // DEBUG
+  if (dist<5) {
+	document.getElementById('success-image').src = 'https://www.petertheobald.com/downloads/crypto-sign.png';
+	document.getElementById("distance-feedback").innerHTML = '';
+	} else {
+		document.getElementById("distance-feedback").innerHTML = ' ' + dist.toLocaleString(undefined, {maximumFractionDigits: 0}) + ' ';
+	}
 }
 function update_error(error) {
   document.getElementById("error-feedback").innerHTML = '(location error)';
@@ -108,6 +121,7 @@ window.onload = function() {
 </script>
 </head>
 <body>
+<img id='success-image'>
 <div class="wrapper">
   <div id="distance-feedback">
   ( )
