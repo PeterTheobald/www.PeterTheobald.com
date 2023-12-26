@@ -97,13 +97,18 @@ function distance(lat1, lon1, lat2, lon2, unit) {
 		return dist;
 	}
 }
+found=false;
 function update_distance(position) {
+  if (found) {
+    return;
+	}
   dist=distance(target_lat, target_long, position.coords.latitude, position.coords.longitude, 'f');
   console.log(target_lat, target_long, position.coords.latitude, position.coords.longitude, 'f', dist.toLocaleString(undefined, {maximumFractionDigits: 0}))
   //dist=3; // DEBUG
   if (dist<5) {
 	document.getElementById('success-image').src = 'https://www.petertheobald.com/downloads/crypto-sign.png';
-	document.getElementById("distance-feedback").innerHTML = '';
+	document.getElementById("distance-feedback").innerHTML = 'TARGET FOUND';
+	found=true;
 	} else {
 		document.getElementById("distance-feedback").innerHTML = ' ' + dist.toLocaleString(undefined, {maximumFractionDigits: 0}) + ' ';
 	}
