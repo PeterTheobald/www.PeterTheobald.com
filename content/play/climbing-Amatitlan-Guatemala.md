@@ -11,7 +11,7 @@ Video from a rock climbing trip to Amatitl&aacute;n, Guatemala...
 
 <!--more-->
 
-On a trip to Antigua Guatemala, I went with the great guides at Old Town Outfitters to a lesser known climbing spot above Lago Amatitl&aacute;n, less than an hour south of Antigua. The heart of rock climbing in Guatemala is far from Antigua near Quetzaltenango (Xela). They were trying out a new drone so I got some great video:
+On a trip to Antigua Guatemala, I went with Old Town Outfitters to a lesser known climbing spot above Lago Amatitl&aacute;n, less than an hour south of Antigua. The heart of rock climbing in Guatemala is far from Antigua near Quetzaltenango (Xela). They were trying out a new drone so I got some great video:
 
 {{< youtube id="MUq8ZIBGcUc" >}}
 
