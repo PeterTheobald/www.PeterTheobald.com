@@ -24,7 +24,7 @@
 
 <img src="/images/profile-100c.png" alt="Peter Theobald" />
 </a>
-<div class="banner-title">Peter Theobald</div><div class="banner-description">Software Engineer. Computer Forensics. Rock Climbing Geeky Dad.</div>
+<div class="banner-title">Peter Theobald</div><div class="banner-description">Software Engineer. Site Reliability Engineer. Rock Climbing Geeky Dad.</div>
 </div>
 
       
@@ -76,104 +76,87 @@
 
 <main>
 <p>I have an old Dell Inspiron 8600 I wanted to upgrade to Windows 7. The problem was that there is no current video driver for the Inspiron&rsquo;s Nvidia Geforce FX Go5200 video chip. Even the driver Dell is offering for download for Windows XP is the wrong one and causes all sorts of problems. There simply is no driver for Windows 7.</p>
-
 <p>So I searched on NVIDIA to see what drivers might be close. I found these two possible candidates:</p>
-
 <ul>
 <li>ForceWare 179.48 Win 7 driver for the Go7200</li>
 <li>ForceWare 96.85 Vista driver for the FX5200 (NOT the FX Go5200)</li>
 </ul>
-
 <p>I tried both, and I was able to get the ForceWare 96.85 driver working. Here&rsquo;s how&hellip;</p>
-
 <p>I downloaded the ForceWare 96.85 driver from NVIDIA.
 <a href="http://www.nvidia.com/object/winvista_x86_96.85_2.html">Link to driver</a></p>
-
 <p>The device manager showed me that my Go5200 codes are: VEN_10DE&amp;DEV_0324&amp;SUBSYS_019C1028.
 When I tried to install the ForceWare 96.85 driver (by running setup.exe) I was told it couldn&rsquo;t find a matching driver. I looked in the nv_disp.inf file and I saw lists of various NVIDIA video devices, but my Go5200 was not in the list. I simply added it to the list matching the format of the other lines.
 (Note: if the install deletes the files after failing you may have to run the install and leave it waiting for you to click &lsquo;OK&rsquo; while you copy the folder to another working folder)</p>
-
 <p>I added lines in two places:</p>
-
 <p>Where it had:</p>
-
 <pre><code>%NVIDIA_NV34.DEV_0322.1% = nv_NV3x, PCI\VEN_10DE&amp;DEV_0322
 %NVIDIA_NV34.DEV_0323.1% = nv_NV3x, PCI\VEN_10DE&amp;DEV_0323
 %NVIDIA_NV34.DEV_0326.1% = nv_NV3x, PCI\VEN_10DE&amp;DEV_0326
 %NVIDIA_NV34.DEV_0327.1% = nv_NV3x, PCI\VEN_10DE&amp;DEV_0327
-</code></pre>
-
-<p>I added a line for my Go5200:</p>
-
+</code></pre><p>I added a line for my Go5200:</p>
 <pre><code>%NVIDIA_NV34.DEV_0322.1% = nv_NV3x, PCI\VEN_10DE&amp;DEV_0322
 %NVIDIA_NV34.DEV_0323.1% = nv_NV3x, PCI\VEN_10DE&amp;DEV_0323
 %NVIDIA_NV34.DEV_0324.1% = nv_NV3x, PCI\VEN_10DE&amp;DEV_0324&amp;SUBSYS_019c1028
 %NVIDIA_NV34.DEV_0326.1% = nv_NV3x, PCI\VEN_10DE&amp;DEV_0326
 %NVIDIA_NV34.DEV_0327.1% = nv_NV3x, PCI\VEN_10DE&amp;DEV_0327
-</code></pre>
-
-<p>Actually I added two lines, because when I Googled for DEV_0324 I saw some references to a different SUBSYS. Just in case I added both:</p>
-
+</code></pre><p>Actually I added two lines, because when I Googled for DEV_0324 I saw some references to a different SUBSYS. Just in case I added both:</p>
 <pre><code>%NVIDIA_NV34.DEV_0322.1% = nv_NV3x, PCI\VEN_10DE&amp;DEV_0322
 %NVIDIA_NV34.DEV_0323.1% = nv_NV3x, PCI\VEN_10DE&amp;DEV_0323
 %NVIDIA_NV34.DEV_0324.1% = nv_NV3x, PCI\VEN_10DE&amp;DEV_0324&amp;SUBSYS_019c1028
 %NVIDIA_NV34.DEV_0324.1% = nv_NV3x, PCI\VEN_10DE&amp;DEV_0324&amp;SUBSYS_01961028
 %NVIDIA_NV34.DEV_0326.1% = nv_NV3x, PCI\VEN_10DE&amp;DEV_0326
 %NVIDIA_NV34.DEV_0327.1% = nv_NV3x, PCI\VEN_10DE&amp;DEV_0327
-</code></pre>
-
-<p>And in one other place I changed this:</p>
-
+</code></pre><p>And in one other place I changed this:</p>
 <pre><code>NVIDIA_NV34.DEV_0323.1 = &quot;NVIDIA GeForce FX 5200LE&quot;
 NVIDIA_NV34.DEV_0326.1 = &quot;NVIDIA GeForce FX 5500&quot;
-</code></pre>
-
-<p>To this:</p>
-
+</code></pre><p>To this:</p>
 <pre><code>NVIDIA_NV34.DEV_0323.1 = &quot;NVIDIA GeForce FX 5200LE&quot;
 NVIDIA_NV34.DEV_0324.1 = &quot;NVIDIA GeForce FX Go5200&quot;
 NVIDIA_NV34.DEV_0324.3 = &quot;NVIDIA GeForce FX Go5200 &quot;
 NVIDIA_NV34.DEV_0326.1 = &quot;NVIDIA GeForce FX 5500&quot;
-</code></pre>
-
-<p>Then I installed my new driver (setup.exe). I found my video chip was recognized! I was able to set it&rsquo;s proper native resolution in Control Panel/Display, and my &ldquo;Performance&rdquo; measurement went from 1.0 to 2.0. Not high enough for all of the Aero visual effects, but now I can watch video without any choppiness.</p>
-
-<hr />
-
+</code></pre><p>Then I installed my new driver (setup.exe). I found my video chip was recognized! I was able to set it&rsquo;s proper native resolution in Control Panel/Display, and my &ldquo;Performance&rdquo; measurement went from 1.0 to 2.0. Not high enough for all of the Aero visual effects, but now I can watch video without any choppiness.</p>
+<hr>
 <p>Comments migrated from the old blog:</p>
-
 <blockquote>
-<p>Jerry June 10, 2011 at 8:16 PM<br />
+<p>Jerry June 10, 2011 at 8:16 PM<br>
 I am about to try this myself, thank you.</p>
-
-<p>Jerry June 10, 2011 at 8:56 PM<br />
+</blockquote>
+<blockquote>
+<p>Jerry June 10, 2011 at 8:56 PM<br>
 Wow. Thank you so much.</p>
-
-<p>BillyKool July 24, 2011 at 3:40 PM<br />
-Awesome Peter,<br />
+</blockquote>
+<blockquote>
+<p>BillyKool July 24, 2011 at 3:40 PM<br>
+Awesome Peter,<br>
 I&rsquo;ll point out a note. If you do not install this update you will not likely be allocating any system memory to video.
 With this update Win 7 allocated 255MB of my 1GB of memory and it made Aero Exp Index go from 1.0 to 2.4. Great!
 But, point being if you have only 512MB, you may not want to do this without increasing your RAM.
-But that said, I&rsquo;ve been looking for this code patch for a while.<br />
+But that said, I&rsquo;ve been looking for this code patch for a while.<br>
 Thanks again Peter.</p>
-
-<p>addiRockART October 5, 2012 at 1:09 PM<br />
+</blockquote>
+<blockquote>
+<p>addiRockART October 5, 2012 at 1:09 PM<br>
 so, I am having the same problem, BUT, even after editing said document, the installer says &ldquo;windows vista not found.&rdquo; any ideas? can I get some help? :)</p>
-
-<p>Karel Kolbaba November 5, 2013 at 5:27 AM<br />
+</blockquote>
+<blockquote>
+<p>Karel Kolbaba November 5, 2013 at 5:27 AM<br>
 super, thank you so much!!!</p>
-
-<p>Farhad Azhadi April 17, 2014 at 6:49 PM<br />
+</blockquote>
+<blockquote>
+<p>Farhad Azhadi April 17, 2014 at 6:49 PM<br>
 Thank You SOOOO Much!!!!!!</p>
-
-<p>dieter collischon April 30, 2014 at 12:59 AM<br />
+</blockquote>
+<blockquote>
+<p>dieter collischon April 30, 2014 at 12:59 AM<br>
 This works fine for my old Inspiron. Thanks!</p>
-
-<p>Catherine Durstewitz March 20, 2016 at 11:04 AM<br />
+</blockquote>
+<blockquote>
+<p>Catherine Durstewitz March 20, 2016 at 11:04 AM<br>
 Thank you so much for taking the time to share this information Peter. We are trying to breathe life back into my Inspiron 8600 with Windows 7&hellip; Many thanks again!</p>
-
-<p>Unknown July 24, 2016 at 2:49 PM<br />
-Peter,<br />
+</blockquote>
+<blockquote>
+<p>Unknown July 24, 2016 at 2:49 PM<br>
+Peter,<br>
 Thanks a ton! I too was able to breathe life back into my Inspiron running Win 7. Much thanks!
 </small></p>
 </blockquote>
@@ -188,6 +171,7 @@ Thanks a ton! I too was able to breathe life back into my Inspiron running Win 7
   <span class="nav-prev"><a href="/tech/tricky-forensic-hard-drive-acquisition/">&larr; Tricky forensic hard drive acquisition of an iMac</a></span>
   <span class="nav-next"><a href="/tech/unison-for-nexenta/">Unison 2.40.61 binary for Nexenta Core Platform 3 &rarr;</a></span>
 </nav>
+
 
 
 <div id="disqus_thread"></div>
@@ -210,6 +194,7 @@ Thanks a ton! I too was able to breathe life back into my Inspiron running Win 7
 </script>
 <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 <a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
 </article>
 </div>
 

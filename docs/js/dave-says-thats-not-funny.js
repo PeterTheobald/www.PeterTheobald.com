@@ -85,7 +85,7 @@ function requestFirst10RedditJokes() {
   // tried using decent law-abiding CORS request but iOS Safari wouldnt have it.
   // resorted to ugly-security-hack JSONP request.
   // "Here's some code from another site, just eval() it, what could go wrong?"
-  $.getJSON( "http://www.reddit.com/r/Jokes/top.json?sort=top&t=day&limit=10&jsonp=?", redditLoader);
+  $.getJSON( "https://www.reddit.com/r/Jokes/top.json?sort=top&t=day&limit=10&jsonp=?", redditLoader);
 }
 
 var lastRedditJokeId='';
@@ -99,7 +99,7 @@ function requestNext10RedditJokes() {
       // tried using decent law-abiding CORS request but iOS Safari wouldnt have it.
       // resorted to ugly-security-hack JSONP request
       // "Here's some code from another site, just eval() it, what could go wrong?"
-      $.getJSON( "http://www.reddit.com/r/Jokes/top.json?sort=top&t=day&limit=10&after="+lastRedditJokeId+"&jsonp=?", redditLoader);
+      $.getJSON( "https://www.reddit.com/r/Jokes/top.json?sort=top&t=day&limit=10&after="+lastRedditJokeId+"&jsonp=?", redditLoader);
   }
 }
 
@@ -148,7 +148,7 @@ function buildJoke( joke) {
   }
   appendImageToCanvas( canvas, jokeImageObjects[SPACER]);
   appendImageToCanvas( canvas, jokeImageObjects[REPLY]);
-  ctx.font="14pt Helvetica";
+  ctx.font="12pt Helvetica";
   ctx.textBaseline="top";
   ctx.fillText( "That's not funny", 25, canvas.height-25);
   appendImageToCanvas( canvas, jokeImageObjects[FOOTER]);
@@ -159,21 +159,21 @@ function buildJoke( joke) {
 
 function placeJokeLine( canvas, jokeLine) {
   var ctx=canvas.getContext("2d");
-  jokeWrappedLines=wordWrap( jokeLine, 25);
+  jokeWrappedLines=wordWrap( jokeLine, 28);
   if (jokeWrappedLines.length==1) {
     // One liner jokes fit inside the ONELINER bubble image
     appendImageToCanvas( canvas, jokeImageObjects[ONELINER]);
-    ctx.font="14pt Helvetica";
+    ctx.font="12pt Helvetica";
     ctx.textBaseline="top";
-    ctx.fillText( jokeWrappedLines[0], 60, canvas.height-22);
+    ctx.fillText( jokeWrappedLines[0], 60, canvas.height-18);
   } else {
     // multiline jokes go inside a TOP, MID, BOT bubble image
     appendImageToCanvas( canvas, jokeImageObjects[TOP]);
     for(var i=0; i<jokeWrappedLines.length; i++) {
       appendImageToCanvas( canvas, jokeImageObjects[MID]);
-      ctx.font="14pt Helvetica";
+      ctx.font="12pt Helvetica";
       ctx.textBaseline="top";
-      ctx.fillText( jokeWrappedLines[i], 60, canvas.height-22);
+      ctx.fillText( jokeWrappedLines[i], 60, canvas.height-18);
     }
     appendImageToCanvas( canvas, jokeImageObjects[BOT]);
   }

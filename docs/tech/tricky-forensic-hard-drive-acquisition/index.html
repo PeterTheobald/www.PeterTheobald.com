@@ -24,7 +24,7 @@
 
 <img src="/images/profile-100c.png" alt="Peter Theobald" />
 </a>
-<div class="banner-title">Peter Theobald</div><div class="banner-description">Software Engineer. Computer Forensics. Rock Climbing Geeky Dad.</div>
+<div class="banner-title">Peter Theobald</div><div class="banner-description">Software Engineer. Site Reliability Engineer. Rock Climbing Geeky Dad.</div>
 </div>
 
       
@@ -76,31 +76,26 @@
 
 <main>
 <p>Recently I had to do a forensic acquisition of an iMac hard drive, and it presented many obstacles.</p>
-
 <p>The three basic ways to do an acquisition are:</p>
-
-<p>1) Remove the hard drive and use high speed dedicated imaging hardware such as a Logicube, or from a forensic workstation through a write-blocker.</p>
-
-<p>2) Boot the computer using a forensically sound Linux distro, such as Helix, and acquire the internal hard drive using a software tool such as dcfldd or LinEn to an external hard drive or over the network to a server set up for this purpose.</p>
-
-<p>3) Boot the Mac into &lsquo;Target Disk Mode&rsquo; (this only works on Macs) which exposes the internal hard drive on the Firewire port. Connect a forensic system to that firewire port through a write-blocker.</p>
-
+<ol>
+<li>
+<p>Remove the hard drive and use high speed dedicated imaging hardware such as a Logicube, or from a forensic workstation through a write-blocker.</p>
+</li>
+<li>
+<p>Boot the computer using a forensically sound Linux distro, such as Helix, and acquire the internal hard drive using a software tool such as dcfldd or LinEn to an external hard drive or over the network to a server set up for this purpose.</p>
+</li>
+<li>
+<p>Boot the Mac into &lsquo;Target Disk Mode&rsquo; (this only works on Macs) which exposes the internal hard drive on the Firewire port. Connect a forensic system to that firewire port through a write-blocker.</p>
+</li>
+</ol>
 <p>The iMac is notoriously difficult to disassemble because it uses a unibody enclosure, fitting all of the computer components inside the LCD monitor. Some models even have a tissue thin EMI foil wrapped around the edge of the LCD frame that would be difficult to remove and reattach without tearing. I always turn to iFixit.com to learn how to disassemble any computer or electronic device.</p>
-
 <p>Because of this I would prefer not to use method #1, as removing the hard drive from this iMac would be time consuming and have the potential of damaging the system. I haven&rsquo;t damaged a computer yet, and I don&rsquo;t want this to be the first.</p>
-
 <p>So I chose method #2, booting from a forensically sound Linux distro.</p>
-
 <p>When booting a Mac into a forensic CD, never power up with the &lsquo;C&rsquo; key to boot from the CD. If the system doesn&rsquo;t like your CD, for example if it is a version of Linux that won&rsquo;t boot on that particular system, it will bypass the CD and go right into booting from the hard drive. You will have just scribbled timestamps on the hard drive and your image wouldn&rsquo;t be forensically sound anymore. Instead power up with the &lsquo;OPTION&rsquo; key to list what devices are bootable. Then you can choose the CD and if it won&rsquo;t boot it doesn&rsquo;t try to boot from the hard drive.</p>
-
 <p>Also don&rsquo;t try booting with a wireless keyboard because if the battery has just run out the system won&rsquo;t see your &lsquo;OPTION&rsquo; key and will boot into the hard drive: Scribble, scribble, not forensically sound anymore. Keep an extra wired apple keyboard around for this.</p>
-
 <p>I started with Helix 2009R1 but it wouldn&rsquo;t boot properly. I next tried Helix 2008R1, Helix 1.9a, Helix 1.8, Backtrack (with no-mounting boot codes), DEFT 5.1, even an older Macquisition boot CD. No luck. All of them either wouldn&rsquo;t boot at all on the iMac or had a problem with the video. Apparently the new iMacs with the Intel Core i5 have a setting in the firmware that cause Linux to send all video to the mini display port instead of the LCD. My choice is now to either attach an external display to the mini display port or find a Forensic Linux CD that will work on this iMac.</p>
-
 <p>Luckily I tried just one more, SystemRescueCD, and it worked. Be sure to add &lsquo;noswap&rsquo; to the boot line so it doesn&rsquo;t try to mount any swap partitions it finds. I booted with the &lsquo;safest&rsquo; choice, a VGA only video mode and it came up.</p>
-
 <p>Now for the next challenge. A quick &lsquo;fdisk -l&rsquo; shows that the system has a 2 Terabyte drive. Two Terabytes is the largest drive manufactured at this time. I prefer using DCFLDD, but I can&rsquo;t fit a 2 Terabyte image file plus overhead (file system, directories, etc) onto a 2 Terabyte drive. There are a few solutions to this. I could send the image over the network to a server. I could use a direct connect USB RAID appliance to get more than 2 TB of storage. But I had just read that Access Data has released a Linux command-line version of the excellent FTK Imager. I downloaded it and brought it over to the iMac on a USB thumb drive. I was able to image the internal drive using FTK Imager saving to Encase&rsquo;s E01 format with compression to an external 2TB drive so that the image files took up considerably less than 2TB.</p>
-
 <p>I was so pleased with FTK Imager for Linux that I have replaced DCFLDD with FTK Imager for Linux from now on. It&rsquo;s an easy tool to use, it captures the drive serial numbers, the date and time, it gives good feedback, it&rsquo;s easier to use, and it saves to E01 format with compression.</p>
 </main>
 
@@ -112,6 +107,7 @@
   <span class="nav-prev"><a href="/tech/breaking-the-encryption/">&larr; Breaking The Encryption</a></span>
   <span class="nav-next"><a href="/tech/upgrade-inspiron-8600-to-windows7-with-nvidia-driver/">Upgrade your Inspiron 8600 to Windows 7 with this NVidia FX Go5200 video driver &rarr;</a></span>
 </nav>
+
 
 
 <div id="disqus_thread"></div>
@@ -134,6 +130,7 @@
 </script>
 <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 <a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
 </article>
 </div>
 
