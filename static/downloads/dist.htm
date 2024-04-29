@@ -130,6 +130,7 @@ function update_distance(position) {
   if (dist<target_size) {
 	document.getElementById('success-image').src = success_image;
 	document.getElementById("distance-feedback").innerHTML = 'TARGET FOUND';
+	document.getElementById('success-audio').play();
 	found=true;
 	} else {
 		document.getElementById("distance-feedback").innerHTML = ' ' + dist.toLocaleString(undefined, {maximumFractionDigits: 0}) + ' ';
@@ -156,5 +157,6 @@ window.onload = function() {
   <div id="error-feedback">
   </div>
 </div>
+<audio id="victory-speech" src="ta-da.mp3" preload="auto"></audio>
 </body>
 </html>
