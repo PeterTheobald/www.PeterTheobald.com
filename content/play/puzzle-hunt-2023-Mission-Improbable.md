@@ -384,8 +384,8 @@ Thanks for reading, and please give me your comments, questions, and thoughts be
 
 <style>
 .hidden { display:none; } /* change this to block to show all for testing */
-.image-container { display: flex; justify-content: center; align-items: center; }
-.image-container img { margin-right: 10px; height: 20em; cursor: pointer; box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.5);}
+.image-container { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; padding: 5px;}
+.image-container img { margin: 5px; max-height: 20em; width: auto; cursor: pointer; box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.5);}
 #imageModal {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
