@@ -131,7 +131,7 @@ function updateDistance(position) {
   //dist=3; // DEBUG
   if (dist<targetSize) {
 	document.getElementById('success-image').src = successImage;
-	document.getElementById("distance-feedback").innerHTML = 'TARGET FOUND';
+	document.getElementById("distance-feedback").innerHTML = '!';
 	document.getElementById('success-audio').play();
 	found=true;
 	} else {
