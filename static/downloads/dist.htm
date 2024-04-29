@@ -1,4 +1,10 @@
 <html>
+<!-- GPS based puzzle hunt. Show only a number on screen.
+     That number is the distance in feet from the current position
+     to the target GPS location. The distance will update as the
+     player moves until the player is close enough to the target.
+     Then display a success image and text.
+-->
 <head>
 <style>
 *{
@@ -67,8 +73,25 @@ div {
 */
 </style>
 <script>
-target_lat='37.4081636024583';
-target_long='-122.11692754350655';
+
+// Palo Alto:
+// target_lat='37.4081636024583';
+// target_long='-122.11692754350655';
+// success_image = 'https://www.petertheobald.com/downloads/crypto-sign.png';
+
+// Example: San Francisco Yoda statue outside Lucasfilm
+target_lat='37.7987857';
+target_long='-122.450617';
+success_image='https://en.wikipedia.org/wiki/Success_Kid#/media/File:SuccessKid.jpg';
+target_size = 10; // distance in feet to target for success
+
+
+// if demo_mode is true, ignore the configured target location
+// and pick a target approx. 700 feet East of the player's
+// starting position.
+// (assuming lat. 37.8 N, further or closer at different latitudes)
+demo_mode = true;
+
 const options = {
   enableHighAccuracy: true,
   timeout: 10000,
@@ -102,11 +125,16 @@ function update_distance(position) {
   if (found) {
     return;
 	}
+  if (demo_mode) {
+	target_lat = position.coords.latitude;
+	target_long = position.coords.longitude + 0.00242; // approx. 700 feet East at 38N
+	demo_mode = false;
+  }
   dist=distance(target_lat, target_long, position.coords.latitude, position.coords.longitude, 'f');
   console.log(target_lat, target_long, position.coords.latitude, position.coords.longitude, 'f', dist.toLocaleString(undefined, {maximumFractionDigits: 0}))
   //dist=3; // DEBUG
-  if (dist<5) {
-	document.getElementById('success-image').src = 'https://www.petertheobald.com/downloads/crypto-sign.png';
+  if (dist<target_size) {
+	document.getElementById('success-image').src = success_image;
 	document.getElementById("distance-feedback").innerHTML = 'TARGET FOUND';
 	found=true;
 	} else {
