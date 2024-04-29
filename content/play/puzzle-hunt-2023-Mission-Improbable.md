@@ -51,6 +51,8 @@ After a few moments examining the bomb case, they were interrupted by a group te
 </div>
 
 <div class="answer_div">
+This is how the puzzle treasure hunt started. Click the buttons below to see the rest of it, and try to solve the puzzles yourself.
+<br>
 CLICK TO OPEN IT: <button onclick="revealSectionAndPlay('section_2', 'intro_player')">OPEN FEDEX BOX</button>
 <div class="spacer"></div>
 <button onclick="showHint(2)">I just want the answers</button>
