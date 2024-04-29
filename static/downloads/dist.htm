@@ -132,7 +132,7 @@ function updateDistance(position) {
   if (dist<targetSize) {
 	document.getElementById('success-image').src = successImage;
 	document.getElementById("distance-feedback").innerHTML = '!';
-	document.getElementById('success-audio').play();
+	document.getElementById('success-audio').play(); // this won't work on iOS, audio without user pressing a button is forbidden
 	found=true;
 	} else {
 		document.getElementById("distance-feedback").innerHTML = ' ' + dist.toLocaleString(undefined, {maximumFractionDigits: 0}) + ' ';
