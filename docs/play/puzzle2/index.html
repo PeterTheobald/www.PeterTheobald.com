@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    
+    <title>Peter Theobald</title>
+	<link href='https://fonts.googleapis.com/css?family=Oswald' rel='stylesheet'>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link href="//cdn.bootcss.com/highlight.js/9.12.0/styles/github.min.css" rel="stylesheet">
+
+	  
+    
+    <script type="text/javascript" src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+  </head>
+
+  <body class="page">
+    <nav class="header">
+      <div class="banner">
+<a href="/">
+
+<img src="/images/profile-100c.png" alt="Peter Theobald" />
+</a>
+<div class="banner-title">Peter Theobald</div><div class="banner-description">Software Engineer. Site Reliability Engineer. Rock Climbing Geeky Dad.</div>
+</div>
+
+      
+      <ul class="menu">
+        
+        
+        <li><a href="/"><span data-hover="Home">Home</span></a></li>
+        
+        <li><a href="/about/"><span data-hover="About">About</span></a></li>
+        
+        <li><a href="/tech/"><span data-hover="Tech">Tech</span></a></li>
+        
+        <li><a href="/play/"><span data-hover="Play">Play</span></a></li>
+        
+        <li><a href="/tags/"><span data-hover="Tags">Tags</span></a></li>
+        
+      </ul>
+    </nav>
+
+<div class="container">
+<article>
+<div class="article-meta">
+
+  
+  
+  <h1><span class="title">Puzzle Hunt 2023 - Mission Improbable</span></h1>
+  <span class="date">2024-01-01</span>
+
+  
+
+  
+  
+  <div class="categories">
+    
+    
+      <a href="/categories/play">play: </a>
+    
+    
+    
+    <a href="/tags/puzzles">puzzles</a>, <a href="/tags/treasure-hunts">treasure-hunts</a>
+    
+  </div>
+  
+  
+
+</div>
+
+
+
+<main>
+<!-- --------------------------------------------------------------
+|                                                                 |
+|          DON'T CHEAT YOURSELF OF SOLVING FUN!                   |
+|                                                                 |
+|            STOP LOOKING AT THE SOURCE CODE                      |
+|                                                                 |
+--------------------------------------------------------------- -->
+
+This year I wanted to add a storyline to my annual puzzle treasure hunt. The players would take on in-game identities and could have an element of role-play in the hunt. I had a wide range of ages from 13 to 23 so I would need some elements that were challenging for the older experienced puzzle solvers and some elements that were fun for the 13 year olds. I like physical puzzles because online components will be unfavorably compared to high end video-games, so I use online components sparingly and only where they fit into the story. Finally I also wanted a cooperative puzzle or game that they had to work on together in order to solve it.
+
+This write-up will present each clue in the order the players found them with the answers hidden behind spoiler-blocks as much as possible. I challenge you to play along and solve the puzzles yourself. One catch is many of the answers will be simple names of locations or things in my house that my family would know, for example: "fireplace" or "broccoli box" would direct them to those locations in the house. So be prepared to solve for simple words that are only meaningful in directing you to a location in a house.
+
+At the end I will also go into more detail in how I created some of the puzzles to help you if you want to use these ideas in your own puzzle treasure hunt.
+
+# THE HUNT
+
+The family gathered under the Christmas tree on Christmas morning and opened presents. One by one gifts were opened until a strange plain wrapped gift was found addressed "From: Agent Gigachad of C.H.A.O.S. with love to: Dear Comrades of Mission Improbable Team". My kids tore the gift wrapper off to reveal a clear plexi-glass case with a bomb inside. The bomb consisted of three sticks of dynamite, some attached electronics, and a countdown timer showing only three hours until it went off. The case was locked by a latch with a three number combination lock.
+
+<div class="image-container">
+<img src="/images/puzzle2023-bomb-wrapped.jpg" onclick="openModal(this.src)">
+<img src="/images/puzzle2023-bomb-in-case.jpg" onclick="openModal(this.src)">
+</div>
+
+After a moment examining the case, they were interrupted by a group text message sent to all of them from an unknown number "Your FEDEX package has been delivered." with a photo of a FEDEX package leaning on the front door.
+
+<div class="image-container">
+<img src="/images/puzzle2023-fedex-box.jpg" onclick="openModal(this.src)">
+</div>
+
+CLICK TO OPEN IT: <button onclick="revealSectionAndPlay('section_2', 'intro_player')">OPEN FEDEX BOX</button>
+
+<audio id="intro_player" controls>
+  <source src="/images/puzzle2023-intro-audio.mp3" type="audio/mp3">
+  Your browser does not support the audio element.
+</audio>
+
+<div id="section_2" class="hidden">
+They brought the package in and opened it. Inside was a set of Secret Agent Dossiers on each of the players telling them their Secret Agent Codenames and background (Agents Petabyte, Jigsaw, Quantum, Skyfall, Moriarty, Cipher and Jade). Also inside was a detailed recipe for "Spirit of Hartshorn Pie" with a Polaroid photo paperclipped to the recipe with a photo of an unconscious man lying in the London Tube with the note 'Agent GigaChad of C.H.A.O.S. - Conspiracy of Henchmen and Agents Operating in Secret'. As soon as the FEDEX box was opened a recorded voice message began playing. By closing and reopening the box they could replay the audio message.
+
+> Good morning Mission Improbable Team. An agent of C.H.A.O.S. accidentally slipped on a banana in a London tube station and was knocked unconscious. Our agents had been following him and were able to recover a secret communique he was delivering to C.H.A.O.S. We know C.H.A.O.S. has built a nuclear weapon fuel enrichment operation. You must use the intercepted communique to track down the location of their nuclear lab and disable it. Beware: C.H.A.O.S. has discovered that we intercepted the communique and has planted a bomb in our embassy. The bomb is set to go off after a timer runs out. It cannot be removed from the embassy without triggering a GPS based booby-trap. You must also find and defuse this bomb.
+> You will find a dossier on your team members attached. The intercepted communique looks innocent but we have reason to believe it holds the key to finding their operation.
+> This mission will be dangerous. If you are caught or detected your safety cannot be guaranteed. If any of your Mission Improbable Team are caught, the Secretary of the United States will disavow any knowledge of your actions to avoid an international incident. After disabling the nuclear fuel operation you must send their secret project codename to us at MI headquarters. The method for sending us the project codename is... _MESSAGE INTERRUPTED. CARRIER LOST. MESSAGE TERMINATED PREMATURELY._
+
+<div class="image-container">
+<img src="/images/puzzle2023-fedex-box.jpg" onclick="openModal(this.src)">
+<img src="/images/puzzle2023-dossiers.jpg" onclick="openModal(this.src)">
+<img src="/images/puzzle2023-dossiers-solving.jpg" onclick="openModal(this.src)">
+<img src="/images/puzzle2023-recipe.jpg" onclick="openModal(this.src)">
+<img src="/images/puzzle2023-recipe-closeup.png" onclick="openModal(this.src)">
+<img src="/images/puzzle2023-fedex-solving.jpg" onclick="openModal(this.src)">
+</div>
+
+Now you have everything you need to solve... something. When you're ready enter the solution here: 
+
+<!-- solution box -->
+<label for="solution3">Enter solution here:</label>
+<input type="text" id="solution3" placeholder="here">
+<button onclick="checkSolution(3)">Submit</button>
+<span id="feedback"></span>
+
+(no, keep trying)
+FEDEXTRACKINGNUM: Correct! Now what's next?
+-->
+</div>
+
+<div id="section3" class="hidden">
+The numbers in the recipe are indexes to select a single letter from each ingredient. 
+Now what's next? Enter solution:
+
+<!-- solution box:
+(no, keep trying)
+INOLDHEATERUNIT: Correct! You've unlocked the next clue. (reveal next section)
+-->
+</div>
+
+The players looked at the Fedex Tracking number and noticed that all of the letters are also the first letters of their Agent Code names. The Fedex tracking number is the first letter of each team member's code name and an index to select a letter from that name.
+
+In the old decommissioned heater unit the players found a large graphic of a collectibles toy box filled with Hot-Wheels cars with some unusual elements.
+
+<div class="image-container">
+<img src="/images/puzzle2023-hotwheels-solving.jpg" onclick="openModal(this.src)">
+<img src="/images/puzzle2023-hotwheels-closeup.png" onclick="openModal(this.src)">
+</div>
+
+
+Enter solution here:
+<!-- solution box:
+(no, keep trying)
+2NDPBJAR: Correct! (reveal next section)
+-->
+
+Some of the cars have numbers on them. The numbers go exactly from 1-8. The players got the idea that each cell could represent a letter and the cards numbers give the order. But which letters go in which box? They counted the cells and there were 36. Too many for just 26 letters. But 26 letters and ten numbers would fit perfectly. Where to start? They could try many different combinations, but there were clues. The donuts mark the 0 (zero) and O (oh) and the little bee marked the letter B. So the cars spelled out 2NDPBJAR. 
+In the cabinet where Peanut Butter jars are usually kept, the players found a clean empty Peanut Butter jar in the back with an ID-BADGE inside it behind a full Peanut Butter jar.
+
+<div class="image-container">
+<img src="/images/puzzle2023-idbadge-front.jpg" onclick="openModal(this.src)">
+<img src="/images/puzzle2023-idbadge-back.jpg" onclick="openModal(this.src)">
+</div>
+
+<!-- badge has url to gps-hunt webpage. This special version gets the players location on start, then sets the target location to 700 feet to the East. When they get within 5 feet it displays the ANSWER KEYWORD IS: LOCATION. This may or not be possible if the player lives by the ocean or a cliff etc. -->
+
+Enter solution here:
+<!-- solution box:
+(no, keep trying or enter IGIVEUP to skip)
+LOCATION: Correct! (reveal next section)
+IGIVEUP: (reveal next section)
+-->
+
+There is a QR Code on the back of the ID-BADGE. When the players scanned the QR Code they got a simple display of a large number on their phone screen. After a few moments of confusion, they noticed that each player had a slightly different number, and the numbers changed when they moved around. They soon realized that the number got smaller when they went in a certain direction, and they all followed the direction that led to the number getting smaller and smaller. This led them out of the house and down the street about a block away until they were standing in front of a sign in front of a park. At that point the screens changed to a photo of an altered version of the park sign.
+
+I tried to replicate this for you remote puzzler by starting with your location and sending you 700 feet to the East. I hope it worked, but it's possible you live on the edge of a cliff and had to enter IGIVEUP to move on.
+
+<div class="image-container">
+<img src="/images/puzzle2023-gpshunt.png" style="border:1px black solid" onclick="openModal(this.src)">
+<img src="/images/puzzle2023-parksign-real.jpg" onclick="openModal(this.src)">
+<img src="/images/puzzle2023-parksign-code.png" onclick="openModal(this.src)">
+</div>
+
+Enter solution here:
+<!-- solution box:
+(no, keep trying)
+MAILROOMBOXONECOMMATHREE: Correct! (reveal next section)
+-->
+
+The real park sign has writing on it. The image on the phones has the same sign but the letters have changed and don't spell anything sensible anymore. If you use the fake letters as offsets (A=+1, B=+2 etc.) and add each one in turn to the real sign letter you will spell out the solution "MAILROOMBOXONECOMMATHREE". In coding terms, the fake lettes are a one-time-pad.
+
+The players noticed earlier that signs with colorful gibberish were placed on all of the internal house doors. They could look through the translucent red filter on the ID-BADGE to see actual room names on the signs. At the time the room names weren't useful to them, but now "MAILROOM" makes sense!
+
+<div class="image-container">
+<img src="/images/puzzle2023-doorsign-1.jpg" onclick="openModal(this.src)">
+<img src="/images/puzzle2023-doorsign-2.jpg" onclick="openModal(this.src)">
+<img src="/images/puzzle2023-doorsign-all.jpg" onclick="openModal(this.src)">
+</div>
+
+If you can find a translucent red sheet of the exact same color to look through, you may be able to read the room names.
+If you can, enter MAILROOM, otherwise enter IGIVEUP.
+Enter solution here:
+<!-- solution box:
+MAILROOM:
+IGIVEUP:
+-->
+
+<div class="image-container">
+<img src="/images/puzzle2023-doorsign-solved.jpg" onclick="openModal(this.src)">
+</div>
+
+The players entered the "MAILROOM" and found a storage unit with 2 rows of 4 drawers.
+Click on drawer:
+<div class="image-container">
+<img src="/images/puzzle2023-mailboxes.jpg" onclick="openModal(this.src)">
+</div>
+<!-- img of storage-unit,
+click on wrong drawer: No, try again.
+click on 1,3: Correct! reveal next section -->
+
+Within drawer number 1,3 the players found two keys and a wire-cutter. You may need to print out the keys and cut them out to solve this one.
+
+<div class="image-container">
+<img src="/images/puzzle2023-keys.jpg" onclick="openModal(this.src)">
+</div>
+
+Enter solution here:
+<!-- solution box:
+wrong: no, try again.
+474 or 4,7,4: Correct! reveal next section
+-->
+
+The two keys are a template, when the keys are placed together the key "fingers" outline the number "474". This three digit code is the code to open the bomb case!
+<div class="image-container">
+<img src="/images/puzzle2023-keys-solved.jpg" onclick="openModal(this.src)">
+</div>
+
+The players ran back to the Christmas tree where the bomb timer was running out. They used the code from the keys to open the plex-glass box and took out the bomb assembly. Using the wire cutters they snipped the red wire and the countdown stopped! The youngest players did the bomb cutting and loved this part!
+
+<div class="image-container">
+<img src="/images/puzzle2023-bomb-solving.jpg" onclick="openModal(this.src)">
+<img src="/images/puzzle2023-bomb-closeup.png" onclick="openModal(this.src)">
+</div>
+
+On close inspection of the dynamite, they found it was "MADE IN WEAPONS LAB BEHIND EMBASSY MAILROOM". They rushed back to the "MAILROOM" and out the back door to the patio. There they found a frame with danger warning signs and a radioactive Plutonium cannister in a slot in the center. There was a section off to the side with a slot marked 'SAFE ZONE'. There were four wires running from the Plutonium cannister to the four corners of the frame with four handles attached. A sign told them they could not reach into the frame until the radioactive Plutonium was safely placed in the SAFE ZONE. With four players controllign each handle, they were able to coordinate their movements to lift the Plutonium cannister out of the center and move it to the slot in the safe zone.
+
+Once in the safe zone, they were able to pick up the cannister and look through a viewing window to see the words "PROJECT ORION" labelled inside it.
+
+<div class="image-container">
+<img src="/images/puzzle2023-nuclear-solving.png" onclick="openModal(this.src)">
+<img src="/images/puzzle2023-nuclear-closeup.jpg" onclick="openModal(this.src)">
+<img src="/images/puzzle2023-nuclear-solved.jpg" onclick="openModal(this.src)">
+</div>
+
+Enter the location or room where the prize (token of appreciation) is located:
+<!-- solution box:
+treasurechest, treasure chest, embassador, embassadors room: reveal next
+igiveup
+--->
+
+The players now had the name of the project. They remembered that the audio message in the beginning told them they needed to get the name of the project to Headquarters to complete their mission. On the FEDEX box address there was a URL to MissionImprobable HQ. Going to that URL the players found a cryptic web page with no instructions. If you haven't solved it yet, try it now to hear the congratulations message.
+
+<div class="image-container">
+<img src="/images/puzzle2023-morseapp.png" style="border:1px black solid" onclick="openModal(this.src)">
+</div>
+
+Enter the location or room where the prize is located again to continue:
+<!-- solution box:
+treasurechest, treasure chest, embassador, embassadors room: reveal next
+igiveup
+--->
+CLICK TO OPEN IT: <button onclick="revealSectionAndPlay('section_2', 'victory_player')">OPEN FEDEX BOX</button>
+
+<div id="section_n">
+<audio id="victory_player" controls>
+  <source src="/images/puzzle2023-victory-audio.mp3" type="audio/mp3">
+  Your browser does not support the audio element.
+</audio>
+
+The players found that by pressing the green button for a short or long time they were entering Morse Code. By entering the project name "ORION" they were able to solve the final puzzle and hear the congratulations message.
+
+The players used the ID-BADGE red filter to find the 'EMBASSADORS ROOM' and open the Treasure Chest to reveal a matching set of T-Shirts for everyone with the MISSION IMPROBABLE TEAM's Agent Dossiers on them.
+
+<div class="image-container">
+<img src="/images/puzzle2023-tshirt.jpg" onclick="openModal(this.src)">
+</div>
+
+Thank you for playing along. I hope you enjoyed it.
+
+# BEHIND THE SCENES
+
+I got the idea for the theme and story when the 13 year olds loved a spy movie, so I wanted to replicate some of that feeling. My initial inspiration was just the image of them defusing a bomb by clipping a wire. It's such a classic spy movie trope. I thought about the overall puzzle hunt for a while, and once I had a good idea what I wanted I created the whole thing in about 10 hours total spread over two weeks.
+
+Most everthing was photoshopped together from bits and pieces I found online.
+
+# DESIGNING THE HUNT:
+
+Everything had to fit perfectly, one clue leading to another. So I came up with all the puzzles first, came up with some hiding places, and mapped out a linear sequence from the start to finish. I shuffled the puzzles around a bit until I was happy with the order. Only then could I actually make the puzzles because the solutions had to lead to the next puzzle. Everything served the storyline and the experience I wanted. It had to start with a surprise finding the bomb, have puzzles in the middle, and end with defusing the bomb and the nuclear device.
+
+## THE BOMB:
+
+I built the dynamite out of PVC tubes. I found a dymamite label online and photoshopped a clue on them, printed them out and glued them to the PVC tubes. The countdown timer was an electronic timer I had laying around. I needed to be able to defuse it by clipping a wire, so I soldered wires to the battery holder terminals and brought the batteries outside the case. That way I could set the timer the night before to give them an estimated 3 hours after they opened the "gift" and when they clipped the wire it would cut power and shut off the whole timer. I hot-melt glued useless ends of the wires into the ends of the dynamite. Finally I put the whole assembly in a clear box with a combination lock so they could see the bomb without being to get to it until near the end.
+
+<div class="image-container">
+<img src="/images/puzzle2023-bomb-making.jpg" onclick="openModal(this.src)">
+</div>
+
+## THE FEDEX BOX
+
+I found a Fedex label online and photoshopped clues onto it, then stuck it on a Fedex box. I bought a <a href="https://www.amazon.com/gp/product/B007EHLBYG/ref=ppx_yo_dt_b_search_asin_title?ie=UTF8&psc=1">light-activated greeting card audio recording device</a> and placed it just inside the lid of the box so when the box was opened it would play. I used an online VOIP service (Anveo) to send the text message to the players from a phone number they wouldn't recognize. I used Google text-to-speech to make the audio recording with a cool "radio" voice.
+
+<div class="image-container">
+<img src="/images/puzzle2023-fedex-making.jpg" onclick="openModal(this.src)">
+</div>
+
+## THE HOTWHEELS
+
+I originally wanted to make this out of an actual curio box and real Hot-Wheels cars, but I ran out of time and photoshopped it instead. It's a shame because the Hot-Wheels cars would've been nice bonus prizes for the kids.
+
+## THE ID-BADGE and the ROOM NAMES
+
+I love visual puzzles where you can see something different depending on how you look at it. I've used invisible ink, water repellent paint, heat and cold activated inks, etc. For this puzzle I got a translucent red filter and drew lines with colored pencils until I found one that dissapears when looked at through the filter. Then I drew all of the room names with other colors and obscured the letters with the dissapearing red pencil that would make it difficult to read until the red filter hid those extra lines.
+
+## THE GPS HUNT
+
+For this puzzle I wanted the players to unexpectedly have to leave the house. I wrote a simple Javascript to use their GPS location and guide them to the location of the sign for the next puzzle. I gave them as little clue as possible, just one large number to make discovery that much more delightful. I tried to make the code easy to use and modify. You can <a href="https://github.com/PeterTheobald/GPSHunt">find it here.</a>
+
+## THE PLUTONIUM
+
+I wanted a cooperative element that they would have to work together to solve. I saw a similar but much larger mechanism at the San Francisco Exploratorium and I remembered how much I liked it. So I build this smaller version out of PVC. A magnet holds the Plutonium cannister to the pulley wires. In hind-sight I could have skipped the magnet and hard-wired the wires to the cannister.
+
+## THE MORSE PUZZLE
+
+Another Javascript page to give them a puzzle with very little clue. Just a big RED button and a big GREEN button. Each time they press the RED button, depending on how long they press it they get an audio 'BIP' or 'BEEEEP'. When they complete a Morse code letter it shows up on the screen. 
+
+## CONCLUSION
+
+The hardest part is really to predict how hard the puzzles should be to solve in an enjoyable amount of time and to run through it making sure one little typo doesn't stop the hunt at a dead-end. My family has been doing these puzzles for years now and are quite experienced, so I can make them pretty difficult for about a 3 hour hunt. Newcomers may get frustrated with a hunt that lasts more than an hour.
+
+Thanks for reading, and please give me your comments, questions, and thoughts below.
+</div>
+
+<hr>
+<!-- The Modal -->
+<div id="imageModal">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <img id="modalImage">
+</div>
+
+
+<style>
+.hidden { display:block; }
+.image-container { display: flex; justify-content: center; align-items: center; }
+.image-container img { margin-right: 10px; height: 20em; cursor: pointer;}
+#imageModal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+}
+#imageModal img {
+    margin: auto;
+    display: block;
+    max-width: 90%; /* Maximum width */
+    max-height: 80vh; /* max height */
+}
+#imageModal .close {
+    position: absolute;
+    top: 15px;
+    right: 35px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+}
+</style>
+
+</main>
+
+
+
+
+
+<nav class="post-nav">
+  <span class="nav-prev"><a href="/play/puzzle-hunt-2023-mission-improbable/">&larr; Puzzle Hunt 2023 - Mission Improbable</a></span>
+  <span class="nav-next"><a href="/play/traversing-for-endurance/">Traversing for Endurance &rarr;</a></span>
+</nav>
+
+
+
+<div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "petertheobald" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+</article>
+</div>
+
+
+
+<footer>
+
+<div class="footer">
+  
+  
+  <div class="copyright">
+  &copy; 2017 <a href="#" onClick="document.location.href = 'mailto:'+'peter'+'@'+'petertheobald.com';return false;">Peter<span style="display:none">foo</span>@PeterTheobald.com</a> |
+  <a href="https://twitter.com/controlaltpete"><i class="fa fa-twitter" aria-hidden="true"></i> @ControlAltPete</a> |
+  <a href="https://www.linkedin.com/profile/view?id=peterjtheobald"><i class="fa fa-linkedin" aria-hidden="true"></i> |
+  <a href="https://github.com/petertheobald/"><i class="fa fa-github" aria-hidden="true"></i> Github</a> |
+  <a href="http://www.petertheobald.com/index.xml"><i class="fa fa-rss" aria-hidden="true"></i> RSS</a>
+  </div>
+</div>
+</footer>
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+
+
+  <script src="/js/puzzle2023.js"></script>
+
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-18164620-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+
+</body>
+</html>
+

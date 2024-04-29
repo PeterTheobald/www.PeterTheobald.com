@@ -3,6 +3,46 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>/categories/</loc>
+    <lastmod>2024-01-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/</loc>
+    <lastmod>2024-01-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/play/</loc>
+    <lastmod>2024-01-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/play/</loc>
+    <lastmod>2024-01-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/play/puzzle-hunt-2023-mission-improbable/</loc>
+    <lastmod>2024-01-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/puzzles/</loc>
+    <lastmod>2024-01-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/</loc>
+    <lastmod>2024-01-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/treasure-hunts/</loc>
+    <lastmod>2024-01-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/tags/bitcoin/</loc>
     <lastmod>2019-09-20T00:00:00+00:00</lastmod>
   </url>
@@ -18,23 +58,8 @@
   </url>
   
   <url>
-    <loc>/</loc>
-    <lastmod>2019-09-20T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/</loc>
-    <lastmod>2019-09-20T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>/tech/</loc>
     <lastmod>2019-09-20T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/play/</loc>
-    <lastmod>2017-08-26T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -73,11 +98,6 @@
   </url>
   
   <url>
-    <loc>/categories/</loc>
-    <lastmod>2017-05-24T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>/tech/dave-says-thats-not-funny/</loc>
     <lastmod>2017-05-24T00:00:00+00:00</lastmod>
   </url>
@@ -103,11 +123,6 @@
   </url>
   
   <url>
-    <loc>/categories/play/</loc>
-    <lastmod>2017-03-14T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>/play/troy-and-abed-in-a-montage/</loc>
     <lastmod>2017-03-14T00:00:00+00:00</lastmod>
   </url>
@@ -129,11 +144,6 @@
   
   <url>
     <loc>/tech/ghost-solver-in-clojure/</loc>
-    <lastmod>2016-12-20T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/puzzles/</loc>
     <lastmod>2016-12-20T00:00:00+00:00</lastmod>
   </url>
   

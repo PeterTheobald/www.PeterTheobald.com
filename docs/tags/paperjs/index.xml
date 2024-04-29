@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>paperjs on Peter Theobald</title>
+    <link>/tags/paperjs/</link>
+    <description>Recent content in paperjs on Peter Theobald</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 21 Jun 2017 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/paperjs/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Everyone explorer</title>
+      <link>/play/everyone-explorer/</link>
+      <pubDate>Wed, 21 Jun 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/play/everyone-explorer/</guid>
+      <description>&lt;p&gt;I wrote this &lt;a href=&#34;/fun/everyone-explorer-live/&#34;&gt;Javascript page&lt;/a&gt; that helps me explore my entire network of people, everyone I&amp;rsquo;ve ever known, with a visual graph of bubbles.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Everyone explorer live page</title>
+      <link>/play/everyone-explorer-live/</link>
+      <pubDate>Wed, 21 Jun 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/play/everyone-explorer-live/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

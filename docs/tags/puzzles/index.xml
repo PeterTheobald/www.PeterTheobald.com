@@ -6,10 +6,19 @@
     <description>Recent content in puzzles on Peter Theobald</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 20 Dec 2016 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 01 Jan 2024 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/puzzles/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Puzzle Hunt 2023 - Mission Improbable</title>
+      <link>/play/puzzle-hunt-2023-mission-improbable/</link>
+      <pubDate>Mon, 01 Jan 2024 00:00:00 +0000</pubDate>
+      
+      <guid>/play/puzzle-hunt-2023-mission-improbable/</guid>
+      <description>&lt;h1 id=&#34;my-2023-xmas-puzzle-hunt-mission-improbable&#34;&gt;My 2023 Xmas Puzzle Hunt: Mission Improbable&lt;/h1&gt;</description>
+    </item>
     
     <item>
       <title>Ghost Solver - Now in Clojure</title>
