@@ -52,7 +52,6 @@ After a few moments examining the bomb case, they were interrupted by a group te
 
 <div class="answer_div">
 CLICK TO OPEN IT: <button onclick="revealSectionAndPlay('section_2', 'intro_player')">OPEN FEDEX BOX</button>
-<span id="feedback_3"></span>
 <div class="spacer"></div>
 <button onclick="showHint(2)">I just want the answers</button>
 </div>
