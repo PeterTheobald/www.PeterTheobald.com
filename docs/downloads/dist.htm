@@ -1,4 +1,10 @@
 <html>
+<!-- GPS based puzzle hunt. Show only a number on screen.
+     That number is the distance in feet from the current position
+     to the target GPS location. The distance will update as the
+     player moves until the player is close enough to the target.
+     Then display a success image and text.
+-->
 <head>
 <style>
 *{
@@ -6,18 +12,16 @@
   padding: 0;
   margin: 0;
 }
-html {
+html, body {
   height: 100%;
-  }
-body {
-  min-height: 100%;
+  overflow: hidden;
   }
 .wrapper {
   display: grid;
   border-style: solid;
   border-color: red;
   grid-template-columns: 100%;
-  grid-template-rows: 90% 10%;
+  grid-template-rows: auto min-content;
   grid-gap: 2px;
   width: 100vw;
   height: 100vh;
@@ -67,8 +71,21 @@ div {
 */
 </style>
 <script>
-target_lat='37.4081636024583';
-target_long='-122.11692754350655';
+
+// Example: San Francisco Yoda statue outside Lucasfilm
+targetLat='37.7987857';
+targetLong='-122.450617';
+successImage='https://upload.wikimedia.org/wikipedia/en/f/ff/SuccessKid.jpg';
+targetSize = 10; // distance in feet to target for success
+
+// if demoMode is true, ignore the configured target location
+// and pick a target approx. 700 feet East of the player's
+// starting position.
+// (assuming lat. 37.8 N, further or closer at different latitudes)
+demoMode = true;
+demoModeDistance = 0.0003; // approx. 100 feet East at 83N
+successImage='https://www.petertheobald.com/Downloads/puzzle2023-gpssuccess.png';
+
 const options = {
   enableHighAccuracy: true,
   timeout: 10000,
@@ -98,35 +115,42 @@ function distance(lat1, lon1, lat2, lon2, unit) {
 	}
 }
 found=false;
-function update_distance(position) {
+function updateDistance(position) {
   if (found) {
     return;
 	}
-  dist=distance(target_lat, target_long, position.coords.latitude, position.coords.longitude, 'f');
-  console.log(target_lat, target_long, position.coords.latitude, position.coords.longitude, 'f', dist.toLocaleString(undefined, {maximumFractionDigits: 0}))
+  if (demoMode) {
+	targetLat = position.coords.latitude;
+	// targetLong = position.coords.longitude + 0.00242; // approx. 700 feet East at 38N
+	targetLong = position.coords.longitude + demoModeDistance; // approx. 100 feet East at 38N
+	demoMode = false;
+  }
+  dist=distance(targetLat, targetLong, position.coords.latitude, position.coords.longitude, 'f');
+  console.log(targetLat, targetLong, position.coords.latitude, position.coords.longitude, 'f', dist.toLocaleString(undefined, {maximumFractionDigits: 0}))
   //dist=3; // DEBUG
-  if (dist<5) {
-	document.getElementById('success-image').src = 'https://www.petertheobald.com/downloads/crypto-sign.png';
-	document.getElementById("distance-feedback").innerHTML = 'TARGET FOUND';
+  if (dist<targetSize) {
+	document.getElementById('success-image').src = successImage;
+	document.getElementById("distance-feedback").innerHTML = '!';
+	document.getElementById('success-audio').play(); // this won't work on iOS, audio without user pressing a button is forbidden
 	found=true;
 	} else {
 		document.getElementById("distance-feedback").innerHTML = ' ' + dist.toLocaleString(undefined, {maximumFractionDigits: 0}) + ' ';
 	}
 }
-function update_error(error) {
+function updateError(error) {
   document.getElementById("error-feedback").innerHTML = '(Error. You must enable GPS location for this browser)';
 }
 window.onload = function() {
   // do something when the page loads
   //document.getElementById("distance-feedback").style.width = "100%";
   //document.getElementById("distance-feedback").style.height = "100%";
-  navigator.geolocation.getCurrentPosition(update_distance, update_error, options);
-  const id = navigator.geolocation.watchPosition(update_distance, update_error, options);
+  navigator.geolocation.getCurrentPosition(updateDistance, updateError, options);
+  const id = navigator.geolocation.watchPosition(updateDistance, updateError, options);
 };
 </script>
 </head>
 <body>
-<img id='success-image'>
+<img id='success-image' src="https://www.petertheobald.com/downloads/1x1white.png">
 <div class="wrapper">
   <div id="distance-feedback">
   ( )
@@ -134,5 +158,6 @@ window.onload = function() {
   <div id="error-feedback">
   </div>
 </div>
+<audio id="success-audio" src="https://www.petertheobald.com/downloads/ta-da.mp3" preload="auto"></audio>
 </body>
 </html>

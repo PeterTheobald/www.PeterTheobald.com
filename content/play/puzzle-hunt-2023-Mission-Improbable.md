@@ -2,7 +2,7 @@
 date: "2024-01-01"
 draft: false
 title: "Puzzle Hunt 2023 - Mission Improbable"
-thumbnail: "puzzle-hunt-2023-cover.png"
+thumbnail: "puzzle2023-thumbnail.png"
 categories: [ play ]
 tags: [ "puzzles", "treasure-hunts"]
 scripts: [ "puzzle2023.js" ]
