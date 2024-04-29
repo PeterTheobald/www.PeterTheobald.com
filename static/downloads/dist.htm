@@ -122,7 +122,8 @@ function update_distance(position) {
 	}
   if (demo_mode) {
 	target_lat = position.coords.latitude;
-	target_long = position.coords.longitude + 0.00242; // approx. 700 feet East at 38N
+	// target_long = position.coords.longitude + 0.00242; // approx. 700 feet East at 38N
+	target_long = position.coords.longitude + 0.0003; // approx. 100 feet East at 38N
 	demo_mode = false;
   }
   dist=distance(target_lat, target_long, position.coords.latitude, position.coords.longitude, 'f');
