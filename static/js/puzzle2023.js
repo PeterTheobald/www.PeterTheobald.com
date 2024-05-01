@@ -72,7 +72,7 @@ function handleEscKey(event) {
 var hint_messages = [
   "Hint 0 N/A",
   "Hint 1 N/A",
-  "If you just want to see the answers, enter SHOWEVERYTHING in any answer box. But I encourage you to try solving it instead",
+  "If you just want to see the answers, enter IGIVEUP in any answer box to see THAT ONE answer. Enter SHOWEVERYTHING in any answer box to show every answer to the end. But I encourage you to try solving it instead",
   "Pay attention to the recipe quantities and ingredients.<hr>If you give up enter IGIVEUP to see the answer.<br>If you have no interest in solving the puzzles and just want to read all of the puzzles and answers enter SHOWEVERYTHING, but I encourage you to try to solve them first.",
   "Look at all of the letters in the Fedex Tracking number. Where else do you see that set of letters?",
   "(1) Look at the stickers on the cars.<br>(2) Count how many boxes there are. What else has that many things?<br>(3) After you figure that out, what could the DONUT DONUT and BEE be hinting?",
