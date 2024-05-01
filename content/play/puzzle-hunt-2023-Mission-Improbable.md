@@ -114,7 +114,7 @@ Now what's next?
 
 <div id="section_4" class="hidden">
 
-The players looked at the Fedex Tracking number and noticed that all of the letters are also the first letters of their Agent Code names. They used the numbers as indexes into their Agent Code names to spell out 'INOLDHEATERUNIT'. 
+The players looked at the Fedex Tracking number and noticed that all of the letters are also the first letters of their Agent Code names. They used the numbers as indexes into their Agent Code names to spell out 'INOLDHEATUNIT'. 
 
 In the old unused heater unit in the house the players found a large graphic poster of a collectibles toy box filled with Hot-Wheels cars with some unusual elements.
 
