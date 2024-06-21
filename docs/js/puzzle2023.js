@@ -15,7 +15,7 @@ var solutions = [
   ['ANSWER1 N/A'],
   ['ANSWER2 N/A'],
   ['FEDEXTRACKINGNUM', 'IGIVEUP'],
-  ['INOLDHEATERUNIT', 'IGIVEUP'],
+  ['INOLDHEATUNIT', 'IGIVEUP'],
   ['2NDPBJAR', 'IGIVEUP'],
   ['FOUNDIT', 'IGIVEUP'],
   ['MAILROOMBOXONECOMMATHREE', 'IGIVEUP'],
@@ -69,14 +69,16 @@ function handleEscKey(event) {
    }
 }
 
+var hint_footer = "<hr>Enter IGIVEUP in any answer box to see that ONE answer.<br>If you have no interest in solving the puzzles and just want to read all of the puzzles and answers enter SHOWEVERYTHING, but I encourage you to try to solve them first.";
+
 var hint_messages = [
   "Hint 0 N/A",
   "Hint 1 N/A",
-  "If you just want to see the answers, enter SHOWEVERYTHING in any answer box. But I encourage you to try solving it instead",
-  "Pay attention to the recipe quantities and ingredients.<hr>If you give up enter IGIVEUP to see the answer.<br>If you have no interest in solving the puzzles and just want to read all of the puzzles and answers enter SHOWEVERYTHING, but I encourage you to try to solve them first.",
+  "If you just want to see the answers:",
+  "Pay attention to the recipe quantities and ingredients.",
   "Look at all of the letters in the Fedex Tracking number. Where else do you see that set of letters?",
   "(1) Look at the stickers on the cars.<br>(2) Count how many boxes there are. What else has that many things?<br>(3) After you figure that out, what could the DONUT DONUT and BEE be hinting?",
-  "Scan the QR code on the back of the ID Badge. You should see a number on your phone (this will only work on a phone). Now walk around a bit and watch the number. I had to modify this one to work remotely, if it isn't working at all you'll have to enter IGIVEUP.",
+  "Scan the QR code on the back of the ID Badge. You should see a number on your phone (this will only work on a phone). Now walk around a bit and watch the number. I had to modify this one to work remotely. If it isn't working for you, you'll have to enter IGIVEUP.",
   "The park sign has writing on it. The image on your phone shows the same sign with the letters changed. How can you use the changed letters with the real letters?",
   "You need to use the red transparent filter on the ID Badge to view the room signs.",
   "Hint 9 N/A",
@@ -87,7 +89,7 @@ var hint_messages = [
 function showHint(n) {
 	document.getElementById('hintPopup').style.display='block';
 	document.getElementById('overlay').style.display='block';
-    document.getElementById('hintText').innerHTML=hint_messages[n];
+    document.getElementById('hintText').innerHTML=hint_messages[n]+hint_footer;
 }
 
 function closeHint() {

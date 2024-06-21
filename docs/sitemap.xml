@@ -3,17 +3,32 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>/categories/</loc>
-    <lastmod>2024-01-01T00:00:00+00:00</lastmod>
+    <loc>/play/hacker-dojo-python-group/</loc>
+    <lastmod>2024-06-21T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>/</loc>
-    <lastmod>2024-01-01T00:00:00+00:00</lastmod>
+    <lastmod>2024-06-21T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>/play/</loc>
+    <lastmod>2024-06-21T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/programming/</loc>
+    <lastmod>2024-06-21T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/</loc>
+    <lastmod>2024-06-21T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/</loc>
     <lastmod>2024-01-01T00:00:00+00:00</lastmod>
   </url>
   
@@ -29,11 +44,6 @@
   
   <url>
     <loc>/tags/puzzles/</loc>
-    <lastmod>2024-01-01T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/</loc>
     <lastmod>2024-01-01T00:00:00+00:00</lastmod>
   </url>
   
@@ -79,11 +89,6 @@
   
   <url>
     <loc>/tags/forensics/</loc>
-    <lastmod>2017-08-15T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/programming/</loc>
     <lastmod>2017-08-15T00:00:00+00:00</lastmod>
   </url>
   

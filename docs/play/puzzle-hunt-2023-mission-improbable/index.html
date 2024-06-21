@@ -103,9 +103,10 @@
 <div class="image-container">
 <img src="/images/puzzle2023-fedex-box.jpg" onclick="openModal(this.src)">
 </div>
+<p>This is how the puzzle treasure hunt started. Click the buttons below to see the rest of it, and try to solve the puzzles yourself.
+<br></p>
 <div class="answer_div">
 CLICK TO OPEN IT: <button onclick="revealSectionAndPlay('section_2', 'intro_player')">OPEN FEDEX BOX</button>
-<span id="feedback_3"></span>
 <div class="spacer"></div>
 <button onclick="showHint(2)">I just want the answers</button>
 </div>
@@ -151,7 +152,7 @@ This mission will be dangerous. If you are caught or detected your safety cannot
 </div>
 </div>
 <div id="section_4" class="hidden">
-<p>The players looked at the Fedex Tracking number and noticed that all of the letters are also the first letters of their Agent Code names. They used the numbers as indexes into their Agent Code names to spell out &lsquo;INOLDHEATERUNIT&rsquo;.</p>
+<p>The players looked at the Fedex Tracking number and noticed that all of the letters are also the first letters of their Agent Code names. They used the numbers as indexes into their Agent Code names to spell out &lsquo;INOLDHEATUNIT&rsquo;.</p>
 <p>In the old unused heater unit in the house the players found a large graphic poster of a collectibles toy box filled with Hot-Wheels cars with some unusual elements.</p>
 <div class="image-container">
 <img src="/images/puzzle2023-hotwheels-solving.jpg" onclick="openModal(this.src)">
@@ -337,8 +338,8 @@ Click it to open!
 <div id="overlay" onclick="closeHint()"></div>
 <style>
 .hidden { display:none; } /* change this to block to show all for testing */
-.image-container { display: flex; justify-content: center; align-items: center; }
-.image-container img { margin-right: 10px; height: 20em; cursor: pointer; box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.5);}
+.image-container { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; padding: 5px;}
+.image-container img { margin: 5px; max-height: 20em; width: auto; cursor: pointer; box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.5);}
 #imageModal {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
@@ -405,7 +406,7 @@ input { margin: 0 5px;}
 
 
 <nav class="post-nav">
-  <span class="nav-prev"></span>
+  <span class="nav-prev"><a href="/play/hacker-dojo-python-group/">&larr; Hacker Dojo Python Group</a></span>
   <span class="nav-next"><a href="/play/traversing-for-endurance/">Traversing for Endurance &rarr;</a></span>
 </nav>
 
