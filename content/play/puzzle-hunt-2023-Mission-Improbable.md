@@ -311,7 +311,7 @@ The players found that by pressing the green button for a short or long time the
 
 > Congratulations. You have stopped Project Orion and set their nuclear project back years. This is a great victory and has made the world safer. Thank you for your service. You will find a token of our appreciation in the treasure chest in the Embassador's Room.
 
-The players used the ID-BADGE red filter to find the 'EMBASSADORS ROOM' and open the Treasure Chest to reveal a matching set of T-Shirts for everyone with the MISSION IMPROBABLE TEAM's Agent Dossiers on them.
+The players used the ID-BADGE red filter to find the 'EMBASSADORS ROOM' and open the Treasure Chest to reveal a matching set of T-Shirts for everyone with the MISSION IMPROBABLE TEAM's Agent profile photos on them.
 
 <div class="image-container">
 <img src="/images/puzzle2023-tshirt.jpg" onclick="openModal(this.src)">
