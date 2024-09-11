@@ -56,13 +56,6 @@ This is how the puzzle treasure hunt started. Click the buttons below to see the
 <div class="answer_div">
 <button onclick="revealSectionAndPlay('section_2', 'intro_player')" >I want to solve the puzzles myself</button>
 <button onclick="showEverything()">I just want to read all the solutions</button>
-
-</div>
-
-<div class="answer_div">
-CLICK TO OPEN IT: <button onclick="revealSectionAndPlay('section_2', 'intro_player')">OPEN FEDEX BOX</button>
-<div class="spacer"></div>
-<button onclick="showHint(2)">I just want the answers</button>
 </div>
 
 </div>
