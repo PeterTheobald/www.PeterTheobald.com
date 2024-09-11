@@ -50,7 +50,7 @@ After a few moments examining the bomb case, they were interrupted by a group te
 <img src="/images/puzzle2023-fedex-box.jpg" onclick="openModal(this.src)">
 </div>
 
-This is how the puzzle treasure hunt started. Click the buttons below to see the rest of it, and try to solve the puzzles yourself.
+This is how the puzzle treasure hunt started. You can try to solve the puzzles yourself, or you can read all the solutions. Keep in mind my players are very experienced and have been solving my puzzles for years. It may take you a lot longer than three hours to solve it.
 <br>
 
 <div class="answer_div">
