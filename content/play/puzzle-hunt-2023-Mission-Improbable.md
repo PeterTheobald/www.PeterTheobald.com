@@ -81,7 +81,7 @@ They brought the package in and opened it. Inside was a set of Secret Agent Doss
 <img src="/images/puzzle2023-fedex-solving.jpg" onclick="openModal(this.src)">
 </div>
 
-Now you have everything you need to solve... something. When you're ready enter the solution.
+Now you have everything you need to solve the first puzzle. When you're ready enter the solution.
 
 <div class="answer_div">
 <label for="answer_3">Enter solution here:</label>
