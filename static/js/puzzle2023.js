@@ -26,18 +26,29 @@ var solutions = [
   ['TREASURECHEST', 'EMBASSADOR', 'EMBASSADORS', 'EMBASSADORSROOM', 'IGIVEUP'],
 ];
 
+function showEverything() {
+  for (var i=1; i<=15; i++) {
+    var sectionId = "section_"+i.toString();
+    var sectionElement = document.getElementById( sectionId);
+    if (sectionElement) {
+      sectionElement.style.display = "block";
+    }
+  }
+  return;
+}
+
 function checkSolution(n) {
   var input = document.getElementById('answer_'+n.toString()).value.toUpperCase().replace(/\s+/g, '').replace(/'/g, '');
 
   if (input.toUpperCase() === "SHOWEVERYTHING") {
-	for (var i=1; i<=15; i++) {
-		var sectionId = "section_"+i.toString();
-		var sectionElement = document.getElementById( sectionId);
-		if (sectionElement) {
-			sectionElement.style.display = "block";
-		}
-	}
-	return;
+	  for (var i=1; i<=15; i++) {
+		  var sectionId = "section_"+i.toString();
+		  var sectionElement = document.getElementById( sectionId);
+		  if (sectionElement) {
+			  sectionElement.style.display = "block";
+		  }
+	  }
+	  return;
   }
   var feedback = document.getElementById('feedback_'+n.toString());
   var hiddenSection = document.getElementById('section_'+n.toString());
