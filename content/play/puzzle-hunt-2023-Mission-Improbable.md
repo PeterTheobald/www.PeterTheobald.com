@@ -271,11 +271,14 @@ The players ran back to the Christmas tree where the bomb timer was running out.
 
 On close inspection of the dynamite, they found it was "MADE IN WEAPONS LAB BEHIND EMBASSY MAILROOM". They rushed back to the "MAILROOM" and out the back door to the patio. There they found a frame with danger warning signs and a radioactive Plutonium cannister in a slot in the center. There was a section off to the side with a slot marked 'SAFE ZONE'. There were four wires running from the Plutonium cannister to the four corners of the frame with four handles attached. A sign told them they could not reach into the frame until the radioactive Plutonium was safely placed in the SAFE ZONE. With four players controlling each handle, they were able to coordinate their movements to lift the Plutonium cannister out of the center and move it to the slot in the safe zone.
 
-Once in the safe zone, they were able to pick up the cannister and look through a viewing window to see the words "PROJECT ORION" labelled inside it.
-
 <div class="image-container">
 <img src="/images/puzzle2023-nuclear-solving.png" onclick="openModal(this.src)">
 <img src="/images/puzzle2023-nuclear-closeup.jpg" onclick="openModal(this.src)">
+</div>
+
+Once in the safe zone, they were able to pick up the cannister and look through a viewing window to see the words "PROJECT ORION" labelled inside it.
+
+<div class="image-container">
 <img src="/images/puzzle2023-nuclear-solved.jpg" onclick="openModal(this.src)">
 </div>
 
