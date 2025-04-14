@@ -79,36 +79,36 @@
 <p>See the <a href="/tech/ghost-game-solver">previous post</a> for details on the Ghost game and the python code. The algorithm is exactly the same, the implementation slightly different. Because Clojure is strongly functional I couldn&rsquo;t update the Trie in place but instead had to return updated sub-tries as I went. As a traditionally imperative programmer I felt the efficiency hairs rise on the back of my neck thinking about all the extra data manipulation this would cause, but I was pleasantly surprised at how efficient Clojure is. Under the hood Clojure has very efficient re-use of data, just rebuilding tree structures to use existing data in different ways.</p>
 <h1 id="the-clojure-program">The Clojure Program</h1>
 <p>Here is the code in Clojure. I&rsquo;ve put it up alongside the Python code on GitHub at <a href="https://github.com/PeterTheobald/GhostSolver">ghostSolver</a></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-clojure" data-lang="clojure"><span style="color:#75715e">; ghost-solver.clj</span>
-<span style="color:#75715e">; Peter@PeterTheobald.com 2016</span>
-<span style="color:#75715e">;</span>
-<span style="color:#75715e">; Ghost is a word game in which players take turns adding letters to a growing</span>
-<span style="color:#75715e">; word fragment, trying not to be the one to complete a valid word. Each</span>
-<span style="color:#75715e">; fragment must be the beginning of an actual word, there is a minimum of four</span>
-<span style="color:#75715e">; letters of a word that counts. The player who completes a word loses the round.</span>
-<span style="color:#75715e">;</span>
-<span style="color:#75715e">; This program reads a dictionary and figures out words that will guarantee</span>
-<span style="color:#75715e">; a win both for the player who plays first and the player who plays second.</span>
-<span style="color:#75715e">;</span>
-<span style="color:#75715e">; Input: ghostSolver.clj (reads &#34;wordlist.txt&#34;)</span>
-<span style="color:#75715e">; Output: Player goes first: list of winning words.</span>
-<span style="color:#75715e">;         Player goes second: list of winning words.</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-clojure" data-lang="clojure"><span style="color:#75715e">; ghost-solver.clj</span>
+<span style="color:#75715e">; Peter@PeterTheobald.com 2016</span>
+<span style="color:#75715e">;</span>
+<span style="color:#75715e">; Ghost is a word game in which players take turns adding letters to a growing</span>
+<span style="color:#75715e">; word fragment, trying not to be the one to complete a valid word. Each</span>
+<span style="color:#75715e">; fragment must be the beginning of an actual word, there is a minimum of four</span>
+<span style="color:#75715e">; letters of a word that counts. The player who completes a word loses the round.</span>
+<span style="color:#75715e">;</span>
+<span style="color:#75715e">; This program reads a dictionary and figures out words that will guarantee</span>
+<span style="color:#75715e">; a win both for the player who plays first and the player who plays second.</span>
+<span style="color:#75715e">;</span>
+<span style="color:#75715e">; Input: ghostSolver.clj (reads &#34;wordlist.txt&#34;)</span>
+<span style="color:#75715e">; Output: Player goes first: list of winning words.</span>
+<span style="color:#75715e">;         Player goes second: list of winning words.</span>
 
 (<span style="color:#66d9ef">ns </span>ghost-solver.core
   (<span style="color:#e6db74">:gen-class</span>))
 (<span style="color:#a6e22e">require</span> <span style="color:#f92672">&#39;</span>[clojure.java.io <span style="color:#e6db74">:as</span> io])
 
-(<span style="color:#66d9ef">defmacro </span>dbg    <span style="color:#75715e">; handy debugging tool</span>
+(<span style="color:#66d9ef">defmacro </span>dbg    <span style="color:#75715e">; handy debugging tool</span>
   ([x]     <span style="color:#f92672">`</span>(<span style="color:#66d9ef">let </span>[x# <span style="color:#f92672">~</span>x] (println <span style="color:#e6db74">&#34;dbg:&#34;</span> <span style="color:#f92672">&#39;~</span>x <span style="color:#e6db74">&#34;=&#34;</span> x#) x#))
   ([label x] <span style="color:#f92672">`</span>(<span style="color:#66d9ef">let </span>[x# <span style="color:#f92672">~</span>x] (println <span style="color:#e6db74">&#34;dbg&#34;</span>(<span style="color:#66d9ef">quote </span><span style="color:#f92672">~</span>label) <span style="color:#e6db74">&#34;:&#34;</span> <span style="color:#f92672">&#39;~</span>x <span style="color:#e6db74">&#34;=&#34;</span> x#) x#)))
 
-<span style="color:#75715e">;; Our trie is a tree of letters forming words.</span>
-<span style="color:#75715e">;; Implemented as a map with letters as keys; values are sub-tries or nil</span>
-<span style="color:#75715e">;; In the ghost game no words are allowed with complete words as prefixes</span>
-<span style="color:#75715e">;;   eg: if we have &#34;cart&#34; we can never reach &#34;cartridge&#34;</span>
-<span style="color:#75715e">;; In the trie during processing for winning moves,</span>
-<span style="color:#75715e">;;   the entries {letter {}} and {letter nil} have different meanings</span>
-<span style="color:#75715e">;;   nil means end-of-word, {} means no winning sub-tries under this node</span>
+<span style="color:#75715e">;; Our trie is a tree of letters forming words.</span>
+<span style="color:#75715e">;; Implemented as a map with letters as keys; values are sub-tries or nil</span>
+<span style="color:#75715e">;; In the ghost game no words are allowed with complete words as prefixes</span>
+<span style="color:#75715e">;;   eg: if we have &#34;cart&#34; we can never reach &#34;cartridge&#34;</span>
+<span style="color:#75715e">;; In the trie during processing for winning moves,</span>
+<span style="color:#75715e">;;   the entries {letter {}} and {letter nil} have different meanings</span>
+<span style="color:#75715e">;;   nil means end-of-word, {} means no winning sub-tries under this node</span>
 
 (<span style="color:#66d9ef">defmacro </span>trie-letters [t] <span style="color:#f92672">`</span>(keys <span style="color:#f92672">~</span>t))
 (<span style="color:#66d9ef">defmacro </span>subtrie [t l] <span style="color:#f92672">`</span>(<span style="color:#f92672">~</span>t <span style="color:#f92672">~</span>l))
@@ -118,29 +118,29 @@
 (<span style="color:#66d9ef">defn </span>add-word [trie word]
   (<span style="color:#66d9ef">let </span>[letter (first word)
         sub-trie (<span style="color:#a6e22e">subtrie</span> trie letter)]
-    (<span style="color:#66d9ef">if </span>(contains? trie letter) <span style="color:#75715e">; letter already in trie, extend it</span>
+    (<span style="color:#66d9ef">if </span>(contains? trie letter) <span style="color:#75715e">; letter already in trie, extend it</span>
       (<span style="color:#66d9ef">if </span>(nil? sub-trie)
-        trie <span style="color:#75715e">; letter is end-of-word, dont add superset words!</span>
-      <span style="color:#75715e">;else add rest of word to sub-trie</span>
+        trie <span style="color:#75715e">; letter is end-of-word, dont add superset words!</span>
+      <span style="color:#75715e">;else add rest of word to sub-trie</span>
         (assoc trie letter (<span style="color:#a6e22e">add-word</span> sub-trie (rest word))))
-    <span style="color:#75715e">;else</span>
-      <span style="color:#75715e">; if the letter is not already in the trie put the word in</span>
-      <span style="color:#75715e">; use a Clojure shortcut to build the whole nested sub-trie all at once</span>
+    <span style="color:#75715e">;else</span>
+      <span style="color:#75715e">; if the letter is not already in the trie put the word in</span>
+      <span style="color:#75715e">; use a Clojure shortcut to build the whole nested sub-trie all at once</span>
       (<span style="color:#a6e22e">assoc-in</span> trie (seq word) nil))))
 
 (<span style="color:#66d9ef">defn </span>add-words [words]
   (reduce add-word {} words))
 
-<span style="color:#75715e">; throw away words less than 4 letters</span>
-<span style="color:#75715e">; clean out some cruft from online dictionaries,</span>
-<span style="color:#75715e">;   anything with Capitals or punctuation</span>
+<span style="color:#75715e">; throw away words less than 4 letters</span>
+<span style="color:#75715e">; clean out some cruft from online dictionaries,</span>
+<span style="color:#75715e">;   anything with Capitals or punctuation</span>
 (<span style="color:#66d9ef">defn </span>clean-words [words]
   (filter <span style="color:#f92672">#</span>(and (&gt; (count %) <span style="color:#ae81ff">3</span>) (re-matches <span style="color:#f92672">#</span><span style="color:#e6db74">&#34;[a-z]+&#34;</span> %)) words))
   
 (<span style="color:#66d9ef">defn </span>build-trie [filename]
   (with-open [rdr (<span style="color:#a6e22e">clojure.java.io/reader</span> filename)]
     (<span style="color:#a6e22e">add-words</span> (<span style="color:#a6e22e">clean-words</span> (map clojure.string/trim (line-seq rdr))))))
-<span style="color:#75715e">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+<span style="color:#75715e">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
 
 (<span style="color:#66d9ef">defn </span>players-move? [partial-word player-goes-first]
   (or (and  player-goes-first
@@ -149,74 +149,74 @@
             (<span style="color:#a6e22e">odd?</span> (count partial-word)))))
 
 (<span style="color:#66d9ef">defn </span>all-words
-  <span style="color:#75715e">; returns list of all words branching from this trie</span>
-  <span style="color:#75715e">; can also be used for all words branching from a sub-trie and a partial word</span>
+  <span style="color:#75715e">; returns list of all words branching from this trie</span>
+  <span style="color:#75715e">; can also be used for all words branching from a sub-trie and a partial word</span>
   ([trie]
-   (<span style="color:#a6e22e">all-words</span> trie nil)) <span style="color:#75715e">; default arg</span>
+   (<span style="color:#a6e22e">all-words</span> trie nil)) <span style="color:#75715e">; default arg</span>
   ([trie partial-word]
    (<span style="color:#a6e22e">flatten</span>
      (for [l (<span style="color:#a6e22e">trie-letters</span> trie)]
        (<span style="color:#66d9ef">if </span>(nil? (<span style="color:#a6e22e">subtrie</span> trie l))
          (str partial-word l)
-        <span style="color:#75715e">;else</span>
+        <span style="color:#75715e">;else</span>
          (<span style="color:#a6e22e">all-words</span> (<span style="color:#a6e22e">subtrie</span> trie l) (str partial-word l)))))))
    
 (<span style="color:#66d9ef">defn </span>best-sort-decorator [t partial-word]
-  <span style="color:#75715e">; in: sub-trie in the form of a tuple vector [letter sub-trie], partial-word</span>
-  <span style="color:#75715e">; return decorated tuple for sorting:</span>
-  <span style="color:#75715e">;        ([count-words len-shortest-word alpha-first-word] [letter sub-trie])</span>
+  <span style="color:#75715e">; in: sub-trie in the form of a tuple vector [letter sub-trie], partial-word</span>
+  <span style="color:#75715e">; return decorated tuple for sorting:</span>
+  <span style="color:#75715e">;        ([count-words len-shortest-word alpha-first-word] [letter sub-trie])</span>
   (<span style="color:#66d9ef">if </span>(nil? (second t))
-    <span style="color:#75715e">; nil means this branch is the end of a word</span>
+    <span style="color:#75715e">; nil means this branch is the end of a word</span>
     (list [<span style="color:#ae81ff">1</span> (count partial-word) partial-word] t)
-  <span style="color:#75715e">; else</span>
+  <span style="color:#75715e">; else</span>
     (<span style="color:#66d9ef">let </span>[words (<span style="color:#a6e22e">all-words</span> (second t) (str partial-word (first t)))]
       (list [(count words) (apply min (map count words)) (first (sort words))]
             t))))
  
-(<span style="color:#66d9ef">defn </span>best-words [trie partial-word] <span style="color:#75715e">; I have words. I have the best words.</span>
-  <span style="color:#75715e">; in: a partial word, and a trie of completions of that word</span>
-  <span style="color:#75715e">; out: a sub-trie with only the best top level branch in it, the rest pruned</span>
-  <span style="color:#75715e">; best is defined subjectively as:</span>
-  <span style="color:#75715e">; 1. the branch with the fewest sub-branches (words)</span>
-  <span style="color:#75715e">; 2. the branch with the shortest word</span>
-  <span style="color:#75715e">; 3. the branch with alphabetically first word</span>
-  <span style="color:#75715e">; eg: 1 long word is &#39;better&#39; than 2 short words</span>
-  <span style="color:#75715e">;     3 short words and 3 long words are &#39;better&#39; than 6 medium words</span>
+(<span style="color:#66d9ef">defn </span>best-words [trie partial-word] <span style="color:#75715e">; I have words. I have the best words.</span>
+  <span style="color:#75715e">; in: a partial word, and a trie of completions of that word</span>
+  <span style="color:#75715e">; out: a sub-trie with only the best top level branch in it, the rest pruned</span>
+  <span style="color:#75715e">; best is defined subjectively as:</span>
+  <span style="color:#75715e">; 1. the branch with the fewest sub-branches (words)</span>
+  <span style="color:#75715e">; 2. the branch with the shortest word</span>
+  <span style="color:#75715e">; 3. the branch with alphabetically first word</span>
+  <span style="color:#75715e">; eg: 1 long word is &#39;better&#39; than 2 short words</span>
+  <span style="color:#75715e">;     3 short words and 3 long words are &#39;better&#39; than 6 medium words</span>
   (<span style="color:#a6e22e">-&gt;&gt;</span> trie
-    <span style="color:#75715e">; decorate with ([count-words len-shortest-word alpha-first-word] [letter sub-trie])</span>
+    <span style="color:#75715e">; decorate with ([count-words len-shortest-word alpha-first-word] [letter sub-trie])</span>
     (map <span style="color:#f92672">#</span>(<span style="color:#a6e22e">best-sort-decorator</span> % partial-word))
-    (sort-by first)    <span style="color:#75715e">; sort by the decorated value</span>
-    (map second)       <span style="color:#75715e">; undecorate</span>
-    first              <span style="color:#75715e">; just the best (first sorted) sub-trie</span>
-    (apply hash-map)))  <span style="color:#75715e">; return a map {letter sub-trie} not a tuple-vector [letter sub-trie]</span>
+    (sort-by first)    <span style="color:#75715e">; sort by the decorated value</span>
+    (map second)       <span style="color:#75715e">; undecorate</span>
+    first              <span style="color:#75715e">; just the best (first sorted) sub-trie</span>
+    (apply hash-map)))  <span style="color:#75715e">; return a map {letter sub-trie} not a tuple-vector [letter sub-trie]</span>
 
 (<span style="color:#66d9ef">defn </span>all-or-nothing [trie]
-  <span style="color:#75715e">; in: trie hashmap {letter sub-trie ...}</span>
-  <span style="color:#75715e">; out: if ANY sub-tries are empty {} returns {}, else returns the original trie</span>
+  <span style="color:#75715e">; in: trie hashmap {letter sub-trie ...}</span>
+  <span style="color:#75715e">; out: if ANY sub-tries are empty {} returns {}, else returns the original trie</span>
   (<span style="color:#66d9ef">if </span>(some (<span style="color:#66d9ef">fn </span>[t] ((comp empty-map? second) t)) trie) {} trie))
   
 (<span style="color:#66d9ef">defn </span>winning-moves [trie partial-word player-goes-first]
-  <span style="color:#75715e">; in: boolean player player-goes-first?</span>
-  <span style="color:#75715e">;     trie hash-map {letter sub-trie ...}</span>
-  <span style="color:#75715e">;     partial-word eg: &#34;aardva&#34;</span>
-  <span style="color:#75715e">; out: trie hash-map w only player winning branches,</span>
-  <span style="color:#75715e">;      and only the &#34;best&#34; of these from each node</span>
+  <span style="color:#75715e">; in: boolean player player-goes-first?</span>
+  <span style="color:#75715e">;     trie hash-map {letter sub-trie ...}</span>
+  <span style="color:#75715e">;     partial-word eg: &#34;aardva&#34;</span>
+  <span style="color:#75715e">; out: trie hash-map w only player winning branches,</span>
+  <span style="color:#75715e">;      and only the &#34;best&#34; of these from each node</span>
   (<span style="color:#a6e22e">cond</span>
     (nil? trie) nil
     (<span style="color:#a6e22e">players-move?</span> partial-word player-goes-first)
     (<span style="color:#a6e22e">as-&gt;</span> trie X
-      (into {} (remove (comp nil? second) X)) <span style="color:#75715e">; prune end-of-word player lost</span>
+      (into {} (remove (comp nil? second) X)) <span style="color:#75715e">; prune end-of-word player lost</span>
       (reduce (<span style="color:#66d9ef">fn </span>[t l]
                  (assoc t l
                   (<span style="color:#a6e22e">winning-moves</span> (<span style="color:#a6e22e">subtrie</span> X l) (str partial-word l) player-goes-first)))
               {}
-              (<span style="color:#a6e22e">trie-letters</span> X))        <span style="color:#75715e">; find sub-winners</span>
-      (into {} (remove (comp empty-map? second)) X) <span style="color:#75715e">; prune {} w/no winning moves</span>
-      (<span style="color:#a6e22e">best-words</span> X partial-word))      <span style="color:#75715e">; choose only the best winning branch</span>
-    <span style="color:#e6db74">:else</span> <span style="color:#75715e">; opponent&#39;s move</span>
-      <span style="color:#75715e">; find sub-winners, return all winning sub-branches.</span>
-      <span style="color:#75715e">; but if any branches have no winning moves, thus allowing opponent to</span>
-      <span style="color:#75715e">; force player-loss this entire branch is dangerous, return none {}</span>
+              (<span style="color:#a6e22e">trie-letters</span> X))        <span style="color:#75715e">; find sub-winners</span>
+      (into {} (remove (comp empty-map? second)) X) <span style="color:#75715e">; prune {} w/no winning moves</span>
+      (<span style="color:#a6e22e">best-words</span> X partial-word))      <span style="color:#75715e">; choose only the best winning branch</span>
+    <span style="color:#e6db74">:else</span> <span style="color:#75715e">; opponent&#39;s move</span>
+      <span style="color:#75715e">; find sub-winners, return all winning sub-branches.</span>
+      <span style="color:#75715e">; but if any branches have no winning moves, thus allowing opponent to</span>
+      <span style="color:#75715e">; force player-loss this entire branch is dangerous, return none {}</span>
       (<span style="color:#a6e22e">all-or-nothing</span>
         (reduce (<span style="color:#66d9ef">fn </span>[t l]
                   (assoc t l
@@ -240,11 +240,11 @@
     (println <span style="color:#e6db74">&#34;Adversary goes first: winning words&#34;</span>)
     (doall (<span style="color:#a6e22e">print-winners</span> trie false))
     nil))
-  <span style="color:#75715e">; note: -main doesn&#39;t actually consume (use) the return values</span>
-  <span style="color:#75715e">;       so wrap the functions with doall to force all lazy evaluations to happen</span>
-  <span style="color:#75715e">;       otherwise Clojure will be happy to return with the silent knowledge</span>
-  <span style="color:#75715e">;       that it knows how to (print-winners trie true) but since you didn&#39;t</span>
-  <span style="color:#75715e">;       use the result it won&#39;t execute all the sub-calculations</span>
+  <span style="color:#75715e">; note: -main doesn&#39;t actually consume (use) the return values</span>
+  <span style="color:#75715e">;       so wrap the functions with doall to force all lazy evaluations to happen</span>
+  <span style="color:#75715e">;       otherwise Clojure will be happy to return with the silent knowledge</span>
+  <span style="color:#75715e">;       that it knows how to (print-winners trie true) but since you didn&#39;t</span>
+  <span style="color:#75715e">;       use the result it won&#39;t execute all the sub-calculations</span>
 <span style="color:#e6db74">&#34;loaded&#34;</span>
 </code></pre></div><h1 id="the-results">The Results</h1>
 <p>The results were exactly the same, as expected. Both programs runtime was the same order of magnitude (a couple of seconds on a 45,000 word dictionary). Writing it in Clojure took me a little longer than writing it in Python no doubt because I was learning the language at the same time as I wrote the program. Both programs are approximately the same length in lines of code. I found that writing it in Clojure forced me to think more clearly about the problem, ie: what does this sub-trie represent conceptually at each point in the code.</p>
