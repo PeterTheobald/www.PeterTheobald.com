@@ -12,6 +12,8 @@ I occasionally make cartoons.
 
 <!--more-->
 
+First I hand draw a comic (badly), then use ChatGPT/Dall-E to redraw it with clean lines, then just for fun I transform it into a claymation style diorama.
+
 <style>
     body {
       font-family: sans-serif;
