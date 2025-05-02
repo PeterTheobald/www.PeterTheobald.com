@@ -35,48 +35,48 @@ I occasionally make cartoons.
 </style>
 
   <div class="row">
-    <img src="/images/cartoons"/germs-handdrawn.png" alt="Cartoon image">
-    <img src="/images/cartoons"/germs.png" alt="Cartoon image">
-    <img src="/images/cartoons"/germs-clay.png" alt="Cartoon image">
+    <img src="/images/cartoons/germs-handdrawn.png" alt="Cartoon image">
+    <img src="/images/cartoons/germs.png" alt="Cartoon image">
+    <img src="/images/cartoons/germs-clay.png" alt="Cartoon image">
   </div>
 
   <div class="row">
-    <img src="/images/cartoons"/bubble.png" alt="Cartoon image">
-    <img src="/images/cartoons"/bubble-clay.png" alt="Cartoon image">
+    <img src="/images/cartoons/bubble.png" alt="Cartoon image">
+    <img src="/images/cartoons/bubble-clay.png" alt="Cartoon image">
   </div>
   
   <div class="row">
-    <img src="/images/cartoons"/santa.png" alt="Cartoon image">
-    <img src="/images/cartoons"/santa-clay.png" alt="Cartoon image">
+    <img src="/images/cartoons/santa.png" alt="Cartoon image">
+    <img src="/images/cartoons/santa-clay.png" alt="Cartoon image">
   </div>
 
   <div class="row">
-    <img src="/images/cartoons"/gpterminator.png" alt="Cartoon image">
-    <img src="/images/cartoons"/gpterminator-clay.png" alt="Cartoon image">
+    <img src="/images/cartoons/gpterminator.png" alt="Cartoon image">
+    <img src="/images/cartoons/gpterminator-clay.png" alt="Cartoon image">
   </div>
 
   <div class="row">
-    <img src="/images/cartoons"/legolas.png" alt="Cartoon image">
-    <img src="/images/cartoons"/legolas-clay.png" alt="Cartoon image">
+    <img src="/images/cartoons/legolas.png" alt="Cartoon image">
+    <img src="/images/cartoons/legolas-clay.png" alt="Cartoon image">
   </div>
 
   <div class="row">
-    <img src="/images/cartoons"/skeeter.png" alt="Cartoon image">
-    <img src="/images/cartoons"/skeeter-clay.png" alt="Cartoon image">
+    <img src="/images/cartoons/skeeter.png" alt="Cartoon image">
+    <img src="/images/cartoons/skeeter-clay.png" alt="Cartoon image">
   </div>
 
   <div class="row">
-    <img src="/images/cartoons"/snikt.png" alt="Cartoon image">
-    <img src="/images/cartoons"/snikt-clay.png" alt="Cartoon image">
+    <img src="/images/cartoons/snikt.png" alt="Cartoon image">
+    <img src="/images/cartoons/snikt-clay.png" alt="Cartoon image">
   </div>
 
   <div class="row">
-    <img src="/images/cartoons"/flesh bone spirit.png" alt="Cartoon image">
-    <img src="/images/cartoons"/flesh bone spirit-clay.png" alt="Cartoon image">
+    <img src="/images/cartoons/flesh bone spirit.png" alt="Cartoon image">
+    <img src="/images/cartoons/flesh bone spirit-clay.png" alt="Cartoon image">
   </div>
 
   <div class="row">
-    <img src="/images/cartoons"/cats.png" alt="Cartoon image">
+    <img src="/images/cartoons/cats.png" alt="Cartoon image">
   </div>
 
 
