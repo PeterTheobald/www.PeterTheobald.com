@@ -41,8 +41,8 @@ I occasionally make cartoons.
   </div>
 
   <div class="row">
-    <img src="/images/cartoons/bubble.png" alt="Cartoon image">
-    <img src="/images/cartoons/bubble-clay.png" alt="Cartoon image">
+    <img src="/images/cartoons/balloon.png" alt="Cartoon image">
+    <img src="/images/cartoons/balloon-clay.png" alt="Cartoon image">
   </div>
   
   <div class="row">
