@@ -2,8 +2,8 @@
 title: "Hacker Dojo Python Group"
 date: 2025-06-25
 categories: ["tech"]
-redirect: "https://petertheobald.github.io/HackerDojoPythonGroup/"
-thumbnail: "https://www.hackerdojo.com/assets/images/logo.png"
+redirect: "/HackerDojoPythonGroup/"
+thumbnail: "/images/hackerdojopython/logo.png"
 ---
 
 <meta http-equiv="refresh" content="0; url=https://petertheobald.github.io/HackerDojoPythonGroup/" />
