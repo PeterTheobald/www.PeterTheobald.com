@@ -3,17 +3,37 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>/categories/</loc>
+    <lastmod>2025-06-25T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tech/hacker-dojo-python-group/</loc>
+    <lastmod>2025-06-25T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/</loc>
+    <lastmod>2025-06-25T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tech/</loc>
+    <lastmod>2025-06-25T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/tech/</loc>
+    <lastmod>2025-06-25T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/play/cartoons/</loc>
     <lastmod>2025-04-01T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>/tags/cartoons/</loc>
-    <lastmod>2025-04-01T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/</loc>
     <lastmod>2025-04-01T00:00:00+00:00</lastmod>
   </url>
   
@@ -35,11 +55,6 @@
   <url>
     <loc>/tags/programming/</loc>
     <lastmod>2024-06-21T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/categories/</loc>
-    <lastmod>2024-01-01T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -74,11 +89,6 @@
   
   <url>
     <loc>/tech/how-to-get-your-forking-money/</loc>
-    <lastmod>2019-09-20T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tech/</loc>
     <lastmod>2019-09-20T00:00:00+00:00</lastmod>
   </url>
   
@@ -124,11 +134,6 @@
   
   <url>
     <loc>/tags/jquery/</loc>
-    <lastmod>2017-05-24T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/categories/tech/</loc>
     <lastmod>2017-05-24T00:00:00+00:00</lastmod>
   </url>
   

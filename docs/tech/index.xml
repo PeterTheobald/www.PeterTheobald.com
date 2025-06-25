@@ -6,10 +6,19 @@
     <description>Recent content in Tech on Peter Theobald</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 20 Sep 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 25 Jun 2025 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tech/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Hacker Dojo Python Group</title>
+      <link>/tech/hacker-dojo-python-group/</link>
+      <pubDate>Wed, 25 Jun 2025 00:00:00 +0000</pubDate>
+      
+      <guid>/tech/hacker-dojo-python-group/</guid>
+      <description>If you are not redirected, click here.</description>
+    </item>
     
     <item>
       <title>How To Get Your Forking Money</title>
