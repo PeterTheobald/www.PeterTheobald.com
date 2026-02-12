@@ -77,9 +77,9 @@
 <main>
 <p>To try out the free video editor &lsquo;HitFilm&rsquo; I made this montage of the fake show &lsquo;Troy and Abed in the Morning&rsquo; from the show Community.</p>
 <p>First I found out which episodes have Troy and Abed clips. I found a website with Community scripts, downloaded the scripts and searched for related clips, like this:</p>
-<pre><code>wget -r -l1 http://www.springfieldspringfield.co.uk/episode_scripts.php?tv-show=community
-grep -l -i 'troy and abed' *
-grep -l -i 'troy and \w+ abed' *
+<pre tabindex="0"><code>wget -r -l1 http://www.springfieldspringfield.co.uk/episode_scripts.php?tv-show=community
+grep -l -i &#39;troy and abed&#39; *
+grep -l -i &#39;troy and \w+ abed&#39; *
 </code></pre><p>This gave me a list of episodes with key phrases like &lsquo;Troy and Abed in the Morning&rsquo;, &lsquo;Evil Troy and Evil Abed&rsquo;, &lsquo;Troy and Abed in Stop Motion&rsquo;, &lsquo;Troy and Abed and Annie&rsquo;, etc&hellip; I already have all the Community episodes as a video source.</p>
 <p>I usually use Lightworks, but this time I used HitFilm to edit together the clips. I found HitFilm easier to use and more powerful as it has a full 2D and 3D compositor included in it, although Lightworks still wins for power-user keyboard shortcuts for trimming and rolling clips. Watch the result here:</p>
 
@@ -100,8 +100,8 @@ grep -l -i 'troy and \w+ abed' *
 
 
 <div id="disqus_thread"></div>
-<script type="application/javascript">
-    var disqus_config = function () {
+<script>
+    window.disqus_config = function () {
     
     
     
@@ -155,7 +155,7 @@ grep -l -i 'troy and \w+ abed' *
 
 
 
-<script type="application/javascript">
+<script>
 var doNotTrack = false;
 if (!doNotTrack) {
 	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -167,7 +167,6 @@ if (!doNotTrack) {
 	ga('send', 'pageview');
 }
 </script>
-
 <script async data-id="101474234" src="//static.getclicky.com/js"></script>
 
 </body>

@@ -94,175 +94,174 @@
 <p>The data structure is a <a href="https://en.wikipedia.org/wiki/Trie">TRIE</a> : It is a hash/dictionary with the first letters for keys and another hash/dictionary for the values. Each sub-hash/dictionary likewise has the subsequent letter as a key and another hash/dictionary as the value, until the end of a word is reached and the value will be an empty list or Null/Nil/None.</p>
 <p>The search does two things:</p>
 <ol>
-<li>For end-of-words with no &lsquo;next letter&rsquo; return WIN if the opponent had to complete a word or LOSE if the player had to complete a word, depending on which player went first and whether it&rsquo;s an even or odd turn.</li>
+<li>For end-of-words with no &rsquo;next letter&rsquo; return WIN if the opponent had to complete a word or LOSE if the player had to complete a word, depending on which player went first and whether it&rsquo;s an even or odd turn.</li>
 <li>For all other letters (nodes) recursively check each branch. If it&rsquo;s the players turn and any branches guarantee a win choose the &lsquo;best&rsquo; branch and return it. If it&rsquo;s the opponents turn and every branch forces a win return them all. If any branches lose assume the opponent would choose that and return LOSE.</li>
 </ol>
 <p>Here is the code in Python. I&rsquo;ve put it up on GitHub at <a href="https://github.com/PeterTheobald/GhostSolver">ghostSolver</a></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># ghostSolver.py</span>
-<span style="color:#75715e"># Peter@PeterTheobald.com 2016</span>
-<span style="color:#75715e">#</span>
-<span style="color:#75715e"># Ghost is a word game in which players take turns adding letters to a growing</span>
-<span style="color:#75715e"># word fragment, trying not to be the one to complete a valid word. Each</span>
-<span style="color:#75715e"># fragment must be the beginning of an actual word, there is a minimum of four</span>
-<span style="color:#75715e"># letters of a word that counts. The player who completes a word loses the round.</span>
-<span style="color:#75715e">#</span>
-<span style="color:#75715e"># This program reads a dictionary and figures out words that will guarantee</span>
-<span style="color:#75715e"># a win both for the player who plays first and the player who plays second.</span>
-<span style="color:#75715e">#</span>
-<span style="color:#75715e"># Input: ghostSolver.py &lt; wordlist.txt</span>
-<span style="color:#75715e"># Output: Player goes first: list of winning words.</span>
-<span style="color:#75715e">#         Player goes second: list of winning words.</span>
-
-<span style="color:#f92672">import</span> pprint
-<span style="color:#f92672">import</span> fileinput
-<span style="color:#f92672">import</span> re
-
-<span style="color:#75715e"># Our trie is a tree of letters forming words.</span>
-<span style="color:#75715e"># Implemented as a hash-map with letters as keys; values are sub-tries or nil</span>
-<span style="color:#75715e"># In the ghost game no words are allowed with complete words as prefixes</span>
-<span style="color:#75715e">#   eg: if we have &#34;cart&#34; we can never reach &#34;cartridge&#34;</span>
-
-<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">trieLetters</span>( trie):
-  <span style="color:#66d9ef">return</span> trie<span style="color:#f92672">.</span>keys()
-  
-<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">subTrie</span>( trie, letter):
-  <span style="color:#66d9ef">return</span> trie[letter]
-
-<span style="color:#75715e"># read through a list of words, split each word into letters,</span>
-<span style="color:#75715e"># traverse the letters in the tree and add any new letters found</span>
-<span style="color:#75715e"># throw away any words less than 4 letters long</span>
-<span style="color:#75715e"># throw away any words that are supersets of existing words</span>
-<span style="color:#75715e"># this is made easier because we assume the input is always sorted</span>
-<span style="color:#75715e"># dont need any end-of-word markers because there are no supersets.</span>
-<span style="color:#75715e"># leaf nodes are always end-of-word. non-leaf nodes are never end-of-word.</span>
-
-<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">buildTrie</span>():
-  trie<span style="color:#f92672">=</span>{}
-  <span style="color:#66d9ef">for</span> line <span style="color:#f92672">in</span> fileinput<span style="color:#f92672">.</span>input():
-    word<span style="color:#f92672">=</span>line<span style="color:#f92672">.</span>rstrip()
-    <span style="color:#66d9ef">if</span> len(word)<span style="color:#f92672">&lt;</span><span style="color:#ae81ff">4</span>:
-      <span style="color:#66d9ef">continue</span>
-    <span style="color:#75715e"># clean out some cruft from online dictionaries, anything with Capitals or punctuation</span>
-    <span style="color:#66d9ef">if</span> re<span style="color:#f92672">.</span>search( <span style="color:#e6db74">&#39;[^a-z]&#39;</span>, word):
-      <span style="color:#66d9ef">continue</span>
-    p<span style="color:#f92672">=</span>trie
-    newnode<span style="color:#f92672">=</span>True
-    <span style="color:#66d9ef">for</span> letter <span style="color:#f92672">in</span> word:
-      <span style="color:#66d9ef">if</span> letter <span style="color:#f92672">in</span> p:
-        <span style="color:#75715e"># this letter has already been created (for a different word), follow it</span>
-        p<span style="color:#f92672">=</span>subTrie( p, letter)
-        newnode<span style="color:#f92672">=</span>False
-      <span style="color:#66d9ef">else</span>:
-        <span style="color:#75715e"># This letter isn&#39;t here. Is it because we are adding new letters onto the tree</span>
-        <span style="color:#75715e"># or because we&#39;ve reached the end of a complete existing word?</span>
-        <span style="color:#66d9ef">if</span> p <span style="color:#f92672">or</span> newnode:
-          <span style="color:#75715e"># create new node for this letter</span>
-          p[letter]<span style="color:#f92672">=</span>{}
-          newnode<span style="color:#f92672">=</span>True
-          p<span style="color:#f92672">=</span>subTrie( p, letter)
-        <span style="color:#66d9ef">else</span>:
-          <span style="color:#75715e"># this is a superset of an existing word</span>
-          <span style="color:#66d9ef">continue</span> <span style="color:#75715e"># skip it-Ghost can&#39;t use it and saves lots of memory</span>
-  <span style="color:#66d9ef">return</span> trie
-
-<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">isOdd</span>(x):
-  <span style="color:#66d9ef">return</span> x<span style="color:#f92672">%</span><span style="color:#ae81ff">2</span>
-<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">isEven</span>(x):
-  <span style="color:#66d9ef">return</span> <span style="color:#f92672">not</span> x<span style="color:#f92672">%</span><span style="color:#ae81ff">2</span>
-<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">isPlayersMove</span>( partialWord, playerGoesFirst):
-  <span style="color:#66d9ef">return</span> ((playerGoesFirst <span style="color:#f92672">and</span> isEven( len( partialWord)))
-          <span style="color:#f92672">or</span> ( <span style="color:#f92672">not</span>( playerGoesFirst) <span style="color:#f92672">and</span> isOdd( len( partialWord))))
-
-<span style="color:#75715e"># returns list of all words branching from this trie</span>
-<span style="color:#75715e"># can also be used for all words branching from a sub-trie and a partial word</span>
-<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">allWords</span>( trie, partialWord):
-  <span style="color:#66d9ef">if</span> <span style="color:#f92672">not</span> trie:
-    <span style="color:#66d9ef">return</span> [partialWord]
-  resultList<span style="color:#f92672">=</span>[]
-  <span style="color:#66d9ef">for</span> l <span style="color:#f92672">in</span> trieLetters( trie):
-    resultList<span style="color:#f92672">.</span>extend( allWords( subTrie(trie, l), partialWord<span style="color:#f92672">+</span>l))
-  <span style="color:#66d9ef">return</span> resultList
-           
-<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">bestWords</span>( trie, partialWord): <span style="color:#75715e"># I have words. I have the best words.</span>
-  <span style="color:#75715e"># in: a partial word, and a tree of completions of that word</span>
-  <span style="color:#75715e"># out: a tree with the best branch in it</span>
-  <span style="color:#75715e"># best is defined as:</span>
-  <span style="color:#75715e">#   1. the branch with the fewest sub-branches (words)</span>
-  <span style="color:#75715e">#   2. the branch with the shortest word</span>
-  <span style="color:#75715e">#   3. the branch with alphabetically first word</span>
-  <span style="color:#75715e"># Note: this is somewhat subjective:</span>
-  <span style="color:#75715e">#       1 long word is &#39;better&#39; than 2 short words</span>
-  <span style="color:#75715e">#       3 short words and 3 long words are &#39;better&#39; than 6 medium words</span>
-  wordList<span style="color:#f92672">=</span>[]
-  countWords<span style="color:#f92672">=</span>{}
-  shortestWord<span style="color:#f92672">=</span>{}
-  alphaFirstWord<span style="color:#f92672">=</span>{}
-  <span style="color:#66d9ef">for</span> l <span style="color:#f92672">in</span> trieLetters( trie):
-    <span style="color:#75715e"># pre-calculate sort keys for each letter and list of words</span>
-    wordList<span style="color:#f92672">=</span>allWords( subTrie( trie, l), partialWord<span style="color:#f92672">+</span>l)
-    countWords[l]<span style="color:#f92672">=</span>len( wordList)
-    shortestWord[l]<span style="color:#f92672">=</span>min(map(len,wordList))
-    alphaFirstWord[l]<span style="color:#f92672">=</span>sorted(wordList)[<span style="color:#ae81ff">0</span>]
-  bestBranchLetter<span style="color:#f92672">=</span>sorted( trie, 
-                  key<span style="color:#f92672">=</span><span style="color:#66d9ef">lambda</span> x: ( countWords[x], shortestWord[x], alphaFirstWord[x])
-                  )[<span style="color:#ae81ff">0</span>]
-  <span style="color:#66d9ef">return</span> { bestBranchLetter: subTrie( trie, bestBranchLetter)}
-
-<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">winningMoves</span>( trie, partialWord, playerGoesFirst):
-  <span style="color:#75715e"># traverse the tree, find words that lose and prune them. Only pass back up the winning words</span>
-  <span style="color:#66d9ef">if</span> ( isPlayersMove( partialWord, playerGoesFirst)):
-    <span style="color:#75715e"># Player&#39;s move</span>
-    <span style="color:#75715e"># played &#39;word&#39; so far, next letter is one of tree.keys</span>
-    <span style="color:#75715e"># if ANY children are winning words, choose the best one</span>
-    <span style="color:#75715e"># prune the rest</span>
-    resultNode<span style="color:#f92672">=</span>{}
-    <span style="color:#66d9ef">for</span> l <span style="color:#f92672">in</span> trieLetters( trie): <span style="color:#75715e"># search all children branches</span>
-      <span style="color:#66d9ef">if</span> subTrie( trie, l): <span style="color:#75715e"># skip losing end-of-words</span>
-        subResult<span style="color:#f92672">=</span>winningMoves( subTrie( trie, l), partialWord<span style="color:#f92672">+</span>l, playerGoesFirst)
-        <span style="color:#66d9ef">if</span> subResult:
-          resultNode[l]<span style="color:#f92672">=</span>subResult
-    <span style="color:#66d9ef">if</span> (resultNode):
-      <span style="color:#66d9ef">return</span> bestWords( resultNode, partialWord)
-    <span style="color:#66d9ef">else</span>:
-      <span style="color:#66d9ef">return</span> None
-  <span style="color:#66d9ef">else</span>:
-    <span style="color:#75715e"># Opponent&#39;s move</span>
-    <span style="color:#75715e"># played &#39;word&#39; so far, next letter is one of tree.keys</span>
-    <span style="color:#75715e"># if ALL children are winning words, prune losers return ALL win word branches</span>
-    <span style="color:#75715e"># if ANY children lose, this is a dangerous branch return None</span>
-    <span style="color:#75715e"># if opponent must complete a word, this is a win word</span>
-    resultNode<span style="color:#f92672">=</span>{}
-    <span style="color:#66d9ef">for</span> l <span style="color:#f92672">in</span> trieLetters( trie): <span style="color:#75715e"># search all children branches</span>
-      <span style="color:#66d9ef">if</span> <span style="color:#f92672">not</span> subTrie( trie, l): <span style="color:#75715e"># end of word keep a win</span>
-        resultNode[l]<span style="color:#f92672">=</span>{}
-      <span style="color:#66d9ef">else</span>:
-        subResult<span style="color:#f92672">=</span>winningMoves( subTrie( trie, l), partialWord<span style="color:#f92672">+</span>l, playerGoesFirst)
-        <span style="color:#66d9ef">if</span> <span style="color:#f92672">not</span> subResult: <span style="color:#75715e"># found a losing branch, prune this</span>
-          <span style="color:#66d9ef">return</span> None
-        <span style="color:#66d9ef">else</span>:
-          resultNode[l]<span style="color:#f92672">=</span>subResult <span style="color:#75715e"># keep winning branches</span>
-    <span style="color:#66d9ef">return</span> resultNode   
-
-<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">printWinners</span>( trie, playerGoesFirst):
-    <span style="color:#66d9ef">for</span> l <span style="color:#f92672">in</span> sorted( trieLetters( trie)):
-        winningTrie<span style="color:#f92672">=</span>winningMoves( subTrie( trie, l), l, playerGoesFirst)
-        <span style="color:#66d9ef">if</span> (winningTrie):
-            <span style="color:#66d9ef">print</span>(l<span style="color:#f92672">+</span><span style="color:#e6db74">&#34;: </span><span style="color:#e6db74">%s</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">%</span> sorted(allWords( winningTrie, l)))
-        <span style="color:#66d9ef">else</span>:
-            <span style="color:#66d9ef">print</span>(l<span style="color:#f92672">+</span><span style="color:#e6db74">&#34;: No winning words&#34;</span>)
-
-<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">main</span>():
-    trie<span style="color:#f92672">=</span>buildTrie( )
-    <span style="color:#66d9ef">print</span>( <span style="color:#e6db74">&#34;Player goes first: winning words:</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>)
-    printWinners( trie, True)
-    <span style="color:#66d9ef">print</span>( <span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">Adversary goes first: winning words:</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>)
-    printWinners( trie, False)
-
-<span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;__main__&#34;</span>:
-    main()
-
-</code></pre></div><h1 id="the-results">The Results</h1>
-<pre><code>Player goes first: winning words:
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># ghostSolver.py</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Peter@PeterTheobald.com 2016</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Ghost is a word game in which players take turns adding letters to a growing</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># word fragment, trying not to be the one to complete a valid word. Each</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># fragment must be the beginning of an actual word, there is a minimum of four</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># letters of a word that counts. The player who completes a word loses the round.</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># This program reads a dictionary and figures out words that will guarantee</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># a win both for the player who plays first and the player who plays second.</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Input: ghostSolver.py &lt; wordlist.txt</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Output: Player goes first: list of winning words.</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#         Player goes second: list of winning words.</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> pprint
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> fileinput
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> re
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Our trie is a tree of letters forming words.</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Implemented as a hash-map with letters as keys; values are sub-tries or nil</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># In the ghost game no words are allowed with complete words as prefixes</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#   eg: if we have &#34;cart&#34; we can never reach &#34;cartridge&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">trieLetters</span>( trie):
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> trie<span style="color:#f92672">.</span>keys()
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">subTrie</span>( trie, letter):
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> trie[letter]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># read through a list of words, split each word into letters,</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># traverse the letters in the tree and add any new letters found</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># throw away any words less than 4 letters long</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># throw away any words that are supersets of existing words</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># this is made easier because we assume the input is always sorted</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># dont need any end-of-word markers because there are no supersets.</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># leaf nodes are always end-of-word. non-leaf nodes are never end-of-word.</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">buildTrie</span>():
+</span></span><span style="display:flex;"><span>  trie<span style="color:#f92672">=</span>{}
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">for</span> line <span style="color:#f92672">in</span> fileinput<span style="color:#f92672">.</span>input():
+</span></span><span style="display:flex;"><span>    word<span style="color:#f92672">=</span>line<span style="color:#f92672">.</span>rstrip()
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> len(word)<span style="color:#f92672">&lt;</span><span style="color:#ae81ff">4</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">continue</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># clean out some cruft from online dictionaries, anything with Capitals or punctuation</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> re<span style="color:#f92672">.</span>search( <span style="color:#e6db74">&#39;[^a-z]&#39;</span>, word):
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">continue</span>
+</span></span><span style="display:flex;"><span>    p<span style="color:#f92672">=</span>trie
+</span></span><span style="display:flex;"><span>    newnode<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> letter <span style="color:#f92672">in</span> word:
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">if</span> letter <span style="color:#f92672">in</span> p:
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># this letter has already been created (for a different word), follow it</span>
+</span></span><span style="display:flex;"><span>        p<span style="color:#f92672">=</span>subTrie( p, letter)
+</span></span><span style="display:flex;"><span>        newnode<span style="color:#f92672">=</span><span style="color:#66d9ef">False</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># This letter isn&#39;t here. Is it because we are adding new letters onto the tree</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># or because we&#39;ve reached the end of a complete existing word?</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> p <span style="color:#f92672">or</span> newnode:
+</span></span><span style="display:flex;"><span>          <span style="color:#75715e"># create new node for this letter</span>
+</span></span><span style="display:flex;"><span>          p[letter]<span style="color:#f92672">=</span>{}
+</span></span><span style="display:flex;"><span>          newnode<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>
+</span></span><span style="display:flex;"><span>          p<span style="color:#f92672">=</span>subTrie( p, letter)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>          <span style="color:#75715e"># this is a superset of an existing word</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#66d9ef">continue</span> <span style="color:#75715e"># skip it-Ghost can&#39;t use it and saves lots of memory</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> trie
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">isOdd</span>(x):
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> x<span style="color:#f92672">%</span><span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">isEven</span>(x):
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#f92672">not</span> x<span style="color:#f92672">%</span><span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">isPlayersMove</span>( partialWord, playerGoesFirst):
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> ((playerGoesFirst <span style="color:#f92672">and</span> isEven( len( partialWord)))
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">or</span> ( <span style="color:#f92672">not</span>( playerGoesFirst) <span style="color:#f92672">and</span> isOdd( len( partialWord))))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># returns list of all words branching from this trie</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># can also be used for all words branching from a sub-trie and a partial word</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">allWords</span>( trie, partialWord):
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> <span style="color:#f92672">not</span> trie:
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> [partialWord]
+</span></span><span style="display:flex;"><span>  resultList<span style="color:#f92672">=</span>[]
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">for</span> l <span style="color:#f92672">in</span> trieLetters( trie):
+</span></span><span style="display:flex;"><span>    resultList<span style="color:#f92672">.</span>extend( allWords( subTrie(trie, l), partialWord<span style="color:#f92672">+</span>l))
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> resultList
+</span></span><span style="display:flex;"><span>           
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">bestWords</span>( trie, partialWord): <span style="color:#75715e"># I have words. I have the best words.</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># in: a partial word, and a tree of completions of that word</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># out: a tree with the best branch in it</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># best is defined as:</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">#   1. the branch with the fewest sub-branches (words)</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">#   2. the branch with the shortest word</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">#   3. the branch with alphabetically first word</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># Note: this is somewhat subjective:</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">#       1 long word is &#39;better&#39; than 2 short words</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">#       3 short words and 3 long words are &#39;better&#39; than 6 medium words</span>
+</span></span><span style="display:flex;"><span>  wordList<span style="color:#f92672">=</span>[]
+</span></span><span style="display:flex;"><span>  countWords<span style="color:#f92672">=</span>{}
+</span></span><span style="display:flex;"><span>  shortestWord<span style="color:#f92672">=</span>{}
+</span></span><span style="display:flex;"><span>  alphaFirstWord<span style="color:#f92672">=</span>{}
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">for</span> l <span style="color:#f92672">in</span> trieLetters( trie):
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># pre-calculate sort keys for each letter and list of words</span>
+</span></span><span style="display:flex;"><span>    wordList<span style="color:#f92672">=</span>allWords( subTrie( trie, l), partialWord<span style="color:#f92672">+</span>l)
+</span></span><span style="display:flex;"><span>    countWords[l]<span style="color:#f92672">=</span>len( wordList)
+</span></span><span style="display:flex;"><span>    shortestWord[l]<span style="color:#f92672">=</span>min(map(len,wordList))
+</span></span><span style="display:flex;"><span>    alphaFirstWord[l]<span style="color:#f92672">=</span>sorted(wordList)[<span style="color:#ae81ff">0</span>]
+</span></span><span style="display:flex;"><span>  bestBranchLetter<span style="color:#f92672">=</span>sorted( trie, 
+</span></span><span style="display:flex;"><span>                  key<span style="color:#f92672">=</span><span style="color:#66d9ef">lambda</span> x: ( countWords[x], shortestWord[x], alphaFirstWord[x])
+</span></span><span style="display:flex;"><span>                  )[<span style="color:#ae81ff">0</span>]
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> { bestBranchLetter: subTrie( trie, bestBranchLetter)}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">winningMoves</span>( trie, partialWord, playerGoesFirst):
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># traverse the tree, find words that lose and prune them. Only pass back up the winning words</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> ( isPlayersMove( partialWord, playerGoesFirst)):
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Player&#39;s move</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># played &#39;word&#39; so far, next letter is one of tree.keys</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># if ANY children are winning words, choose the best one</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># prune the rest</span>
+</span></span><span style="display:flex;"><span>    resultNode<span style="color:#f92672">=</span>{}
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> l <span style="color:#f92672">in</span> trieLetters( trie): <span style="color:#75715e"># search all children branches</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">if</span> subTrie( trie, l): <span style="color:#75715e"># skip losing end-of-words</span>
+</span></span><span style="display:flex;"><span>        subResult<span style="color:#f92672">=</span>winningMoves( subTrie( trie, l), partialWord<span style="color:#f92672">+</span>l, playerGoesFirst)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> subResult:
+</span></span><span style="display:flex;"><span>          resultNode[l]<span style="color:#f92672">=</span>subResult
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (resultNode):
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">return</span> bestWords( resultNode, partialWord)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">None</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Opponent&#39;s move</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># played &#39;word&#39; so far, next letter is one of tree.keys</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># if ALL children are winning words, prune losers return ALL win word branches</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># if ANY children lose, this is a dangerous branch return None</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># if opponent must complete a word, this is a win word</span>
+</span></span><span style="display:flex;"><span>    resultNode<span style="color:#f92672">=</span>{}
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> l <span style="color:#f92672">in</span> trieLetters( trie): <span style="color:#75715e"># search all children branches</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">if</span> <span style="color:#f92672">not</span> subTrie( trie, l): <span style="color:#75715e"># end of word keep a win</span>
+</span></span><span style="display:flex;"><span>        resultNode[l]<span style="color:#f92672">=</span>{}
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>        subResult<span style="color:#f92672">=</span>winningMoves( subTrie( trie, l), partialWord<span style="color:#f92672">+</span>l, playerGoesFirst)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> <span style="color:#f92672">not</span> subResult: <span style="color:#75715e"># found a losing branch, prune this</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">None</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>          resultNode[l]<span style="color:#f92672">=</span>subResult <span style="color:#75715e"># keep winning branches</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> resultNode   
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">printWinners</span>( trie, playerGoesFirst):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> l <span style="color:#f92672">in</span> sorted( trieLetters( trie)):
+</span></span><span style="display:flex;"><span>        winningTrie<span style="color:#f92672">=</span>winningMoves( subTrie( trie, l), l, playerGoesFirst)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (winningTrie):
+</span></span><span style="display:flex;"><span>            print(l<span style="color:#f92672">+</span><span style="color:#e6db74">&#34;: </span><span style="color:#e6db74">%s</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">%</span> sorted(allWords( winningTrie, l)))
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>            print(l<span style="color:#f92672">+</span><span style="color:#e6db74">&#34;: No winning words&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">main</span>():
+</span></span><span style="display:flex;"><span>    trie<span style="color:#f92672">=</span>buildTrie( )
+</span></span><span style="display:flex;"><span>    print( <span style="color:#e6db74">&#34;Player goes first: winning words:</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>)
+</span></span><span style="display:flex;"><span>    printWinners( trie, <span style="color:#66d9ef">True</span>)
+</span></span><span style="display:flex;"><span>    print( <span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">Adversary goes first: winning words:</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>)
+</span></span><span style="display:flex;"><span>    printWinners( trie, <span style="color:#66d9ef">False</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;__main__&#34;</span>:
+</span></span><span style="display:flex;"><span>    main()
+</span></span></code></pre></div><h1 id="the-results">The Results</h1>
+<pre tabindex="0"><code>Player goes first: winning words:
 
   a: No winning words  
   b: No winning words  
@@ -271,51 +270,51 @@
   e: No winning words  
   f: No winning words  
   g: No winning words  
-  h: ['hack', 'hegemony', 'hick', 'hoar', 'hues', 'hybrid']  
+  h: [&#39;hack&#39;, &#39;hegemony&#39;, &#39;hick&#39;, &#39;hoar&#39;, &#39;hues&#39;, &#39;hybrid&#39;]  
   i: No winning words  
-  j: ['jack', 'jest', 'jigs', 'jobs', 'just']  
+  j: [&#39;jack&#39;, &#39;jest&#39;, &#39;jigs&#39;, &#39;jobs&#39;, &#39;just&#39;]  
   k: No winning words  
   l: No winning words  
-  m: ['maze', 'meek', 'meet', 'mien', 'mnemonic', 'moan', 'moat', 'muff', 'myth']  
+  m: [&#39;maze&#39;, &#39;meek&#39;, &#39;meet&#39;, &#39;mien&#39;, &#39;mnemonic&#39;, &#39;moan&#39;, &#39;moat&#39;, &#39;muff&#39;, &#39;myth&#39;]  
   n: No winning words  
   o: No winning words  
   p: No winning words  
   q: No winning words  
-  r: ['raft', 'relate', 'relating', 'relent', 'relish', 'reload', 'reluctance', 'rely', 'rhapsody', 'rill', 'rock', 'ruin']  
+  r: [&#39;raft&#39;, &#39;relate&#39;, &#39;relating&#39;, &#39;relent&#39;, &#39;relish&#39;, &#39;reload&#39;, &#39;reluctance&#39;, &#39;rely&#39;, &#39;rhapsody&#39;, &#39;rill&#39;, &#39;rock&#39;, &#39;ruin&#39;]  
   s: No winning words  
   t: No winning words  
   u: No winning words  
   v: No winning words  
   w: No winning words  
   y: No winning words  
-  z: ['zeal', 'zinc', 'zodiac']  
+  z: [&#39;zeal&#39;, &#39;zinc&#39;, &#39;zodiac&#39;]  
 
 Adversary goes first: winning words:
 
-  a: ['ahead']  
-  b: ['black', 'bleed', 'blimp', 'bloat', 'bluff']  
-  c: ['clarity', 'cleft', 'cliff', 'cloak', 'cluck']  
-  d: ['draft', 'dregs', 'drift', 'droll', 'drunk', 'dryly']  
-  e: ['equal', 'equator'] 
-  f: ['frail', 'freak', 'friar', 'frock', 'fruit']  
-  g: ['graft', 'grenade', 'grill', 'groan', 'gruff']  
+  a: [&#39;ahead&#39;]  
+  b: [&#39;black&#39;, &#39;bleed&#39;, &#39;blimp&#39;, &#39;bloat&#39;, &#39;bluff&#39;]  
+  c: [&#39;clarity&#39;, &#39;cleft&#39;, &#39;cliff&#39;, &#39;cloak&#39;, &#39;cluck&#39;]  
+  d: [&#39;draft&#39;, &#39;dregs&#39;, &#39;drift&#39;, &#39;droll&#39;, &#39;drunk&#39;, &#39;dryly&#39;]  
+  e: [&#39;equal&#39;, &#39;equator&#39;] 
+  f: [&#39;frail&#39;, &#39;freak&#39;, &#39;friar&#39;, &#39;frock&#39;, &#39;fruit&#39;]  
+  g: [&#39;graft&#39;, &#39;grenade&#39;, &#39;grill&#39;, &#39;groan&#39;, &#39;gruff&#39;]  
   h: No winning words  
-  i: ['illegal']  
+  i: [&#39;illegal&#39;]  
   j: No winning words  
-  k: ['knack', 'knead', 'knife', 'knifing', 'knock', 'knuckle']  
-  l: ['lying', 'lymph', 'lynch', 'lyric']  
+  k: [&#39;knack&#39;, &#39;knead&#39;, &#39;knife&#39;, &#39;knifing&#39;, &#39;knock&#39;, &#39;knuckle&#39;]  
+  l: [&#39;lying&#39;, &#39;lymph&#39;, &#39;lynch&#39;, &#39;lyric&#39;]  
   m: No winning words  
-  n: ['nylon', 'nymph']  
-  o: ['ozone']  
-  p: ['pneumatic']  
-  q: ['quack', 'quell', 'quick', 'quonset']  
+  n: [&#39;nylon&#39;, &#39;nymph&#39;]  
+  o: [&#39;ozone&#39;]  
+  p: [&#39;pneumatic&#39;]  
+  q: [&#39;quack&#39;, &#39;quell&#39;, &#39;quick&#39;, &#39;quonset&#39;]  
   r: No winning words  
-  s: ['squeamish', 'squeeze', 'squeezing', 'squelch']  
-  t: ['twain', 'tweed', 'twice', 'twofold']  
-  u: ['ulcer', 'ultra']  
-  v: ['vulture']  
-  w: ['whack', 'wheat', 'which', 'whoop']  
-  y: ['yield']  
+  s: [&#39;squeamish&#39;, &#39;squeeze&#39;, &#39;squeezing&#39;, &#39;squelch&#39;]  
+  t: [&#39;twain&#39;, &#39;tweed&#39;, &#39;twice&#39;, &#39;twofold&#39;]  
+  u: [&#39;ulcer&#39;, &#39;ultra&#39;]  
+  v: [&#39;vulture&#39;]  
+  w: [&#39;whack&#39;, &#39;wheat&#39;, &#39;which&#39;, &#39;whoop&#39;]  
+  y: [&#39;yield&#39;]  
   z: No winning words  
 </code></pre><p>I also tried it with a 176,000 word scrabble dictionary (TWL06) a monster 267,000 word meta-dictionary compilation from several dictionaries (SOWPODS) and a smaller 32,000 word dictionary (6of12). The results from each obviously varied due to the different words available. You should use the one that most closely matches your vocabulary and the dictionary you will use to check challenges when you play. You can download a copy of these wordlists from the <a href="https://github.com/PeterTheobald/GhostSolver">GhostSolver github repo</a>.</p>
 <h1 id="randall-munroe-did-it-first">Randall Munroe Did It First</h1>
@@ -346,8 +345,8 @@ Adversary goes first: winning words:
 
 
 <div id="disqus_thread"></div>
-<script type="application/javascript">
-    var disqus_config = function () {
+<script>
+    window.disqus_config = function () {
     
     
     
@@ -399,7 +398,7 @@ Adversary goes first: winning words:
 
 
 
-<script type="application/javascript">
+<script>
 var doNotTrack = false;
 if (!doNotTrack) {
 	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -411,7 +410,6 @@ if (!doNotTrack) {
 	ga('send', 'pageview');
 }
 </script>
-
 <script async data-id="101474234" src="//static.getclicky.com/js"></script>
 
 </body>

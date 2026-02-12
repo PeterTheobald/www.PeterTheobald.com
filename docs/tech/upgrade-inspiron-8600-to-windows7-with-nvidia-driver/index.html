@@ -89,31 +89,31 @@ When I tried to install the ForceWare 96.85 driver (by running setup.exe) I was 
 (Note: if the install deletes the files after failing you may have to run the install and leave it waiting for you to click &lsquo;OK&rsquo; while you copy the folder to another working folder)</p>
 <p>I added lines in two places:</p>
 <p>Where it had:</p>
-<pre><code>%NVIDIA_NV34.DEV_0322.1% = nv_NV3x, PCI\VEN_10DE&amp;DEV_0322
+<pre tabindex="0"><code>%NVIDIA_NV34.DEV_0322.1% = nv_NV3x, PCI\VEN_10DE&amp;DEV_0322
 %NVIDIA_NV34.DEV_0323.1% = nv_NV3x, PCI\VEN_10DE&amp;DEV_0323
 %NVIDIA_NV34.DEV_0326.1% = nv_NV3x, PCI\VEN_10DE&amp;DEV_0326
 %NVIDIA_NV34.DEV_0327.1% = nv_NV3x, PCI\VEN_10DE&amp;DEV_0327
 </code></pre><p>I added a line for my Go5200:</p>
-<pre><code>%NVIDIA_NV34.DEV_0322.1% = nv_NV3x, PCI\VEN_10DE&amp;DEV_0322
+<pre tabindex="0"><code>%NVIDIA_NV34.DEV_0322.1% = nv_NV3x, PCI\VEN_10DE&amp;DEV_0322
 %NVIDIA_NV34.DEV_0323.1% = nv_NV3x, PCI\VEN_10DE&amp;DEV_0323
 %NVIDIA_NV34.DEV_0324.1% = nv_NV3x, PCI\VEN_10DE&amp;DEV_0324&amp;SUBSYS_019c1028
 %NVIDIA_NV34.DEV_0326.1% = nv_NV3x, PCI\VEN_10DE&amp;DEV_0326
 %NVIDIA_NV34.DEV_0327.1% = nv_NV3x, PCI\VEN_10DE&amp;DEV_0327
 </code></pre><p>Actually I added two lines, because when I Googled for DEV_0324 I saw some references to a different SUBSYS. Just in case I added both:</p>
-<pre><code>%NVIDIA_NV34.DEV_0322.1% = nv_NV3x, PCI\VEN_10DE&amp;DEV_0322
+<pre tabindex="0"><code>%NVIDIA_NV34.DEV_0322.1% = nv_NV3x, PCI\VEN_10DE&amp;DEV_0322
 %NVIDIA_NV34.DEV_0323.1% = nv_NV3x, PCI\VEN_10DE&amp;DEV_0323
 %NVIDIA_NV34.DEV_0324.1% = nv_NV3x, PCI\VEN_10DE&amp;DEV_0324&amp;SUBSYS_019c1028
 %NVIDIA_NV34.DEV_0324.1% = nv_NV3x, PCI\VEN_10DE&amp;DEV_0324&amp;SUBSYS_01961028
 %NVIDIA_NV34.DEV_0326.1% = nv_NV3x, PCI\VEN_10DE&amp;DEV_0326
 %NVIDIA_NV34.DEV_0327.1% = nv_NV3x, PCI\VEN_10DE&amp;DEV_0327
 </code></pre><p>And in one other place I changed this:</p>
-<pre><code>NVIDIA_NV34.DEV_0323.1 = &quot;NVIDIA GeForce FX 5200LE&quot;
-NVIDIA_NV34.DEV_0326.1 = &quot;NVIDIA GeForce FX 5500&quot;
+<pre tabindex="0"><code>NVIDIA_NV34.DEV_0323.1 = &#34;NVIDIA GeForce FX 5200LE&#34;
+NVIDIA_NV34.DEV_0326.1 = &#34;NVIDIA GeForce FX 5500&#34;
 </code></pre><p>To this:</p>
-<pre><code>NVIDIA_NV34.DEV_0323.1 = &quot;NVIDIA GeForce FX 5200LE&quot;
-NVIDIA_NV34.DEV_0324.1 = &quot;NVIDIA GeForce FX Go5200&quot;
-NVIDIA_NV34.DEV_0324.3 = &quot;NVIDIA GeForce FX Go5200 &quot;
-NVIDIA_NV34.DEV_0326.1 = &quot;NVIDIA GeForce FX 5500&quot;
+<pre tabindex="0"><code>NVIDIA_NV34.DEV_0323.1 = &#34;NVIDIA GeForce FX 5200LE&#34;
+NVIDIA_NV34.DEV_0324.1 = &#34;NVIDIA GeForce FX Go5200&#34;
+NVIDIA_NV34.DEV_0324.3 = &#34;NVIDIA GeForce FX Go5200 &#34;
+NVIDIA_NV34.DEV_0326.1 = &#34;NVIDIA GeForce FX 5500&#34;
 </code></pre><p>Then I installed my new driver (setup.exe). I found my video chip was recognized! I was able to set it&rsquo;s proper native resolution in Control Panel/Display, and my &ldquo;Performance&rdquo; measurement went from 1.0 to 2.0. Not high enough for all of the Aero visual effects, but now I can watch video without any choppiness.</p>
 <hr>
 <p>Comments migrated from the old blog:</p>
@@ -175,8 +175,8 @@ Thanks a ton! I too was able to breathe life back into my Inspiron running Win 7
 
 
 <div id="disqus_thread"></div>
-<script type="application/javascript">
-    var disqus_config = function () {
+<script>
+    window.disqus_config = function () {
     
     
     
@@ -228,7 +228,7 @@ Thanks a ton! I too was able to breathe life back into my Inspiron running Win 7
 
 
 
-<script type="application/javascript">
+<script>
 var doNotTrack = false;
 if (!doNotTrack) {
 	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -240,7 +240,6 @@ if (!doNotTrack) {
 	ga('send', 'pageview');
 }
 </script>
-
 <script async data-id="101474234" src="//static.getclicky.com/js"></script>
 
 </body>

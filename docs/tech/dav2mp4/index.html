@@ -79,526 +79,526 @@
 <p>If you have similar needs and want a feature added, email me or comment at the bottom of this page and I&rsquo;ll add the feature if I can make time. If it&rsquo;s a big request hire me to take care of your project!</p>
 <h1 id="source-code">Source code</h1>
 <p>For the curious, the source code follows:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Dav2Mp4</span>
-<span style="color:#75715e"># V1.4 - Peter@PeterTheobald.com 2017</span>
-<span style="color:#75715e"># GPLv3 license</span>
-<span style="color:#75715e">#</span>
-<span style="color:#75715e"># Convert folder full of surveillance system DAV videos to standard MP4 videos</span>
-<span style="color:#75715e"># Works with NVR DAV files with filename convention:</span>
-<span style="color:#75715e">#    NPV-CH&lt;camera-channel&gt;-&lt;track:MAIN or ALT&gt;-&lt;yyyymmddhhMMss&gt;-&lt;yyyymmddhhMMss&gt;{_1}.DAV</span>
-<span style="color:#75715e"># This includes the ICrealtime, Dahua, and other camera systems</span>
-<span style="color:#75715e"># Preserve embedded DAV DateTime info by using the filenames and DateTime subtitles</span>
-<span style="color:#75715e"># Also merge hundreds of small clips into larger duration MP4 video files</span>
-<span style="color:#75715e">#</span>
-<span style="color:#75715e"># If you are having trouble converting your DAV files using this Dav2Mp4 you may need</span>
-<span style="color:#75715e"># to choose the nuclear option: go purchase &#39;Amped DVRconv&#39; which specializes in</span>
-<span style="color:#75715e"># converting security cam video</span>
-<span style="color:#75715e"># Note: The original EOM Dahua software, which is white-labelled by every other</span>
-<span style="color:#75715e"># manufacturer is terrible. When playing video files the times do not match the</span>
-<span style="color:#75715e"># filename&#39;s encoded times. The durations do not match. The timeline cursor starts</span>
-<span style="color:#75715e"># in one area then jumps to another. Export fails more often than it succeeds with</span>
-<span style="color:#75715e"># unhelpful errors such as &#39;file too small export failed&#39;</span>
-<span style="color:#75715e"># (tested with Dahua Smart Player 3.41.0.R.161031 and several other versions)</span>
-<span style="color:#75715e">#</span>
-<span style="color:#75715e"># BahamaSecurity DHAVI Batch Converter 3.34 works pretty well to convert DAV to AVI</span>
-<span style="color:#75715e">#   It is both faster and converts closer (but not perfect) frame rates/durations</span>
-<span style="color:#75715e">#   than ffmpeg. Use Dav2Mp4 to merge the hundreds of small AVIs and subtitle them.</span>
-
-<span style="color:#75715e"># Python 3, tk, ttk, ffmpeg</span>
-<span style="color:#75715e"># draw UI:</span>
-<span style="color:#75715e">#    title</span>
-<span style="color:#75715e">#    left: DAV folder, DAV file list, CONVERT button, right: MP4 folder, MP4 file list</span>
-<span style="color:#75715e">#    progress bar</span>
-<span style="color:#75715e">#    console/log</span>
-<span style="color:#75715e"># on convert:</span>
-<span style="color:#75715e">#    convert all DAV files to MP4 files (must convert before durations are available)</span>
-<span style="color:#75715e">#    apply DateTime subtitles to MP4 files</span>
-<span style="color:#75715e">#    merge adjacent time MP4 files</span>
-
-<span style="color:#75715e"># Version history/roadmap:</span>
-<span style="color:#75715e"># V0.1: basic UI to select DAV folder, MP4 folder</span>
-<span style="color:#75715e"># V0.2: subprocess ffmpeg to convert DAV to MP4</span>
-<span style="color:#75715e"># V0.3: build DateTime subtitle files</span>
-<span style="color:#75715e"># V0.4: merge time-adjacent files from same camera/channel</span>
-<span style="color:#75715e"># V0.5: dont make merged videos larger than maximum 2GB</span>
-<span style="color:#75715e"># V0.6: handle files w same name same time period _1 suffix but different actual contents</span>
-<span style="color:#75715e">#         use the larger one but note the exception</span>
-<span style="color:#75715e">#V1.0</span>
-<span style="color:#75715e"># V1.0: package into pyinstaller executable, make sure ffmpeg and ffprobe are in path or cwd</span>
-<span style="color:#75715e"># V1.1: create 2 log files dav2mp4-log.txt and dav2mp4-debug.txt (w ffmpeg output)</span>
-<span style="color:#75715e"># V1.2: checkboxes/settings for partial processing: Dav2Mp4, Merge Mp4s, timestamp subtitles</span>
-<span style="color:#75715e"># V1.3: ability to work with BahamaSecurity batch converter.</span>
-<span style="color:#75715e">#       Use Bahama to convert to avi, then merge and subtitle here</span>
-<span style="color:#75715e"># V1.4: redo GUI to better show steps: dav-&gt;mp4, merge, subtitle</span>
-<span style="color:#75715e"># TODO: burn/stamp DateTime subtitles onto mp4 videos</span>
-<span style="color:#75715e"># TODO: handle mp4 duration differences from recorded filename duration - analyze for best results</span>
-<span style="color:#75715e"># TODO: move ffmpeg into multithreading process and add CANCEL button so UI doesn&#39;t freeze</span>
-<span style="color:#75715e"># TODO: about button w description, my contact info, GPL license</span>
-<span style="color:#75715e"># TODO: Color filename backgrounds green as they are finished</span>
-<span style="color:#75715e">#V2.0: Converting in background!</span>
-<span style="color:#75715e"># TODO: add timestamps to log files</span>
-<span style="color:#75715e"># TODO: minimize transcoding passes,</span>
-<span style="color:#75715e">#       reduce 3 passes (dav-&gt;mp4,merge mp4s,burn subtitles) to as few passes as possible</span>
-<span style="color:#75715e"># TODO: optimize video codecs/frame rates/options for transcoding</span>
-<span style="color:#75715e"># TODO: add option to merge all files, even non-contiguous ones</span>
-<span style="color:#75715e"># TODO: remember last used folders and default to them</span>
-<span style="color:#75715e"># TODO: switch from ffmpeg to Dahua&#39;s SDK to transcode their proprietary frame rate weirdness</span>
-<span style="color:#75715e">#       and get durations that are closer but still not correct.</span>
-<span style="color:#75715e">#       SDK is C++, write command line davsdk2avi.exe infile-full-path outfile-full-path</span>
-<span style="color:#75715e"># TODO: add support for filename convention: &lt;cam&gt;-&lt;startdatetime&gt;.DAV</span>
-<span style="color:#75715e"># TODO: add fancy windows installer</span>
-<span style="color:#75715e"># TODO: add instructions for build environment (pyinstaller, ffmpeg etc)</span>
-<span style="color:#75715e"># TODO: support other subtitle formats other than SRT (ASS, SSA) and have options to set screen location</span>
-<span style="color:#75715e"># TODO: add better error handling to catch any errors and display/log them nicely</span>
-
-<span style="color:#75715e"># technique notes:</span>
-<span style="color:#75715e"># Subtitles: filename.srt line1: seqid, line2: starttime --&gt; endtime, line3-n: text, blank-line</span>
-<span style="color:#75715e">#   time= hh:mm:ss,ms eg 00:20:41,150</span>
-<span style="color:#75715e">#   soft subtitles put in .srt file, show subtitles in viewer. hard: ffmpeg -vf subtitles=file.srt</span>
-<span style="color:#75715e"># video merging: (same codec) concat &#34;demuxer&#34; will merge without reencoding</span>
-<span style="color:#75715e">#      ffmpeg -f concat -safe 0 -i filelist.txt -c copy output.mp4 (stream copy no reencoding) (filelist.txt=file file1.mp4\nfile file2.mp4\nfile file3.mp4)</span>
-<span style="color:#75715e"># querying duration:</span>
-<span style="color:#75715e">#   ffprobe -v quiet -print_format compact=print_section=0:nokey=1:escape=csv -show_entries format=duration &#34;$input_file&#34; (in seconds) or -sexagesimal (in 00:20:00,200 format)</span>
-<span style="color:#75715e">#   pipe=sp.Popen([&#39;ffprobe&#39;], stdout=sp.PIPE, stderr=sp.STDOUT)</span>
-<span style="color:#75715e">#   duration, err = pipe.communicate()</span>
-
-<span style="color:#f92672">import</span> sys<span style="color:#f92672">,</span> os<span style="color:#f92672">,</span> glob
-<span style="color:#f92672">import</span> subprocess
-<span style="color:#f92672">import</span> datetime
-<span style="color:#f92672">import</span> collections
-<span style="color:#f92672">import</span> shutil
-
-<span style="color:#f92672">from</span> tkinter <span style="color:#f92672">import</span> <span style="color:#f92672">*</span> <span style="color:#75715e"># no prefixes</span>
-<span style="color:#f92672">import</span> tkinter.scrolledtext <span style="color:#f92672">as</span> tkst
-<span style="color:#f92672">from</span> tkinter <span style="color:#f92672">import</span> ttk <span style="color:#75715e"># use ttk.prefix</span>
-<span style="color:#f92672">from</span> tkinter <span style="color:#f92672">import</span> filedialog
-<span style="color:#f92672">from</span> tkinter <span style="color:#f92672">import</span> messagebox
-
-<span style="color:#75715e"># init_commands:</span>
-<span style="color:#75715e"># get path to executables:</span>
-<span style="color:#66d9ef">if</span> getattr(sys, <span style="color:#e6db74">&#39;frozen&#39;</span>, False):
-  <span style="color:#75715e"># we are running in a pyinstaller bundle</span>
-  bundle_dir <span style="color:#f92672">=</span> sys<span style="color:#f92672">.</span>_MEIPASS
-<span style="color:#66d9ef">else</span>:
-  <span style="color:#75715e"># we are running in a normal Python environment</span>
-  bundle_dir <span style="color:#f92672">=</span> os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>dirname(os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>abspath(__file__))
-FFMPEG <span style="color:#f92672">=</span> os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>join( bundle_dir, <span style="color:#e6db74">&#39;ffmpeg.exe&#39;</span>)
-FFPROBE <span style="color:#f92672">=</span> os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>join( bundle_dir, <span style="color:#e6db74">&#39;ffprobe.exe&#39;</span>)
-
-<span style="color:#75715e">### Logging functions ##########################</span>
-<span style="color:#75715e">#   note Python-style prefers module level fns over Java-style never-instantiated static Class methods</span>
-_LOGFILE<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;dav2mp4-log.txt&#39;</span>
-_DEBUGFILE<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;dav2mp4-debug.txt&#39;</span>
-_logfile_f<span style="color:#f92672">=</span>None
-_debugfile_f<span style="color:#f92672">=</span>None
-
-<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">path</span>( folder, file):
-  <span style="color:#75715e"># use normpath to fix problems such as tk browser widget</span>
-  <span style="color:#75715e"># always returning Linux paths even on Windows systems</span>
-  <span style="color:#66d9ef">return</span>( os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>normpath(os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>join( folder, file)))
-
-<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">log</span>( text, folder<span style="color:#f92672">=</span>None):
-  <span style="color:#75715e"># sends text to logfile, can send strings or bytes</span>
-  <span style="color:#66d9ef">global</span> _logfile_f, _debugfile_f
-  <span style="color:#66d9ef">if</span> (folder):
-    _logfile_f<span style="color:#f92672">=</span>open( path( folder, _LOGFILE),<span style="color:#e6db74">&#39;wb&#39;</span>)
-    _debugfile_f<span style="color:#f92672">=</span>open( path( folder, _DEBUGFILE),<span style="color:#e6db74">&#39;wb&#39;</span>)
-  <span style="color:#66d9ef">if</span> (text):
-    <span style="color:#66d9ef">try</span>:
-      text<span style="color:#f92672">=</span>text<span style="color:#f92672">.</span>encode() <span style="color:#75715e"># convert str to utf8</span>
-    <span style="color:#66d9ef">except</span> <span style="color:#a6e22e">AttributeError</span>:
-      <span style="color:#66d9ef">pass</span>
-    _logfile_f<span style="color:#f92672">.</span>write( text <span style="color:#f92672">+</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#39;</span>)
-    _logfile_f<span style="color:#f92672">.</span>flush()
-    ui<span style="color:#f92672">.</span>log(text<span style="color:#f92672">.</span>decode())
-    debug(<span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;---- &#39;</span><span style="color:#f92672">+</span>text)
-    
-<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">debug</span>( text):
-  <span style="color:#75715e"># sends text to logfile, can send strings or bytes</span>
-  <span style="color:#66d9ef">if</span> (text):
-    <span style="color:#66d9ef">try</span>:
-      text<span style="color:#f92672">=</span>text<span style="color:#f92672">.</span>encode() <span style="color:#75715e"># convert str to utf8</span>
-    <span style="color:#66d9ef">except</span> <span style="color:#a6e22e">AttributeError</span>:
-      <span style="color:#66d9ef">pass</span>
-    _debugfile_f<span style="color:#f92672">.</span>write( text <span style="color:#f92672">+</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#39;</span>)
-    _debugfile_f<span style="color:#f92672">.</span>flush()
-<span style="color:#75715e">################################################</span>
-
-<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">runConversions</span>( davFolder, mp4Folder, mergedFolder):
-  log( <span style="color:#e6db74">&#34;starting conversion&#34;</span>, mp4Folder)
-  progress<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>
-  <span style="color:#66d9ef">if</span> (ui<span style="color:#f92672">.</span>runDav2Mp4<span style="color:#f92672">.</span>get()):
-    <span style="color:#75715e"># convert all dav to mp4</span>
-    log(<span style="color:#e6db74">&#39;---- converting DAV to MP4&#39;</span>)
-    ui<span style="color:#f92672">.</span>updateProgress(<span style="color:#ae81ff">0.0</span>)
-    ui<span style="color:#f92672">.</span>clearFileList()
-    davFiles<span style="color:#f92672">=</span>sorted(filter(<span style="color:#66d9ef">lambda</span> x: x<span style="color:#f92672">.</span>endswith((<span style="color:#e6db74">&#39;.dav&#39;</span>,<span style="color:#e6db74">&#39;.DAV&#39;</span>)), os<span style="color:#f92672">.</span>listdir(davFolder)))
-    <span style="color:#66d9ef">if</span> (ui<span style="color:#f92672">.</span>runMergeMp4<span style="color:#f92672">.</span>get()):
-      maxProgress<span style="color:#f92672">=</span>len(davFiles<span style="color:#f92672">*</span><span style="color:#ae81ff">2</span>) <span style="color:#75715e"># two passes</span>
-    <span style="color:#66d9ef">else</span>:
-      maxProgress<span style="color:#f92672">=</span>len(davFiles) <span style="color:#75715e"># one pass</span>
-    <span style="color:#66d9ef">for</span> file <span style="color:#f92672">in</span> davFiles:
-      log(<span style="color:#e6db74">&#39;converting &#39;</span><span style="color:#f92672">+</span>file<span style="color:#f92672">+</span><span style="color:#e6db74">&#34; to mp4...&#34;</span>)
-      mp4file <span style="color:#f92672">=</span> re<span style="color:#f92672">.</span>sub( <span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;\.[dD][aA][vV]$&#39;</span>, <span style="color:#e6db74">&#39;.mp4&#39;</span>, file)
-      convertDav2Mp4( path(davFolder, file), path(mp4Folder, mp4file))
-      progress<span style="color:#f92672">+=</span><span style="color:#ae81ff">1</span>
-      ui<span style="color:#f92672">.</span>addToFileList( mp4file)
-      ui<span style="color:#f92672">.</span>updateProgress( <span style="color:#ae81ff">100.0</span><span style="color:#f92672">*</span>progress<span style="color:#f92672">/</span>maxProgress)
-  
-  <span style="color:#66d9ef">if</span> (ui<span style="color:#f92672">.</span>runMergeMp4<span style="color:#f92672">.</span>get()):
-    <span style="color:#75715e"># merge adjacent mp4s, build datetime subtitles</span>
-    log(<span style="color:#e6db74">&#39;---- Merging consecutive videos&#39;</span>)
-    mp4Files<span style="color:#f92672">=</span>sorted(filter(<span style="color:#66d9ef">lambda</span> x: x<span style="color:#f92672">.</span>endswith((<span style="color:#e6db74">&#39;.mp4&#39;</span>,<span style="color:#e6db74">&#39;.MP4&#39;</span>,<span style="color:#e6db74">&#39;.avi&#39;</span>,<span style="color:#e6db74">&#39;.AVI&#39;</span>)), os<span style="color:#f92672">.</span>listdir(mp4Folder)))
-    maxProgress<span style="color:#f92672">=</span>progress<span style="color:#f92672">+</span>len(mp4Files)
-    prevFile<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;&#39;</span>
-    mergeList<span style="color:#f92672">=</span>[] <span style="color:#75715e"># keep list of contiguous files and merge contiguous groups</span>
-    mergedSize<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span> <span style="color:#75715e"># track merged file size to avoid going over 2GB</span>
-    debug(<span style="color:#e6db74">&#39;DB empty mergelist&#39;</span>)
-    <span style="color:#66d9ef">for</span> file <span style="color:#f92672">in</span> mp4Files:
-      debug(<span style="color:#e6db74">&#39;DB mergelist=&#39;</span><span style="color:#f92672">+</span>str(mergeList))
-      fInfo<span style="color:#f92672">=</span>getVideoFileInfo( file, mp4Folder)
-      <span style="color:#66d9ef">if</span> (prevFile <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;&#39;</span> <span style="color:#f92672">or</span> areContiguous(file, prevFile)):
-        debug(<span style="color:#e6db74">&#39;DB nearlyadj &#39;</span><span style="color:#f92672">+</span>file)
-        <span style="color:#66d9ef">if</span> (mergedSize<span style="color:#f92672">+</span>fInfo<span style="color:#f92672">.</span>fileSize <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">2000000000</span>):
-          mergeList<span style="color:#f92672">.</span>append(file) <span style="color:#75715e"># add to list of contiguous files</span>
-          mergedSize<span style="color:#f92672">+=</span>fInfo<span style="color:#f92672">.</span>fileSize
-          log(<span style="color:#e6db74">&#39;merging &#39;</span><span style="color:#f92672">+</span>file<span style="color:#f92672">+</span><span style="color:#e6db74">&#39;...&#39;</span>)
-        <span style="color:#66d9ef">else</span>:
-          debug(<span style="color:#e6db74">&#39;DB too large, merge list and start new&#39;</span>)
-          <span style="color:#75715e"># merged file would be too large, merge whats on the list and start a new one</span>
-          performMerge( mergeList, mp4Folder, mergedFolder)
-          mergeList<span style="color:#f92672">=</span>[file]
-          mergedSize<span style="color:#f92672">=</span>fInfo<span style="color:#f92672">.</span>fileSize
-          log(<span style="color:#e6db74">&#39;merging &#39;</span><span style="color:#f92672">+</span>file<span style="color:#f92672">+</span><span style="color:#e6db74">&#39;...&#39;</span>)
-      <span style="color:#66d9ef">elif</span> (sameDatetime(file, prevFile)):
-        <span style="color:#75715e"># an anomaly has been observed: two files w the same recorded time range</span>
-        <span style="color:#75715e"># one with _1 appended, but w different file sizes and actual durations</span>
-        <span style="color:#75715e"># usually the smaller duration is less then the recorded time range</span>
-        <span style="color:#75715e"># and the larger duration is greater than the recorded time range</span>
-        <span style="color:#75715e"># neither file duration matches their file name encoded time range</span>
-        <span style="color:#75715e"># Keep the longer file, but warn about the discrepancy in the console</span>
-        <span style="color:#75715e"># and in the datetime subtitles</span>
-        debug(<span style="color:#e6db74">&#39;DB sametime&#39;</span><span style="color:#f92672">+</span>file)
-        prevfInfo<span style="color:#f92672">=</span>getVideoFileInfo( prevFile, mp4Folder)
-        <span style="color:#66d9ef">if</span> (fInfo<span style="color:#f92672">.</span>fileSize<span style="color:#f92672">&gt;</span>prevfInfo<span style="color:#f92672">.</span>fileSize):
-          <span style="color:#75715e"># replace the previous file with this longer version</span>
-          mergeList[<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>]<span style="color:#f92672">=</span>file <span style="color:#75715e"># keep the longer file</span>
-          mergedSize<span style="color:#f92672">=</span>mergedSize<span style="color:#f92672">-</span>prevfInfo<span style="color:#f92672">.</span>fileSize<span style="color:#f92672">+</span>fInfo<span style="color:#f92672">.</span>fileSize
-          log(<span style="color:#e6db74">&#39;merging &#39;</span><span style="color:#f92672">+</span>file<span style="color:#f92672">+</span><span style="color:#e6db74">&#39; instead of prev file...&#39;</span>)
-          file<span style="color:#f92672">=</span>prevFile
-          <span style="color:#75715e"># Note possible error: this larger file could cause a merged file &gt; 2GB</span>
-          <span style="color:#75715e"># TODO: handle that</span>
-        <span style="color:#66d9ef">else</span>:
-          log(<span style="color:#e6db74">&#39;skipping &#39;</span><span style="color:#f92672">+</span>file)
-      <span style="color:#66d9ef">else</span>:
-        <span style="color:#75715e"># non-contiguous file</span>
-        debug(<span style="color:#e6db74">&#39;DB not contig &#39;</span><span style="color:#f92672">+</span>file)
-        performMerge( mergeList, mp4Folder, mergedFolder) <span style="color:#75715e"># merge what we have</span>
-        mergeList<span style="color:#f92672">=</span>[file] <span style="color:#75715e"># start a new list with current file</span>
-        mergedSize<span style="color:#f92672">=</span>fInfo<span style="color:#f92672">.</span>fileSize
-        log(<span style="color:#e6db74">&#39;merging &#39;</span><span style="color:#f92672">+</span>file<span style="color:#f92672">+</span><span style="color:#e6db74">&#39;...&#39;</span>)
-      prevFile<span style="color:#f92672">=</span>file
-      progress<span style="color:#f92672">+=</span><span style="color:#ae81ff">1</span>
-      ui<span style="color:#f92672">.</span>updateProgress(<span style="color:#ae81ff">100.0</span><span style="color:#f92672">*</span>progress<span style="color:#f92672">/</span>maxProgress)
-    <span style="color:#75715e"># finish last file(s):</span>
-    performMerge( mergeList, mp4Folder, mergedFolder)
-    log(<span style="color:#e6db74">&#39;finished&#39;</span>)
-    ui<span style="color:#f92672">.</span>updateProgress(<span style="color:#ae81ff">0.0</span>)
-    ui<span style="color:#f92672">.</span>clearFileList()
-    <span style="color:#66d9ef">for</span> mp4file <span style="color:#f92672">in</span> sorted(filter(<span style="color:#66d9ef">lambda</span> x: x<span style="color:#f92672">.</span>endswith(<span style="color:#e6db74">&#39;.mp4&#39;</span>), os<span style="color:#f92672">.</span>listdir(mergedFolder))):
-      ui<span style="color:#f92672">.</span>addToFileList( mp4file)
-  
-<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">convertDav2Mp4</span>( davPath, mp4Path):
-  command <span style="color:#f92672">=</span> [FFMPEG, <span style="color:#e6db74">&#39;-y&#39;</span>, <span style="color:#e6db74">&#39;-i&#39;</span>, davPath, mp4Path]
-  debug(str(command))
-  pipe<span style="color:#f92672">=</span> subprocess<span style="color:#f92672">.</span>Popen( command, stdout<span style="color:#f92672">=</span>subprocess<span style="color:#f92672">.</span>PIPE, stderr<span style="color:#f92672">=</span>subprocess<span style="color:#f92672">.</span>PIPE)
-  out, err <span style="color:#f92672">=</span>pipe<span style="color:#f92672">.</span>communicate()
-  debug(out)
-  debug(err)
-
-<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">areContiguous</span>( filename, prevFilename):
-  <span style="color:#75715e"># return true if the startDatetime encoded in filename</span>
-  <span style="color:#75715e"># is the same as the  endDateTime endoded in prevFilename</span>
-  <span style="color:#75715e"># -- I&#39;ve observed video files w duration of just 1 second</span>
-  <span style="color:#75715e">#    so check for 2 second margin of error unless the file</span>
-  <span style="color:#75715e">#    itself is less than 3 seconds then they have to be exact</span>
-  f1Info<span style="color:#f92672">=</span>getVideoFileInfo( filename)
-  f2Info<span style="color:#f92672">=</span>getVideoFileInfo( prevFilename)
-  f1StartDatetime<span style="color:#f92672">=</span>datetime<span style="color:#f92672">.</span>datetime<span style="color:#f92672">.</span>strptime( f1Info<span style="color:#f92672">.</span>namedStartTime, <span style="color:#e6db74">&#39;%Y%m</span><span style="color:#e6db74">%d</span><span style="color:#e6db74">%H%M%S&#39;</span>)
-  f2EndDatetime<span style="color:#f92672">=</span>datetime<span style="color:#f92672">.</span>datetime<span style="color:#f92672">.</span>strptime( f2Info<span style="color:#f92672">.</span>namedEndTime, <span style="color:#e6db74">&#39;%Y%m</span><span style="color:#e6db74">%d</span><span style="color:#e6db74">%H%M%S&#39;</span>)
-  timeDifference<span style="color:#f92672">=</span>abs((f2EndDatetime<span style="color:#f92672">-</span>f1StartDatetime)<span style="color:#f92672">.</span>total_seconds()) <span style="color:#75715e"># timedelta object</span>
-  debug(<span style="color:#e6db74">&#39;DB Nearly adjacent: file1 &#39;</span><span style="color:#f92672">+</span>prevFilename<span style="color:#f92672">+</span><span style="color:#e6db74">&#39; time &#39;</span><span style="color:#f92672">+</span>f2Info<span style="color:#f92672">.</span>namedEndTime<span style="color:#f92672">+</span><span style="color:#e6db74">&#39; vs. file2 &#39;</span><span style="color:#f92672">+</span>filename<span style="color:#f92672">+</span><span style="color:#e6db74">&#39; time &#39;</span><span style="color:#f92672">+</span>f1Info<span style="color:#f92672">.</span>namedStartTime<span style="color:#f92672">+</span><span style="color:#e6db74">&#39; = &#39;</span><span style="color:#f92672">+</span>str(timeDifference)<span style="color:#f92672">+</span><span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#39;</span>)
-  <span style="color:#66d9ef">if</span> (f1Info<span style="color:#f92672">.</span>namedDuration<span style="color:#f92672">&lt;</span><span style="color:#ae81ff">3</span>):
-    <span style="color:#75715e"># must be an exact match</span>
-    <span style="color:#66d9ef">return</span> (timeDifference<span style="color:#f92672">==</span><span style="color:#ae81ff">0</span>)
-  <span style="color:#66d9ef">else</span>:
-    <span style="color:#66d9ef">return</span> (timeDifference<span style="color:#f92672">&lt;=</span><span style="color:#ae81ff">2</span>)
-  
-<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">sameDatetime</span>( filename1, filename2):
-  f1Info<span style="color:#f92672">=</span>getVideoFileInfo( filename1)
-  f2Info<span style="color:#f92672">=</span>getVideoFileInfo( filename2)
-  <span style="color:#66d9ef">return</span>( f1Info<span style="color:#f92672">.</span>namedStartTime<span style="color:#f92672">==</span>f2Info<span style="color:#f92672">.</span>namedStartTime <span style="color:#f92672">and</span> f1Info<span style="color:#f92672">.</span>namedEndTime<span style="color:#f92672">==</span>f2Info<span style="color:#f92672">.</span>namedEndTime)
-  
-<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">performMerge</span>( mergeList, mp4Folder, mergedFolder):
-  <span style="color:#75715e"># calc merged filename with the first file&#39;s startDatetime, the last file&#39;s endDatetime</span>
-  <span style="color:#75715e"># merge the videos</span>
-  <span style="color:#75715e"># create a subtitle file w one second long segments for each merged file</span>
-  <span style="color:#75715e">#    *beware: some files are recorded wrong with different recorded durations and observed durations</span>
-  <span style="color:#75715e">#     TODO: handle these by checking ffprobe observed duration and created dual subtitles</span>
-  <span style="color:#75715e"># move the handled files into subdirectory &#39;merged/&#39;</span>
-  <span style="color:#75715e"># ffmpeg -f concat -safe 0 -i filelist.txt -c copy output.mp4 (stream copy no reencoding) (filelist.txt=file file1.mp4\nfile file2.mp4\nfile file3.mp4)</span>
-
-  firstInfo<span style="color:#f92672">=</span>getVideoFileInfo( mergeList[<span style="color:#ae81ff">0</span>]) <span style="color:#75715e"># doesnt need folder, all info is in filename</span>
-  lastInfo<span style="color:#f92672">=</span>getVideoFileInfo( mergeList[<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>])
-  
-  debug(<span style="color:#e6db74">&#39;performMerge: &#39;</span><span style="color:#f92672">+</span>str(mergeList))
-  <span style="color:#75715e"># create merged video:</span>
-  <span style="color:#66d9ef">if</span> (len(mergeList)<span style="color:#f92672">&gt;</span><span style="color:#ae81ff">1</span>):
-    mergedMp4File <span style="color:#f92672">=</span> firstInfo<span style="color:#f92672">.</span>namedPrefix <span style="color:#f92672">+</span> firstInfo<span style="color:#f92672">.</span>namedStartTime <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;_&#39;</span> <span style="color:#f92672">+</span> lastInfo<span style="color:#f92672">.</span>namedEndTime <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;.mp4&#39;</span>
-    mergeListTxtFile <span style="color:#f92672">=</span> path( mp4Folder, <span style="color:#e6db74">&#39;Dav2Mp4-mergelist.txt&#39;</span>)
-    debug(<span style="color:#e6db74">&#39;DB: mergeListTxtFile=&#39;</span><span style="color:#f92672">+</span>str(mergeListTxtFile)<span style="color:#f92672">+</span><span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#39;</span>)
-    <span style="color:#66d9ef">with</span> open( mergeListTxtFile,<span style="color:#e6db74">&#39;w&#39;</span>) <span style="color:#66d9ef">as</span> f:
-      <span style="color:#66d9ef">for</span> file <span style="color:#f92672">in</span> mergeList:
-        f<span style="color:#f92672">.</span>write(<span style="color:#e6db74">&#39;file </span><span style="color:#ae81ff">\&#39;</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">+</span>path( mp4Folder, file)<span style="color:#f92672">+</span><span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\&#39;\n</span><span style="color:#e6db74">&#39;</span>)
-        debug(<span style="color:#e6db74">&#39;DB:MergeListTxtFile   &#39;</span><span style="color:#f92672">+</span>path( mp4Folder, file)<span style="color:#f92672">+</span><span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#39;</span>)
-    <span style="color:#75715e"># DB</span>
-    <span style="color:#75715e">#mergeListTxtFileDB = path( folder, &#39;Dav2Mp4-mergelist-debug.txt&#39;)</span>
-    <span style="color:#75715e">#shutil.copy(mergeListTxtFile, mergeListTxtFileDB)</span>
-    command<span style="color:#f92672">=</span>[FFMPEG, <span style="color:#e6db74">&#39;-f&#39;</span>, <span style="color:#e6db74">&#39;concat&#39;</span>, <span style="color:#e6db74">&#39;-safe&#39;</span> , <span style="color:#e6db74">&#39;0&#39;</span>, <span style="color:#e6db74">&#39;-i&#39;</span>, mergeListTxtFile,
-             <span style="color:#e6db74">&#39;-y&#39;</span>, <span style="color:#e6db74">&#39;-c&#39;</span>, <span style="color:#e6db74">&#39;copy&#39;</span>, path(mergedFolder, mergedMp4File)]
-    debug(str(command))
-    pipe<span style="color:#f92672">=</span> subprocess<span style="color:#f92672">.</span>Popen( command, stdout<span style="color:#f92672">=</span>subprocess<span style="color:#f92672">.</span>PIPE, stderr<span style="color:#f92672">=</span>subprocess<span style="color:#f92672">.</span>PIPE)
-    out, err <span style="color:#f92672">=</span>pipe<span style="color:#f92672">.</span>communicate()
-    debug(out)
-    debug(err)
-    log(<span style="color:#e6db74">&#39;merged to &#39;</span><span style="color:#f92672">+</span>mergedMp4File)
-  
-  <span style="color:#75715e"># create subtitle file:</span>
-  <span style="color:#75715e"># srt file: &lt;seqid&gt; / hh:mm:ss,ms --&gt; hh:mm:ss,ms / text / blank</span>
-  <span style="color:#75715e">#   hh:mm:ss is relative to start. text is absolute Datetime in human readable fmt</span>
-  <span style="color:#75715e">#</span>
-  <span style="color:#75715e"># Track two simultaneous times:</span>
-  <span style="color:#75715e">#   1) The cumulative SRT start and stop times (in seconds) for each subtitle</span>
-  <span style="color:#75715e">#   2) The display Datetime from the surveillance camera</span>
-
-  subtitleFile <span style="color:#f92672">=</span> firstInfo<span style="color:#f92672">.</span>namedPrefix <span style="color:#f92672">+</span> firstInfo<span style="color:#f92672">.</span>namedStartTime <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;_&#39;</span> <span style="color:#f92672">+</span> lastInfo<span style="color:#f92672">.</span>namedEndTime <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;.srt&#39;</span>
-  log(<span style="color:#e6db74">&#39;building timestamp subtitle file &#39;</span><span style="color:#f92672">+</span>subtitleFile)
-  srtID<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>
-  srtTime<span style="color:#f92672">=</span><span style="color:#ae81ff">0.0</span>
-  <span style="color:#66d9ef">with</span> open( path( mergedFolder, subtitleFile), <span style="color:#e6db74">&#39;w&#39;</span>) <span style="color:#66d9ef">as</span> f2:
-    <span style="color:#66d9ef">for</span> file <span style="color:#f92672">in</span> mergeList:
-      videoFileInfo <span style="color:#f92672">=</span> getVideoFileInfo( file, mp4Folder)
-      <span style="color:#75715e"># displayStartTime = videoFileInfo.namedStartTimeObj (datetime.datetime)</span>
-      <span style="color:#66d9ef">for</span> fileTime <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">0</span>, int(videoFileInfo<span style="color:#f92672">.</span>videoDuration<span style="color:#f92672">+</span><span style="color:#ae81ff">1.0</span>)):
-        <span style="color:#66d9ef">if</span> ((fileTime<span style="color:#f92672">+</span><span style="color:#ae81ff">0.999</span>)<span style="color:#f92672">&lt;=</span>videoFileInfo<span style="color:#f92672">.</span>videoDuration):
-          <span style="color:#75715e"># count in 1 second intervals</span>
-          srtStart<span style="color:#f92672">=</span>srtTime<span style="color:#f92672">+</span>fileTime
-          srtEnd<span style="color:#f92672">=</span>srtTime<span style="color:#f92672">+</span>fileTime<span style="color:#f92672">+</span><span style="color:#ae81ff">0.999</span>
-        <span style="color:#66d9ef">else</span>:
-          <span style="color:#75715e"># except at the end of the file end at the exact finish</span>
-          srtStart<span style="color:#f92672">=</span>srtTime<span style="color:#f92672">+</span>fileTime
-          srtEnd<span style="color:#f92672">=</span>srtTime<span style="color:#f92672">+</span>videoFileInfo<span style="color:#f92672">.</span>videoDuration
-        srtStartHours, srtStartRem<span style="color:#f92672">=</span>(srtStart<span style="color:#f92672">//</span><span style="color:#ae81ff">3600</span>, srtStart<span style="color:#f92672">%</span><span style="color:#ae81ff">3600</span>)
-        srtStartMins, srtStartSecs<span style="color:#f92672">=</span>(srtStartRem<span style="color:#f92672">//</span><span style="color:#ae81ff">60</span>, srtStartRem<span style="color:#f92672">%</span><span style="color:#ae81ff">60</span>)
-        srtStartMillis<span style="color:#f92672">=</span>srtStart<span style="color:#f92672">%</span><span style="color:#ae81ff">1</span>
-        srtEndHours, srtEndRem<span style="color:#f92672">=</span>(srtEnd<span style="color:#f92672">//</span><span style="color:#ae81ff">3600</span>, srtEnd<span style="color:#f92672">%</span><span style="color:#ae81ff">3600</span>)
-        srtEndMins, srtEndSecs<span style="color:#f92672">=</span>(srtEndRem<span style="color:#f92672">//</span><span style="color:#ae81ff">60</span>, srtEndRem<span style="color:#f92672">%</span><span style="color:#ae81ff">60</span>)
-        srtEndMillis<span style="color:#f92672">=</span>srtEnd<span style="color:#f92672">%</span><span style="color:#ae81ff">1</span>
-        srtTimeDisplay<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;{:02d}:{:02d}:{:02d},{:03d} --&gt; {:02d}:{:02d}:{:02d},{:03d}&#39;</span><span style="color:#f92672">.</span>format(
-          int(srtStartHours), int(srtStartMins), int(srtStartSecs), int(srtStartMillis<span style="color:#f92672">*</span><span style="color:#ae81ff">1000</span>),
-          int(srtEndHours), int(srtEndMins), int(srtEndSecs), int(srtEndMillis<span style="color:#f92672">*</span><span style="color:#ae81ff">1000</span>))
-        displayDateTimeObj <span style="color:#f92672">=</span> videoFileInfo<span style="color:#f92672">.</span>namedStartTimeObj <span style="color:#f92672">+</span> datetime<span style="color:#f92672">.</span>timedelta(seconds<span style="color:#f92672">=</span>fileTime)
-        displayDateTimeStr <span style="color:#f92672">=</span> displayDateTimeObj<span style="color:#f92672">.</span>strftime(<span style="color:#e6db74">&#39;%Y-%m-</span><span style="color:#e6db74">%d</span><span style="color:#e6db74"> %H:%M:%S&#39;</span>)
-        f2<span style="color:#f92672">.</span>write(str(srtID)<span style="color:#f92672">+</span><span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">+</span>srtTimeDisplay<span style="color:#f92672">+</span><span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">+</span>displayDateTimeStr<span style="color:#f92672">+</span><span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\n\n</span><span style="color:#e6db74">&#39;</span>)
-        srtID<span style="color:#f92672">+=</span><span style="color:#ae81ff">1</span>
-      srtTime<span style="color:#f92672">+=</span>videoFileInfo<span style="color:#f92672">.</span>videoDuration<span style="color:#f92672">+</span><span style="color:#ae81ff">0.001</span> <span style="color:#75715e"># Next file start time</span>
-  <span style="color:#75715e"># TODO: option to burn subtitles: ffmpeg -cf subtitles.srt</span>
-
-  <span style="color:#75715e"># note: if its just one file, no merge happened, just copy file</span>
-  <span style="color:#66d9ef">if</span> (len(mergeList)<span style="color:#f92672">==</span><span style="color:#ae81ff">1</span>):
-    shutil<span style="color:#f92672">.</span>copy2( path(mp4Folder, file), path(mergedFolder, file))
-
-<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">getVideoFileInfo</span>( file, folder<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;&#39;</span>):
-  <span style="color:#75715e"># get info from DAV coded filename</span>
-  <span style="color:#75715e"># if optional path is included get &#39;expensive&#39; info from file itself</span>
-  <span style="color:#75715e"># filename = &lt;CAM&gt;_&lt;StartyyyymmddhhMMss&gt;_&lt;EndyyyymmddhhMMss&gt;{_1}.mp4</span>
-  <span style="color:#75715e"># dateTime= &lt;yyyymmddhhMMss&gt;</span>
-  namedPrefix, namedStartTimeStr, namedEndTimeStr <span style="color:#f92672">=</span> re<span style="color:#f92672">.</span>match(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;(.*)(\d{14})[-_ ](\d{14})&#39;</span>, file)<span style="color:#f92672">.</span>groups() 
-  namedStartTimeObj <span style="color:#f92672">=</span> datetime<span style="color:#f92672">.</span>datetime<span style="color:#f92672">.</span>strptime( namedStartTimeStr, <span style="color:#e6db74">&#39;%Y%m</span><span style="color:#e6db74">%d</span><span style="color:#e6db74">%H%M%S&#39;</span>)
-  namedEndTimeObj <span style="color:#f92672">=</span> datetime<span style="color:#f92672">.</span>datetime<span style="color:#f92672">.</span>strptime( namedEndTimeStr, <span style="color:#e6db74">&#39;%Y%m</span><span style="color:#e6db74">%d</span><span style="color:#e6db74">%H%M%S&#39;</span>)
-  namedDuration<span style="color:#f92672">=</span>(namedEndTimeObj<span style="color:#f92672">-</span>namedStartTimeObj)<span style="color:#f92672">.</span>total_seconds()<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span> <span style="color:#75715e"># timedelta to float</span>
-  <span style="color:#66d9ef">if</span> (folder):
-    command<span style="color:#f92672">=</span>[FFPROBE,<span style="color:#e6db74">&#39;-v&#39;</span>, <span style="color:#e6db74">&#39;quiet&#39;</span>, <span style="color:#e6db74">&#39;-print_format&#39;</span>,
-             <span style="color:#e6db74">&#39;compact=print_section=0:nokey=1:escape=csv&#39;</span>,
-             <span style="color:#e6db74">&#39;-show_entries&#39;</span>, <span style="color:#e6db74">&#39;format=duration&#39;</span>, path( folder, file)]
-    <span style="color:#75715e">#debug(str(command))</span>
-    pipe<span style="color:#f92672">=</span>subprocess<span style="color:#f92672">.</span>Popen(command, stdout<span style="color:#f92672">=</span>subprocess<span style="color:#f92672">.</span>PIPE, stderr<span style="color:#f92672">=</span>subprocess<span style="color:#f92672">.</span>STDOUT)
-    videoDuration, err <span style="color:#f92672">=</span> pipe<span style="color:#f92672">.</span>communicate()
-    videoDuration<span style="color:#f92672">=</span>float(videoDuration<span style="color:#f92672">.</span>decode(<span style="color:#e6db74">&#34;utf-8&#34;</span>)<span style="color:#f92672">.</span>rstrip())
-    <span style="color:#75715e">#debug(err)</span>
-    fileSize<span style="color:#f92672">=</span>os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>getsize( path(folder, file))
-  <span style="color:#66d9ef">else</span>:
-    videoDuration<span style="color:#f92672">=</span>None
-    fileSize<span style="color:#f92672">=</span>None
-  videoFileInfo <span style="color:#f92672">=</span> collections<span style="color:#f92672">.</span>namedtuple(<span style="color:#e6db74">&#39;videoFileInfo&#39;</span>, [<span style="color:#e6db74">&#39;namedPrefix&#39;</span>, <span style="color:#e6db74">&#39;namedStartTime&#39;</span>, <span style="color:#e6db74">&#39;namedEndTime&#39;</span>, <span style="color:#e6db74">&#39;namedStartTimeObj&#39;</span>, <span style="color:#e6db74">&#39;namedEndTimeObj&#39;</span>, <span style="color:#e6db74">&#39;namedDuration&#39;</span>, <span style="color:#e6db74">&#39;fileSize&#39;</span>, <span style="color:#e6db74">&#39;videoDuration&#39;</span>])
-  <span style="color:#66d9ef">return</span> videoFileInfo( namedPrefix, namedStartTimeStr, namedEndTimeStr, namedStartTimeObj, namedEndTimeObj, namedDuration, fileSize, videoDuration)
-  
-<span style="color:#75715e">################################</span>
-
-<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">UI</span>(Frame):
-  <span style="color:#66d9ef">def</span> __init__(self, master<span style="color:#f92672">=</span>None):
-    Frame<span style="color:#f92672">.</span>__init__(self, master)
-    self<span style="color:#f92672">.</span>pack(fill<span style="color:#f92672">=</span>BOTH,expand<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)
-    self<span style="color:#f92672">.</span>create_widgets()
-    self<span style="color:#f92672">.</span>processingState<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>
-  
-  <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">davBrowser</span>(self):
-    folder <span style="color:#f92672">=</span> filedialog<span style="color:#f92672">.</span>askdirectory(title<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Choose folder with DAV video files&#34;</span>, mustexist<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)
-    <span style="color:#66d9ef">if</span> folder:
-      self<span style="color:#f92672">.</span>davFolder<span style="color:#f92672">.</span>set(folder)
-      self<span style="color:#f92672">.</span>fileList<span style="color:#f92672">.</span>configure(state<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;normal&#39;</span>)
-      <span style="color:#66d9ef">for</span> file <span style="color:#f92672">in</span> sorted(filter(<span style="color:#66d9ef">lambda</span> x: x<span style="color:#f92672">.</span>endswith((<span style="color:#e6db74">&#39;.dav&#39;</span>,<span style="color:#e6db74">&#39;.DAV&#39;</span>)), os<span style="color:#f92672">.</span>listdir(folder))):
-         self<span style="color:#f92672">.</span>fileList<span style="color:#f92672">.</span>insert( <span style="color:#e6db74">&#34;end&#34;</span>, file<span style="color:#f92672">+</span><span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>)
-      self<span style="color:#f92672">.</span>fileList<span style="color:#f92672">.</span>configure(state<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;disabled&#39;</span>)
-  
-  <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">updateProgress</span>(self, progress):
-    self<span style="color:#f92672">.</span>progressVar<span style="color:#f92672">.</span>set(progress)
-    self<span style="color:#f92672">.</span>update()
-    
-  <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">mp4Browser</span>(self):
-    folder <span style="color:#f92672">=</span> filedialog<span style="color:#f92672">.</span>askdirectory(title<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Choose folder for MP4/AVI video files&#34;</span>, mustexist<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>)
-    <span style="color:#66d9ef">if</span> folder:
-      self<span style="color:#f92672">.</span>mp4Folder<span style="color:#f92672">.</span>set(folder)
-      self<span style="color:#f92672">.</span>fileList<span style="color:#f92672">.</span>configure(state<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;normal&#39;</span>)
-      <span style="color:#66d9ef">for</span> file <span style="color:#f92672">in</span> sorted(filter(<span style="color:#66d9ef">lambda</span> x: x<span style="color:#f92672">.</span>endswith((<span style="color:#e6db74">&#39;.mp4&#39;</span>,<span style="color:#e6db74">&#39;.MP4&#39;</span>,<span style="color:#e6db74">&#39;.avi&#39;</span>,<span style="color:#e6db74">&#39;.AVI&#39;</span>)), os<span style="color:#f92672">.</span>listdir(folder))):
-         self<span style="color:#f92672">.</span>fileList<span style="color:#f92672">.</span>insert( <span style="color:#e6db74">&#34;end&#34;</span>, file<span style="color:#f92672">+</span><span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>)
-      self<span style="color:#f92672">.</span>fileList<span style="color:#f92672">.</span>configure(state<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;disabled&#39;</span>)
-      
-  <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">mergedBrowser</span>(self):
-    folder <span style="color:#f92672">=</span> filedialog<span style="color:#f92672">.</span>askdirectory(title<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Choose folder to save merged MP4 video files&#34;</span>, mustexist<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>)
-    <span style="color:#66d9ef">if</span> folder:
-      self<span style="color:#f92672">.</span>mergedFolder<span style="color:#f92672">.</span>set(folder)
-      
-  <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">clearFileList</span>(self):
-    self<span style="color:#f92672">.</span>fileList<span style="color:#f92672">.</span>configure(state<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;normal&#39;</span>)
-    self<span style="color:#f92672">.</span>fileList<span style="color:#f92672">.</span>delete(<span style="color:#e6db74">&#34;1.0&#34;</span>,END)
-    self<span style="color:#f92672">.</span>fileList<span style="color:#f92672">.</span>configure(state<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;disabled&#39;</span>)
-    
-  <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">addToFileList</span>(self, text):
-    self<span style="color:#f92672">.</span>fileList<span style="color:#f92672">.</span>configure(state<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;normal&#39;</span>)
-    self<span style="color:#f92672">.</span>fileList<span style="color:#f92672">.</span>insert(<span style="color:#e6db74">&#34;end&#34;</span>, text<span style="color:#f92672">+</span><span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>)
-    self<span style="color:#f92672">.</span>fileList<span style="color:#f92672">.</span>configure(state<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;disabled&#39;</span>)
-    
-  <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">convertHandler</span>(self):
-    <span style="color:#66d9ef">if</span> (self<span style="color:#f92672">.</span>runDav2Mp4<span style="color:#f92672">.</span>get() <span style="color:#f92672">and</span> <span style="color:#f92672">not</span> self<span style="color:#f92672">.</span>davFolder<span style="color:#f92672">.</span>get()):
-      messagebox<span style="color:#f92672">.</span>showerror(<span style="color:#e6db74">&#34;Error&#34;</span>, <span style="color:#e6db74">&#34;Select folder with DAV video files to convert&#34;</span>)
-    <span style="color:#66d9ef">elif</span> (self<span style="color:#f92672">.</span>runDav2Mp4<span style="color:#f92672">.</span>get() <span style="color:#f92672">and</span> <span style="color:#f92672">not</span> self<span style="color:#f92672">.</span>mp4Folder<span style="color:#f92672">.</span>get()):
-      messagebox<span style="color:#f92672">.</span>showerror(<span style="color:#e6db74">&#34;Error&#34;</span>, <span style="color:#e6db74">&#34;Select folder to save MP4 video files&#34;</span>)
-    <span style="color:#66d9ef">elif</span> (self<span style="color:#f92672">.</span>runMergeMp4<span style="color:#f92672">.</span>get() <span style="color:#f92672">and</span> <span style="color:#f92672">not</span> self<span style="color:#f92672">.</span>mp4Folder<span style="color:#f92672">.</span>get()):
-      messagebox<span style="color:#f92672">.</span>showerror(<span style="color:#e6db74">&#34;Error&#34;</span>, <span style="color:#e6db74">&#34;Select folder with MP4 or AVI video files to merge&#34;</span>)
-    <span style="color:#66d9ef">elif</span> (self<span style="color:#f92672">.</span>runMergeMp4<span style="color:#f92672">.</span>get() <span style="color:#f92672">and</span> <span style="color:#f92672">not</span> self<span style="color:#f92672">.</span>mergedFolder<span style="color:#f92672">.</span>get()):
-      messagebox<span style="color:#f92672">.</span>showerror(<span style="color:#e6db74">&#34;Error&#34;</span>, <span style="color:#e6db74">&#34;Select folder to save merged MP4 video files&#34;</span>)
-    <span style="color:#66d9ef">else</span>:
-      <span style="color:#66d9ef">if</span> self<span style="color:#f92672">.</span>processingState<span style="color:#f92672">==</span><span style="color:#ae81ff">0</span>: <span style="color:#75715e"># I call update from inside the loop, catch thread-unsafe call</span>
-        self<span style="color:#f92672">.</span>processingState<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>
-        <span style="color:#75715e"># ghost Convert button. Add &#39;spinner&#39; widget/dialog w cancel button</span>
-        runConversions( self<span style="color:#f92672">.</span>davFolder<span style="color:#f92672">.</span>get(), self<span style="color:#f92672">.</span>mp4Folder<span style="color:#f92672">.</span>get(), self<span style="color:#f92672">.</span>mergedFolder<span style="color:#f92672">.</span>get())
-        self<span style="color:#f92672">.</span>processingState<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>
-
-  <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">log</span>(self, message):
-    self<span style="color:#f92672">.</span>consoleLog<span style="color:#f92672">.</span>configure(state<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;normal&#39;</span>)
-    self<span style="color:#f92672">.</span>consoleLog<span style="color:#f92672">.</span>insert(<span style="color:#e6db74">&#39;end&#39;</span>, message<span style="color:#f92672">+</span><span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#39;</span>)
-    self<span style="color:#f92672">.</span>consoleLog<span style="color:#f92672">.</span>configure(state<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;disabled&#39;</span>)
-    self<span style="color:#f92672">.</span>update()
-    
-  <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">create_widgets</span>(self):
-    <span style="color:#75715e"># [header]</span>
-    <span style="color:#75715e"># [DavLabel][DavFolder][DavBrowseButton][Mp4Label][Mp4Folder][Mp4BrowseButton]</span>
-    <span style="color:#75715e"># [DavFileList] [convertButton] [Mp4FileList]</span>
-    <span style="color:#75715e"># [progressBar]</span>
-    <span style="color:#75715e"># [consoleLog]</span>
-
-    <span style="color:#75715e"># main layout:</span>
-    self<span style="color:#f92672">.</span>header <span style="color:#f92672">=</span> ttk<span style="color:#f92672">.</span>Label(self, text<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Convert surveillance cam DAV video to standard MP4 video&#34;</span>)
-    self<span style="color:#f92672">.</span>header<span style="color:#f92672">.</span>pack(padx<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span>, pady<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span>)
-    
-    <span style="color:#75715e"># DAV folder selector:</span>
-    self<span style="color:#f92672">.</span>DavSelector <span style="color:#f92672">=</span> ttk<span style="color:#f92672">.</span>Frame(self)
-    self<span style="color:#f92672">.</span>DavSelector<span style="color:#f92672">.</span>pack(fill<span style="color:#f92672">=</span>X)
-    self<span style="color:#f92672">.</span>davFolderLabel <span style="color:#f92672">=</span> ttk<span style="color:#f92672">.</span>Label(self<span style="color:#f92672">.</span>DavSelector, text<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;DAV folder:&#34;</span>)
-    self<span style="color:#f92672">.</span>davFolderLabel<span style="color:#f92672">.</span>pack(side<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;left&#34;</span>)
-    self<span style="color:#f92672">.</span>davFolder<span style="color:#f92672">=</span>StringVar()
-    <span style="color:#75715e"># TODO: add onChange handler for entry widget</span>
-    self<span style="color:#f92672">.</span>davFolderEntry <span style="color:#f92672">=</span> ttk<span style="color:#f92672">.</span>Entry(self<span style="color:#f92672">.</span>DavSelector, width<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>, textvariable<span style="color:#f92672">=</span>self<span style="color:#f92672">.</span>davFolder)
-    self<span style="color:#f92672">.</span>davFolderEntry<span style="color:#f92672">.</span>pack(side<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;left&#34;</span>,fill<span style="color:#f92672">=</span>X,expand<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)
-    self<span style="color:#f92672">.</span>davBrowseButton <span style="color:#f92672">=</span> ttk<span style="color:#f92672">.</span>Button(self<span style="color:#f92672">.</span>DavSelector, text<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Browse&#34;</span>, command<span style="color:#f92672">=</span>self<span style="color:#f92672">.</span>davBrowser)
-    self<span style="color:#f92672">.</span>davBrowseButton<span style="color:#f92672">.</span>pack(side<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;left&#34;</span>, padx<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span>)
-    
-    <span style="color:#75715e"># MP4 folder selector:</span>
-    self<span style="color:#f92672">.</span>mp4Selector <span style="color:#f92672">=</span> ttk<span style="color:#f92672">.</span>Frame(self)
-    self<span style="color:#f92672">.</span>mp4Selector<span style="color:#f92672">.</span>pack(fill<span style="color:#f92672">=</span>X)
-    self<span style="color:#f92672">.</span>mp4FolderLabel <span style="color:#f92672">=</span> ttk<span style="color:#f92672">.</span>Label(self<span style="color:#f92672">.</span>mp4Selector, text<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;MP4/AVI folder:&#34;</span>)
-    self<span style="color:#f92672">.</span>mp4FolderLabel<span style="color:#f92672">.</span>pack(side<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;left&#34;</span>)
-    self<span style="color:#f92672">.</span>mp4Folder<span style="color:#f92672">=</span>StringVar()
-    <span style="color:#75715e"># TODO: add onChange handler for entry widget</span>
-    self<span style="color:#f92672">.</span>mp4FolderEntry <span style="color:#f92672">=</span> ttk<span style="color:#f92672">.</span>Entry(self<span style="color:#f92672">.</span>mp4Selector, width<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>, textvariable<span style="color:#f92672">=</span>self<span style="color:#f92672">.</span>mp4Folder)
-    self<span style="color:#f92672">.</span>mp4FolderEntry<span style="color:#f92672">.</span>pack(side<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;left&#34;</span>,fill<span style="color:#f92672">=</span>X,expand<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)
-    self<span style="color:#f92672">.</span>mp4BrowseButton <span style="color:#f92672">=</span> ttk<span style="color:#f92672">.</span>Button(self<span style="color:#f92672">.</span>mp4Selector, text<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Browse&#34;</span>, command<span style="color:#f92672">=</span>self<span style="color:#f92672">.</span>mp4Browser)
-    self<span style="color:#f92672">.</span>mp4BrowseButton<span style="color:#f92672">.</span>pack(side<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;left&#34;</span>, padx<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span>)
-
-    <span style="color:#75715e"># Merged folder selector:</span>
-    self<span style="color:#f92672">.</span>mergedSelector <span style="color:#f92672">=</span> ttk<span style="color:#f92672">.</span>Frame(self)
-    self<span style="color:#f92672">.</span>mergedSelector<span style="color:#f92672">.</span>pack(fill<span style="color:#f92672">=</span>X)
-    self<span style="color:#f92672">.</span>mergedFolderLabel <span style="color:#f92672">=</span> ttk<span style="color:#f92672">.</span>Label(self<span style="color:#f92672">.</span>mergedSelector, text<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Merged MP4 folder:&#34;</span>)
-    self<span style="color:#f92672">.</span>mergedFolderLabel<span style="color:#f92672">.</span>pack(side<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;left&#34;</span>)
-    self<span style="color:#f92672">.</span>mergedFolder<span style="color:#f92672">=</span>StringVar()
-    <span style="color:#75715e"># TODO: add onChange handler for entry widget</span>
-    self<span style="color:#f92672">.</span>mergedFolderEntry <span style="color:#f92672">=</span> ttk<span style="color:#f92672">.</span>Entry(self<span style="color:#f92672">.</span>mergedSelector, width<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>, textvariable<span style="color:#f92672">=</span>self<span style="color:#f92672">.</span>mergedFolder)
-    self<span style="color:#f92672">.</span>mergedFolderEntry<span style="color:#f92672">.</span>pack(side<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;left&#34;</span>,fill<span style="color:#f92672">=</span>X,expand<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)
-    self<span style="color:#f92672">.</span>mergedBrowseButton <span style="color:#f92672">=</span> ttk<span style="color:#f92672">.</span>Button(self<span style="color:#f92672">.</span>mergedSelector, text<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Browse&#34;</span>, command<span style="color:#f92672">=</span>self<span style="color:#f92672">.</span>mergedBrowser)
-    self<span style="color:#f92672">.</span>mergedBrowseButton<span style="color:#f92672">.</span>pack(side<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;left&#34;</span>, padx<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span>)
-    
-    <span style="color:#75715e"># pass checkboxes:</span>
-    self<span style="color:#f92672">.</span>passSelections <span style="color:#f92672">=</span> ttk<span style="color:#f92672">.</span>Frame(self, borderwidth<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>, relief<span style="color:#f92672">=</span>GROOVE)
-    self<span style="color:#f92672">.</span>passSelections<span style="color:#f92672">.</span>pack(fill<span style="color:#f92672">=</span>X, pady<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span>)
-    self<span style="color:#f92672">.</span>runDav2Mp4<span style="color:#f92672">=</span>IntVar()
-    self<span style="color:#f92672">.</span>runDav2Mp4<span style="color:#f92672">.</span>set(<span style="color:#ae81ff">1</span>)
-    self<span style="color:#f92672">.</span>checkRunDav2Mp4 <span style="color:#f92672">=</span> ttk<span style="color:#f92672">.</span>Checkbutton(self<span style="color:#f92672">.</span>passSelections, text<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;convert DAVs to MP4 w ffmpeg&#34;</span>, variable<span style="color:#f92672">=</span>self<span style="color:#f92672">.</span>runDav2Mp4)
-    self<span style="color:#f92672">.</span>checkRunDav2Mp4<span style="color:#f92672">.</span>pack(fill<span style="color:#f92672">=</span>X)
-    <span style="color:#75715e">#self.dummy = ttk.Checkbutton(self.passSelections, text=&#34;convert DAVs to AVI w BahamaSecurity&#34;, state=DISABLED)</span>
-    <span style="color:#75715e">#self.dummy.pack(fill=X)</span>
-    <span style="color:#75715e">#self.dummy = ttk.Checkbutton(self.passSelections, text=&#34;convert DAVs to AVI w DahuaSDK&#34;, state=DISABLED)</span>
-    <span style="color:#75715e">#self.dummy.pack(fill=X)</span>
-    self<span style="color:#f92672">.</span>runMergeMp4<span style="color:#f92672">=</span>IntVar()
-    self<span style="color:#f92672">.</span>runMergeMp4<span style="color:#f92672">.</span>set(<span style="color:#ae81ff">1</span>)
-    self<span style="color:#f92672">.</span>checkRunMergeMp4 <span style="color:#f92672">=</span> ttk<span style="color:#f92672">.</span>Checkbutton(self<span style="color:#f92672">.</span>passSelections, text<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Merge contiguous MP4s/AVIs and make timestamp subtitles&#34;</span>, variable<span style="color:#f92672">=</span>self<span style="color:#f92672">.</span>runMergeMp4)
-    self<span style="color:#f92672">.</span>checkRunMergeMp4<span style="color:#f92672">.</span>pack(fill<span style="color:#f92672">=</span>X)
-    
-    <span style="color:#75715e"># GO button and Progress bar</span>
-    self<span style="color:#f92672">.</span>progressFrame <span style="color:#f92672">=</span> ttk<span style="color:#f92672">.</span>Frame(self)
-    self<span style="color:#f92672">.</span>progressFrame<span style="color:#f92672">.</span>pack(fill<span style="color:#f92672">=</span>X)
-    self<span style="color:#f92672">.</span>convertButton <span style="color:#f92672">=</span> ttk<span style="color:#f92672">.</span>Button(self<span style="color:#f92672">.</span>progressFrame, text<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Convert=&gt;&#34;</span>, command<span style="color:#f92672">=</span>self<span style="color:#f92672">.</span>convertHandler)
-    self<span style="color:#f92672">.</span>convertButton<span style="color:#f92672">.</span>pack(side<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;left&#34;</span>, padx<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span>)
-    self<span style="color:#f92672">.</span>progressVar<span style="color:#f92672">=</span>DoubleVar()
-    self<span style="color:#f92672">.</span>progressBar <span style="color:#f92672">=</span> ttk<span style="color:#f92672">.</span>Progressbar(self<span style="color:#f92672">.</span>progressFrame,
-      mode<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;determinate&#34;</span>, orient<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;horizontal&#34;</span>,
-      maximum<span style="color:#f92672">=</span><span style="color:#ae81ff">100.0</span>, value<span style="color:#f92672">=</span><span style="color:#ae81ff">0.0</span>, variable<span style="color:#f92672">=</span>self<span style="color:#f92672">.</span>progressVar)
-    self<span style="color:#f92672">.</span>progressBar<span style="color:#f92672">.</span>pack(fill<span style="color:#f92672">=</span>X, padx<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span>, pady<span style="color:#f92672">=</span><span style="color:#ae81ff">5</span>)
-    
-    <span style="color:#75715e"># Files list and console/log text:</span>
-    self<span style="color:#f92672">.</span>fileList <span style="color:#f92672">=</span> tkst<span style="color:#f92672">.</span>ScrolledText(self, width<span style="color:#f92672">=</span><span style="color:#ae81ff">10</span>, height<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span>, state<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;disabled&#39;</span>)
-    self<span style="color:#f92672">.</span>fileList<span style="color:#f92672">.</span>pack(fill<span style="color:#f92672">=</span>BOTH,expand<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)
-    self<span style="color:#f92672">.</span>consoleLog <span style="color:#f92672">=</span> tkst<span style="color:#f92672">.</span>ScrolledText(self, width<span style="color:#f92672">=</span><span style="color:#ae81ff">10</span>, height<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span>, state<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;disabled&#39;</span>)
-    self<span style="color:#f92672">.</span>consoleLog<span style="color:#f92672">.</span>pack(fill<span style="color:#f92672">=</span>BOTH,expand<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)
-
-<span style="color:#75715e">################################</span>
-    
-root <span style="color:#f92672">=</span> Tk()
-ui <span style="color:#f92672">=</span> UI(master<span style="color:#f92672">=</span>root)
-ui<span style="color:#f92672">.</span>master<span style="color:#f92672">.</span>title(<span style="color:#e6db74">&#34;Dav2Mp4&#34;</span>)
-ui<span style="color:#f92672">.</span>master<span style="color:#f92672">.</span>geometry(<span style="color:#e6db74">&#34;800x600&#34;</span>)
-ui<span style="color:#f92672">.</span>mainloop()
-</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># Dav2Mp4</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># V1.4 - Peter@PeterTheobald.com 2017</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># GPLv3 license</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Convert folder full of surveillance system DAV videos to standard MP4 videos</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Works with NVR DAV files with filename convention:</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#    NPV-CH&lt;camera-channel&gt;-&lt;track:MAIN or ALT&gt;-&lt;yyyymmddhhMMss&gt;-&lt;yyyymmddhhMMss&gt;{_1}.DAV</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># This includes the ICrealtime, Dahua, and other camera systems</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Preserve embedded DAV DateTime info by using the filenames and DateTime subtitles</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Also merge hundreds of small clips into larger duration MP4 video files</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># If you are having trouble converting your DAV files using this Dav2Mp4 you may need</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># to choose the nuclear option: go purchase &#39;Amped DVRconv&#39; which specializes in</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># converting security cam video</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Note: The original EOM Dahua software, which is white-labelled by every other</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># manufacturer is terrible. When playing video files the times do not match the</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># filename&#39;s encoded times. The durations do not match. The timeline cursor starts</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># in one area then jumps to another. Export fails more often than it succeeds with</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># unhelpful errors such as &#39;file too small export failed&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># (tested with Dahua Smart Player 3.41.0.R.161031 and several other versions)</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># BahamaSecurity DHAVI Batch Converter 3.34 works pretty well to convert DAV to AVI</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#   It is both faster and converts closer (but not perfect) frame rates/durations</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#   than ffmpeg. Use Dav2Mp4 to merge the hundreds of small AVIs and subtitle them.</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Python 3, tk, ttk, ffmpeg</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># draw UI:</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#    title</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#    left: DAV folder, DAV file list, CONVERT button, right: MP4 folder, MP4 file list</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#    progress bar</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#    console/log</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># on convert:</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#    convert all DAV files to MP4 files (must convert before durations are available)</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#    apply DateTime subtitles to MP4 files</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#    merge adjacent time MP4 files</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Version history/roadmap:</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># V0.1: basic UI to select DAV folder, MP4 folder</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># V0.2: subprocess ffmpeg to convert DAV to MP4</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># V0.3: build DateTime subtitle files</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># V0.4: merge time-adjacent files from same camera/channel</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># V0.5: dont make merged videos larger than maximum 2GB</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># V0.6: handle files w same name same time period _1 suffix but different actual contents</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#         use the larger one but note the exception</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#V1.0</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># V1.0: package into pyinstaller executable, make sure ffmpeg and ffprobe are in path or cwd</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># V1.1: create 2 log files dav2mp4-log.txt and dav2mp4-debug.txt (w ffmpeg output)</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># V1.2: checkboxes/settings for partial processing: Dav2Mp4, Merge Mp4s, timestamp subtitles</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># V1.3: ability to work with BahamaSecurity batch converter.</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#       Use Bahama to convert to avi, then merge and subtitle here</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># V1.4: redo GUI to better show steps: dav-&gt;mp4, merge, subtitle</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># TODO: burn/stamp DateTime subtitles onto mp4 videos</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># TODO: handle mp4 duration differences from recorded filename duration - analyze for best results</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># TODO: move ffmpeg into multithreading process and add CANCEL button so UI doesn&#39;t freeze</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># TODO: about button w description, my contact info, GPL license</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># TODO: Color filename backgrounds green as they are finished</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#V2.0: Converting in background!</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># TODO: add timestamps to log files</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># TODO: minimize transcoding passes,</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#       reduce 3 passes (dav-&gt;mp4,merge mp4s,burn subtitles) to as few passes as possible</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># TODO: optimize video codecs/frame rates/options for transcoding</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># TODO: add option to merge all files, even non-contiguous ones</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># TODO: remember last used folders and default to them</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># TODO: switch from ffmpeg to Dahua&#39;s SDK to transcode their proprietary frame rate weirdness</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#       and get durations that are closer but still not correct.</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#       SDK is C++, write command line davsdk2avi.exe infile-full-path outfile-full-path</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># TODO: add support for filename convention: &lt;cam&gt;-&lt;startdatetime&gt;.DAV</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># TODO: add fancy windows installer</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># TODO: add instructions for build environment (pyinstaller, ffmpeg etc)</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># TODO: support other subtitle formats other than SRT (ASS, SSA) and have options to set screen location</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># TODO: add better error handling to catch any errors and display/log them nicely</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># technique notes:</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Subtitles: filename.srt line1: seqid, line2: starttime --&gt; endtime, line3-n: text, blank-line</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#   time= hh:mm:ss,ms eg 00:20:41,150</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#   soft subtitles put in .srt file, show subtitles in viewer. hard: ffmpeg -vf subtitles=file.srt</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># video merging: (same codec) concat &#34;demuxer&#34; will merge without reencoding</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#      ffmpeg -f concat -safe 0 -i filelist.txt -c copy output.mp4 (stream copy no reencoding) (filelist.txt=file file1.mp4\nfile file2.mp4\nfile file3.mp4)</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># querying duration:</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#   ffprobe -v quiet -print_format compact=print_section=0:nokey=1:escape=csv -show_entries format=duration &#34;$input_file&#34; (in seconds) or -sexagesimal (in 00:20:00,200 format)</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#   pipe=sp.Popen([&#39;ffprobe&#39;], stdout=sp.PIPE, stderr=sp.STDOUT)</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#   duration, err = pipe.communicate()</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> sys<span style="color:#f92672">,</span> os<span style="color:#f92672">,</span> glob
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> subprocess
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> datetime
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> collections
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> shutil
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> tkinter <span style="color:#f92672">import</span> <span style="color:#f92672">*</span> <span style="color:#75715e"># no prefixes</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> tkinter.scrolledtext <span style="color:#66d9ef">as</span> tkst
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> tkinter <span style="color:#f92672">import</span> ttk <span style="color:#75715e"># use ttk.prefix</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> tkinter <span style="color:#f92672">import</span> filedialog
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> tkinter <span style="color:#f92672">import</span> messagebox
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># init_commands:</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># get path to executables:</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> getattr(sys, <span style="color:#e6db74">&#39;frozen&#39;</span>, <span style="color:#66d9ef">False</span>):
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># we are running in a pyinstaller bundle</span>
+</span></span><span style="display:flex;"><span>  bundle_dir <span style="color:#f92672">=</span> sys<span style="color:#f92672">.</span>_MEIPASS
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># we are running in a normal Python environment</span>
+</span></span><span style="display:flex;"><span>  bundle_dir <span style="color:#f92672">=</span> os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>dirname(os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>abspath(__file__))
+</span></span><span style="display:flex;"><span>FFMPEG <span style="color:#f92672">=</span> os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>join( bundle_dir, <span style="color:#e6db74">&#39;ffmpeg.exe&#39;</span>)
+</span></span><span style="display:flex;"><span>FFPROBE <span style="color:#f92672">=</span> os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>join( bundle_dir, <span style="color:#e6db74">&#39;ffprobe.exe&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">### Logging functions ##########################</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#   note Python-style prefers module level fns over Java-style never-instantiated static Class methods</span>
+</span></span><span style="display:flex;"><span>_LOGFILE<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;dav2mp4-log.txt&#39;</span>
+</span></span><span style="display:flex;"><span>_DEBUGFILE<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;dav2mp4-debug.txt&#39;</span>
+</span></span><span style="display:flex;"><span>_logfile_f<span style="color:#f92672">=</span><span style="color:#66d9ef">None</span>
+</span></span><span style="display:flex;"><span>_debugfile_f<span style="color:#f92672">=</span><span style="color:#66d9ef">None</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">path</span>( folder, file):
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># use normpath to fix problems such as tk browser widget</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># always returning Linux paths even on Windows systems</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span>( os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>normpath(os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>join( folder, file)))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">log</span>( text, folder<span style="color:#f92672">=</span><span style="color:#66d9ef">None</span>):
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># sends text to logfile, can send strings or bytes</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">global</span> _logfile_f, _debugfile_f
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> (folder):
+</span></span><span style="display:flex;"><span>    _logfile_f<span style="color:#f92672">=</span>open( path( folder, _LOGFILE),<span style="color:#e6db74">&#39;wb&#39;</span>)
+</span></span><span style="display:flex;"><span>    _debugfile_f<span style="color:#f92672">=</span>open( path( folder, _DEBUGFILE),<span style="color:#e6db74">&#39;wb&#39;</span>)
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> (text):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">try</span>:
+</span></span><span style="display:flex;"><span>      text<span style="color:#f92672">=</span>text<span style="color:#f92672">.</span>encode() <span style="color:#75715e"># convert str to utf8</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">except</span> <span style="color:#a6e22e">AttributeError</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">pass</span>
+</span></span><span style="display:flex;"><span>    _logfile_f<span style="color:#f92672">.</span>write( text <span style="color:#f92672">+</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#39;</span>)
+</span></span><span style="display:flex;"><span>    _logfile_f<span style="color:#f92672">.</span>flush()
+</span></span><span style="display:flex;"><span>    ui<span style="color:#f92672">.</span>log(text<span style="color:#f92672">.</span>decode())
+</span></span><span style="display:flex;"><span>    debug(<span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;---- &#39;</span><span style="color:#f92672">+</span>text)
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">debug</span>( text):
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># sends text to logfile, can send strings or bytes</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> (text):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">try</span>:
+</span></span><span style="display:flex;"><span>      text<span style="color:#f92672">=</span>text<span style="color:#f92672">.</span>encode() <span style="color:#75715e"># convert str to utf8</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">except</span> <span style="color:#a6e22e">AttributeError</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">pass</span>
+</span></span><span style="display:flex;"><span>    _debugfile_f<span style="color:#f92672">.</span>write( text <span style="color:#f92672">+</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#39;</span>)
+</span></span><span style="display:flex;"><span>    _debugfile_f<span style="color:#f92672">.</span>flush()
+</span></span><span style="display:flex;"><span><span style="color:#75715e">################################################</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">runConversions</span>( davFolder, mp4Folder, mergedFolder):
+</span></span><span style="display:flex;"><span>  log( <span style="color:#e6db74">&#34;starting conversion&#34;</span>, mp4Folder)
+</span></span><span style="display:flex;"><span>  progress<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> (ui<span style="color:#f92672">.</span>runDav2Mp4<span style="color:#f92672">.</span>get()):
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># convert all dav to mp4</span>
+</span></span><span style="display:flex;"><span>    log(<span style="color:#e6db74">&#39;---- converting DAV to MP4&#39;</span>)
+</span></span><span style="display:flex;"><span>    ui<span style="color:#f92672">.</span>updateProgress(<span style="color:#ae81ff">0.0</span>)
+</span></span><span style="display:flex;"><span>    ui<span style="color:#f92672">.</span>clearFileList()
+</span></span><span style="display:flex;"><span>    davFiles<span style="color:#f92672">=</span>sorted(filter(<span style="color:#66d9ef">lambda</span> x: x<span style="color:#f92672">.</span>endswith((<span style="color:#e6db74">&#39;.dav&#39;</span>,<span style="color:#e6db74">&#39;.DAV&#39;</span>)), os<span style="color:#f92672">.</span>listdir(davFolder)))
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (ui<span style="color:#f92672">.</span>runMergeMp4<span style="color:#f92672">.</span>get()):
+</span></span><span style="display:flex;"><span>      maxProgress<span style="color:#f92672">=</span>len(davFiles<span style="color:#f92672">*</span><span style="color:#ae81ff">2</span>) <span style="color:#75715e"># two passes</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>      maxProgress<span style="color:#f92672">=</span>len(davFiles) <span style="color:#75715e"># one pass</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> file <span style="color:#f92672">in</span> davFiles:
+</span></span><span style="display:flex;"><span>      log(<span style="color:#e6db74">&#39;converting &#39;</span><span style="color:#f92672">+</span>file<span style="color:#f92672">+</span><span style="color:#e6db74">&#34; to mp4...&#34;</span>)
+</span></span><span style="display:flex;"><span>      mp4file <span style="color:#f92672">=</span> re<span style="color:#f92672">.</span>sub( <span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;\.[dD][aA][vV]$&#39;</span>, <span style="color:#e6db74">&#39;.mp4&#39;</span>, file)
+</span></span><span style="display:flex;"><span>      convertDav2Mp4( path(davFolder, file), path(mp4Folder, mp4file))
+</span></span><span style="display:flex;"><span>      progress<span style="color:#f92672">+=</span><span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>      ui<span style="color:#f92672">.</span>addToFileList( mp4file)
+</span></span><span style="display:flex;"><span>      ui<span style="color:#f92672">.</span>updateProgress( <span style="color:#ae81ff">100.0</span><span style="color:#f92672">*</span>progress<span style="color:#f92672">/</span>maxProgress)
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> (ui<span style="color:#f92672">.</span>runMergeMp4<span style="color:#f92672">.</span>get()):
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># merge adjacent mp4s, build datetime subtitles</span>
+</span></span><span style="display:flex;"><span>    log(<span style="color:#e6db74">&#39;---- Merging consecutive videos&#39;</span>)
+</span></span><span style="display:flex;"><span>    mp4Files<span style="color:#f92672">=</span>sorted(filter(<span style="color:#66d9ef">lambda</span> x: x<span style="color:#f92672">.</span>endswith((<span style="color:#e6db74">&#39;.mp4&#39;</span>,<span style="color:#e6db74">&#39;.MP4&#39;</span>,<span style="color:#e6db74">&#39;.avi&#39;</span>,<span style="color:#e6db74">&#39;.AVI&#39;</span>)), os<span style="color:#f92672">.</span>listdir(mp4Folder)))
+</span></span><span style="display:flex;"><span>    maxProgress<span style="color:#f92672">=</span>progress<span style="color:#f92672">+</span>len(mp4Files)
+</span></span><span style="display:flex;"><span>    prevFile<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;&#39;</span>
+</span></span><span style="display:flex;"><span>    mergeList<span style="color:#f92672">=</span>[] <span style="color:#75715e"># keep list of contiguous files and merge contiguous groups</span>
+</span></span><span style="display:flex;"><span>    mergedSize<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span> <span style="color:#75715e"># track merged file size to avoid going over 2GB</span>
+</span></span><span style="display:flex;"><span>    debug(<span style="color:#e6db74">&#39;DB empty mergelist&#39;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> file <span style="color:#f92672">in</span> mp4Files:
+</span></span><span style="display:flex;"><span>      debug(<span style="color:#e6db74">&#39;DB mergelist=&#39;</span><span style="color:#f92672">+</span>str(mergeList))
+</span></span><span style="display:flex;"><span>      fInfo<span style="color:#f92672">=</span>getVideoFileInfo( file, mp4Folder)
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">if</span> (prevFile <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;&#39;</span> <span style="color:#f92672">or</span> areContiguous(file, prevFile)):
+</span></span><span style="display:flex;"><span>        debug(<span style="color:#e6db74">&#39;DB nearlyadj &#39;</span><span style="color:#f92672">+</span>file)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (mergedSize<span style="color:#f92672">+</span>fInfo<span style="color:#f92672">.</span>fileSize <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">2000000000</span>):
+</span></span><span style="display:flex;"><span>          mergeList<span style="color:#f92672">.</span>append(file) <span style="color:#75715e"># add to list of contiguous files</span>
+</span></span><span style="display:flex;"><span>          mergedSize<span style="color:#f92672">+=</span>fInfo<span style="color:#f92672">.</span>fileSize
+</span></span><span style="display:flex;"><span>          log(<span style="color:#e6db74">&#39;merging &#39;</span><span style="color:#f92672">+</span>file<span style="color:#f92672">+</span><span style="color:#e6db74">&#39;...&#39;</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>          debug(<span style="color:#e6db74">&#39;DB too large, merge list and start new&#39;</span>)
+</span></span><span style="display:flex;"><span>          <span style="color:#75715e"># merged file would be too large, merge whats on the list and start a new one</span>
+</span></span><span style="display:flex;"><span>          performMerge( mergeList, mp4Folder, mergedFolder)
+</span></span><span style="display:flex;"><span>          mergeList<span style="color:#f92672">=</span>[file]
+</span></span><span style="display:flex;"><span>          mergedSize<span style="color:#f92672">=</span>fInfo<span style="color:#f92672">.</span>fileSize
+</span></span><span style="display:flex;"><span>          log(<span style="color:#e6db74">&#39;merging &#39;</span><span style="color:#f92672">+</span>file<span style="color:#f92672">+</span><span style="color:#e6db74">&#39;...&#39;</span>)
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">elif</span> (sameDatetime(file, prevFile)):
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># an anomaly has been observed: two files w the same recorded time range</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># one with _1 appended, but w different file sizes and actual durations</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># usually the smaller duration is less then the recorded time range</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># and the larger duration is greater than the recorded time range</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># neither file duration matches their file name encoded time range</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># Keep the longer file, but warn about the discrepancy in the console</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># and in the datetime subtitles</span>
+</span></span><span style="display:flex;"><span>        debug(<span style="color:#e6db74">&#39;DB sametime&#39;</span><span style="color:#f92672">+</span>file)
+</span></span><span style="display:flex;"><span>        prevfInfo<span style="color:#f92672">=</span>getVideoFileInfo( prevFile, mp4Folder)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (fInfo<span style="color:#f92672">.</span>fileSize<span style="color:#f92672">&gt;</span>prevfInfo<span style="color:#f92672">.</span>fileSize):
+</span></span><span style="display:flex;"><span>          <span style="color:#75715e"># replace the previous file with this longer version</span>
+</span></span><span style="display:flex;"><span>          mergeList[<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>]<span style="color:#f92672">=</span>file <span style="color:#75715e"># keep the longer file</span>
+</span></span><span style="display:flex;"><span>          mergedSize<span style="color:#f92672">=</span>mergedSize<span style="color:#f92672">-</span>prevfInfo<span style="color:#f92672">.</span>fileSize<span style="color:#f92672">+</span>fInfo<span style="color:#f92672">.</span>fileSize
+</span></span><span style="display:flex;"><span>          log(<span style="color:#e6db74">&#39;merging &#39;</span><span style="color:#f92672">+</span>file<span style="color:#f92672">+</span><span style="color:#e6db74">&#39; instead of prev file...&#39;</span>)
+</span></span><span style="display:flex;"><span>          file<span style="color:#f92672">=</span>prevFile
+</span></span><span style="display:flex;"><span>          <span style="color:#75715e"># Note possible error: this larger file could cause a merged file &gt; 2GB</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#75715e"># TODO: handle that</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>          log(<span style="color:#e6db74">&#39;skipping &#39;</span><span style="color:#f92672">+</span>file)
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># non-contiguous file</span>
+</span></span><span style="display:flex;"><span>        debug(<span style="color:#e6db74">&#39;DB not contig &#39;</span><span style="color:#f92672">+</span>file)
+</span></span><span style="display:flex;"><span>        performMerge( mergeList, mp4Folder, mergedFolder) <span style="color:#75715e"># merge what we have</span>
+</span></span><span style="display:flex;"><span>        mergeList<span style="color:#f92672">=</span>[file] <span style="color:#75715e"># start a new list with current file</span>
+</span></span><span style="display:flex;"><span>        mergedSize<span style="color:#f92672">=</span>fInfo<span style="color:#f92672">.</span>fileSize
+</span></span><span style="display:flex;"><span>        log(<span style="color:#e6db74">&#39;merging &#39;</span><span style="color:#f92672">+</span>file<span style="color:#f92672">+</span><span style="color:#e6db74">&#39;...&#39;</span>)
+</span></span><span style="display:flex;"><span>      prevFile<span style="color:#f92672">=</span>file
+</span></span><span style="display:flex;"><span>      progress<span style="color:#f92672">+=</span><span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>      ui<span style="color:#f92672">.</span>updateProgress(<span style="color:#ae81ff">100.0</span><span style="color:#f92672">*</span>progress<span style="color:#f92672">/</span>maxProgress)
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># finish last file(s):</span>
+</span></span><span style="display:flex;"><span>    performMerge( mergeList, mp4Folder, mergedFolder)
+</span></span><span style="display:flex;"><span>    log(<span style="color:#e6db74">&#39;finished&#39;</span>)
+</span></span><span style="display:flex;"><span>    ui<span style="color:#f92672">.</span>updateProgress(<span style="color:#ae81ff">0.0</span>)
+</span></span><span style="display:flex;"><span>    ui<span style="color:#f92672">.</span>clearFileList()
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> mp4file <span style="color:#f92672">in</span> sorted(filter(<span style="color:#66d9ef">lambda</span> x: x<span style="color:#f92672">.</span>endswith(<span style="color:#e6db74">&#39;.mp4&#39;</span>), os<span style="color:#f92672">.</span>listdir(mergedFolder))):
+</span></span><span style="display:flex;"><span>      ui<span style="color:#f92672">.</span>addToFileList( mp4file)
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">convertDav2Mp4</span>( davPath, mp4Path):
+</span></span><span style="display:flex;"><span>  command <span style="color:#f92672">=</span> [FFMPEG, <span style="color:#e6db74">&#39;-y&#39;</span>, <span style="color:#e6db74">&#39;-i&#39;</span>, davPath, mp4Path]
+</span></span><span style="display:flex;"><span>  debug(str(command))
+</span></span><span style="display:flex;"><span>  pipe<span style="color:#f92672">=</span> subprocess<span style="color:#f92672">.</span>Popen( command, stdout<span style="color:#f92672">=</span>subprocess<span style="color:#f92672">.</span>PIPE, stderr<span style="color:#f92672">=</span>subprocess<span style="color:#f92672">.</span>PIPE)
+</span></span><span style="display:flex;"><span>  out, err <span style="color:#f92672">=</span>pipe<span style="color:#f92672">.</span>communicate()
+</span></span><span style="display:flex;"><span>  debug(out)
+</span></span><span style="display:flex;"><span>  debug(err)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">areContiguous</span>( filename, prevFilename):
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># return true if the startDatetime encoded in filename</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># is the same as the  endDateTime endoded in prevFilename</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># -- I&#39;ve observed video files w duration of just 1 second</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">#    so check for 2 second margin of error unless the file</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">#    itself is less than 3 seconds then they have to be exact</span>
+</span></span><span style="display:flex;"><span>  f1Info<span style="color:#f92672">=</span>getVideoFileInfo( filename)
+</span></span><span style="display:flex;"><span>  f2Info<span style="color:#f92672">=</span>getVideoFileInfo( prevFilename)
+</span></span><span style="display:flex;"><span>  f1StartDatetime<span style="color:#f92672">=</span>datetime<span style="color:#f92672">.</span>datetime<span style="color:#f92672">.</span>strptime( f1Info<span style="color:#f92672">.</span>namedStartTime, <span style="color:#e6db74">&#39;%Y%m</span><span style="color:#e6db74">%d</span><span style="color:#e6db74">%H%M%S&#39;</span>)
+</span></span><span style="display:flex;"><span>  f2EndDatetime<span style="color:#f92672">=</span>datetime<span style="color:#f92672">.</span>datetime<span style="color:#f92672">.</span>strptime( f2Info<span style="color:#f92672">.</span>namedEndTime, <span style="color:#e6db74">&#39;%Y%m</span><span style="color:#e6db74">%d</span><span style="color:#e6db74">%H%M%S&#39;</span>)
+</span></span><span style="display:flex;"><span>  timeDifference<span style="color:#f92672">=</span>abs((f2EndDatetime<span style="color:#f92672">-</span>f1StartDatetime)<span style="color:#f92672">.</span>total_seconds()) <span style="color:#75715e"># timedelta object</span>
+</span></span><span style="display:flex;"><span>  debug(<span style="color:#e6db74">&#39;DB Nearly adjacent: file1 &#39;</span><span style="color:#f92672">+</span>prevFilename<span style="color:#f92672">+</span><span style="color:#e6db74">&#39; time &#39;</span><span style="color:#f92672">+</span>f2Info<span style="color:#f92672">.</span>namedEndTime<span style="color:#f92672">+</span><span style="color:#e6db74">&#39; vs. file2 &#39;</span><span style="color:#f92672">+</span>filename<span style="color:#f92672">+</span><span style="color:#e6db74">&#39; time &#39;</span><span style="color:#f92672">+</span>f1Info<span style="color:#f92672">.</span>namedStartTime<span style="color:#f92672">+</span><span style="color:#e6db74">&#39; = &#39;</span><span style="color:#f92672">+</span>str(timeDifference)<span style="color:#f92672">+</span><span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#39;</span>)
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> (f1Info<span style="color:#f92672">.</span>namedDuration<span style="color:#f92672">&lt;</span><span style="color:#ae81ff">3</span>):
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># must be an exact match</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> (timeDifference<span style="color:#f92672">==</span><span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> (timeDifference<span style="color:#f92672">&lt;=</span><span style="color:#ae81ff">2</span>)
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">sameDatetime</span>( filename1, filename2):
+</span></span><span style="display:flex;"><span>  f1Info<span style="color:#f92672">=</span>getVideoFileInfo( filename1)
+</span></span><span style="display:flex;"><span>  f2Info<span style="color:#f92672">=</span>getVideoFileInfo( filename2)
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span>( f1Info<span style="color:#f92672">.</span>namedStartTime<span style="color:#f92672">==</span>f2Info<span style="color:#f92672">.</span>namedStartTime <span style="color:#f92672">and</span> f1Info<span style="color:#f92672">.</span>namedEndTime<span style="color:#f92672">==</span>f2Info<span style="color:#f92672">.</span>namedEndTime)
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">performMerge</span>( mergeList, mp4Folder, mergedFolder):
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># calc merged filename with the first file&#39;s startDatetime, the last file&#39;s endDatetime</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># merge the videos</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># create a subtitle file w one second long segments for each merged file</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">#    *beware: some files are recorded wrong with different recorded durations and observed durations</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">#     TODO: handle these by checking ffprobe observed duration and created dual subtitles</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># move the handled files into subdirectory &#39;merged/&#39;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># ffmpeg -f concat -safe 0 -i filelist.txt -c copy output.mp4 (stream copy no reencoding) (filelist.txt=file file1.mp4\nfile file2.mp4\nfile file3.mp4)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  firstInfo<span style="color:#f92672">=</span>getVideoFileInfo( mergeList[<span style="color:#ae81ff">0</span>]) <span style="color:#75715e"># doesnt need folder, all info is in filename</span>
+</span></span><span style="display:flex;"><span>  lastInfo<span style="color:#f92672">=</span>getVideoFileInfo( mergeList[<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>])
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>  debug(<span style="color:#e6db74">&#39;performMerge: &#39;</span><span style="color:#f92672">+</span>str(mergeList))
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># create merged video:</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> (len(mergeList)<span style="color:#f92672">&gt;</span><span style="color:#ae81ff">1</span>):
+</span></span><span style="display:flex;"><span>    mergedMp4File <span style="color:#f92672">=</span> firstInfo<span style="color:#f92672">.</span>namedPrefix <span style="color:#f92672">+</span> firstInfo<span style="color:#f92672">.</span>namedStartTime <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;_&#39;</span> <span style="color:#f92672">+</span> lastInfo<span style="color:#f92672">.</span>namedEndTime <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;.mp4&#39;</span>
+</span></span><span style="display:flex;"><span>    mergeListTxtFile <span style="color:#f92672">=</span> path( mp4Folder, <span style="color:#e6db74">&#39;Dav2Mp4-mergelist.txt&#39;</span>)
+</span></span><span style="display:flex;"><span>    debug(<span style="color:#e6db74">&#39;DB: mergeListTxtFile=&#39;</span><span style="color:#f92672">+</span>str(mergeListTxtFile)<span style="color:#f92672">+</span><span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#39;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">with</span> open( mergeListTxtFile,<span style="color:#e6db74">&#39;w&#39;</span>) <span style="color:#66d9ef">as</span> f:
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">for</span> file <span style="color:#f92672">in</span> mergeList:
+</span></span><span style="display:flex;"><span>        f<span style="color:#f92672">.</span>write(<span style="color:#e6db74">&#39;file </span><span style="color:#ae81ff">\&#39;</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">+</span>path( mp4Folder, file)<span style="color:#f92672">+</span><span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\&#39;\n</span><span style="color:#e6db74">&#39;</span>)
+</span></span><span style="display:flex;"><span>        debug(<span style="color:#e6db74">&#39;DB:MergeListTxtFile   &#39;</span><span style="color:#f92672">+</span>path( mp4Folder, file)<span style="color:#f92672">+</span><span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#39;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># DB</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">#mergeListTxtFileDB = path( folder, &#39;Dav2Mp4-mergelist-debug.txt&#39;)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">#shutil.copy(mergeListTxtFile, mergeListTxtFileDB)</span>
+</span></span><span style="display:flex;"><span>    command<span style="color:#f92672">=</span>[FFMPEG, <span style="color:#e6db74">&#39;-f&#39;</span>, <span style="color:#e6db74">&#39;concat&#39;</span>, <span style="color:#e6db74">&#39;-safe&#39;</span> , <span style="color:#e6db74">&#39;0&#39;</span>, <span style="color:#e6db74">&#39;-i&#39;</span>, mergeListTxtFile,
+</span></span><span style="display:flex;"><span>             <span style="color:#e6db74">&#39;-y&#39;</span>, <span style="color:#e6db74">&#39;-c&#39;</span>, <span style="color:#e6db74">&#39;copy&#39;</span>, path(mergedFolder, mergedMp4File)]
+</span></span><span style="display:flex;"><span>    debug(str(command))
+</span></span><span style="display:flex;"><span>    pipe<span style="color:#f92672">=</span> subprocess<span style="color:#f92672">.</span>Popen( command, stdout<span style="color:#f92672">=</span>subprocess<span style="color:#f92672">.</span>PIPE, stderr<span style="color:#f92672">=</span>subprocess<span style="color:#f92672">.</span>PIPE)
+</span></span><span style="display:flex;"><span>    out, err <span style="color:#f92672">=</span>pipe<span style="color:#f92672">.</span>communicate()
+</span></span><span style="display:flex;"><span>    debug(out)
+</span></span><span style="display:flex;"><span>    debug(err)
+</span></span><span style="display:flex;"><span>    log(<span style="color:#e6db74">&#39;merged to &#39;</span><span style="color:#f92672">+</span>mergedMp4File)
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># create subtitle file:</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># srt file: &lt;seqid&gt; / hh:mm:ss,ms --&gt; hh:mm:ss,ms / text / blank</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">#   hh:mm:ss is relative to start. text is absolute Datetime in human readable fmt</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">#</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># Track two simultaneous times:</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">#   1) The cumulative SRT start and stop times (in seconds) for each subtitle</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">#   2) The display Datetime from the surveillance camera</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  subtitleFile <span style="color:#f92672">=</span> firstInfo<span style="color:#f92672">.</span>namedPrefix <span style="color:#f92672">+</span> firstInfo<span style="color:#f92672">.</span>namedStartTime <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;_&#39;</span> <span style="color:#f92672">+</span> lastInfo<span style="color:#f92672">.</span>namedEndTime <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;.srt&#39;</span>
+</span></span><span style="display:flex;"><span>  log(<span style="color:#e6db74">&#39;building timestamp subtitle file &#39;</span><span style="color:#f92672">+</span>subtitleFile)
+</span></span><span style="display:flex;"><span>  srtID<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>  srtTime<span style="color:#f92672">=</span><span style="color:#ae81ff">0.0</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">with</span> open( path( mergedFolder, subtitleFile), <span style="color:#e6db74">&#39;w&#39;</span>) <span style="color:#66d9ef">as</span> f2:
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> file <span style="color:#f92672">in</span> mergeList:
+</span></span><span style="display:flex;"><span>      videoFileInfo <span style="color:#f92672">=</span> getVideoFileInfo( file, mp4Folder)
+</span></span><span style="display:flex;"><span>      <span style="color:#75715e"># displayStartTime = videoFileInfo.namedStartTimeObj (datetime.datetime)</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">for</span> fileTime <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">0</span>, int(videoFileInfo<span style="color:#f92672">.</span>videoDuration<span style="color:#f92672">+</span><span style="color:#ae81ff">1.0</span>)):
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> ((fileTime<span style="color:#f92672">+</span><span style="color:#ae81ff">0.999</span>)<span style="color:#f92672">&lt;=</span>videoFileInfo<span style="color:#f92672">.</span>videoDuration):
+</span></span><span style="display:flex;"><span>          <span style="color:#75715e"># count in 1 second intervals</span>
+</span></span><span style="display:flex;"><span>          srtStart<span style="color:#f92672">=</span>srtTime<span style="color:#f92672">+</span>fileTime
+</span></span><span style="display:flex;"><span>          srtEnd<span style="color:#f92672">=</span>srtTime<span style="color:#f92672">+</span>fileTime<span style="color:#f92672">+</span><span style="color:#ae81ff">0.999</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>          <span style="color:#75715e"># except at the end of the file end at the exact finish</span>
+</span></span><span style="display:flex;"><span>          srtStart<span style="color:#f92672">=</span>srtTime<span style="color:#f92672">+</span>fileTime
+</span></span><span style="display:flex;"><span>          srtEnd<span style="color:#f92672">=</span>srtTime<span style="color:#f92672">+</span>videoFileInfo<span style="color:#f92672">.</span>videoDuration
+</span></span><span style="display:flex;"><span>        srtStartHours, srtStartRem<span style="color:#f92672">=</span>(srtStart<span style="color:#f92672">//</span><span style="color:#ae81ff">3600</span>, srtStart<span style="color:#f92672">%</span><span style="color:#ae81ff">3600</span>)
+</span></span><span style="display:flex;"><span>        srtStartMins, srtStartSecs<span style="color:#f92672">=</span>(srtStartRem<span style="color:#f92672">//</span><span style="color:#ae81ff">60</span>, srtStartRem<span style="color:#f92672">%</span><span style="color:#ae81ff">60</span>)
+</span></span><span style="display:flex;"><span>        srtStartMillis<span style="color:#f92672">=</span>srtStart<span style="color:#f92672">%</span><span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>        srtEndHours, srtEndRem<span style="color:#f92672">=</span>(srtEnd<span style="color:#f92672">//</span><span style="color:#ae81ff">3600</span>, srtEnd<span style="color:#f92672">%</span><span style="color:#ae81ff">3600</span>)
+</span></span><span style="display:flex;"><span>        srtEndMins, srtEndSecs<span style="color:#f92672">=</span>(srtEndRem<span style="color:#f92672">//</span><span style="color:#ae81ff">60</span>, srtEndRem<span style="color:#f92672">%</span><span style="color:#ae81ff">60</span>)
+</span></span><span style="display:flex;"><span>        srtEndMillis<span style="color:#f92672">=</span>srtEnd<span style="color:#f92672">%</span><span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>        srtTimeDisplay<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">{:02d}</span><span style="color:#e6db74">:</span><span style="color:#e6db74">{:02d}</span><span style="color:#e6db74">:</span><span style="color:#e6db74">{:02d}</span><span style="color:#e6db74">,</span><span style="color:#e6db74">{:03d}</span><span style="color:#e6db74"> --&gt; </span><span style="color:#e6db74">{:02d}</span><span style="color:#e6db74">:</span><span style="color:#e6db74">{:02d}</span><span style="color:#e6db74">:</span><span style="color:#e6db74">{:02d}</span><span style="color:#e6db74">,</span><span style="color:#e6db74">{:03d}</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">.</span>format(
+</span></span><span style="display:flex;"><span>          int(srtStartHours), int(srtStartMins), int(srtStartSecs), int(srtStartMillis<span style="color:#f92672">*</span><span style="color:#ae81ff">1000</span>),
+</span></span><span style="display:flex;"><span>          int(srtEndHours), int(srtEndMins), int(srtEndSecs), int(srtEndMillis<span style="color:#f92672">*</span><span style="color:#ae81ff">1000</span>))
+</span></span><span style="display:flex;"><span>        displayDateTimeObj <span style="color:#f92672">=</span> videoFileInfo<span style="color:#f92672">.</span>namedStartTimeObj <span style="color:#f92672">+</span> datetime<span style="color:#f92672">.</span>timedelta(seconds<span style="color:#f92672">=</span>fileTime)
+</span></span><span style="display:flex;"><span>        displayDateTimeStr <span style="color:#f92672">=</span> displayDateTimeObj<span style="color:#f92672">.</span>strftime(<span style="color:#e6db74">&#39;%Y-%m-</span><span style="color:#e6db74">%d</span><span style="color:#e6db74"> %H:%M:%S&#39;</span>)
+</span></span><span style="display:flex;"><span>        f2<span style="color:#f92672">.</span>write(str(srtID)<span style="color:#f92672">+</span><span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">+</span>srtTimeDisplay<span style="color:#f92672">+</span><span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">+</span>displayDateTimeStr<span style="color:#f92672">+</span><span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\n\n</span><span style="color:#e6db74">&#39;</span>)
+</span></span><span style="display:flex;"><span>        srtID<span style="color:#f92672">+=</span><span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>      srtTime<span style="color:#f92672">+=</span>videoFileInfo<span style="color:#f92672">.</span>videoDuration<span style="color:#f92672">+</span><span style="color:#ae81ff">0.001</span> <span style="color:#75715e"># Next file start time</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># TODO: option to burn subtitles: ffmpeg -cf subtitles.srt</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># note: if its just one file, no merge happened, just copy file</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> (len(mergeList)<span style="color:#f92672">==</span><span style="color:#ae81ff">1</span>):
+</span></span><span style="display:flex;"><span>    shutil<span style="color:#f92672">.</span>copy2( path(mp4Folder, file), path(mergedFolder, file))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">getVideoFileInfo</span>( file, folder<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;&#39;</span>):
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># get info from DAV coded filename</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># if optional path is included get &#39;expensive&#39; info from file itself</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># filename = &lt;CAM&gt;_&lt;StartyyyymmddhhMMss&gt;_&lt;EndyyyymmddhhMMss&gt;{_1}.mp4</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># dateTime= &lt;yyyymmddhhMMss&gt;</span>
+</span></span><span style="display:flex;"><span>  namedPrefix, namedStartTimeStr, namedEndTimeStr <span style="color:#f92672">=</span> re<span style="color:#f92672">.</span><span style="color:#66d9ef">match</span>(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;(.*)(\d</span><span style="color:#e6db74">{14}</span><span style="color:#e6db74">)[-_ ](\d</span><span style="color:#e6db74">{14}</span><span style="color:#e6db74">)&#39;</span>, file)<span style="color:#f92672">.</span>groups() 
+</span></span><span style="display:flex;"><span>  namedStartTimeObj <span style="color:#f92672">=</span> datetime<span style="color:#f92672">.</span>datetime<span style="color:#f92672">.</span>strptime( namedStartTimeStr, <span style="color:#e6db74">&#39;%Y%m</span><span style="color:#e6db74">%d</span><span style="color:#e6db74">%H%M%S&#39;</span>)
+</span></span><span style="display:flex;"><span>  namedEndTimeObj <span style="color:#f92672">=</span> datetime<span style="color:#f92672">.</span>datetime<span style="color:#f92672">.</span>strptime( namedEndTimeStr, <span style="color:#e6db74">&#39;%Y%m</span><span style="color:#e6db74">%d</span><span style="color:#e6db74">%H%M%S&#39;</span>)
+</span></span><span style="display:flex;"><span>  namedDuration<span style="color:#f92672">=</span>(namedEndTimeObj<span style="color:#f92672">-</span>namedStartTimeObj)<span style="color:#f92672">.</span>total_seconds()<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span> <span style="color:#75715e"># timedelta to float</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> (folder):
+</span></span><span style="display:flex;"><span>    command<span style="color:#f92672">=</span>[FFPROBE,<span style="color:#e6db74">&#39;-v&#39;</span>, <span style="color:#e6db74">&#39;quiet&#39;</span>, <span style="color:#e6db74">&#39;-print_format&#39;</span>,
+</span></span><span style="display:flex;"><span>             <span style="color:#e6db74">&#39;compact=print_section=0:nokey=1:escape=csv&#39;</span>,
+</span></span><span style="display:flex;"><span>             <span style="color:#e6db74">&#39;-show_entries&#39;</span>, <span style="color:#e6db74">&#39;format=duration&#39;</span>, path( folder, file)]
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">#debug(str(command))</span>
+</span></span><span style="display:flex;"><span>    pipe<span style="color:#f92672">=</span>subprocess<span style="color:#f92672">.</span>Popen(command, stdout<span style="color:#f92672">=</span>subprocess<span style="color:#f92672">.</span>PIPE, stderr<span style="color:#f92672">=</span>subprocess<span style="color:#f92672">.</span>STDOUT)
+</span></span><span style="display:flex;"><span>    videoDuration, err <span style="color:#f92672">=</span> pipe<span style="color:#f92672">.</span>communicate()
+</span></span><span style="display:flex;"><span>    videoDuration<span style="color:#f92672">=</span>float(videoDuration<span style="color:#f92672">.</span>decode(<span style="color:#e6db74">&#34;utf-8&#34;</span>)<span style="color:#f92672">.</span>rstrip())
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">#debug(err)</span>
+</span></span><span style="display:flex;"><span>    fileSize<span style="color:#f92672">=</span>os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>getsize( path(folder, file))
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>    videoDuration<span style="color:#f92672">=</span><span style="color:#66d9ef">None</span>
+</span></span><span style="display:flex;"><span>    fileSize<span style="color:#f92672">=</span><span style="color:#66d9ef">None</span>
+</span></span><span style="display:flex;"><span>  videoFileInfo <span style="color:#f92672">=</span> collections<span style="color:#f92672">.</span>namedtuple(<span style="color:#e6db74">&#39;videoFileInfo&#39;</span>, [<span style="color:#e6db74">&#39;namedPrefix&#39;</span>, <span style="color:#e6db74">&#39;namedStartTime&#39;</span>, <span style="color:#e6db74">&#39;namedEndTime&#39;</span>, <span style="color:#e6db74">&#39;namedStartTimeObj&#39;</span>, <span style="color:#e6db74">&#39;namedEndTimeObj&#39;</span>, <span style="color:#e6db74">&#39;namedDuration&#39;</span>, <span style="color:#e6db74">&#39;fileSize&#39;</span>, <span style="color:#e6db74">&#39;videoDuration&#39;</span>])
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> videoFileInfo( namedPrefix, namedStartTimeStr, namedEndTimeStr, namedStartTimeObj, namedEndTimeObj, namedDuration, fileSize, videoDuration)
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span><span style="color:#75715e">################################</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">UI</span>(Frame):
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">def</span> __init__(self, master<span style="color:#f92672">=</span><span style="color:#66d9ef">None</span>):
+</span></span><span style="display:flex;"><span>    Frame<span style="color:#f92672">.</span>__init__(self, master)
+</span></span><span style="display:flex;"><span>    self<span style="color:#f92672">.</span>pack(fill<span style="color:#f92672">=</span>BOTH,expand<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>    self<span style="color:#f92672">.</span>create_widgets()
+</span></span><span style="display:flex;"><span>    self<span style="color:#f92672">.</span>processingState<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">davBrowser</span>(self):
+</span></span><span style="display:flex;"><span>    folder <span style="color:#f92672">=</span> filedialog<span style="color:#f92672">.</span>askdirectory(title<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Choose folder with DAV video files&#34;</span>, mustexist<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> folder:
+</span></span><span style="display:flex;"><span>      self<span style="color:#f92672">.</span>davFolder<span style="color:#f92672">.</span>set(folder)
+</span></span><span style="display:flex;"><span>      self<span style="color:#f92672">.</span>fileList<span style="color:#f92672">.</span>configure(state<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;normal&#39;</span>)
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">for</span> file <span style="color:#f92672">in</span> sorted(filter(<span style="color:#66d9ef">lambda</span> x: x<span style="color:#f92672">.</span>endswith((<span style="color:#e6db74">&#39;.dav&#39;</span>,<span style="color:#e6db74">&#39;.DAV&#39;</span>)), os<span style="color:#f92672">.</span>listdir(folder))):
+</span></span><span style="display:flex;"><span>         self<span style="color:#f92672">.</span>fileList<span style="color:#f92672">.</span>insert( <span style="color:#e6db74">&#34;end&#34;</span>, file<span style="color:#f92672">+</span><span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>)
+</span></span><span style="display:flex;"><span>      self<span style="color:#f92672">.</span>fileList<span style="color:#f92672">.</span>configure(state<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;disabled&#39;</span>)
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">updateProgress</span>(self, progress):
+</span></span><span style="display:flex;"><span>    self<span style="color:#f92672">.</span>progressVar<span style="color:#f92672">.</span>set(progress)
+</span></span><span style="display:flex;"><span>    self<span style="color:#f92672">.</span>update()
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">mp4Browser</span>(self):
+</span></span><span style="display:flex;"><span>    folder <span style="color:#f92672">=</span> filedialog<span style="color:#f92672">.</span>askdirectory(title<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Choose folder for MP4/AVI video files&#34;</span>, mustexist<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> folder:
+</span></span><span style="display:flex;"><span>      self<span style="color:#f92672">.</span>mp4Folder<span style="color:#f92672">.</span>set(folder)
+</span></span><span style="display:flex;"><span>      self<span style="color:#f92672">.</span>fileList<span style="color:#f92672">.</span>configure(state<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;normal&#39;</span>)
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">for</span> file <span style="color:#f92672">in</span> sorted(filter(<span style="color:#66d9ef">lambda</span> x: x<span style="color:#f92672">.</span>endswith((<span style="color:#e6db74">&#39;.mp4&#39;</span>,<span style="color:#e6db74">&#39;.MP4&#39;</span>,<span style="color:#e6db74">&#39;.avi&#39;</span>,<span style="color:#e6db74">&#39;.AVI&#39;</span>)), os<span style="color:#f92672">.</span>listdir(folder))):
+</span></span><span style="display:flex;"><span>         self<span style="color:#f92672">.</span>fileList<span style="color:#f92672">.</span>insert( <span style="color:#e6db74">&#34;end&#34;</span>, file<span style="color:#f92672">+</span><span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>)
+</span></span><span style="display:flex;"><span>      self<span style="color:#f92672">.</span>fileList<span style="color:#f92672">.</span>configure(state<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;disabled&#39;</span>)
+</span></span><span style="display:flex;"><span>      
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">mergedBrowser</span>(self):
+</span></span><span style="display:flex;"><span>    folder <span style="color:#f92672">=</span> filedialog<span style="color:#f92672">.</span>askdirectory(title<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Choose folder to save merged MP4 video files&#34;</span>, mustexist<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> folder:
+</span></span><span style="display:flex;"><span>      self<span style="color:#f92672">.</span>mergedFolder<span style="color:#f92672">.</span>set(folder)
+</span></span><span style="display:flex;"><span>      
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">clearFileList</span>(self):
+</span></span><span style="display:flex;"><span>    self<span style="color:#f92672">.</span>fileList<span style="color:#f92672">.</span>configure(state<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;normal&#39;</span>)
+</span></span><span style="display:flex;"><span>    self<span style="color:#f92672">.</span>fileList<span style="color:#f92672">.</span>delete(<span style="color:#e6db74">&#34;1.0&#34;</span>,END)
+</span></span><span style="display:flex;"><span>    self<span style="color:#f92672">.</span>fileList<span style="color:#f92672">.</span>configure(state<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;disabled&#39;</span>)
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">addToFileList</span>(self, text):
+</span></span><span style="display:flex;"><span>    self<span style="color:#f92672">.</span>fileList<span style="color:#f92672">.</span>configure(state<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;normal&#39;</span>)
+</span></span><span style="display:flex;"><span>    self<span style="color:#f92672">.</span>fileList<span style="color:#f92672">.</span>insert(<span style="color:#e6db74">&#34;end&#34;</span>, text<span style="color:#f92672">+</span><span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>)
+</span></span><span style="display:flex;"><span>    self<span style="color:#f92672">.</span>fileList<span style="color:#f92672">.</span>configure(state<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;disabled&#39;</span>)
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">convertHandler</span>(self):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (self<span style="color:#f92672">.</span>runDav2Mp4<span style="color:#f92672">.</span>get() <span style="color:#f92672">and</span> <span style="color:#f92672">not</span> self<span style="color:#f92672">.</span>davFolder<span style="color:#f92672">.</span>get()):
+</span></span><span style="display:flex;"><span>      messagebox<span style="color:#f92672">.</span>showerror(<span style="color:#e6db74">&#34;Error&#34;</span>, <span style="color:#e6db74">&#34;Select folder with DAV video files to convert&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">elif</span> (self<span style="color:#f92672">.</span>runDav2Mp4<span style="color:#f92672">.</span>get() <span style="color:#f92672">and</span> <span style="color:#f92672">not</span> self<span style="color:#f92672">.</span>mp4Folder<span style="color:#f92672">.</span>get()):
+</span></span><span style="display:flex;"><span>      messagebox<span style="color:#f92672">.</span>showerror(<span style="color:#e6db74">&#34;Error&#34;</span>, <span style="color:#e6db74">&#34;Select folder to save MP4 video files&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">elif</span> (self<span style="color:#f92672">.</span>runMergeMp4<span style="color:#f92672">.</span>get() <span style="color:#f92672">and</span> <span style="color:#f92672">not</span> self<span style="color:#f92672">.</span>mp4Folder<span style="color:#f92672">.</span>get()):
+</span></span><span style="display:flex;"><span>      messagebox<span style="color:#f92672">.</span>showerror(<span style="color:#e6db74">&#34;Error&#34;</span>, <span style="color:#e6db74">&#34;Select folder with MP4 or AVI video files to merge&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">elif</span> (self<span style="color:#f92672">.</span>runMergeMp4<span style="color:#f92672">.</span>get() <span style="color:#f92672">and</span> <span style="color:#f92672">not</span> self<span style="color:#f92672">.</span>mergedFolder<span style="color:#f92672">.</span>get()):
+</span></span><span style="display:flex;"><span>      messagebox<span style="color:#f92672">.</span>showerror(<span style="color:#e6db74">&#34;Error&#34;</span>, <span style="color:#e6db74">&#34;Select folder to save merged MP4 video files&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">if</span> self<span style="color:#f92672">.</span>processingState<span style="color:#f92672">==</span><span style="color:#ae81ff">0</span>: <span style="color:#75715e"># I call update from inside the loop, catch thread-unsafe call</span>
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>processingState<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># ghost Convert button. Add &#39;spinner&#39; widget/dialog w cancel button</span>
+</span></span><span style="display:flex;"><span>        runConversions( self<span style="color:#f92672">.</span>davFolder<span style="color:#f92672">.</span>get(), self<span style="color:#f92672">.</span>mp4Folder<span style="color:#f92672">.</span>get(), self<span style="color:#f92672">.</span>mergedFolder<span style="color:#f92672">.</span>get())
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>processingState<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">log</span>(self, message):
+</span></span><span style="display:flex;"><span>    self<span style="color:#f92672">.</span>consoleLog<span style="color:#f92672">.</span>configure(state<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;normal&#39;</span>)
+</span></span><span style="display:flex;"><span>    self<span style="color:#f92672">.</span>consoleLog<span style="color:#f92672">.</span>insert(<span style="color:#e6db74">&#39;end&#39;</span>, message<span style="color:#f92672">+</span><span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#39;</span>)
+</span></span><span style="display:flex;"><span>    self<span style="color:#f92672">.</span>consoleLog<span style="color:#f92672">.</span>configure(state<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;disabled&#39;</span>)
+</span></span><span style="display:flex;"><span>    self<span style="color:#f92672">.</span>update()
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">create_widgets</span>(self):
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># [header]</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># [DavLabel][DavFolder][DavBrowseButton][Mp4Label][Mp4Folder][Mp4BrowseButton]</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># [DavFileList] [convertButton] [Mp4FileList]</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># [progressBar]</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># [consoleLog]</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># main layout:</span>
+</span></span><span style="display:flex;"><span>    self<span style="color:#f92672">.</span>header <span style="color:#f92672">=</span> ttk<span style="color:#f92672">.</span>Label(self, text<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Convert surveillance cam DAV video to standard MP4 video&#34;</span>)
+</span></span><span style="display:flex;"><span>    self<span style="color:#f92672">.</span>header<span style="color:#f92672">.</span>pack(padx<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span>, pady<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span>)
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># DAV folder selector:</span>
+</span></span><span style="display:flex;"><span>    self<span style="color:#f92672">.</span>DavSelector <span style="color:#f92672">=</span> ttk<span style="color:#f92672">.</span>Frame(self)
+</span></span><span style="display:flex;"><span>    self<span style="color:#f92672">.</span>DavSelector<span style="color:#f92672">.</span>pack(fill<span style="color:#f92672">=</span>X)
+</span></span><span style="display:flex;"><span>    self<span style="color:#f92672">.</span>davFolderLabel <span style="color:#f92672">=</span> ttk<span style="color:#f92672">.</span>Label(self<span style="color:#f92672">.</span>DavSelector, text<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;DAV folder:&#34;</span>)
+</span></span><span style="display:flex;"><span>    self<span style="color:#f92672">.</span>davFolderLabel<span style="color:#f92672">.</span>pack(side<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;left&#34;</span>)
+</span></span><span style="display:flex;"><span>    self<span style="color:#f92672">.</span>davFolder<span style="color:#f92672">=</span>StringVar()
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># TODO: add onChange handler for entry widget</span>
+</span></span><span style="display:flex;"><span>    self<span style="color:#f92672">.</span>davFolderEntry <span style="color:#f92672">=</span> ttk<span style="color:#f92672">.</span>Entry(self<span style="color:#f92672">.</span>DavSelector, width<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>, textvariable<span style="color:#f92672">=</span>self<span style="color:#f92672">.</span>davFolder)
+</span></span><span style="display:flex;"><span>    self<span style="color:#f92672">.</span>davFolderEntry<span style="color:#f92672">.</span>pack(side<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;left&#34;</span>,fill<span style="color:#f92672">=</span>X,expand<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>    self<span style="color:#f92672">.</span>davBrowseButton <span style="color:#f92672">=</span> ttk<span style="color:#f92672">.</span>Button(self<span style="color:#f92672">.</span>DavSelector, text<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Browse&#34;</span>, command<span style="color:#f92672">=</span>self<span style="color:#f92672">.</span>davBrowser)
+</span></span><span style="display:flex;"><span>    self<span style="color:#f92672">.</span>davBrowseButton<span style="color:#f92672">.</span>pack(side<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;left&#34;</span>, padx<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span>)
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># MP4 folder selector:</span>
+</span></span><span style="display:flex;"><span>    self<span style="color:#f92672">.</span>mp4Selector <span style="color:#f92672">=</span> ttk<span style="color:#f92672">.</span>Frame(self)
+</span></span><span style="display:flex;"><span>    self<span style="color:#f92672">.</span>mp4Selector<span style="color:#f92672">.</span>pack(fill<span style="color:#f92672">=</span>X)
+</span></span><span style="display:flex;"><span>    self<span style="color:#f92672">.</span>mp4FolderLabel <span style="color:#f92672">=</span> ttk<span style="color:#f92672">.</span>Label(self<span style="color:#f92672">.</span>mp4Selector, text<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;MP4/AVI folder:&#34;</span>)
+</span></span><span style="display:flex;"><span>    self<span style="color:#f92672">.</span>mp4FolderLabel<span style="color:#f92672">.</span>pack(side<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;left&#34;</span>)
+</span></span><span style="display:flex;"><span>    self<span style="color:#f92672">.</span>mp4Folder<span style="color:#f92672">=</span>StringVar()
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># TODO: add onChange handler for entry widget</span>
+</span></span><span style="display:flex;"><span>    self<span style="color:#f92672">.</span>mp4FolderEntry <span style="color:#f92672">=</span> ttk<span style="color:#f92672">.</span>Entry(self<span style="color:#f92672">.</span>mp4Selector, width<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>, textvariable<span style="color:#f92672">=</span>self<span style="color:#f92672">.</span>mp4Folder)
+</span></span><span style="display:flex;"><span>    self<span style="color:#f92672">.</span>mp4FolderEntry<span style="color:#f92672">.</span>pack(side<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;left&#34;</span>,fill<span style="color:#f92672">=</span>X,expand<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>    self<span style="color:#f92672">.</span>mp4BrowseButton <span style="color:#f92672">=</span> ttk<span style="color:#f92672">.</span>Button(self<span style="color:#f92672">.</span>mp4Selector, text<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Browse&#34;</span>, command<span style="color:#f92672">=</span>self<span style="color:#f92672">.</span>mp4Browser)
+</span></span><span style="display:flex;"><span>    self<span style="color:#f92672">.</span>mp4BrowseButton<span style="color:#f92672">.</span>pack(side<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;left&#34;</span>, padx<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Merged folder selector:</span>
+</span></span><span style="display:flex;"><span>    self<span style="color:#f92672">.</span>mergedSelector <span style="color:#f92672">=</span> ttk<span style="color:#f92672">.</span>Frame(self)
+</span></span><span style="display:flex;"><span>    self<span style="color:#f92672">.</span>mergedSelector<span style="color:#f92672">.</span>pack(fill<span style="color:#f92672">=</span>X)
+</span></span><span style="display:flex;"><span>    self<span style="color:#f92672">.</span>mergedFolderLabel <span style="color:#f92672">=</span> ttk<span style="color:#f92672">.</span>Label(self<span style="color:#f92672">.</span>mergedSelector, text<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Merged MP4 folder:&#34;</span>)
+</span></span><span style="display:flex;"><span>    self<span style="color:#f92672">.</span>mergedFolderLabel<span style="color:#f92672">.</span>pack(side<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;left&#34;</span>)
+</span></span><span style="display:flex;"><span>    self<span style="color:#f92672">.</span>mergedFolder<span style="color:#f92672">=</span>StringVar()
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># TODO: add onChange handler for entry widget</span>
+</span></span><span style="display:flex;"><span>    self<span style="color:#f92672">.</span>mergedFolderEntry <span style="color:#f92672">=</span> ttk<span style="color:#f92672">.</span>Entry(self<span style="color:#f92672">.</span>mergedSelector, width<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>, textvariable<span style="color:#f92672">=</span>self<span style="color:#f92672">.</span>mergedFolder)
+</span></span><span style="display:flex;"><span>    self<span style="color:#f92672">.</span>mergedFolderEntry<span style="color:#f92672">.</span>pack(side<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;left&#34;</span>,fill<span style="color:#f92672">=</span>X,expand<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>    self<span style="color:#f92672">.</span>mergedBrowseButton <span style="color:#f92672">=</span> ttk<span style="color:#f92672">.</span>Button(self<span style="color:#f92672">.</span>mergedSelector, text<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Browse&#34;</span>, command<span style="color:#f92672">=</span>self<span style="color:#f92672">.</span>mergedBrowser)
+</span></span><span style="display:flex;"><span>    self<span style="color:#f92672">.</span>mergedBrowseButton<span style="color:#f92672">.</span>pack(side<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;left&#34;</span>, padx<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span>)
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># pass checkboxes:</span>
+</span></span><span style="display:flex;"><span>    self<span style="color:#f92672">.</span>passSelections <span style="color:#f92672">=</span> ttk<span style="color:#f92672">.</span>Frame(self, borderwidth<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>, relief<span style="color:#f92672">=</span>GROOVE)
+</span></span><span style="display:flex;"><span>    self<span style="color:#f92672">.</span>passSelections<span style="color:#f92672">.</span>pack(fill<span style="color:#f92672">=</span>X, pady<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span>)
+</span></span><span style="display:flex;"><span>    self<span style="color:#f92672">.</span>runDav2Mp4<span style="color:#f92672">=</span>IntVar()
+</span></span><span style="display:flex;"><span>    self<span style="color:#f92672">.</span>runDav2Mp4<span style="color:#f92672">.</span>set(<span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>    self<span style="color:#f92672">.</span>checkRunDav2Mp4 <span style="color:#f92672">=</span> ttk<span style="color:#f92672">.</span>Checkbutton(self<span style="color:#f92672">.</span>passSelections, text<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;convert DAVs to MP4 w ffmpeg&#34;</span>, variable<span style="color:#f92672">=</span>self<span style="color:#f92672">.</span>runDav2Mp4)
+</span></span><span style="display:flex;"><span>    self<span style="color:#f92672">.</span>checkRunDav2Mp4<span style="color:#f92672">.</span>pack(fill<span style="color:#f92672">=</span>X)
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">#self.dummy = ttk.Checkbutton(self.passSelections, text=&#34;convert DAVs to AVI w BahamaSecurity&#34;, state=DISABLED)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">#self.dummy.pack(fill=X)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">#self.dummy = ttk.Checkbutton(self.passSelections, text=&#34;convert DAVs to AVI w DahuaSDK&#34;, state=DISABLED)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">#self.dummy.pack(fill=X)</span>
+</span></span><span style="display:flex;"><span>    self<span style="color:#f92672">.</span>runMergeMp4<span style="color:#f92672">=</span>IntVar()
+</span></span><span style="display:flex;"><span>    self<span style="color:#f92672">.</span>runMergeMp4<span style="color:#f92672">.</span>set(<span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>    self<span style="color:#f92672">.</span>checkRunMergeMp4 <span style="color:#f92672">=</span> ttk<span style="color:#f92672">.</span>Checkbutton(self<span style="color:#f92672">.</span>passSelections, text<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Merge contiguous MP4s/AVIs and make timestamp subtitles&#34;</span>, variable<span style="color:#f92672">=</span>self<span style="color:#f92672">.</span>runMergeMp4)
+</span></span><span style="display:flex;"><span>    self<span style="color:#f92672">.</span>checkRunMergeMp4<span style="color:#f92672">.</span>pack(fill<span style="color:#f92672">=</span>X)
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># GO button and Progress bar</span>
+</span></span><span style="display:flex;"><span>    self<span style="color:#f92672">.</span>progressFrame <span style="color:#f92672">=</span> ttk<span style="color:#f92672">.</span>Frame(self)
+</span></span><span style="display:flex;"><span>    self<span style="color:#f92672">.</span>progressFrame<span style="color:#f92672">.</span>pack(fill<span style="color:#f92672">=</span>X)
+</span></span><span style="display:flex;"><span>    self<span style="color:#f92672">.</span>convertButton <span style="color:#f92672">=</span> ttk<span style="color:#f92672">.</span>Button(self<span style="color:#f92672">.</span>progressFrame, text<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Convert=&gt;&#34;</span>, command<span style="color:#f92672">=</span>self<span style="color:#f92672">.</span>convertHandler)
+</span></span><span style="display:flex;"><span>    self<span style="color:#f92672">.</span>convertButton<span style="color:#f92672">.</span>pack(side<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;left&#34;</span>, padx<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span>)
+</span></span><span style="display:flex;"><span>    self<span style="color:#f92672">.</span>progressVar<span style="color:#f92672">=</span>DoubleVar()
+</span></span><span style="display:flex;"><span>    self<span style="color:#f92672">.</span>progressBar <span style="color:#f92672">=</span> ttk<span style="color:#f92672">.</span>Progressbar(self<span style="color:#f92672">.</span>progressFrame,
+</span></span><span style="display:flex;"><span>      mode<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;determinate&#34;</span>, orient<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;horizontal&#34;</span>,
+</span></span><span style="display:flex;"><span>      maximum<span style="color:#f92672">=</span><span style="color:#ae81ff">100.0</span>, value<span style="color:#f92672">=</span><span style="color:#ae81ff">0.0</span>, variable<span style="color:#f92672">=</span>self<span style="color:#f92672">.</span>progressVar)
+</span></span><span style="display:flex;"><span>    self<span style="color:#f92672">.</span>progressBar<span style="color:#f92672">.</span>pack(fill<span style="color:#f92672">=</span>X, padx<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span>, pady<span style="color:#f92672">=</span><span style="color:#ae81ff">5</span>)
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Files list and console/log text:</span>
+</span></span><span style="display:flex;"><span>    self<span style="color:#f92672">.</span>fileList <span style="color:#f92672">=</span> tkst<span style="color:#f92672">.</span>ScrolledText(self, width<span style="color:#f92672">=</span><span style="color:#ae81ff">10</span>, height<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span>, state<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;disabled&#39;</span>)
+</span></span><span style="display:flex;"><span>    self<span style="color:#f92672">.</span>fileList<span style="color:#f92672">.</span>pack(fill<span style="color:#f92672">=</span>BOTH,expand<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>    self<span style="color:#f92672">.</span>consoleLog <span style="color:#f92672">=</span> tkst<span style="color:#f92672">.</span>ScrolledText(self, width<span style="color:#f92672">=</span><span style="color:#ae81ff">10</span>, height<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span>, state<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;disabled&#39;</span>)
+</span></span><span style="display:flex;"><span>    self<span style="color:#f92672">.</span>consoleLog<span style="color:#f92672">.</span>pack(fill<span style="color:#f92672">=</span>BOTH,expand<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">################################</span>
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>root <span style="color:#f92672">=</span> Tk()
+</span></span><span style="display:flex;"><span>ui <span style="color:#f92672">=</span> UI(master<span style="color:#f92672">=</span>root)
+</span></span><span style="display:flex;"><span>ui<span style="color:#f92672">.</span>master<span style="color:#f92672">.</span>title(<span style="color:#e6db74">&#34;Dav2Mp4&#34;</span>)
+</span></span><span style="display:flex;"><span>ui<span style="color:#f92672">.</span>master<span style="color:#f92672">.</span>geometry(<span style="color:#e6db74">&#34;800x600&#34;</span>)
+</span></span><span style="display:flex;"><span>ui<span style="color:#f92672">.</span>mainloop()
+</span></span></code></pre></div>
 </main>
 
 
@@ -613,8 +613,8 @@ ui<span style="color:#f92672">.</span>mainloop()
 
 
 <div id="disqus_thread"></div>
-<script type="application/javascript">
-    var disqus_config = function () {
+<script>
+    window.disqus_config = function () {
     
     
     
@@ -666,7 +666,7 @@ ui<span style="color:#f92672">.</span>mainloop()
 
 
 
-<script type="application/javascript">
+<script>
 var doNotTrack = false;
 if (!doNotTrack) {
 	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -678,7 +678,6 @@ if (!doNotTrack) {
 	ga('send', 'pageview');
 }
 </script>
-
 <script async data-id="101474234" src="//static.getclicky.com/js"></script>
 
 </body>
