@@ -38,6 +38,7 @@
   hljs.initHighlightingOnLoad();
 </script>
 {{ end }}
+<script src="{{ "/js/custom-scripts.js" | relURL }}"></script>
 {{ range .Params.scripts }}
   <script src="/js/{{ . }}"></script>
 {{ end }}
