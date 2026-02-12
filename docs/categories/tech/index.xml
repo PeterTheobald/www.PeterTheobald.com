@@ -1,97 +1,75 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>tech on Peter Theobald</title>
+    <title>Tech on Peter Theobald</title>
     <link>/categories/tech/</link>
-    <description>Recent content in tech on Peter Theobald</description>
+    <description>Recent content in Tech on Peter Theobald</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Wed, 25 Jun 2025 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="/categories/tech/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <atom:link href="/categories/tech/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Hacker Dojo Python Group</title>
       <link>/tech/hacker-dojo-python-group/</link>
       <pubDate>Wed, 25 Jun 2025 00:00:00 +0000</pubDate>
-      
       <guid>/tech/hacker-dojo-python-group/</guid>
       <description>Hacker Dojo is a collaborative hackerspace in Silicon Valley where tech enthusiasts gather to build, experiment and improve. The Hacker Dojo Python Group is a group of people interested in learning more about developing in the Python programming language.</description>
     </item>
-    
     <item>
       <title>Dave Says Thats Not Funny</title>
       <link>/tech/dave-says-thats-not-funny/</link>
       <pubDate>Wed, 24 May 2017 00:00:00 +0000</pubDate>
-      
       <guid>/tech/dave-says-thats-not-funny/</guid>
       <description>&lt;p&gt;Dave doesn&amp;rsquo;t think any of my jokes are funny. I keep trying but he always says the same thing, &amp;ldquo;That&amp;rsquo;s not funny&amp;rdquo;. So like all repetitive processes, I automated it. This page scrapes jokes from &lt;a href=&#34;http://www.reddit.com/r/Jokes&#34;&gt;Reddit/r/Jokes&lt;/a&gt; and presents them here as texts to Dave.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Ghost Solver - Now in Clojure</title>
       <link>/tech/ghost-solver-in-clojure/</link>
       <pubDate>Tue, 20 Dec 2016 00:00:00 +0000</pubDate>
-      
       <guid>/tech/ghost-solver-in-clojure/</guid>
       <description>&lt;p&gt;&lt;a href=&#34;/tech/ghost-game-solver/&#34;&gt;My previous post&lt;/a&gt; was about a Python program to calculate the moves to guarantee a win in the puzzle word game &amp;lsquo;Ghost&amp;rsquo;. The algorithm was naturally recursive and felt &amp;lsquo;LISPy&amp;rsquo;. &lt;a href=&#34;http://www.twitter.com/pdlug&#34;&gt;@pdlug&lt;/a&gt; has been telling me how writing in Clojure will expand my mind, make me more productive and hem my pants so this week I learned just enough Clojure (I already knew LISP) to re-write the Ghost game solver in Clojure.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Ghost Solver - In Which We Ruin a Great Game</title>
       <link>/tech/ghost-game-solver/</link>
       <pubDate>Sat, 26 Nov 2016 00:00:00 +0000</pubDate>
-      
       <guid>/tech/ghost-game-solver/</guid>
       <description>&lt;p&gt;My son showed me a new word game, &amp;lsquo;Ghost&amp;rsquo;, and I wrote a Python program to &amp;ldquo;solve&amp;rdquo; the game and find all winning sequences.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Breaking The Encryption</title>
       <link>/tech/breaking-the-encryption/</link>
       <pubDate>Thu, 07 Jul 2016 16:11:58 +0530</pubDate>
-      
       <guid>/tech/breaking-the-encryption/</guid>
       <description>&lt;p&gt;I was presented with a hard drive encrypted with TrueCrypt. TrueCrypt is unbreakable. Was there anything I could do? &lt;em&gt;(tl;dr: yes)&lt;/em&gt;&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Tricky forensic hard drive acquisition of an iMac</title>
       <link>/tech/tricky-forensic-hard-drive-acquisition/</link>
       <pubDate>Thu, 30 Apr 2015 00:00:00 +0000</pubDate>
-      
       <guid>/tech/tricky-forensic-hard-drive-acquisition/</guid>
       <description>&lt;p&gt;Recently I had to do a forensic acquisition of an iMac hard drive, and it presented many obstacles.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Upgrade your Inspiron 8600 to Windows 7 with this NVidia FX Go5200 video driver</title>
       <link>/tech/upgrade-inspiron-8600-to-windows7-with-nvidia-driver/</link>
       <pubDate>Wed, 01 Jun 2011 00:00:00 +0000</pubDate>
-      
       <guid>/tech/upgrade-inspiron-8600-to-windows7-with-nvidia-driver/</guid>
-      <description>I have an old Dell Inspiron 8600 I wanted to upgrade to Windows 7. The problem was that there is no current video driver for the Inspiron&amp;rsquo;s Nvidia Geforce FX Go5200 video chip. Even the driver Dell is offering for download for Windows XP is the wrong one and causes all sorts of problems. There simply is no driver for Windows 7.
-So I searched on NVIDIA to see what drivers might be close.</description>
+      <description>I have an old Dell Inspiron 8600 I wanted to upgrade to Windows 7. The problem was that there is no current video driver for the Inspiron&amp;rsquo;s Nvidia Geforce FX Go5200 video chip. Even the driver Dell is offering for download for Windows XP is the wrong one and causes all sorts of problems. There simply is no driver for Windows 7.&#xA;So I searched on NVIDIA to see what drivers might be close.</description>
     </item>
-    
     <item>
       <title>Unison 2.40.61 binary for Nexenta Core Platform 3</title>
       <link>/tech/unison-for-nexenta/</link>
       <pubDate>Fri, 01 Apr 2011 00:00:00 +0000</pubDate>
-      
       <guid>/tech/unison-for-nexenta/</guid>
       <description>&lt;p&gt;I have compiled a Unison 2.40.61 binary (file-syncronization tool) for Nexenta (Solaris/Linux hybrid OS with ZFS) and made it available for download here.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>ZFS capable operating systems</title>
       <link>/tech/zfs-capable-operating-systems/</link>
       <pubDate>Tue, 16 Nov 2010 00:00:00 +0000</pubDate>
-      
       <guid>/tech/zfs-capable-operating-systems/</guid>
       <description>With today&amp;rsquo;s announcement of Oracle Solaris Express 11 our choices for running a ZFS capable Operating System just got even more confusing. I wasn&amp;rsquo;t able to find a list of the build numbers these Operating Systems are based on all in one place, so I&amp;rsquo;m going to keep a chart of the choices here, and if readers will contribute in the comments I will keep the chart updated. The build number gives you a good idea of how recent the ZFS feature set is.</description>
     </item>
-    
   </channel>
 </rss>

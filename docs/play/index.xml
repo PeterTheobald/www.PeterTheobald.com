@@ -7,66 +7,48 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Tue, 01 Apr 2025 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="/play/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <atom:link href="/play/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Cartoons</title>
       <link>/play/cartoons/</link>
       <pubDate>Tue, 01 Apr 2025 00:00:00 +0000</pubDate>
-      
       <guid>/play/cartoons/</guid>
       <description>&lt;p&gt;I occasionally make cartoons.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Hacker Dojo Python Group</title>
       <link>/play/hacker-dojo-python-group/</link>
       <pubDate>Fri, 21 Jun 2024 00:00:00 +0000</pubDate>
-      
       <guid>/play/hacker-dojo-python-group/</guid>
-      <description>&lt;h1 id=&#34;hacker-dojo-python-group&#34;&gt;Hacker Dojo Python Group&lt;/h1&gt;
-&lt;h2 id=&#34;about&#34;&gt;About&lt;/h2&gt;
-&lt;p&gt;&lt;a href=&#34;https://hackerdojo.org/&#34;&gt;Hacker Dojo&lt;/a&gt; is a collaborative hackerspace in Silicon Valley where tech enthusiasts gather to build, experiment and improve. The Hacker Dojo Python Group is a group of people interested in learning more about developing in the Python programming language.&lt;/p&gt;</description>
+      <description>&lt;h1 id=&#34;hacker-dojo-python-group&#34;&gt;Hacker Dojo Python Group&lt;/h1&gt;&#xA;&lt;h2 id=&#34;about&#34;&gt;About&lt;/h2&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://hackerdojo.org/&#34;&gt;Hacker Dojo&lt;/a&gt; is a collaborative hackerspace in Silicon Valley where tech enthusiasts gather to build, experiment and improve. The Hacker Dojo Python Group is a group of people interested in learning more about developing in the Python programming language.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Puzzle Hunt 2023 - Mission Improbable</title>
       <link>/play/puzzle-hunt-2023-mission-improbable/</link>
       <pubDate>Mon, 01 Jan 2024 00:00:00 +0000</pubDate>
-      
       <guid>/play/puzzle-hunt-2023-mission-improbable/</guid>
       <description>&lt;h1 id=&#34;my-2023-xmas-puzzle-hunt-mission-improbable&#34;&gt;My 2023 Xmas Puzzle Hunt: Mission Improbable&lt;/h1&gt;</description>
     </item>
-    
     <item>
       <title>Traversing for Endurance</title>
       <link>/play/traversing-for-endurance/</link>
       <pubDate>Sat, 26 Aug 2017 00:00:00 +0000</pubDate>
-      
       <guid>/play/traversing-for-endurance/</guid>
-      <description>&lt;p&gt;I do most of my climbing in an indoor gym, &lt;a href=&#34;http://www.islandrock.net&#34;&gt;Island Rock&lt;/a&gt;. I find that climbing in the gym trains me for short powerful climbs, but outside I was getting pumped after the 30-40 vertical feet I was used to. A great training routine for endurance is to do long traverses, so I laid out a traverse route that hits every wall in the gym. The difficulty varies over time as the gym resets each wall; Some sections felt around V.2, some around V.5. At first I found it difficult to finish the entire traverse. When I finally was able to complete one full traverse it took me 40 minutes to complete it. I was forced to learn techniques to rest on the wall, hanging on straight arms, finding ways to place my feet with opposing force to rest. Eventually, with practice in resting and in finding the best sequence of holds I got it down to 16 minutes.&lt;/p&gt;
-&lt;p&gt;I made up a poster explaining The Big Traverse and hung it up. Within days I was seeing people working their way across the traverse. I&amp;rsquo;ve included a link to the full poster below as an example so you can make something similar for your local gym.&lt;/p&gt;</description>
+      <description>&lt;p&gt;I do most of my climbing in an indoor gym, &lt;a href=&#34;http://www.islandrock.net&#34;&gt;Island Rock&lt;/a&gt;. I find that climbing in the gym trains me for short powerful climbs, but outside I was getting pumped after the 30-40 vertical feet I was used to. A great training routine for endurance is to do long traverses, so I laid out a traverse route that hits every wall in the gym. The difficulty varies over time as the gym resets each wall; Some sections felt around V.2, some around V.5. At first I found it difficult to finish the entire traverse. When I finally was able to complete one full traverse it took me 40 minutes to complete it. I was forced to learn techniques to rest on the wall, hanging on straight arms, finding ways to place my feet with opposing force to rest. Eventually, with practice in resting and in finding the best sequence of holds I got it down to 16 minutes.&lt;/p&gt;&#xA;&lt;p&gt;I made up a poster explaining The Big Traverse and hung it up. Within days I was seeing people working their way across the traverse. I&amp;rsquo;ve included a link to the full poster below as an example so you can make something similar for your local gym.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Troy and Abed in a Montage</title>
       <link>/play/troy-and-abed-in-a-montage/</link>
       <pubDate>Tue, 14 Mar 2017 00:00:00 +0000</pubDate>
-      
       <guid>/play/troy-and-abed-in-a-montage/</guid>
       <description>&lt;p&gt;To try out the free video editor &amp;lsquo;HitFilm&amp;rsquo; I made this montage of the fake show &amp;lsquo;Troy and Abed in the Morning&amp;rsquo; from the show Community.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Climbing Amatitlan Guatemala</title>
       <link>/play/climbing-amatitlan-guatemala/</link>
       <pubDate>Thu, 07 Jul 2016 00:00:00 +0000</pubDate>
-      
       <guid>/play/climbing-amatitlan-guatemala/</guid>
       <description>&lt;p&gt;Video from a rock climbing trip to Amatitlán, Guatemala&amp;hellip;&lt;/p&gt;</description>
     </item>
-    
   </channel>
 </rss>

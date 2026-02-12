@@ -16,13 +16,13 @@
   {{ end }}
   </div>
   -->
-  <h1><span class="list-title"><a href="{{ .URL }}">{{ .Title }}</a></span></h1>
+  <h1><span class="list-title"><a href="{{ .RelPermalink }}">{{ .Title }}</a></span></h1>
   <div class="date-author">
     {{ if .Params.author }}<span class="author">{{ partial "author_names.html" . }}</span> / {{ end }}
     <span class="date">{{ .Date.Format "2006-01-02" }}</span>
   </div>
   <div class="summary">
-    <a href="{{ .URL }}">
+    <a href="{{ .RelPermalink }}">
     {{ with .Params.thumbnail }}
     <div class="thumbnail"><img src="/images/{{ relURL . }}" alt="Thumbnail" /></div>
     {{ else }}

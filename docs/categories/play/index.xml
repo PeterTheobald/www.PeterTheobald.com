@@ -1,42 +1,33 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>play on Peter Theobald</title>
+    <title>Play on Peter Theobald</title>
     <link>/categories/play/</link>
-    <description>Recent content in play on Peter Theobald</description>
+    <description>Recent content in Play on Peter Theobald</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Mon, 01 Jan 2024 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="/categories/play/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <atom:link href="/categories/play/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Puzzle Hunt 2023 - Mission Improbable</title>
       <link>/play/puzzle-hunt-2023-mission-improbable/</link>
       <pubDate>Mon, 01 Jan 2024 00:00:00 +0000</pubDate>
-      
       <guid>/play/puzzle-hunt-2023-mission-improbable/</guid>
       <description>&lt;h1 id=&#34;my-2023-xmas-puzzle-hunt-mission-improbable&#34;&gt;My 2023 Xmas Puzzle Hunt: Mission Improbable&lt;/h1&gt;</description>
     </item>
-    
     <item>
       <title>Troy and Abed in a Montage</title>
       <link>/play/troy-and-abed-in-a-montage/</link>
       <pubDate>Tue, 14 Mar 2017 00:00:00 +0000</pubDate>
-      
       <guid>/play/troy-and-abed-in-a-montage/</guid>
       <description>&lt;p&gt;To try out the free video editor &amp;lsquo;HitFilm&amp;rsquo; I made this montage of the fake show &amp;lsquo;Troy and Abed in the Morning&amp;rsquo; from the show Community.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Climbing Amatitlan Guatemala</title>
       <link>/play/climbing-amatitlan-guatemala/</link>
       <pubDate>Thu, 07 Jul 2016 00:00:00 +0000</pubDate>
-      
       <guid>/play/climbing-amatitlan-guatemala/</guid>
       <description>&lt;p&gt;Video from a rock climbing trip to Amatitlán, Guatemala&amp;hellip;&lt;/p&gt;</description>
     </item>
-    
   </channel>
 </rss>

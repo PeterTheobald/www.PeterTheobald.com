@@ -1,42 +1,33 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>puzzles on Peter Theobald</title>
+    <title>Puzzles on Peter Theobald</title>
     <link>/tags/puzzles/</link>
-    <description>Recent content in puzzles on Peter Theobald</description>
+    <description>Recent content in Puzzles on Peter Theobald</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Mon, 01 Jan 2024 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="/tags/puzzles/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <atom:link href="/tags/puzzles/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Puzzle Hunt 2023 - Mission Improbable</title>
       <link>/play/puzzle-hunt-2023-mission-improbable/</link>
       <pubDate>Mon, 01 Jan 2024 00:00:00 +0000</pubDate>
-      
       <guid>/play/puzzle-hunt-2023-mission-improbable/</guid>
       <description>&lt;h1 id=&#34;my-2023-xmas-puzzle-hunt-mission-improbable&#34;&gt;My 2023 Xmas Puzzle Hunt: Mission Improbable&lt;/h1&gt;</description>
     </item>
-    
     <item>
       <title>Ghost Solver - Now in Clojure</title>
       <link>/tech/ghost-solver-in-clojure/</link>
       <pubDate>Tue, 20 Dec 2016 00:00:00 +0000</pubDate>
-      
       <guid>/tech/ghost-solver-in-clojure/</guid>
       <description>&lt;p&gt;&lt;a href=&#34;/tech/ghost-game-solver/&#34;&gt;My previous post&lt;/a&gt; was about a Python program to calculate the moves to guarantee a win in the puzzle word game &amp;lsquo;Ghost&amp;rsquo;. The algorithm was naturally recursive and felt &amp;lsquo;LISPy&amp;rsquo;. &lt;a href=&#34;http://www.twitter.com/pdlug&#34;&gt;@pdlug&lt;/a&gt; has been telling me how writing in Clojure will expand my mind, make me more productive and hem my pants so this week I learned just enough Clojure (I already knew LISP) to re-write the Ghost game solver in Clojure.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Ghost Solver - In Which We Ruin a Great Game</title>
       <link>/tech/ghost-game-solver/</link>
       <pubDate>Sat, 26 Nov 2016 00:00:00 +0000</pubDate>
-      
       <guid>/tech/ghost-game-solver/</guid>
       <description>&lt;p&gt;My son showed me a new word game, &amp;lsquo;Ghost&amp;rsquo;, and I wrote a Python program to &amp;ldquo;solve&amp;rdquo; the game and find all winning sequences.&lt;/p&gt;</description>
     </item>
-    
   </channel>
 </rss>

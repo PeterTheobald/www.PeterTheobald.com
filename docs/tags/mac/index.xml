@@ -1,24 +1,19 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>mac on Peter Theobald</title>
+    <title>Mac on Peter Theobald</title>
     <link>/tags/mac/</link>
-    <description>Recent content in mac on Peter Theobald</description>
+    <description>Recent content in Mac on Peter Theobald</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Thu, 30 Apr 2015 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="/tags/mac/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <atom:link href="/tags/mac/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Tricky forensic hard drive acquisition of an iMac</title>
       <link>/tech/tricky-forensic-hard-drive-acquisition/</link>
       <pubDate>Thu, 30 Apr 2015 00:00:00 +0000</pubDate>
-      
       <guid>/tech/tricky-forensic-hard-drive-acquisition/</guid>
       <description>&lt;p&gt;Recently I had to do a forensic acquisition of an iMac hard drive, and it presented many obstacles.&lt;/p&gt;</description>
     </item>
-    
   </channel>
 </rss>

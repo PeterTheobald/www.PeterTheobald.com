@@ -7,243 +7,188 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Tue, 01 Apr 2025 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>cartoons</title>
+      <title>Cartoons</title>
       <link>/tags/cartoons/</link>
       <pubDate>Tue, 01 Apr 2025 00:00:00 +0000</pubDate>
-      
       <guid>/tags/cartoons/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>programming</title>
+      <title>Programming</title>
       <link>/tags/programming/</link>
       <pubDate>Fri, 21 Jun 2024 00:00:00 +0000</pubDate>
-      
       <guid>/tags/programming/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>puzzles</title>
+      <title>Puzzles</title>
       <link>/tags/puzzles/</link>
       <pubDate>Mon, 01 Jan 2024 00:00:00 +0000</pubDate>
-      
       <guid>/tags/puzzles/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>treasure-hunts</title>
+      <title>Treasure-Hunts</title>
       <link>/tags/treasure-hunts/</link>
       <pubDate>Mon, 01 Jan 2024 00:00:00 +0000</pubDate>
-      
       <guid>/tags/treasure-hunts/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>bitcoin</title>
+      <title>Bitcoin</title>
       <link>/tags/bitcoin/</link>
       <pubDate>Fri, 20 Sep 2019 00:00:00 +0000</pubDate>
-      
       <guid>/tags/bitcoin/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>crypto</title>
+      <title>Crypto</title>
       <link>/tags/crypto/</link>
       <pubDate>Fri, 20 Sep 2019 00:00:00 +0000</pubDate>
-      
       <guid>/tags/crypto/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>rock climbing</title>
+      <title>Rock Climbing</title>
       <link>/tags/rock-climbing/</link>
       <pubDate>Sat, 26 Aug 2017 00:00:00 +0000</pubDate>
-      
       <guid>/tags/rock-climbing/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>forensics</title>
+      <title>Forensics</title>
       <link>/tags/forensics/</link>
       <pubDate>Tue, 15 Aug 2017 00:00:00 +0000</pubDate>
-      
       <guid>/tags/forensics/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>python</title>
+      <title>Python</title>
       <link>/tags/python/</link>
       <pubDate>Tue, 15 Aug 2017 00:00:00 +0000</pubDate>
-      
       <guid>/tags/python/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>video-editing</title>
+      <title>Video-Editing</title>
       <link>/tags/video-editing/</link>
       <pubDate>Tue, 15 Aug 2017 00:00:00 +0000</pubDate>
-      
       <guid>/tags/video-editing/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>javascript</title>
+      <title>Javascript</title>
       <link>/tags/javascript/</link>
       <pubDate>Wed, 24 May 2017 00:00:00 +0000</pubDate>
-      
       <guid>/tags/javascript/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>jquery</title>
+      <title>Jquery</title>
       <link>/tags/jquery/</link>
       <pubDate>Wed, 24 May 2017 00:00:00 +0000</pubDate>
-      
       <guid>/tags/jquery/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>community</title>
+      <title>Community</title>
       <link>/tags/community/</link>
       <pubDate>Tue, 14 Mar 2017 00:00:00 +0000</pubDate>
-      
       <guid>/tags/community/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>videos</title>
+      <title>Videos</title>
       <link>/tags/videos/</link>
       <pubDate>Tue, 14 Mar 2017 00:00:00 +0000</pubDate>
-      
       <guid>/tags/videos/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>clojure</title>
+      <title>Clojure</title>
       <link>/tags/clojure/</link>
       <pubDate>Tue, 20 Dec 2016 00:00:00 +0000</pubDate>
-      
       <guid>/tags/clojure/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>games</title>
+      <title>Games</title>
       <link>/tags/games/</link>
       <pubDate>Tue, 20 Dec 2016 00:00:00 +0000</pubDate>
-      
       <guid>/tags/games/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>encryption</title>
+      <title>Encryption</title>
       <link>/tags/encryption/</link>
       <pubDate>Thu, 07 Jul 2016 16:11:58 +0530</pubDate>
-      
       <guid>/tags/encryption/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>truecrypt</title>
+      <title>Truecrypt</title>
       <link>/tags/truecrypt/</link>
       <pubDate>Thu, 07 Jul 2016 16:11:58 +0530</pubDate>
-      
       <guid>/tags/truecrypt/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>travel</title>
+      <title>Travel</title>
       <link>/tags/travel/</link>
       <pubDate>Thu, 07 Jul 2016 00:00:00 +0000</pubDate>
-      
       <guid>/tags/travel/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>ftk</title>
+      <title>Ftk</title>
       <link>/tags/ftk/</link>
       <pubDate>Thu, 30 Apr 2015 00:00:00 +0000</pubDate>
-      
       <guid>/tags/ftk/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>mac</title>
+      <title>Mac</title>
       <link>/tags/mac/</link>
       <pubDate>Thu, 30 Apr 2015 00:00:00 +0000</pubDate>
-      
       <guid>/tags/mac/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>windows</title>
+      <title>Windows</title>
       <link>/tags/windows/</link>
       <pubDate>Wed, 01 Jun 2011 00:00:00 +0000</pubDate>
-      
       <guid>/tags/windows/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>ocaml</title>
+      <title>Ocaml</title>
       <link>/tags/ocaml/</link>
       <pubDate>Fri, 01 Apr 2011 00:00:00 +0000</pubDate>
-      
       <guid>/tags/ocaml/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>solaris</title>
+      <title>Solaris</title>
       <link>/tags/solaris/</link>
       <pubDate>Fri, 01 Apr 2011 00:00:00 +0000</pubDate>
-      
       <guid>/tags/solaris/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>unison</title>
+      <title>Unison</title>
       <link>/tags/unison/</link>
       <pubDate>Fri, 01 Apr 2011 00:00:00 +0000</pubDate>
-      
       <guid>/tags/unison/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>zfs</title>
+      <title>Zfs</title>
       <link>/tags/zfs/</link>
       <pubDate>Fri, 01 Apr 2011 00:00:00 +0000</pubDate>
-      
       <guid>/tags/zfs/</guid>
       <description></description>
     </item>
-    
   </channel>
 </rss>

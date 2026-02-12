@@ -1,24 +1,19 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>treasure-hunts on Peter Theobald</title>
+    <title>Treasure-Hunts on Peter Theobald</title>
     <link>/tags/treasure-hunts/</link>
-    <description>Recent content in treasure-hunts on Peter Theobald</description>
+    <description>Recent content in Treasure-Hunts on Peter Theobald</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Mon, 01 Jan 2024 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="/tags/treasure-hunts/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <atom:link href="/tags/treasure-hunts/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Puzzle Hunt 2023 - Mission Improbable</title>
       <link>/play/puzzle-hunt-2023-mission-improbable/</link>
       <pubDate>Mon, 01 Jan 2024 00:00:00 +0000</pubDate>
-      
       <guid>/play/puzzle-hunt-2023-mission-improbable/</guid>
       <description>&lt;h1 id=&#34;my-2023-xmas-puzzle-hunt-mission-improbable&#34;&gt;My 2023 Xmas Puzzle Hunt: Mission Improbable&lt;/h1&gt;</description>
     </item>
-    
   </channel>
 </rss>
